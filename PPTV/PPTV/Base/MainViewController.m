@@ -39,7 +39,7 @@
 
 -(void)bootSetting{
     
-    UINavigationController * nacontroller = [[UINavigationController alloc]initWithRootViewController: [[SHLoginViewController alloc ] init]];
+    UINavigationController * nacontroller = [[UINavigationController alloc]initWithRootViewController: [[SHHomeViewController alloc ] init]];
     NSDictionary *attributes=[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName,nil];
     [nacontroller.navigationBar setTitleTextAttributes:attributes];
     nacontroller.navigationBar.translucent = NO;

@@ -8,13 +8,15 @@
 
 #import "SHViewController.h"
 #import "SHLoginViewController.h"
+#import "SHHomeViewController.h"
 
 
 @interface MainViewController : SHViewController <UITabBarDelegate,SHTaskDelegate>
 {
 
     UINavigationController* lastnacontroller;
-    SHLoginViewController* loginViewController;
+//    SHLoginViewController* loginViewController;
+//    SHHomeViewController * homeViewController;
     NSMutableDictionary * mDicViewController;
 
 }
