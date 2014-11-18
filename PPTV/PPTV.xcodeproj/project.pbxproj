@@ -106,6 +106,28 @@
 		7740A4E31A18FB7A0036FCA2 /* iphone_home_photo_slider@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7740A4871A18FB7A0036FCA2 /* iphone_home_photo_slider@2x.png */; };
 		7740A4E41A18FB7A0036FCA2 /* iphone_home_photo_slider_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = 7740A4881A18FB7A0036FCA2 /* iphone_home_photo_slider_sel.png */; };
 		7740A4E51A18FB7A0036FCA2 /* iphone_home_photo_slider_sel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7740A4891A18FB7A0036FCA2 /* iphone_home_photo_slider_sel@2x.png */; };
+		7740A4F01A1A27E30036FCA2 /* SHVerticalCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7740A4EE1A1A27E30036FCA2 /* SHVerticalCollectionViewCell.m */; };
+		7740A4F11A1A27E30036FCA2 /* SHVerticalCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7740A4EF1A1A27E30036FCA2 /* SHVerticalCollectionViewCell.xib */; };
+		7740A4F41A1A2A6F0036FCA2 /* SHImgVertiaclViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7740A4F31A1A2A6F0036FCA2 /* SHImgVertiaclViewCell.m */; };
+		7740A4F61A1A2A7A0036FCA2 /* SHImgVertiaclViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7740A4F51A1A2A7A0036FCA2 /* SHImgVertiaclViewCell.xib */; };
+		7740A4F91A1A337C0036FCA2 /* SHRecomendFirstCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7740A4F81A1A337C0036FCA2 /* SHRecomendFirstCell.m */; };
+		7740A4FB1A1A33870036FCA2 /* SHRecomendFirstCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7740A4FA1A1A33870036FCA2 /* SHRecomendFirstCell.xib */; };
+		7740A5021A1A3BE80036FCA2 /* ic_home_content_default2.png in Resources */ = {isa = PBXBuildFile; fileRef = 7740A4FC1A1A3BE80036FCA2 /* ic_home_content_default2.png */; };
+		7740A5041A1A3BE80036FCA2 /* ic_live.png in Resources */ = {isa = PBXBuildFile; fileRef = 7740A4FE1A1A3BE80036FCA2 /* ic_live.png */; };
+		7740A5051A1A3BE80036FCA2 /* ic_video_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 7740A4FF1A1A3BE80036FCA2 /* ic_video_default.png */; };
+		7740A5061A1A3BE80036FCA2 /* img_video_paly.png in Resources */ = {isa = PBXBuildFile; fileRef = 7740A5001A1A3BE80036FCA2 /* img_video_paly.png */; };
+		7740A5071A1A3BE80036FCA2 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7740A5011A1A3BE80036FCA2 /* logo.png */; };
+		7740A50A1A1A3DCD0036FCA2 /* ic_home_content_default1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7740A5081A1A3DCD0036FCA2 /* ic_home_content_default1.png */; };
+		7740A50B1A1A3DCD0036FCA2 /* ic_home_title_default1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7740A5091A1A3DCD0036FCA2 /* ic_home_title_default1.png */; };
+		7740A50D1A1A427C0036FCA2 /* ic_home_content_default2.png in Resources */ = {isa = PBXBuildFile; fileRef = 7740A50C1A1A427C0036FCA2 /* ic_home_content_default2.png */; };
+		7740A5101A1A428B0036FCA2 /* ic_home_title_default2.png in Resources */ = {isa = PBXBuildFile; fileRef = 7740A50E1A1A428B0036FCA2 /* ic_home_title_default2.png */; };
+		7740A5111A1A428B0036FCA2 /* ic_home_content_default3.png in Resources */ = {isa = PBXBuildFile; fileRef = 7740A50F1A1A428B0036FCA2 /* ic_home_content_default3.png */; };
+		7740A5141A1A42C90036FCA2 /* SHRecomendSecondTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7740A5131A1A42C90036FCA2 /* SHRecomendSecondTitleCell.m */; };
+		7740A5161A1A42DB0036FCA2 /* SHRecomendSecondTitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7740A5151A1A42DB0036FCA2 /* SHRecomendSecondTitleCell.xib */; };
+		7740A51B1A1A442C0036FCA2 /* ic_home_animation.png in Resources */ = {isa = PBXBuildFile; fileRef = 7740A5171A1A442C0036FCA2 /* ic_home_animation.png */; };
+		7740A51C1A1A442C0036FCA2 /* ic_home_movice_micro.png in Resources */ = {isa = PBXBuildFile; fileRef = 7740A5181A1A442C0036FCA2 /* ic_home_movice_micro.png */; };
+		7740A51D1A1A442C0036FCA2 /* ic_home_movice.png in Resources */ = {isa = PBXBuildFile; fileRef = 7740A5191A1A442C0036FCA2 /* ic_home_movice.png */; };
+		7740A51E1A1A442C0036FCA2 /* ic_home_tv.png in Resources */ = {isa = PBXBuildFile; fileRef = 7740A51A1A1A442C0036FCA2 /* ic_home_tv.png */; };
 		77566BF11A18927800194562 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 77566BF01A18927800194562 /* main.m */; };
 		77566BF71A18927800194562 /* PPTV.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 77566BF51A18927800194562 /* PPTV.xcdatamodeld */; };
 		77566BFD1A18927800194562 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77566BFB1A18927800194562 /* Main.storyboard */; };
@@ -458,6 +480,32 @@
 		7740A4871A18FB7A0036FCA2 /* iphone_home_photo_slider@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iphone_home_photo_slider@2x.png"; sourceTree = "<group>"; };
 		7740A4881A18FB7A0036FCA2 /* iphone_home_photo_slider_sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iphone_home_photo_slider_sel.png; sourceTree = "<group>"; };
 		7740A4891A18FB7A0036FCA2 /* iphone_home_photo_slider_sel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iphone_home_photo_slider_sel@2x.png"; sourceTree = "<group>"; };
+		7740A4ED1A1A27E30036FCA2 /* SHVerticalCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHVerticalCollectionViewCell.h; sourceTree = "<group>"; };
+		7740A4EE1A1A27E30036FCA2 /* SHVerticalCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHVerticalCollectionViewCell.m; sourceTree = "<group>"; };
+		7740A4EF1A1A27E30036FCA2 /* SHVerticalCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SHVerticalCollectionViewCell.xib; sourceTree = "<group>"; };
+		7740A4F21A1A2A6F0036FCA2 /* SHImgVertiaclViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHImgVertiaclViewCell.h; sourceTree = "<group>"; };
+		7740A4F31A1A2A6F0036FCA2 /* SHImgVertiaclViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHImgVertiaclViewCell.m; sourceTree = "<group>"; };
+		7740A4F51A1A2A7A0036FCA2 /* SHImgVertiaclViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SHImgVertiaclViewCell.xib; sourceTree = "<group>"; };
+		7740A4F71A1A337C0036FCA2 /* SHRecomendFirstCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHRecomendFirstCell.h; sourceTree = "<group>"; };
+		7740A4F81A1A337C0036FCA2 /* SHRecomendFirstCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHRecomendFirstCell.m; sourceTree = "<group>"; };
+		7740A4FA1A1A33870036FCA2 /* SHRecomendFirstCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SHRecomendFirstCell.xib; sourceTree = "<group>"; };
+		7740A4FC1A1A3BE80036FCA2 /* ic_home_content_default2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_home_content_default2.png; sourceTree = "<group>"; };
+		7740A4FE1A1A3BE80036FCA2 /* ic_live.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_live.png; sourceTree = "<group>"; };
+		7740A4FF1A1A3BE80036FCA2 /* ic_video_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_video_default.png; sourceTree = "<group>"; };
+		7740A5001A1A3BE80036FCA2 /* img_video_paly.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_video_paly.png; sourceTree = "<group>"; };
+		7740A5011A1A3BE80036FCA2 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		7740A5081A1A3DCD0036FCA2 /* ic_home_content_default1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_home_content_default1.png; sourceTree = "<group>"; };
+		7740A5091A1A3DCD0036FCA2 /* ic_home_title_default1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_home_title_default1.png; sourceTree = "<group>"; };
+		7740A50C1A1A427C0036FCA2 /* ic_home_content_default2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_home_content_default2.png; sourceTree = "<group>"; };
+		7740A50E1A1A428B0036FCA2 /* ic_home_title_default2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_home_title_default2.png; sourceTree = "<group>"; };
+		7740A50F1A1A428B0036FCA2 /* ic_home_content_default3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_home_content_default3.png; sourceTree = "<group>"; };
+		7740A5121A1A42C90036FCA2 /* SHRecomendSecondTitleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHRecomendSecondTitleCell.h; sourceTree = "<group>"; };
+		7740A5131A1A42C90036FCA2 /* SHRecomendSecondTitleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHRecomendSecondTitleCell.m; sourceTree = "<group>"; };
+		7740A5151A1A42DB0036FCA2 /* SHRecomendSecondTitleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SHRecomendSecondTitleCell.xib; sourceTree = "<group>"; };
+		7740A5171A1A442C0036FCA2 /* ic_home_animation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_home_animation.png; sourceTree = "<group>"; };
+		7740A5181A1A442C0036FCA2 /* ic_home_movice_micro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_home_movice_micro.png; sourceTree = "<group>"; };
+		7740A5191A1A442C0036FCA2 /* ic_home_movice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_home_movice.png; sourceTree = "<group>"; };
+		7740A51A1A1A442C0036FCA2 /* ic_home_tv.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_home_tv.png; sourceTree = "<group>"; };
 		77566BEB1A18927800194562 /* PPTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PPTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77566BEF1A18927800194562 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		77566BF01A18927800194562 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -999,6 +1047,18 @@
 				7740A4281A18F69E0036FCA2 /* SHBestAdCell.h */,
 				7740A4291A18F69E0036FCA2 /* SHBestAdCell.m */,
 				7740A42B1A18F7460036FCA2 /* SHBestAdCell.xib */,
+				7740A4ED1A1A27E30036FCA2 /* SHVerticalCollectionViewCell.h */,
+				7740A4EE1A1A27E30036FCA2 /* SHVerticalCollectionViewCell.m */,
+				7740A4EF1A1A27E30036FCA2 /* SHVerticalCollectionViewCell.xib */,
+				7740A4F21A1A2A6F0036FCA2 /* SHImgVertiaclViewCell.h */,
+				7740A4F31A1A2A6F0036FCA2 /* SHImgVertiaclViewCell.m */,
+				7740A4F51A1A2A7A0036FCA2 /* SHImgVertiaclViewCell.xib */,
+				7740A4F71A1A337C0036FCA2 /* SHRecomendFirstCell.h */,
+				7740A4F81A1A337C0036FCA2 /* SHRecomendFirstCell.m */,
+				7740A4FA1A1A33870036FCA2 /* SHRecomendFirstCell.xib */,
+				7740A5121A1A42C90036FCA2 /* SHRecomendSecondTitleCell.h */,
+				7740A5131A1A42C90036FCA2 /* SHRecomendSecondTitleCell.m */,
+				7740A5151A1A42DB0036FCA2 /* SHRecomendSecondTitleCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1882,6 +1942,20 @@
 		77566DDF1A18960E00194562 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7740A5171A1A442C0036FCA2 /* ic_home_animation.png */,
+				7740A5181A1A442C0036FCA2 /* ic_home_movice_micro.png */,
+				7740A5191A1A442C0036FCA2 /* ic_home_movice.png */,
+				7740A51A1A1A442C0036FCA2 /* ic_home_tv.png */,
+				7740A50E1A1A428B0036FCA2 /* ic_home_title_default2.png */,
+				7740A50F1A1A428B0036FCA2 /* ic_home_content_default3.png */,
+				7740A50C1A1A427C0036FCA2 /* ic_home_content_default2.png */,
+				7740A5081A1A3DCD0036FCA2 /* ic_home_content_default1.png */,
+				7740A5091A1A3DCD0036FCA2 /* ic_home_title_default1.png */,
+				7740A4FC1A1A3BE80036FCA2 /* ic_home_content_default2.png */,
+				7740A4FE1A1A3BE80036FCA2 /* ic_live.png */,
+				7740A4FF1A1A3BE80036FCA2 /* ic_video_default.png */,
+				7740A5001A1A3BE80036FCA2 /* img_video_paly.png */,
+				7740A5011A1A3BE80036FCA2 /* logo.png */,
 				7740A42D1A18FB7A0036FCA2 /* 首页 */,
 			);
 			path = Resources;
@@ -2168,6 +2242,7 @@
 				7740A4D41A18FB7A0036FCA2 /* ipad_home_tv_icon.png in Resources */,
 				7740A4E51A18FB7A0036FCA2 /* iphone_home_photo_slider_sel@2x.png in Resources */,
 				7740A49F1A18FB7A0036FCA2 /* ipad_home_live_icon@2x.png in Resources */,
+				7740A4F61A1A2A7A0036FCA2 /* SHImgVertiaclViewCell.xib in Resources */,
 				7740A4B71A18FB7A0036FCA2 /* ipad_home_photo_shu_Mask@2x.png in Resources */,
 				7740A4BE1A18FB7A0036FCA2 /* ipad_home_pptv_logo.png in Resources */,
 				77566E331A18960E00194562 /* grayArrow.png in Resources */,
@@ -2176,6 +2251,7 @@
 				77566E861A18960E00194562 /* SHTableViewTitleImageCell.xib in Resources */,
 				77566E321A18960E00194562 /* blueArrow@2x.png in Resources */,
 				7740A4BD1A18FB7A0036FCA2 /* ipad_home_photo_tuijian_bg@2x.png in Resources */,
+				7740A51D1A1A442C0036FCA2 /* ic_home_movice.png in Resources */,
 				7740A4DD1A18FB7A0036FCA2 /* ipad_home_vip_icon@2x.png in Resources */,
 				77566E351A18960E00194562 /* whiteArrow.png in Resources */,
 				77566E2A1A18960E00194562 /* DSLCalendarDaySelection-right.png in Resources */,
@@ -2188,6 +2264,7 @@
 				77566ED21A18960E00194562 /* color.xml in Resources */,
 				77566E271A18960E00194562 /* DSLCalendarDaySelection-left@2x.png in Resources */,
 				7740A4A41A18FB7A0036FCA2 /* ipad_home_more_icon_sel.png in Resources */,
+				7740A4FB1A1A33870036FCA2 /* SHRecomendFirstCell.xib in Resources */,
 				77566E971A18960E00194562 /* status-bar-pattern-default@2x.jpg in Resources */,
 				77566E201A18960E00194562 /* DSLCalendar-nextMonth.png in Resources */,
 				7740A4C81A18FB7A0036FCA2 /* ipad_home_softicon_bg.png in Resources */,
@@ -2195,6 +2272,7 @@
 				77566EEC1A18971F00194562 /* guide02.jpg in Resources */,
 				77566BFD1A18927800194562 /* Main.storyboard in Resources */,
 				7740A4C11A18FB7A0036FCA2 /* ipad_home_Recentlyviewed_button@2x.png in Resources */,
+				7740A5101A1A428B0036FCA2 /* ic_home_title_default2.png in Resources */,
 				7740A4DB1A18FB7A0036FCA2 /* ipad_home_Variety_icon_sel@2x.png in Resources */,
 				77566E231A18960E00194562 /* DSLCalendar-previousMonth@2x.png in Resources */,
 				77566EBA1A18960E00194562 /* mapapi.bundle in Resources */,
@@ -2205,6 +2283,7 @@
 				7740A4AA1A18FB7A0036FCA2 /* ipad_home_navigation_label_blue.png in Resources */,
 				77566EC41A18960E00194562 /* Resource.bundle in Resources */,
 				77566E981A18960E00194562 /* status-bar-progress.png in Resources */,
+				7740A50D1A1A427C0036FCA2 /* ic_home_content_default2.png in Resources */,
 				77566E2C1A18960E00194562 /* DSLCalendarDaySelection.png in Resources */,
 				7740A4C21A18FB7A0036FCA2 /* ipad_home_recommend_icon.png in Resources */,
 				7740A49A1A18FB7A0036FCA2 /* ipad_home_develop_button.png in Resources */,
@@ -2219,8 +2298,11 @@
 				77566E6D1A18960E00194562 /* timeline_image_loading.png in Resources */,
 				77566E781A18960E00194562 /* SHLoadingViewCell.xib in Resources */,
 				7740A4B31A18FB7A0036FCA2 /* ipad_home_photo_heng_bg@2x.png in Resources */,
+				7740A5051A1A3BE80036FCA2 /* ic_video_default.png in Resources */,
 				7740A48D1A18FB7A0036FCA2 /* ipad_home_Animation_icon_sel@2x.png in Resources */,
 				7740A4971A18FB7A0036FCA2 /* ipad_home_Cache_icon@2x.png in Resources */,
+				7740A5111A1A428B0036FCA2 /* ic_home_content_default3.png in Resources */,
+				7740A51C1A1A442C0036FCA2 /* ic_home_movice_micro.png in Resources */,
 				7740A4BC1A18FB7A0036FCA2 /* ipad_home_photo_tuijian_bg.png in Resources */,
 				7740A4DC1A18FB7A0036FCA2 /* ipad_home_vip_icon.png in Resources */,
 				77566E211A18960E00194562 /* DSLCalendar-nextMonth@2x.png in Resources */,
@@ -2230,6 +2312,7 @@
 				7740A4941A18FB7A0036FCA2 /* ipad_home_bule_button.png in Resources */,
 				7740A4B91A18FB7A0036FCA2 /* ipad_home_photo_slider@2x.png in Resources */,
 				77566E7E1A18960E00194562 /* SHTableViewGeneralCell.xib in Resources */,
+				7740A5021A1A3BE80036FCA2 /* ic_home_content_default2.png in Resources */,
 				7740A4D81A18FB7A0036FCA2 /* ipad_home_Variety_icon.png in Resources */,
 				7740A4B81A18FB7A0036FCA2 /* ipad_home_photo_slider.png in Resources */,
 				7740A4E21A18FB7A0036FCA2 /* iphone_home_photo_slider.png in Resources */,
@@ -2253,6 +2336,7 @@
 				7740A42C1A18F7460036FCA2 /* SHBestAdCell.xib in Resources */,
 				77566E841A18960E00194562 /* SHTableViewTitleContentCell.xib in Resources */,
 				77566E4B1A18960E00194562 /* SHSelectionViewController.xib in Resources */,
+				7740A51B1A1A442C0036FCA2 /* ic_home_animation.png in Resources */,
 				77566E991A18960E00194562 /* status-bar-progress@2x.png in Resources */,
 				7740A4D31A18FB7A0036FCA2 /* ipad_home_titlebar@2x.png in Resources */,
 				77566ED51A18960E00194562 /* string.xml in Resources */,
@@ -2270,10 +2354,12 @@
 				77566E301A18960E00194562 /* blackArrow@2x.png in Resources */,
 				7740A4B21A18FB7A0036FCA2 /* ipad_home_photo_heng_bg.png in Resources */,
 				77566EEB1A18971F00194562 /* guide01.jpg in Resources */,
+				7740A5161A1A42DB0036FCA2 /* SHRecomendSecondTitleCell.xib in Resources */,
 				77566E4E1A18960E00194562 /* button_item_white_bg.png in Resources */,
 				7740A4AF1A18FB7A0036FCA2 /* ipad_home_personal_icon@2x.png in Resources */,
 				7740A4E31A18FB7A0036FCA2 /* iphone_home_photo_slider@2x.png in Resources */,
 				77566E571A18960E00194562 /* MJPhotoBrowser.bundle in Resources */,
+				7740A51E1A1A442C0036FCA2 /* ic_home_tv.png in Resources */,
 				7740A4A31A18FB7A0036FCA2 /* ipad_home_more_icon@2x.png in Resources */,
 				77566EED1A18971F00194562 /* guide03.jpg in Resources */,
 				7740A4DF1A18FB7A0036FCA2 /* ipad_home_vip_icon_sel@2x.png in Resources */,
@@ -2287,8 +2373,10 @@
 				77566EEF1A18971F00194562 /* SHGuideViewController.xib in Resources */,
 				77566E701A18960E00194562 /* SHCollectionImagesViewController.xib in Resources */,
 				77566EEA1A18971F00194562 /* SHUpdatePasswordViewController.xib in Resources */,
+				7740A50B1A1A3DCD0036FCA2 /* ic_home_title_default1.png in Resources */,
 				7740A4A91A18FB7A0036FCA2 /* ipad_home_movie_icon_sel@2x.png in Resources */,
 				77566E2B1A18960E00194562 /* DSLCalendarDaySelection-right@2x.png in Resources */,
+				7740A5071A1A3BE80036FCA2 /* logo.png in Resources */,
 				77566E341A18960E00194562 /* grayArrow@2x.png in Resources */,
 				77566E261A18960E00194562 /* DSLCalendarDaySelection-left.png in Resources */,
 				77566E361A18960E00194562 /* whiteArrow@2x.png in Resources */,
@@ -2304,6 +2392,7 @@
 				7740A4A51A18FB7A0036FCA2 /* ipad_home_more_icon_sel@2x.png in Resources */,
 				77566E961A18960E00194562 /* status-bar-pattern-default.jpg in Resources */,
 				77566E3A1A18960E00194562 /* NaviBack.png in Resources */,
+				7740A4F11A1A27E30036FCA2 /* SHVerticalCollectionViewCell.xib in Resources */,
 				7740A4BB1A18FB7A0036FCA2 /* ipad_home_photo_slider_sel@2x.png in Resources */,
 				77566E941A18960E00194562 /* status-bar-pattern-black.jpg in Resources */,
 				77566E101A18960E00194562 /* MainViewController.xib in Resources */,
@@ -2313,6 +2402,7 @@
 				7740A4AD1A18FB7A0036FCA2 /* ipad_home_navigation_label_yellow@2x.png in Resources */,
 				7740A4C71A18FB7A0036FCA2 /* ipad_home_search_button@2x.png in Resources */,
 				7740A4CB1A18FB7A0036FCA2 /* ipad_home_splitter_more@2x.png in Resources */,
+				7740A5041A1A3BE80036FCA2 /* ic_live.png in Resources */,
 				77566E2D1A18960E00194562 /* DSLCalendarDaySelection@2x.png in Resources */,
 				77566E4F1A18960E00194562 /* navigation_bar_bg.png in Resources */,
 				7740A4BF1A18FB7A0036FCA2 /* ipad_home_pptv_logo@2x.png in Resources */,
@@ -2323,11 +2413,13 @@
 				7740A49C1A18FB7A0036FCA2 /* ipad_home_editor_bg.png in Resources */,
 				77566E511A18960E00194562 /* SHNavigationShowViewController.xib in Resources */,
 				7740A41D1A18AD340036FCA2 /* SHHomeViewController.xib in Resources */,
+				7740A5061A1A3BE80036FCA2 /* img_video_paly.png in Resources */,
 				77566E311A18960E00194562 /* blueArrow.png in Resources */,
 				7740A4D51A18FB7A0036FCA2 /* ipad_home_tv_icon@2x.png in Resources */,
 				77566E281A18960E00194562 /* DSLCalendarDaySelection-middle.png in Resources */,
 				7740A4981A18FB7A0036FCA2 /* ipad_home_Cache_icon_sel.png in Resources */,
 				7740A4961A18FB7A0036FCA2 /* ipad_home_Cache_icon.png in Resources */,
+				7740A50A1A1A3DCD0036FCA2 /* ic_home_content_default1.png in Resources */,
 				77566E951A18960E00194562 /* status-bar-pattern-black@2x.jpg in Resources */,
 				77566E761A18960E00194562 /* ic_re_error@2x.png in Resources */,
 				77566E891A18960E00194562 /* SHTableViewUnReadNumberCell.xib in Resources */,
@@ -2366,6 +2458,7 @@
 				77566E9B1A18960E00194562 /* WTStatusView.m in Sources */,
 				77566E8A1A18960E00194562 /* SHView.m in Sources */,
 				77566EA71A18960E00194562 /* VRGCalendarView.m in Sources */,
+				7740A4F91A1A337C0036FCA2 /* SHRecomendFirstCell.m in Sources */,
 				77566E461A18960E00194562 /* MMProgressHUDViewController.m in Sources */,
 				77566E161A18960E00194562 /* NSDate+Addtion.m in Sources */,
 				77566BF71A18927800194562 /* PPTV.xcdatamodeld in Sources */,
@@ -2421,6 +2514,7 @@
 				77566E8C1A18960E00194562 /* SHWebViewController.m in Sources */,
 				77566EB41A18960E00194562 /* SHAppDelegate.m in Sources */,
 				77566EE71A18971F00194562 /* SHLoginViewController.m in Sources */,
+				7740A5141A1A42C90036FCA2 /* SHRecomendSecondTitleCell.m in Sources */,
 				77566E611A18960E00194562 /* SDWebImageDecoder.m in Sources */,
 				77566E1D1A18960E00194562 /* DSLCalendarMonthView.m in Sources */,
 				77566EA41A18960E00194562 /* NSMutableArray+convenience.m in Sources */,
@@ -2466,8 +2560,10 @@
 				77566E111A18960E00194562 /* UIButton+Addition.m in Sources */,
 				77566E901A18960E00194562 /* BWStatusBarOverlay.m in Sources */,
 				77566EB61A18960E00194562 /* UIApplicationAddtion.m in Sources */,
+				7740A4F01A1A27E30036FCA2 /* SHVerticalCollectionViewCell.m in Sources */,
 				77566E631A18960E00194562 /* SDWebImageDownloaderOperation.m in Sources */,
 				77566E4A1A18960E00194562 /* SHSelectionViewController.m in Sources */,
+				7740A4F41A1A2A6F0036FCA2 /* SHImgVertiaclViewCell.m in Sources */,
 				77566E621A18960E00194562 /* SDWebImageDownloader.m in Sources */,
 				77566E4C1A18960E00194562 /* SHImageView.m in Sources */,
 			);

@@ -17,9 +17,6 @@
             <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ipad_home_bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="SKK-di-Cbc">
-                    <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
-                </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oTc-lR-J8w">
                     <rect key="frame" x="0.0" y="0.0" width="1024" height="719"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -28,8 +25,8 @@
                     <rect key="frame" x="0.0" y="719" width="1024" height="49"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="49" id="A4D-ye-puG"/>
-                        <constraint firstAttribute="width" constant="1024" id="WGE-XX-ZMh"/>
+                        <constraint firstAttribute="width" constant="1024" id="S1s-RR-kcE"/>
+                        <constraint firstAttribute="height" constant="49" id="hjD-EH-YeF"/>
                     </constraints>
                     <items>
                         <tabBarItem title="推荐" image="ipad_home_recommend_icon.png" id="mD4-W9-cbt"/>
@@ -51,14 +48,14 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="sgC-EW-N6p" secondAttribute="bottom" id="GeI-Cv-YgZ"/>
-                <constraint firstItem="oTc-lR-J8w" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="He7-uX-zJH"/>
-                <constraint firstItem="sgC-EW-N6p" firstAttribute="top" secondItem="oTc-lR-J8w" secondAttribute="bottom" id="N6u-i5-chB"/>
-                <constraint firstItem="sgC-EW-N6p" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="WXb-3A-suF"/>
-                <constraint firstAttribute="trailing" secondItem="oTc-lR-J8w" secondAttribute="trailing" id="azn-oC-Gyf"/>
-                <constraint firstAttribute="trailing" secondItem="sgC-EW-N6p" secondAttribute="trailing" id="oXP-Po-tiF"/>
-                <constraint firstItem="sgC-EW-N6p" firstAttribute="top" secondItem="oTc-lR-J8w" secondAttribute="bottom" id="qZ1-fv-ZdL"/>
-                <constraint firstItem="oTc-lR-J8w" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="vgg-dC-aKT"/>
+                <constraint firstAttribute="bottom" secondItem="sgC-EW-N6p" secondAttribute="bottom" id="3Ge-MP-yC1"/>
+                <constraint firstItem="sgC-EW-N6p" firstAttribute="top" secondItem="oTc-lR-J8w" secondAttribute="bottom" id="6Fg-PP-AEM"/>
+                <constraint firstAttribute="trailing" secondItem="oTc-lR-J8w" secondAttribute="trailing" id="BUl-1X-k6F"/>
+                <constraint firstItem="oTc-lR-J8w" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="LwY-a6-po0"/>
+                <constraint firstItem="oTc-lR-J8w" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="d0I-fa-jTI"/>
+                <constraint firstItem="sgC-EW-N6p" firstAttribute="top" secondItem="oTc-lR-J8w" secondAttribute="bottom" id="h55-cg-l9M"/>
+                <constraint firstAttribute="trailing" secondItem="sgC-EW-N6p" secondAttribute="trailing" id="kd6-mh-w7n"/>
+                <constraint firstItem="sgC-EW-N6p" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="vVR-wG-C8g"/>
             </constraints>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
@@ -67,7 +64,6 @@
     <resources>
         <image name="ipad_home_Animation_icon.png" width="34" height="34"/>
         <image name="ipad_home_Variety_icon.png" width="34" height="34"/>
-        <image name="ipad_home_bg.png" width="1024" height="704"/>
         <image name="ipad_home_live_icon.png" width="34" height="34"/>
         <image name="ipad_home_more_icon.png" width="34" height="34"/>
         <image name="ipad_home_movie_icon.png" width="34" height="34"/>

@@ -12,7 +12,7 @@
     <property name="ColorBase" R="35" G="35" B= "35" A="1" />
     <property name="ColorTabSelected" R="178" G="177" B= "172" A="1" />
     <property name="ColorLightBackGround" R="240" G="240" B= "240" A="1" />
-    <property name="ColorBaseBackGround" R="42" G="42" B= "42" A="1" />
+    <property name="ColorBaseBackGround" R="229" G="229" B= "229" A="1" />
     <property name="ColorBackGround" R="42" G="42" B= "42" A="1" />
     <property name="ColorBackGroundCellHead" R="251" G="244" B= "224" A="1" />
    

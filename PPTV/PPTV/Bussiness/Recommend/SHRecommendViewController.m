@@ -8,6 +8,9 @@
 
 #import "SHRecommendViewController.h"
 #import "SHBestAdCell.h"
+#import "SHImgVertiaclViewCell.h"
+#import "SHRecomendFirstCell.h"
+#import "SHRecomendSecondTitleCell.h"
 
 @interface SHRecommendViewController ()
 
@@ -32,45 +35,51 @@
     }];
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    if (section == 0) {
-        return 0;
-    }
-    return CELL_GENERAL_HEIGHT3;
-}
-- (int) numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return mListItme.count;
-}
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    if (section == 0) {
-        return  [[UIView alloc]init];
-    }
-    UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, 320, 44)];
-    label.userstyle = @"labmidmilk";
-    label.text = [mListItme objectAtIndex:section];
-    label.textAlignment = NSTextAlignmentLeft;
-    return label;
-}
+//-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+//{
+//    if (section == 0) {
+//        return 0;
+//    }
+//    return CELL_GENERAL_HEIGHT3;
+//}
+//- (int) numberOfSectionsInTableView:(UITableView *)tableView
+//{
+//    return mListItme.count;
+//}
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+//{
+//    if (section == 0) {
+//        return  [[UIView alloc]init];
+//    }
+//    UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, 320, 44)];
+//    label.userstyle = @"labmidmilk";
+//    label.text = [mListItme objectAtIndex:section];
+//    label.textAlignment = NSTextAlignmentLeft;
+//    return label;
+//}
 -(float) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
    
-    if (indexPath.section == 0) {
+    if (indexPath.row == 0) {
         return 330;
+    }else if(indexPath.row == 1){
+        return 355;
+    }else if(indexPath.row == 2 || indexPath.row == 4 || indexPath.row == 6 || indexPath.row == 8){
+        return 175;
+    }else if(indexPath.row == 3 || indexPath.row == 5 || indexPath.row == 7 || indexPath.row == 9){
+        return 625;
     }
     return 50;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
    
-    return 1;
+    return 11;
 }
 
 -(SHTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SHTableViewGeneralCell * cell = [self.tableView dequeueReusableGeneralCell];
-    if (indexPath.section == 0) {
+    if (indexPath.row == 0) {
     
         SHBestAdCell * cell = [self.tableView dequeueReusableCellWithIdentifier:@"table_bestad_cell"];
         if(cell == nil){
@@ -83,6 +92,79 @@
         cell.backgroundColor = [UIColor clearColor];
         return cell;
         
+    }else if (indexPath.row == 1){
+        SHRecomendFirstCell * cell = cell = [self.tableView dequeueReusableCellWithIdentifier:@"table_recommend_first_cell"];
+        if(cell == nil){
+            cell = (SHRecomendFirstCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHRecomendFirstCell" owner:nil options:nil] objectAtIndex:0];
+        }
+
+        cell.backgroundColor = [UIColor clearColor];
+        return cell;
+        
+    }else if (indexPath.row == 2){
+        
+        SHRecomendSecondTitleCell * cell = cell = [self.tableView dequeueReusableCellWithIdentifier:@"table_recommend_second_title_cell"];
+        if(cell == nil){
+            cell = (SHRecomendSecondTitleCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHRecomendSecondTitleCell" owner:nil options:nil] objectAtIndex:0];
+        }
+        cell.backgroundColor = [UIColor clearColor];
+        return cell;
+        
+    }else if (indexPath.row == 3){
+        SHImgVertiaclViewCell * cell = [self.tableView dequeueReusableCellWithIdentifier:@"table_img_vertical_cell"];
+        if(cell == nil){
+            cell = (SHImgVertiaclViewCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHImgVertiaclViewCell" owner:nil options:nil] objectAtIndex:0];
+        }
+         cell.backgroundColor = [UIColor clearColor];
+        return cell;
+    }else if (indexPath.row == 4){
+        
+        SHRecomendSecondTitleCell * cell = cell = [self.tableView dequeueReusableCellWithIdentifier:@"table_recommend_second_title_cell"];
+        if(cell == nil){
+            cell = (SHRecomendSecondTitleCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHRecomendSecondTitleCell" owner:nil options:nil] objectAtIndex:0];
+        }
+        cell.backgroundColor = [UIColor clearColor];
+        return cell;
+        
+    }else if (indexPath.row == 5){
+        SHImgVertiaclViewCell * cell = [self.tableView dequeueReusableCellWithIdentifier:@"table_img_vertical_cell"];
+        if(cell == nil){
+            cell = (SHImgVertiaclViewCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHImgVertiaclViewCell" owner:nil options:nil] objectAtIndex:0];
+        }
+         cell.backgroundColor = [UIColor clearColor];
+        return cell;
+    }else if (indexPath.row == 6){
+        
+        SHRecomendSecondTitleCell * cell = cell = [self.tableView dequeueReusableCellWithIdentifier:@"table_recommend_second_title_cell"];
+        if(cell == nil){
+            cell = (SHRecomendSecondTitleCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHRecomendSecondTitleCell" owner:nil options:nil] objectAtIndex:0];
+        }
+        cell.backgroundColor = [UIColor clearColor];
+        return cell;
+        
+    }else if (indexPath.row == 7){
+        SHImgVertiaclViewCell * cell = [self.tableView dequeueReusableCellWithIdentifier:@"table_img_vertical_cell"];
+        if(cell == nil){
+            cell = (SHImgVertiaclViewCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHImgVertiaclViewCell" owner:nil options:nil] objectAtIndex:0];
+        }
+         cell.backgroundColor = [UIColor clearColor];
+        return cell;
+    }else if (indexPath.row == 8){
+        
+        SHRecomendSecondTitleCell * cell = cell = [self.tableView dequeueReusableCellWithIdentifier:@"table_recommend_second_title_cell"];
+        if(cell == nil){
+            cell = (SHRecomendSecondTitleCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHRecomendSecondTitleCell" owner:nil options:nil] objectAtIndex:0];
+        }
+        cell.backgroundColor = [UIColor clearColor];
+        return cell;
+        
+    }else if (indexPath.row == 9){
+        SHImgVertiaclViewCell * cell = [self.tableView dequeueReusableCellWithIdentifier:@"table_img_vertical_cell"];
+        if(cell == nil){
+            cell = (SHImgVertiaclViewCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHImgVertiaclViewCell" owner:nil options:nil] objectAtIndex:0];
+        }
+         cell.backgroundColor = [UIColor clearColor];
+        return cell;
     }
     cell.backgroundColor = [UIColor clearColor];
     return cell;
@@ -90,6 +172,8 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+
+    
 }
 -(BestScrollView  *)showScrollView:(NSMutableArray *)arr  WithAnimation:(BOOL)animation{
     
