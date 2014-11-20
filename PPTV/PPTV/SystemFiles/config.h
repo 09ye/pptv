@@ -6,7 +6,7 @@
 //  Copyright (c) 2013年 zywang. All rights reserved.
 //
 
-
+#import "Vitamio.h"
 #import "Core.h"
 #import "common.h"
 #import "SHAppDelegate.h"

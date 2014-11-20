@@ -11,6 +11,7 @@
 #import "SHImgVertiaclViewCell.h"
 #import "SHRecomendFirstCell.h"
 #import "SHRecomendSecondTitleCell.h"
+#import "SHImgHorizaonalViewCell.h"
 
 @interface SHRecommendViewController ()
 
@@ -33,6 +34,7 @@
     } taskDidFailed:^(SHTask *t) {
         
     }];
+  
 }
 
 //-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -66,19 +68,20 @@
     }else if(indexPath.row == 2 || indexPath.row == 4 || indexPath.row == 6 || indexPath.row == 8){
         return 175;
     }else if(indexPath.row == 3 || indexPath.row == 5 || indexPath.row == 7 || indexPath.row == 9){
-        return 625;
+        return 2*315;
+    }else{
+        return 2*175;
     }
-    return 50;
+
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
    
-    return 11;
+    return 12;
 }
 
 -(SHTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SHTableViewGeneralCell * cell = [self.tableView dequeueReusableGeneralCell];
     if (indexPath.row == 0) {
     
         SHBestAdCell * cell = [self.tableView dequeueReusableCellWithIdentifier:@"table_bestad_cell"];
@@ -89,7 +92,9 @@
         if(imagesArray.count>0){
             [cell.contentView insertSubview:[self showScrollView:imagesArray WithAnimation:YES] atIndex:0];
         }
+
         cell.backgroundColor = [UIColor clearColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
         
     }else if (indexPath.row == 1){
@@ -99,15 +104,21 @@
         }
 
         cell.backgroundColor = [UIColor clearColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
         
-    }else if (indexPath.row == 2){
+    }else if (indexPath.row == 2){//动漫
         
         SHRecomendSecondTitleCell * cell = cell = [self.tableView dequeueReusableCellWithIdentifier:@"table_recommend_second_title_cell"];
         if(cell == nil){
             cell = (SHRecomendSecondTitleCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHRecomendSecondTitleCell" owner:nil options:nil] objectAtIndex:0];
         }
+        cell.btnBg.backgroundColor = [UIColor colorWithRed:234/255.0 green:143/255.0 blue:50/255.0 alpha:1];
+        cell.imgLogo.image = [UIImage imageNamed:@"ic_home_animation"];
+        cell.labNameLogo.text = @"动漫";
+        cell.labContentLogo.text = @"共1234部";
         cell.backgroundColor = [UIColor clearColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
         
     }else if (indexPath.row == 3){
@@ -115,15 +126,22 @@
         if(cell == nil){
             cell = (SHImgVertiaclViewCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHImgVertiaclViewCell" owner:nil options:nil] objectAtIndex:0];
         }
-         cell.backgroundColor = [UIColor clearColor];
+        cell.navController = self.navController;
+        cell.backgroundColor = [UIColor clearColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
-    }else if (indexPath.row == 4){
+    }else if (indexPath.row == 4){//电视
         
         SHRecomendSecondTitleCell * cell = cell = [self.tableView dequeueReusableCellWithIdentifier:@"table_recommend_second_title_cell"];
         if(cell == nil){
             cell = (SHRecomendSecondTitleCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHRecomendSecondTitleCell" owner:nil options:nil] objectAtIndex:0];
         }
+        cell.btnBg.backgroundColor = [UIColor colorWithRed:158/255.0 green:178/255.0 blue:35/255.0 alpha:1];
+        cell.imgLogo.image = [UIImage imageNamed:@"ic_home_tv"];
+        cell.labNameLogo.text = @"电视剧";
+        cell.labContentLogo.text = @"共1234部";
         cell.backgroundColor = [UIColor clearColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
         
     }else if (indexPath.row == 5){
@@ -131,7 +149,9 @@
         if(cell == nil){
             cell = (SHImgVertiaclViewCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHImgVertiaclViewCell" owner:nil options:nil] objectAtIndex:0];
         }
-         cell.backgroundColor = [UIColor clearColor];
+        cell.navController = self.navController;
+        cell.backgroundColor = [UIColor clearColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }else if (indexPath.row == 6){
         
@@ -139,7 +159,12 @@
         if(cell == nil){
             cell = (SHRecomendSecondTitleCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHRecomendSecondTitleCell" owner:nil options:nil] objectAtIndex:0];
         }
+        cell.btnBg.backgroundColor = [UIColor colorWithRed:31/255.0 green:166/255.0 blue:212/255.0 alpha:1];
+        cell.imgLogo.image = [UIImage imageNamed:@"ic_home_movice"];
+        cell.labNameLogo.text = @"电影";
+        cell.labContentLogo.text = @"共1234部";
         cell.backgroundColor = [UIColor clearColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
         
     }else if (indexPath.row == 7){
@@ -147,15 +172,22 @@
         if(cell == nil){
             cell = (SHImgVertiaclViewCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHImgVertiaclViewCell" owner:nil options:nil] objectAtIndex:0];
         }
-         cell.backgroundColor = [UIColor clearColor];
+        cell.navController = self.navController;
+        cell.backgroundColor = [UIColor clearColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
-    }else if (indexPath.row == 8){
+    }else if (indexPath.row == 8){// 微电影
         
         SHRecomendSecondTitleCell * cell = cell = [self.tableView dequeueReusableCellWithIdentifier:@"table_recommend_second_title_cell"];
         if(cell == nil){
             cell = (SHRecomendSecondTitleCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHRecomendSecondTitleCell" owner:nil options:nil] objectAtIndex:0];
         }
+        cell.btnBg.backgroundColor = [UIColor colorWithRed:18/255.0 green:196/255.0 blue:170/255.0 alpha:1];
+        cell.imgLogo.image = [UIImage imageNamed:@"ic_home_movice_micro"];
+        cell.labNameLogo.text = @"微电影";
+        cell.labContentLogo.text = @"共1234部";
         cell.backgroundColor = [UIColor clearColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
         
     }else if (indexPath.row == 9){
@@ -163,11 +195,32 @@
         if(cell == nil){
             cell = (SHImgVertiaclViewCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHImgVertiaclViewCell" owner:nil options:nil] objectAtIndex:0];
         }
-         cell.backgroundColor = [UIColor clearColor];
+        cell.navController = self.navController;
+        cell.backgroundColor = [UIColor clearColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
+    }else if (indexPath.row == 10){//综艺
+        SHImgHorizaonalViewCell * cell = [self.tableView dequeueReusableCellWithIdentifier:@"table_img_horizaonal_cell"];
+        if(cell == nil){
+            cell = (SHImgHorizaonalViewCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHImgHorizaonalViewCell" owner:nil options:nil] objectAtIndex:0];
+        }
+        cell.navController = self.navController;
+        cell.type = 0;
+        cell.backgroundColor = [UIColor clearColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
+    }else{//纪录片
+        SHImgHorizaonalViewCell * cell = [self.tableView dequeueReusableCellWithIdentifier:@"table_img_horizaonal_cell"];
+        if(cell == nil){
+            cell = (SHImgHorizaonalViewCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHImgHorizaonalViewCell" owner:nil options:nil] objectAtIndex:0];
+        }
+        cell.navController = self.navController;
+        cell.type = 1;
+        cell.backgroundColor = [UIColor clearColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
-    cell.backgroundColor = [UIColor clearColor];
-    return cell;
+   
     
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

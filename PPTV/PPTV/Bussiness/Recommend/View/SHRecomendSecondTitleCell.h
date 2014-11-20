@@ -9,5 +9,9 @@
 #import "SHTableViewCell.h"
 
 @interface SHRecomendSecondTitleCell : SHTableViewCell
+@property (weak, nonatomic) IBOutlet UIButton *btnBg;
+@property (weak, nonatomic) IBOutlet UIImageView *imgLogo;
+@property (weak, nonatomic) IBOutlet UILabel *labNameLogo;
+@property (weak, nonatomic) IBOutlet UILabel *labContentLogo;
 
 @end

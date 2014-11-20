@@ -17,29 +17,58 @@
             <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oTc-lR-J8w">
-                    <rect key="frame" x="0.0" y="0.0" width="1024" height="719"/>
+                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oTc-lR-J8w">
+                    <rect key="frame" x="0.0" y="64" width="1024" height="655"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q81-xb-2Nn" userLabel="View-nav">
+                    <rect key="frame" x="0.0" y="0.0" width="1024" height="64"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="vpd-71-mLf">
+                            <rect key="frame" x="15" y="26" width="80" height="32"/>
+                        </imageView>
+                        <searchBar contentMode="redraw" fixedFrame="YES" barStyle="blackTranslucent" placeholder="搜索" backgroundImage="img_search_bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="52C-v3-OzX">
+                            <rect key="frame" x="342" y="20" width="340" height="44"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <color key="barTintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </searchBar>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_title_records.png" translatesAutoresizingMaskIntoConstraints="NO" id="Xv2-eA-MwH">
+                            <rect key="frame" x="850" y="34" width="15" height="15"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="看过" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ONh-Zg-zUF">
+                            <rect key="frame" x="873" y="31" width="34" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_title_download.png" translatesAutoresizingMaskIntoConstraints="NO" id="lNP-fU-RYB">
+                            <rect key="frame" x="924" y="34" width="15" height="15"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="下载" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ERV-6d-sQa">
+                            <rect key="frame" x="947" y="31" width="34" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.066666666666666666" green="0.066666666666666666" blue="0.066666666666666666" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sgC-EW-N6p">
                     <rect key="frame" x="0.0" y="719" width="1024" height="49"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="1024" id="S1s-RR-kcE"/>
-                        <constraint firstAttribute="height" constant="49" id="hjD-EH-YeF"/>
-                    </constraints>
                     <items>
-                        <tabBarItem title="推荐" image="ipad_home_recommend_icon.png" id="mD4-W9-cbt"/>
-                        <tabBarItem tag="1" title="直播" image="ipad_home_live_icon.png" id="R0u-d6-XsW"/>
-                        <tabBarItem tag="1" title="电影" image="ipad_home_movie_icon.png" id="E9d-mR-rrJ"/>
-                        <tabBarItem tag="1" title="电视剧" image="ipad_home_tv_icon.png" id="8An-Ve-QjP"/>
-                        <tabBarItem tag="1" title="动漫" image="ipad_home_Animation_icon.png" id="0du-Gz-HK9"/>
-                        <tabBarItem tag="1" title="综艺" image="ipad_home_Variety_icon.png" id="rU7-wO-SU1"/>
-                        <tabBarItem tag="1" title="体育" image="ipad_home_sports_icon.png" id="3he-Gu-WJA"/>
-                        <tabBarItem tag="1" title="VIP" image="ipad_home_vip_icon.png" id="4yL-Pz-VC1"/>
-                        <tabBarItem tag="1" title="更多" image="ipad_home_more_icon.png" id="x5c-Le-UAA"/>
-                        <tabBarItem tag="1" title="缓存" id="4dv-J2-b2p"/>
-                        <tabBarItem tag="1" title="个人中心" image="ipad_home_personal_icon.png" id="hRy-0n-NUC"/>
+                        <tabBarItem title="首页" image="ic_tab_home.png" id="mD4-W9-cbt"/>
+                        <tabBarItem tag="1" title="直播" image="ic_tab_live.png" id="R0u-d6-XsW"/>
+                        <tabBarItem tag="1" title="动漫" image="ic_tab_animation.png" id="E9d-mR-rrJ"/>
+                        <tabBarItem tag="1" title="电视剧" image="ic_tab_tv.png" id="8An-Ve-QjP"/>
+                        <tabBarItem tag="1" title="电影" image="ic_tab_movice.png" id="0du-Gz-HK9"/>
+                        <tabBarItem tag="1" title="微电影" image="ic_tab_movice_micro.png" id="rU7-wO-SU1"/>
+                        <tabBarItem tag="1" title="综艺" image="ic_tab_variety.png" id="3he-Gu-WJA"/>
+                        <tabBarItem tag="1" title="纪录片" image="ic_tab_documentary.png" id="4yL-Pz-VC1"/>
+                        <tabBarItem tag="1" title="更多" image="ic_tab_more.png" id="x5c-Le-UAA"/>
+                        <tabBarItem tag="1" title="收藏" image="ic_tab_store.png" id="4dv-J2-b2p"/>
+                        <tabBarItem tag="1" title="设置" image="ic_tab_setting.png" id="hRy-0n-NUC"/>
                     </items>
                     <connections>
                         <outlet property="delegate" destination="-1" id="Cqb-7h-5lb"/>
@@ -48,29 +77,38 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="sgC-EW-N6p" secondAttribute="bottom" id="3Ge-MP-yC1"/>
-                <constraint firstItem="sgC-EW-N6p" firstAttribute="top" secondItem="oTc-lR-J8w" secondAttribute="bottom" id="6Fg-PP-AEM"/>
-                <constraint firstAttribute="trailing" secondItem="oTc-lR-J8w" secondAttribute="trailing" id="BUl-1X-k6F"/>
-                <constraint firstItem="oTc-lR-J8w" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="LwY-a6-po0"/>
-                <constraint firstItem="oTc-lR-J8w" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="d0I-fa-jTI"/>
-                <constraint firstItem="sgC-EW-N6p" firstAttribute="top" secondItem="oTc-lR-J8w" secondAttribute="bottom" id="h55-cg-l9M"/>
-                <constraint firstAttribute="trailing" secondItem="sgC-EW-N6p" secondAttribute="trailing" id="kd6-mh-w7n"/>
-                <constraint firstItem="sgC-EW-N6p" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="vVR-wG-C8g"/>
+                <constraint firstItem="sgC-EW-N6p" firstAttribute="top" secondItem="oTc-lR-J8w" secondAttribute="bottom" id="53y-f1-UUo"/>
+                <constraint firstItem="sgC-EW-N6p" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="9Tu-SZ-Ow5"/>
+                <constraint firstAttribute="trailing" secondItem="q81-xb-2Nn" secondAttribute="trailing" id="FPa-Ic-fDb"/>
+                <constraint firstItem="q81-xb-2Nn" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="MyX-vn-V7y"/>
+                <constraint firstAttribute="trailing" secondItem="sgC-EW-N6p" secondAttribute="trailing" id="QX6-Uk-YcR"/>
+                <constraint firstItem="sgC-EW-N6p" firstAttribute="top" secondItem="oTc-lR-J8w" secondAttribute="bottom" id="R5n-xI-bTJ"/>
+                <constraint firstItem="oTc-lR-J8w" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="UmK-Lv-ksF"/>
+                <constraint firstItem="oTc-lR-J8w" firstAttribute="top" secondItem="q81-xb-2Nn" secondAttribute="bottom" id="keG-Oa-bXM"/>
+                <constraint firstAttribute="bottom" secondItem="sgC-EW-N6p" secondAttribute="bottom" id="l2Q-SD-17x"/>
+                <constraint firstItem="oTc-lR-J8w" firstAttribute="top" secondItem="q81-xb-2Nn" secondAttribute="bottom" id="xET-ow-iLV"/>
+                <constraint firstItem="q81-xb-2Nn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="z9A-DA-7DB"/>
+                <constraint firstAttribute="trailing" secondItem="oTc-lR-J8w" secondAttribute="trailing" id="zAN-vq-iPM"/>
             </constraints>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
         </view>
     </objects>
     <resources>
-        <image name="ipad_home_Animation_icon.png" width="34" height="34"/>
-        <image name="ipad_home_Variety_icon.png" width="34" height="34"/>
-        <image name="ipad_home_live_icon.png" width="34" height="34"/>
-        <image name="ipad_home_more_icon.png" width="34" height="34"/>
-        <image name="ipad_home_movie_icon.png" width="34" height="34"/>
-        <image name="ipad_home_personal_icon.png" width="34" height="34"/>
-        <image name="ipad_home_recommend_icon.png" width="34" height="34"/>
-        <image name="ipad_home_sports_icon.png" width="34" height="34"/>
-        <image name="ipad_home_tv_icon.png" width="34" height="34"/>
-        <image name="ipad_home_vip_icon.png" width="34" height="34"/>
+        <image name="ic_tab_animation.png" width="30" height="30"/>
+        <image name="ic_tab_documentary.png" width="30" height="30"/>
+        <image name="ic_tab_home.png" width="30" height="30"/>
+        <image name="ic_tab_live.png" width="30" height="30"/>
+        <image name="ic_tab_more.png" width="30" height="30"/>
+        <image name="ic_tab_movice.png" width="30" height="30"/>
+        <image name="ic_tab_movice_micro.png" width="30" height="30"/>
+        <image name="ic_tab_setting.png" width="30" height="30"/>
+        <image name="ic_tab_store.png" width="30" height="30"/>
+        <image name="ic_tab_tv.png" width="30" height="30"/>
+        <image name="ic_tab_variety.png" width="30" height="30"/>
+        <image name="ic_title_download.png" width="43" height="37"/>
+        <image name="ic_title_records.png" width="37" height="37"/>
+        <image name="img_search_bg.png" width="675" height="75"/>
+        <image name="logo.png" width="163" height="64"/>
     </resources>
 </document>

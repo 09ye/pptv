@@ -17,7 +17,7 @@
     // Drawing code
 }
 */
--(void) loadSkin
+-(void) awakeFromNib
 {
     
 }

@@ -8,6 +8,7 @@
 
 #import "SHHomeViewController.h"
 #import "SHRecommendViewController.h"
+#import "SHChannelListViewController.H"
 
 @interface SHHomeViewController ()
 
@@ -21,12 +22,17 @@
     
     [self tabBar:tabbar didSelectItem:[[tabbar items] objectAtIndex:0]];
     tabbar.selectedItem = [tabbar.items objectAtIndex:0];
-    tabbar.barTintColor = [[UIColor alloc]initWithRed:28/255 green:28/255 blue:28/255 alpha:1];
-    tabbar.alpha = 0.5;
+    tabbar.barTintColor = [[UIColor alloc]initWithRed:38/255 green:38/255 blue:38/255 alpha:1];
     tabbar.selectedImageTintColor = [SHSkin.instance colorOfStyle:@"ColorTextBlue"];
     
+    
 }
-
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    
+}
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
 {
     SHTableViewController * nacontroller;
@@ -38,11 +44,11 @@
             [mDictionary setValue:nacontroller forKey:@"SHRecommendViewController"];
         }
     }else if (item.tag == 1){
-        nacontroller =[ mDictionary valueForKey:@"SHDesktopViewController"];
+        nacontroller =[ mDictionary valueForKey:@"SHChannelListViewController"];
         if(!nacontroller){
-            SHRecommendViewController * viewcontroller = [[SHRecommendViewController alloc]init];
+            SHChannelListViewController * viewcontroller = [[SHChannelListViewController alloc]init];
             nacontroller = viewcontroller;
-            [mDictionary setValue:nacontroller forKey:@"SHDesktopViewController"];
+            [mDictionary setValue:nacontroller forKey:@"SHChannelListViewController"];
         }
     }
     
