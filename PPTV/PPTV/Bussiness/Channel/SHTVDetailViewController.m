@@ -32,7 +32,7 @@
     mShowViewControll.delegate = self;
     mShowViewControll.videoTitle = @"xxx";
     mShowViewControll.videoUrl = @"http://hot.vrs.sohu.com/ipad1407291_4596271359934_4618512.m3u8";
-    mShowViewControll.view.frame = CGRectMake(0, 0,700, 450);
+    mShowViewControll.view.frame = CGRectMake(0, 5,710, 500);
      [self.view addSubview:mShowViewControll.view];
 }
 - (void)didReceiveMemoryWarning {

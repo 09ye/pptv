@@ -263,8 +263,8 @@
 {
     NSLog(@"%d",index);
     SHImageView  *imageView=[[SHImageView alloc]  initWithFrame: CGRectMake(0, 0, 1024, 330)];
-    [imageView setUrl:[[imagesArray objectAtIndex:index] objectForKey:@"PicUrl"]];
-    
+//    [imageView setUrl:[[imagesArray objectAtIndex:index] objectForKey:@"PicUrl"]];
+    imageView.image = [UIImage imageNamed:@"bg_ad1"];
     return imageView;
 }
 

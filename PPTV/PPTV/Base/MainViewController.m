@@ -71,7 +71,7 @@
         
     }
     
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]) {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]&& false) {
         // 这里判断是否第一次
         guideVC=[[SHGuideViewController alloc]  init];
         guideVC.delegate=self;

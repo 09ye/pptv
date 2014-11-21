@@ -326,6 +326,9 @@
 		77F70F171A1CDB6100D5CD41 /* SHFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77F70F161A1CDB6100D5CD41 /* SHFilterView.xib */; };
 		77F70F1B1A1CF4B800D5CD41 /* SHTVDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F70F191A1CF4B800D5CD41 /* SHTVDetailViewController.m */; };
 		77F70F1C1A1CF4B800D5CD41 /* SHTVDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77F70F1A1A1CF4B800D5CD41 /* SHTVDetailViewController.xib */; };
+		77F70F231A1ECCB400D5CD41 /* bg_tv_detail.png in Resources */ = {isa = PBXBuildFile; fileRef = 77F70F221A1ECCB400D5CD41 /* bg_tv_detail.png */; };
+		77F70F261A1ED29100D5CD41 /* bg_ad1.png in Resources */ = {isa = PBXBuildFile; fileRef = 77F70F241A1ED29100D5CD41 /* bg_ad1.png */; };
+		77F70F271A1ED29100D5CD41 /* bg_title_tv.png in Resources */ = {isa = PBXBuildFile; fileRef = 77F70F251A1ED29100D5CD41 /* bg_title_tv.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -901,6 +904,9 @@
 		77F70F181A1CF4B800D5CD41 /* SHTVDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHTVDetailViewController.h; sourceTree = "<group>"; };
 		77F70F191A1CF4B800D5CD41 /* SHTVDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHTVDetailViewController.m; sourceTree = "<group>"; };
 		77F70F1A1A1CF4B800D5CD41 /* SHTVDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SHTVDetailViewController.xib; sourceTree = "<group>"; };
+		77F70F221A1ECCB400D5CD41 /* bg_tv_detail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_tv_detail.png; sourceTree = "<group>"; };
+		77F70F241A1ED29100D5CD41 /* bg_ad1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_ad1.png; sourceTree = "<group>"; };
+		77F70F251A1ED29100D5CD41 /* bg_title_tv.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_title_tv.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1802,6 +1808,9 @@
 		77566DDF1A18960E00194562 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				77F70F241A1ED29100D5CD41 /* bg_ad1.png */,
+				77F70F251A1ED29100D5CD41 /* bg_title_tv.png */,
+				77F70F221A1ECCB400D5CD41 /* bg_tv_detail.png */,
 				77F70F0F1A1CD56200D5CD41 /* ic_arrow_down.png */,
 				77F70F101A1CD56200D5CD41 /* ic_arrow_right.png */,
 				77AEE46F1A1B928200366AEB /* ic_title_download.png */,
@@ -2192,6 +2201,7 @@
 				TargetAttributes = {
 					77566BEA1A18927800194562 = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = RJ35P28RXH;
 					};
 					77566C061A18927800194562 = {
 						CreatedOnToolsVersion = 6.1;
@@ -2235,6 +2245,7 @@
 				77566E331A18960E00194562 /* grayArrow.png in Resources */,
 				77F70F171A1CDB6100D5CD41 /* SHFilterView.xib in Resources */,
 				77566E821A18960E00194562 /* SHTableViewTitleContentBottomCell.xib in Resources */,
+				77F70F261A1ED29100D5CD41 /* bg_ad1.png in Resources */,
 				77566E861A18960E00194562 /* SHTableViewTitleImageCell.xib in Resources */,
 				77F70F111A1CD56200D5CD41 /* ic_arrow_down.png in Resources */,
 				77566E321A18960E00194562 /* blueArrow@2x.png in Resources */,
@@ -2261,6 +2272,7 @@
 				77AEE4691A1B7E4200366AEB /* SHHorizonalCollectionViewCell.xib in Resources */,
 				7740A5101A1A428B0036FCA2 /* ic_home_title_default2.png in Resources */,
 				77566E231A18960E00194562 /* DSLCalendar-previousMonth@2x.png in Resources */,
+				77F70F231A1ECCB400D5CD41 /* bg_tv_detail.png in Resources */,
 				77566EBA1A18960E00194562 /* mapapi.bundle in Resources */,
 				77566E7C1A18960E00194562 /* SHTableViewEditGeneralCell.xib in Resources */,
 				77AEE4721A1B928200366AEB /* ic_title_records.png in Resources */,
@@ -2291,6 +2303,7 @@
 				77566EA21A18960E00194562 /* chart.html in Resources */,
 				77566E191A18960E00194562 /* DSLCalendarDayCalloutView.xib in Resources */,
 				77F70EED1A1C82CB00D5CD41 /* LICENSE in Resources */,
+				77F70F271A1ED29100D5CD41 /* bg_title_tv.png in Resources */,
 				77AEE4511A1B4E7A00366AEB /* ic_tab_documentary.png in Resources */,
 				77566E541A18960E00194562 /* MBProgressHUD.bundle in Resources */,
 				77566E751A18960E00194562 /* ic_re_error.png in Resources */,
@@ -2644,6 +2657,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2667,8 +2681,10 @@
 					"$(PROJECT_DIR)/PPTV/ShareSDK/Extend/WeChatSDK",
 					"$(PROJECT_DIR)/PPTV/Vitamio",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = "armv7 armv7s";
 			};
 			name = Debug;
 		};
@@ -2676,6 +2692,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2699,8 +2716,10 @@
 					"$(PROJECT_DIR)/PPTV/ShareSDK/Extend/WeChatSDK",
 					"$(PROJECT_DIR)/PPTV/Vitamio",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = "armv7 armv7s";
 			};
 			name = Release;
 		};

@@ -175,7 +175,7 @@
 
 - (void)mediaPlayer:(VMediaPlayer *)player didPrepared:(id)arg
 {
-	[player setVideoFillMode:VMVideoFillMode100];
+	[player setVideoFillMode:VMVideoFillModeStretch];
     
 	mDuration = [player getDuration];
     [player start];

@@ -32,32 +32,28 @@
     // Do any additional setup after loading the view from its nib.
     
     
-    if (!IPHONE4) {
-         [self.scrollView setContentSize:CGSizeMake(320*3, 568)];
-    }else {
-         [self.scrollView setContentSize:CGSizeMake(320*3, 480)];
-    }
+    
+    [self.scrollView setContentSize:CGSizeMake(1024*3, 768)];
+    
     self.scrollView.delegate=self;
     for (int i = 0 ; i < 3; i++) {
-		
-		NSString *imageName = @"";
-		
-		if (!IPHONE5) {
-			imageName = @"guide4";
-		}else {
-			imageName = @"guide0";
-		}
+        
+        NSString *imageName = @"";
+        
+        if (!IPHONE5) {
+            imageName = @"guide4";
+        }else {
+            imageName = @"guide0";
+        }
         
         imageName = [imageName stringByAppendingFormat:@"%d.png", i + 1];
         UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];
         
         NSLog(@"%@",imageName);
         
-		if (!IPHONE4) {
-			imageView.frame = CGRectMake(i * 320, 0, 320, 568);
-		}else {
-			imageView.frame = CGRectMake(i * 320, 0, 320, 480);
-		}
+
+        imageView.frame = CGRectMake(i * 1024, 0, 1024, 768);
+        
         [self.scrollView addSubview:imageView];
     }
     
@@ -84,8 +80,8 @@
     _xScrollViewOffSet = point.x;
     
     NSLog(@"%@",[NSValue valueWithCGPoint:point]);
-	
-	CGFloat pageWidth = self.scrollView.frame.size.width;
+    
+    CGFloat pageWidth = self.scrollView.frame.size.width;
     _page = floor((self.scrollView.contentOffset.x - pageWidth/2)/pageWidth)+1;
     
     if (_xScrollViewOffSet > 700)
@@ -102,7 +98,7 @@
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-	 [_pageController setCurrentPage:_page];
+    [_pageController setCurrentPage:_page];
 }
 
 
@@ -120,7 +116,7 @@
         
         [_delegate  guideViewController:self viewClosed:1];
     }
-
+    
 }
 
 
