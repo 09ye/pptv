@@ -31,18 +31,22 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+     homeViewController = [[SHHomeViewController alloc ] init];
+    
     // 引导页
     [self  showGuidePage] ;
     // Do any additional setup after loading the view from its nib.
-
+   
 }
 
 -(void)bootSetting{
     
-    UINavigationController * nacontroller = [[UINavigationController alloc]initWithRootViewController: [[SHHomeViewController alloc ] init]];
+   
+    UINavigationController * nacontroller = [[UINavigationController alloc]initWithRootViewController:homeViewController];
     NSDictionary *attributes=[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName,nil];
     [nacontroller.navigationBar setTitleTextAttributes:attributes];
     nacontroller.navigationBar.translucent = NO;
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     nacontroller.navigationBar.tintColor = [UIColor whiteColor];
     if(!iOS7){
         nacontroller.navigationBar.clipsToBounds = YES;
@@ -94,6 +98,47 @@
     
     
 }
+-(void)hideTarbar:(BOOL)value{
 
+    if (!isFirst) {
+        rectTabBar = homeViewController.tabbar.frame;
+    }
+    isFirst = true;
+    [UIView animateWithDuration:0.5 animations:^{
+       
+        if(value){
+            homeViewController.tabbar.alpha = 0;
+            homeViewController.tabbar.frame = CGRectMake( homeViewController.tabbar.frame.origin.x, [[UIScreen mainScreen] currentMode].size.height, homeViewController.tabbar.frame.size.width, homeViewController.tabbar.frame.size.height);
+        }else{
+            homeViewController.tabbar.hidden = NO;
+            homeViewController.tabbar.alpha = 0.7;
+            homeViewController.tabbar.frame = rectTabBar;
+            
+        }
 
+    } completion:^(BOOL finished) {
+         homeViewController.tabbar.hidden = value;
+    }];
+   
+}
+-(UIView*) hideSearchView:(BOOL)value
+{
+   
+    [UIView animateWithDuration:0.5 animations:^{
+        
+        if(value){
+            homeViewController.viewTitleBar.alpha = 0;
+            homeViewController.viewTitleBar.frame = CGRectMake( 0, -homeViewController.viewTitleBar.frame.size.height, homeViewController.viewTitleBar.frame.size.width, homeViewController.viewTitleBar.frame.size.height);
+        }else{
+            homeViewController.viewTitleBar.hidden = NO;
+            homeViewController.viewTitleBar.alpha = 0.9;
+            homeViewController.viewTitleBar.frame = CGRectMake( 0, 0, homeViewController.viewTitleBar.frame.size.width, homeViewController.viewTitleBar.frame.size.height);
+            
+        }
+        
+    } completion:^(BOOL finished) {
+         homeViewController.viewTitleBar.hidden = value;
+    }];
+   return  homeViewController.viewTitleBar;
+}
 @end

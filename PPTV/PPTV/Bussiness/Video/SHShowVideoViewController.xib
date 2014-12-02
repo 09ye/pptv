@@ -17,6 +17,7 @@
                 <outlet property="nextBtn" destination="hv4-LV-HbP" id="DKf-dO-8Lh"/>
                 <outlet property="progressSld" destination="kMG-pK-9r9" id="gAA-jM-pEi"/>
                 <outlet property="reset" destination="MGH-bX-6e5" id="XP8-Dv-vIb"/>
+                <outlet property="resetBtn" destination="klL-6t-b99" id="J61-Sq-p80"/>
                 <outlet property="startPause" destination="81I-5v-gA2" id="Emn-XZ-Jy4"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -31,19 +32,19 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <view clipsSubviews="YES" contentMode="scaleToFill" id="ZxJ-4G-xU4">
-                            <rect key="frame" x="5" y="5" width="310" height="558"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="518"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" red="0.16862745100000001" green="0.18039215689999999" blue="0.20784313730000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.082352941176470587" green="0.086274509803921567" blue="0.10196078431372549" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <view contentMode="scaleToFill" id="DZK-MT-FZK">
-                    <rect key="frame" x="0.0" y="478" width="320" height="90"/>
+                    <rect key="frame" x="0.0" y="518" width="320" height="50"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <subviews>
                         <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" id="kMG-pK-9r9" customClass="VSegmentSlider">
-                            <rect key="frame" x="58" y="44" width="237" height="29"/>
+                            <rect key="frame" x="98" y="11" width="129" height="29"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             <connections>
                                 <action selector="dragProgressSliderAction:" destination="-1" eventType="valueChanged" id="shp-lR-KS3"/>
@@ -53,22 +54,22 @@
                             </connections>
                         </slider>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="00:00:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MNW-Kk-9uK">
-                            <rect key="frame" x="60" y="67" width="50" height="21"/>
+                            <rect key="frame" x="50" y="14" width="50" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="00:00:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="M2i-85-Gfu">
-                            <rect key="frame" x="250" y="67" width="50" height="21"/>
+                            <rect key="frame" x="231" y="14" width="50" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="81I-5v-gA2">
-                            <rect key="frame" x="14" y="35" width="45" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <rect key="frame" x="6" y="2" width="45" height="45"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" image="mediacontroller_pause.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -77,6 +78,19 @@
                             </state>
                             <connections>
                                 <action selector="startPauseButtonAction:" destination="-2" eventType="touchUpInside" id="Kr7-Yv-QQl"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="klL-6t-b99">
+                            <rect key="frame" x="279" y="10" width="30" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                            <state key="normal" image="btn_full_video.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="disabled">
+                                <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="resetButtonAction:" destination="-1" eventType="touchUpInside" id="jDm-8F-EdR"/>
                             </connections>
                         </button>
                     </subviews>
@@ -185,9 +199,11 @@
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
     </objects>
     <resources>
+        <image name="btn_full_video.png" width="61" height="60"/>
         <image name="mediacontroller_pause.png" width="98" height="98"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

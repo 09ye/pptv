@@ -34,20 +34,25 @@
     self.backGround.backgroundColor = [UIColor whiteColor];
 }
 
-- (void)showIn:(UIView *)view :(CGRect)rect
+- (void)showIn:(UIView *)view :(CGRect)rect 
 {
     if(!mIsShow){
         mIsShow = YES;
+        self.imgArrow.image = [UIImage imageNamed:@"ic_arrow_up"];
         self.frame = rect;
         self.backGround.frame = CGRectMake( self.backGround.frame.origin.x, - self.backGround.frame.size.height, self.backGround.frame.size.width, self.backGround.frame.size.height);
         [view addSubview:self];
         self.alpha = 0;
         [UIView animateWithDuration:0.5 animations:^{
+            self.imgArrow.image = [UIImage imageNamed:@"ic_arrow_down"];
             self.alpha = 1;
             self.backGround.frame = CGRectMake( self.backGround.frame.origin.x, 0, self.backGround.frame.size.width, self.backGround.frame.size.height);
+            
         } completion:^(BOOL finished) {
             
         }];
+    }else{
+        [self close];
     }
 }
 
@@ -58,6 +63,7 @@
         [UIView animateWithDuration:0.5 animations:^{
             self.backGround.frame = CGRectMake( self.backGround.frame.origin.x, -self.backGround.frame.size.height, self.backGround.frame.size.width, self.backGround.frame.size.height);
             self.alpha = 0;
+            self.imgArrow.image = [UIImage imageNamed:@"ic_arrow_up"];
         } completion:^(BOOL finished) {
             [self removeFromSuperview];
         }];

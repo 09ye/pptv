@@ -23,17 +23,26 @@
     [super viewDidLoad];
     mListItme = [[NSArray alloc]initWithObjects:@"",@"精彩专题",@"今日热点",@"热播电影",@"同步剧场",@"小编推荐",@"精品推荐",nil];
     self.tableView.backgroundColor = [UIColor clearColor];
-    SHPostTask * post = [[SHPostTaskM alloc]init];
-    post.URL = @"http://mobile.9191offer.com/getguidepic";
-    post.delegate = self;
-    [post start:^(SHTask *t) {
-        imagesArray = [[t result]mutableCopy];
-        [self.tableView reloadData];
-    } taskWillTry:^(SHTask *t) {
-        
-    } taskDidFailed:^(SHTask *t) {
-        
-    }];
+    app=(AppDelegate*)[UIApplication sharedApplication].delegate;
+    UIView * viewTitleBar = [app.viewController hideSearchView:NO];
+    viewTitleBar.alpha = 0.9;
+    
+    imagesArray = [[[NSArray alloc]initWithObjects:@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1", nil] mutableCopy];
+    [self.tableView reloadData];
+    
+//    SHPostTask * post = [[SHPostTaskM alloc]init];
+//    post.URL = @"http://mobile.9191offer.com/getguidepic";
+//    post.delegate = self;
+//    [post start:^(SHTask *t) {
+//        imagesArray = [[t result]mutableCopy];
+//       
+//    } taskWillTry:^(SHTask *t) {
+//        
+//    } taskDidFailed:^(SHTask *t) {
+//        
+//    }];
+    
+    
   
 }
 
@@ -59,6 +68,32 @@
 //    label.textAlignment = NSTextAlignmentLeft;
 //    return label;
 //}
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    static float currentPostion = 0;
+    static float lastPosition = 0;
+    currentPostion = scrollView.contentOffset.y ;
+    if (currentPostion - lastPosition > 10) { //向上滑动屏幕时，隐藏标签栏
+      
+        [app hideTarBarSHDelegate:YES];
+    }
+    else if (lastPosition - currentPostion > 5)//当标签栏隐藏时，向下滑动屏幕时，显示标签栏,
+    {
+        [app hideTarBarSHDelegate:NO];
+    }
+    lastPosition = currentPostion;
+    if(scrollView.contentSize.height-scrollView.contentOffset.y <= scrollView.frame.size.height){// 底部
+        [app hideTarBarSHDelegate:YES];
+    }
+   [app.viewController hideSearchView:NO];
+    
+    
+}
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    //    [_pageController setCurrentPage:_page];
+   
+}
 -(float) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
    
     if (indexPath.row == 0) {
@@ -95,6 +130,8 @@
 
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+      
         return cell;
         
     }else if (indexPath.row == 1){
@@ -102,7 +139,8 @@
         if(cell == nil){
             cell = (SHRecomendFirstCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHRecomendFirstCell" owner:nil options:nil] objectAtIndex:0];
         }
-
+        cell.detail = [[NSMutableDictionary alloc]init];
+        cell.navController = self.navController;
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
@@ -114,9 +152,11 @@
             cell = (SHRecomendSecondTitleCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHRecomendSecondTitleCell" owner:nil options:nil] objectAtIndex:0];
         }
         cell.btnBg.backgroundColor = [UIColor colorWithRed:234/255.0 green:143/255.0 blue:50/255.0 alpha:1];
+        cell.detail = [[NSMutableDictionary alloc]init];
         cell.imgLogo.image = [UIImage imageNamed:@"ic_home_animation"];
         cell.labNameLogo.text = @"动漫";
         cell.labContentLogo.text = @"共1234部";
+        cell.navController = self.navController;
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
@@ -126,6 +166,7 @@
         if(cell == nil){
             cell = (SHImgVertiaclViewCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHImgVertiaclViewCell" owner:nil options:nil] objectAtIndex:0];
         }
+        cell.list = [[[NSArray alloc]initWithObjects:@"1",@"2",@"3",@"4",@"5",@"6",@"3",@"7",@"2",@"1",nil]mutableCopy];
         cell.navController = self.navController;
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -136,10 +177,12 @@
         if(cell == nil){
             cell = (SHRecomendSecondTitleCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHRecomendSecondTitleCell" owner:nil options:nil] objectAtIndex:0];
         }
+         cell.detail = [[NSMutableDictionary alloc]init];
         cell.btnBg.backgroundColor = [UIColor colorWithRed:158/255.0 green:178/255.0 blue:35/255.0 alpha:1];
         cell.imgLogo.image = [UIImage imageNamed:@"ic_home_tv"];
         cell.labNameLogo.text = @"电视剧";
         cell.labContentLogo.text = @"共1234部";
+        cell.navController = self.navController;
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
@@ -149,6 +192,7 @@
         if(cell == nil){
             cell = (SHImgVertiaclViewCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHImgVertiaclViewCell" owner:nil options:nil] objectAtIndex:0];
         }
+         cell.list = [[[NSArray alloc]initWithObjects:@"3",@"2",@"1",@"1",@"3",@"6",@"2",@"7",@"2",@"1",nil]mutableCopy];
         cell.navController = self.navController;
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -159,10 +203,12 @@
         if(cell == nil){
             cell = (SHRecomendSecondTitleCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHRecomendSecondTitleCell" owner:nil options:nil] objectAtIndex:0];
         }
+         cell.detail = [[NSMutableDictionary alloc]init];
         cell.btnBg.backgroundColor = [UIColor colorWithRed:31/255.0 green:166/255.0 blue:212/255.0 alpha:1];
         cell.imgLogo.image = [UIImage imageNamed:@"ic_home_movice"];
         cell.labNameLogo.text = @"电影";
         cell.labContentLogo.text = @"共1234部";
+        cell.navController = self.navController;
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
@@ -172,9 +218,11 @@
         if(cell == nil){
             cell = (SHImgVertiaclViewCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHImgVertiaclViewCell" owner:nil options:nil] objectAtIndex:0];
         }
+         cell.list = [[[NSArray alloc]initWithObjects:@"2",@"5",@"3",@"1",@"6",@"2",@"7",@"2",@"1",@"4",nil]mutableCopy];
         cell.navController = self.navController;
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
         return cell;
     }else if (indexPath.row == 8){// 微电影
         
@@ -182,10 +230,12 @@
         if(cell == nil){
             cell = (SHRecomendSecondTitleCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHRecomendSecondTitleCell" owner:nil options:nil] objectAtIndex:0];
         }
+         cell.detail = [[NSMutableDictionary alloc]init];
         cell.btnBg.backgroundColor = [UIColor colorWithRed:18/255.0 green:196/255.0 blue:170/255.0 alpha:1];
         cell.imgLogo.image = [UIImage imageNamed:@"ic_home_movice_micro"];
         cell.labNameLogo.text = @"微电影";
         cell.labContentLogo.text = @"共1234部";
+        cell.navController = self.navController;
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
@@ -195,6 +245,7 @@
         if(cell == nil){
             cell = (SHImgVertiaclViewCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHImgVertiaclViewCell" owner:nil options:nil] objectAtIndex:0];
         }
+         cell.list = [[[NSArray alloc]initWithObjects:@"2",@"1",@"3",@"4",@"5",@"2",@"6",@"7",@"2",@"4",nil]mutableCopy];
         cell.navController = self.navController;
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -204,6 +255,7 @@
         if(cell == nil){
             cell = (SHImgHorizaonalViewCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHImgHorizaonalViewCell" owner:nil options:nil] objectAtIndex:0];
         }
+        
         cell.navController = self.navController;
         cell.type = 0;
         cell.backgroundColor = [UIColor clearColor];
@@ -248,7 +300,36 @@
     csView.delegate = self;
     csView.datasource = self;
     
+    UISwipeGestureRecognizer* recognizer;
+    recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
+    recognizer.delegate = self;
+    recognizer.direction = UISwipeGestureRecognizerDirectionLeft| UISwipeGestureRecognizerDirectionRight;
+
+    [csView addGestureRecognizer:recognizer];
+
     return  csView;
+}
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    
+    // TODO 做些过滤
+//    UISwipeGestureRecognizer* recognizer =   (UISwipeGestureRecognizer*)gestureRecognizer;
+//    if(recognizer.direction == (UISwipeGestureRecognizerDirectionLeft| UISwipeGestureRecognizerDirectionRight)){
+//              }
+  
+    [app.viewController hideSearchView:YES];
+
+    return YES;
+}
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    
+}
+- (void)handleSwipeFrom:(UISwipeGestureRecognizer*)recognizer {
+    // 触发手勢事件后，在这里作些事情
+    
+    // 底下是刪除手势的方法
+    //    [self.view removeGestureRecognizer:recognizer];
+    NSLog(@"======================");
 }
 #pragma  mark BestView Delegate Data=source
 
@@ -261,7 +342,6 @@
 
 - (UIView *)pageAtIndex:(NSInteger)index
 {
-    NSLog(@"%d",index);
     SHImageView  *imageView=[[SHImageView alloc]  initWithFrame: CGRectMake(0, 0, 1024, 330)];
 //    [imageView setUrl:[[imagesArray objectAtIndex:index] objectForKey:@"PicUrl"]];
     imageView.image = [UIImage imageNamed:@"bg_ad1"];
@@ -275,9 +355,11 @@
     
     SHIntent *intent = [[SHIntent alloc]init];
     intent.target = @"WebViewController";
-    [intent.args setValue:[[imagesArray objectAtIndex:index] objectForKey:@"LinkUrl"] forKeyPath:@"url"];
-    [intent.args setValue:[[imagesArray objectAtIndex:index] objectForKey:@"Title"] forKeyPath:@"title"];
-    intent.container = self.navigationController;
+//    [intent.args setValue:[[imagesArray objectAtIndex:index] objectForKey:@"LinkUrl"] forKeyPath:@"url"];
+//    [intent.args setValue:[[imagesArray objectAtIndex:index] objectForKey:@"Title"] forKeyPath:@"title"];
+    [intent.args setValue:@"http://www.wasu.cn/"  forKeyPath:@"url"];
+    [intent.args setValue:@"广告" forKeyPath:@"title"];
+    intent.container = self.navController;
     [[UIApplication sharedApplication]open:intent];
 }
 @end

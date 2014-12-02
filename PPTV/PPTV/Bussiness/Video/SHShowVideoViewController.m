@@ -16,6 +16,7 @@
 @implementation SHShowVideoViewController
 @synthesize videoTitle = _videoTitle;
 @synthesize videoUrl = _videoUrl;
+@synthesize isfull = _isfull;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -30,7 +31,7 @@
     [super viewDidLoad];
     self.title = _videoTitle;
     // Do any additional setup after loading the view from its nib.
-    self.view.bounds = [[UIScreen mainScreen] bounds];
+//    self.view.bounds = [[UIScreen mainScreen] bounds];
 	self.activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:
 						  UIActivityIndicatorViewStyleWhiteLarge] ;
 	[self.activityCarrier addSubview:self.activityView];
@@ -53,7 +54,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
-	[[UIApplication sharedApplication] setStatusBarHidden:YES];
+	[[UIApplication sharedApplication] setStatusBarHidden:NO];
 	[[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
 //	[self becomeFirstResponder];
     
@@ -219,12 +220,12 @@
 	// Set buffer size, default is 1024KB(1*1024*1024).
     //	[player setBufferSize:256*1024];
 	[player setBufferSize:2*1024];
-    //	[player setAdaptiveStream:YES];
+//    [player setAdaptiveStream:YES];
     
 	[player setVideoQuality:VMVideoQualityHigh];
     
-	player.useCache = YES;
-	[player setCacheDirectory:[self getCacheRootDirectory]];
+//	player.useCache = YES;
+//	[player setCacheDirectory:[self getCacheRootDirectory]];
 }
 
 - (void)mediaPlayer:(VMediaPlayer *)player seekComplete:(id)arg
@@ -353,11 +354,12 @@
     //    [mMPayer setDataSource:self.videoURL header:nil];
     [mMPayer setDataSource:self.videoURL];
 #elif TEST_setOptionsWithKeys // Test setOptionsWithKeys:withValues:
-	self.videoURL = [NSURL URLWithString:@"rtmp://videodownls.9xiu.com/9xiu/552"]; // This is a live stream.
+	self.videoURL = [NSURL URLWithString:@"http://padlive2-cnc.wasu.cn/cctv7/z.m3u8"]; // This is a live stream.
 	NSMutableArray *keys = [NSMutableArray arrayWithCapacity:0];
 	NSMutableArray *vals = [NSMutableArray arrayWithCapacity:0];
 	keys[0] = @"-rtmp_live";
 	vals[0] = @"-1";
+
     [mMPayer setDataSource:self.videoURL header:nil];
 	[mMPayer setOptionsWithKeys:keys withValues:vals];
 #elif TEST_setDataSegmentsSource // Test setDataSegmentsSource:fileList:
@@ -495,21 +497,33 @@
 
 -(IBAction)resetButtonAction:(id)sender
 {
-	static int bigView = 0;
+//	static int bigView = 0;
+   
+	[UIView animateWithDuration:0.3 animations:^{
+		if (!_isfull) {
+            
+//			self.view.frame = CGRectMake(0, 0, [[UIScreen mainScreen] applicationFrame].size.width, [[UIScreen mainScreen] applicationFrame].size.height-44) ;
+			_isfull = 1;
+		} else {
+//			self.view.frame = self.view.bounds;
+			_isfull = 0;
+		}
+		NSLog(@"NAL 1NBV &&&& backview.frame=%@", NSStringFromCGRect(self.backView.frame));
+	}];
+    if(self.delegate && [self.delegate respondsToSelector:@selector(showVideoControllerFullScreen:full:)]){
+        [self.delegate showVideoControllerFullScreen:self full:_isfull];
+    }
+   
+   
     
-//	[UIView animateWithDuration:0.3 animations:^{
-//		if (bigView) {
-//			self.backView.frame = kBackviewDefaultRect;
-//			bigView = 0;
-//		} else {
-//			self.backView.frame = self.view.bounds;
-//			bigView = 1;
-//		}
-//		NSLog(@"NAL 1NBV &&&& backview.frame=%@", NSStringFromCGRect(self.backView.frame));
-//	}];
-    
-    
-    //	[self quicklyStopMovie];
+//    	[self quicklyStopMovie];
+}
+-(void) setIsfull:(BOOL)isfull_
+{
+    _isfull = isfull_;
+    if(self.delegate && [self.delegate respondsToSelector:@selector(showVideoControllerFullScreen:full:)]){
+        [self.delegate showVideoControllerFullScreen:self full:isfull_];
+    }
 }
 
 -(IBAction)progressSliderDownAction:(id)sender

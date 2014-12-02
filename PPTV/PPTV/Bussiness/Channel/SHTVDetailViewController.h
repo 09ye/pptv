@@ -8,10 +8,19 @@
 
 #import "SHTableViewController.h"
 #import "SHShowVideoViewController.h"
+#import "SHChannelHorizontalCell.h"
+#import "SHTVDrameViewController.h"
 
-@interface SHTVDetailViewController : SHTableViewController
+@interface SHTVDetailViewController : SHTableViewController<SHTableHorizontalViewDataSource,SHTableHorizontalViewDelegate,SHShowVideoViewControllerDelegate>
 {
     SHShowVideoViewController* mShowViewControll;
+    SHTVDrameViewController * mDrameViewControll;
+    __weak IBOutlet SHTableHorizontalView *mScrollview;
+    __weak IBOutlet UIView *mViewVideo;
+     __weak IBOutlet UIView *mViewVideoMenu;
+    __weak IBOutlet UIView *mViewContent;
+    __weak IBOutlet UIView *mViewDown;
+    CGRect videoRect;
 }
 
 @end

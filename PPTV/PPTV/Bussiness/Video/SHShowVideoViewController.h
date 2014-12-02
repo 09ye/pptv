@@ -16,6 +16,7 @@
 - (NSURL *)playCtrlGetNextMediaTitle:(NSString **)title lastPlayPos:(long *)lastPlayPos;
 - (NSURL *)playCtrlGetPrevMediaTitle:(NSString **)title lastPlayPos:(long *)lastPlayPos;
 - (void) showVideoControllerDidComplete:(SHShowVideoViewController*) control;
+- (void) showVideoControllerFullScreen:(SHShowVideoViewController*) control full:(BOOL) isFull;
 
 @end
 @interface SHShowVideoViewController : SHViewController<VMediaPlayerDelegate>
@@ -31,6 +32,7 @@
 @property (nonatomic, assign) IBOutlet UIButton *nextBtn;
 @property (nonatomic, assign) IBOutlet UIButton *modeBtn;
 @property (nonatomic, assign) IBOutlet UIButton *reset;
+@property (nonatomic, assign) IBOutlet UIButton *resetBtn;
 @property (nonatomic, assign) IBOutlet VSegmentSlider *progressSld;
 @property (nonatomic, assign) IBOutlet UILabel  *curPosLbl;
 @property (nonatomic, assign) IBOutlet UILabel  *durationLbl;
@@ -45,6 +47,7 @@
 @property (nonatomic, assign) BOOL progressDragging;
 @property (nonatomic,strong) NSString * videoTitle;
 @property (nonatomic,strong) NSString * videoUrl;
+@property (nonatomic, assign) BOOL isfull;
 
 - (void)showIn:(UIView *)view;
 

@@ -8,12 +8,19 @@
 
 #import "SHTableViewController.h"
 
-@interface SHHomeViewController : SHTableViewController
+@interface SHHomeViewController : SHTableViewController<UISearchBarDelegate>
 {
     __weak IBOutlet UIView *mViewContain;
-    __weak IBOutlet UITabBar *tabbar;
+
     NSMutableDictionary* mDictionary;
     SHTableViewController* lastnacontroller;
+    __weak IBOutlet UISearchBar *mSearch;
+   
 }
+
+@property (weak, nonatomic) IBOutlet UIView *viewTitleBar;
+@property (weak, nonatomic) IBOutlet UITabBar *tabbar;
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item; // called when a new view is selected by the user (but not programatically)
+- (IBAction)btnWatchRecordOntouch:(UIButton *)sender;
+- (IBAction)btnDownloadOntouch:(UIButton *)sender;
 @end

@@ -20,31 +20,57 @@
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_home_animation.png" translatesAutoresizingMaskIntoConstraints="NO" id="R4z-oN-a6T">
-                        <rect key="frame" x="93" y="32" width="75" height="65"/>
-                    </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="动漫" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DD6-Gi-QUz">
-                        <rect key="frame" x="80" y="104" width="100" height="30"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="共1023部" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cNO-eB-VEs">
                         <rect key="frame" x="80" y="131" width="100" height="30"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="userstyle" value="labmidwhite"/>
+                        </userDefinedRuntimeAttributes>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_home_title_default2.png" translatesAutoresizingMaskIntoConstraints="NO" id="6rU-my-k7E">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="default706x320.png" translatesAutoresizingMaskIntoConstraints="NO" id="6rU-my-k7E" customClass="SHImageView">
                         <rect key="frame" x="624" y="8" width="350" height="160"/>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_home_title_default2.png" translatesAutoresizingMaskIntoConstraints="NO" id="jI9-MQ-OWs">
+                    <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gwe-Jr-M55">
+                        <rect key="frame" x="624" y="8" width="350" height="160"/>
+                        <state key="normal">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="btnImgBigOntouch:" destination="KOA-de-Ipa" eventType="touchUpInside" id="eGx-3I-lBk"/>
+                        </connections>
+                    </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="default706x320.png" translatesAutoresizingMaskIntoConstraints="NO" id="jI9-MQ-OWs" customClass="SHImageView">
                         <rect key="frame" x="240" y="8" width="350" height="160"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="动漫" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DD6-Gi-QUz">
+                        <rect key="frame" x="80" y="105" width="100" height="30"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="userstyle" value="lablargwhite"/>
+                        </userDefinedRuntimeAttributes>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nl3-Tj-8Oi">
+                        <rect key="frame" x="240" y="8" width="350" height="160"/>
+                        <state key="normal">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="btnImgBigOntouch:" destination="KOA-de-Ipa" eventType="touchUpInside" id="Yus-ip-nzW"/>
+                        </connections>
+                    </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_home_animation.png" translatesAutoresizingMaskIntoConstraints="NO" id="R4z-oN-a6T">
+                        <rect key="frame" x="93" y="32" width="75" height="65"/>
                     </imageView>
                 </subviews>
             </tableViewCellContentView>
             <connections>
                 <outlet property="btnBg" destination="MvF-ai-sSU" id="dXP-tD-NHT"/>
+                <outlet property="imgBig1" destination="jI9-MQ-OWs" id="4pe-io-CSJ"/>
+                <outlet property="imgBig2" destination="6rU-my-k7E" id="JP2-Q6-OP8"/>
                 <outlet property="imgLogo" destination="R4z-oN-a6T" id="u1S-J2-G23"/>
                 <outlet property="labContentLogo" destination="cNO-eB-VEs" id="5Wj-WY-IOX"/>
                 <outlet property="labNameLogo" destination="DD6-Gi-QUz" id="zWC-dG-kWf"/>
@@ -53,7 +79,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="ic_home_animation.png" width="152" height="131"/>
-        <image name="ic_home_title_default2.png" width="706" height="320"/>
+        <image name="default706x320.png" width="706" height="320"/>
+        <image name="ic_home_animation.png" width="152" height="132"/>
     </resources>
 </document>

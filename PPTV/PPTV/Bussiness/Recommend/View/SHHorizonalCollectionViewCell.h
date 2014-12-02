@@ -11,6 +11,7 @@
 @interface SHHorizonalCollectionViewCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet SHImageView *imgDeatil;
 @property (weak, nonatomic) IBOutlet UILabel *labTitle;
+@property (weak, nonatomic) IBOutlet UILabel *labTitle2;
 @property (weak, nonatomic) IBOutlet UILabel *labContent;
 @property (weak, nonatomic) IBOutlet UILabel *labLogoName;
 @property (weak, nonatomic) IBOutlet UILabel *labLogoContent;

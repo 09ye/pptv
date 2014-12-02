@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SHChannelListViewController">
             <connections>
+                <outlet property="imgArrow" destination="kfW-eX-YJE" id="OV8-BI-hu9"/>
                 <outlet property="tableView" destination="Yhq-zC-OvI" id="2lB-2u-TuI"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -16,15 +17,15 @@
             <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Yhq-zC-OvI">
-                    <rect key="frame" x="0.0" y="44" width="1024" height="744"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Yhq-zC-OvI">
+                    <rect key="frame" x="0.0" y="44" width="1024" height="724"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="dfq-7h-0x1"/>
                         <outlet property="delegate" destination="-1" id="gt8-ib-Pyi"/>
                     </connections>
                 </tableView>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ffK-RA-1qm">
+                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ffK-RA-1qm">
                     <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RxK-qr-Feg">
@@ -33,20 +34,29 @@
                                 <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="btnSelectMainOntouch:" destination="-1" eventType="touchUpInside" id="lVk-y3-wcI"/>
+                            </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="otE-Uu-Le5">
+                        <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="otE-Uu-Le5">
                             <rect key="frame" x="120" y="7" width="60" height="30"/>
                             <state key="normal" title="最新发布">
                                 <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="btnSelectMainOntouch:" destination="-1" eventType="touchUpInside" id="2oQ-dU-WQM"/>
+                            </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uRc-6X-kV5">
+                        <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uRc-6X-kV5">
                             <rect key="frame" x="210" y="7" width="60" height="30"/>
                             <state key="normal" title="最多播放">
                                 <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="btnSelectMainOntouch:" destination="-1" eventType="touchUpInside" id="W4P-Ae-bjX"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eTI-h2-8wT">
                             <rect key="frame" x="883" y="11" width="114" height="22"/>
@@ -60,7 +70,7 @@
                                 <action selector="btnShowSearchOntouch:" destination="-1" eventType="touchUpInside" id="Ze4-GO-b8U"/>
                             </connections>
                         </button>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_arrow_down.png" translatesAutoresizingMaskIntoConstraints="NO" id="kfW-eX-YJE">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_arrow_up.png" translatesAutoresizingMaskIntoConstraints="NO" id="kfW-eX-YJE">
                             <rect key="frame" x="964" y="17" width="15" height="9"/>
                         </imageView>
                     </subviews>
@@ -68,12 +78,21 @@
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Yhq-zC-OvI" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="6Ep-jO-oFV"/>
+                <constraint firstItem="ffK-RA-1qm" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="7Jz-9X-DSb"/>
+                <constraint firstAttribute="trailing" secondItem="ffK-RA-1qm" secondAttribute="trailing" id="FLL-g8-6Gs"/>
+                <constraint firstAttribute="bottom" secondItem="Yhq-zC-OvI" secondAttribute="bottom" id="Orw-4R-Tjf"/>
+                <constraint firstItem="ffK-RA-1qm" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="XHx-88-P0T"/>
+                <constraint firstAttribute="trailing" secondItem="Yhq-zC-OvI" secondAttribute="trailing" id="hKs-bx-FFb"/>
+                <constraint firstItem="Yhq-zC-OvI" firstAttribute="top" secondItem="ffK-RA-1qm" secondAttribute="bottom" id="tZE-Ex-n3L"/>
+            </constraints>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
             <point key="canvasLocation" x="220" y="204"/>
         </view>
     </objects>
     <resources>
-        <image name="ic_arrow_down.png" width="33" height="18"/>
+        <image name="ic_arrow_up.png" width="33" height="18"/>
     </resources>
 </document>

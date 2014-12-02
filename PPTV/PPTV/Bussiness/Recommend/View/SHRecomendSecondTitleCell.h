@@ -13,5 +13,10 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imgLogo;
 @property (weak, nonatomic) IBOutlet UILabel *labNameLogo;
 @property (weak, nonatomic) IBOutlet UILabel *labContentLogo;
+@property (weak, nonatomic) IBOutlet SHImageView *imgBig1;
+@property (weak, nonatomic) IBOutlet SHImageView *imgBig2;
+@property(nonatomic,strong) UINavigationController *navController;
 
+@property (nonatomic,strong) NSMutableDictionary * detail;
+- (IBAction)btnImgBigOntouch:(UIButton *)sender;
 @end

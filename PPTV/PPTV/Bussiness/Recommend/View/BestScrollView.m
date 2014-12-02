@@ -35,7 +35,7 @@
         CGRect  rect =CGRectMake(500,280, 50, 50);
         _pageControl = [[UIPageControl alloc] initWithFrame:rect];
         _pageControl.userInteractionEnabled = NO;
-//        _pageControl.pageIndicatorTintColor = [UIColor yellowColor];
+        _pageControl.pageIndicatorTintColor = [UIColor whiteColor];
         _pageControl.currentPageIndicatorTintColor = [UIColor redColor];
         [self addSubview:_pageControl];
         
@@ -47,41 +47,10 @@
     return self;
 }
 
-
--(id)initWithNormal:(CGRect )frame{
-    
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-
-        _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
-        _scrollView.delegate = self;
-        _scrollView.contentSize = CGSizeMake([UIScreen mainScreen].bounds.size.width * 3, [UIScreen mainScreen].bounds.size.height);
-        
-        _scrollView.showsHorizontalScrollIndicator = NO;
-        _scrollView.contentOffset = CGPointMake(self.bounds.size.width, 0);
-        _scrollView.pagingEnabled = YES;
-        [self addSubview:_scrollView];
-        
-        CGRect  rect =CGRectMake(140,130, 50, 37);
-        _pageControl = [[UIPageControl alloc] initWithFrame:rect];
-        _pageControl.userInteractionEnabled = NO;
-        _pageControl.hidden=YES;
-        [self addSubview:_pageControl];
-        
-        _curPage = 0;
-        _pageControl.currentPage=_curPage;
-    }
-    
-    return  self;
-
-}
-
-
 -(void)showImageArray:(NSMutableArray  *)arr  withAnimation:(BOOL)animation{
 
     animationTimer=YES;
-   myTimer=[NSTimer scheduledTimerWithTimeInterval:3.0f target:self selector:@selector(scrollToNextPage:) userInfo:nil repeats:YES];
+   myTimer=[NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(scrollToNextPage:) userInfo:nil repeats:YES];
 
 }
 
@@ -278,4 +247,5 @@
 {
  
 }
+
 @end

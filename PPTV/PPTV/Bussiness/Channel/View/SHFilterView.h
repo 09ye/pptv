@@ -15,6 +15,7 @@
 }
 
 @property (weak, nonatomic) IBOutlet UIView *backGround;
+@property (weak, nonatomic) IBOutlet UIImageView *imgArrow;
 
 - (IBAction)btnCloseOnTouch:(id)sender;
 

@@ -8,7 +8,7 @@
 
 
 #import "SHTableHorizontalView.h"
-#define COLUMNWIDTH 100//每个cell的默认宽度
+#define COLUMNWIDTH 135//每个cell的默认宽度
 #define EXTENSION COLUMNWIDTH
 #define EXTENSION_TAIL (COLUMNWIDTH/2)
 @implementation SHTableHorizontalViewCell

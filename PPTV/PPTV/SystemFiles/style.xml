@@ -55,6 +55,11 @@
         <property name="highlightedTextColor"  type="UIColor"  value="ColorStyleDark" />
     </labmindark>
       <!--轻便的文本结构-->
+      <lablargelight>
+          <property name="font"       type="UIFont"   value="FontScaleLarge"/>
+          <property name="textColor"  type="UIColor"  value="ColorStyleLight" />
+      </lablargelight>
+      
     <labminlight>
         <property name="font"       type="UIFont"   value="FontScaleSmall"/>
         <property name="textColor"  type="UIColor"  value="ColorStyleLight" />
@@ -63,6 +68,29 @@
         <property name="font"       type="UIFont"   value="FontScaleMid"/>
         <property name="textColor"  type="UIColor"  value="ColorStyleLight" />
     </labmidlight>
+    <labminlightSelect>
+        <property name="font"       type="UIFont"   value="FontScaleSmall"/>
+        <property name="textColor"  type="UIColor"  value="ColorStyleLight" />
+        <property name="highlightedTextColor"  type="UIColor"  value="ColorStyleDark" />
+    </labminlightSelect >
+    <!--白色的文本结构-->
+    <lablargewhite>
+        <property name="font"       type="UIFont"   value="FontScaleLarge"/>
+        <property name="textColor"  type="UIColor"  value="ColorStyleMilkWhite" />
+    </lablargewhite>
+    <labmidwhiteSelect>
+        <property name="font"       type="UIFont"   value="FontScaleMid"/>
+        <property name="textColor"  type="UIColor"  value="ColorStyleMilkWhite" />
+        <property name="highlightedTextColor"  type="UIColor"  value="ColorStyleDark" />
+    </labmidwhiteSelect >
+    <labminwhite>
+        <property name="font"       type="UIFont"   value="FontScaleSmall"/>
+        <property name="textColor"  type="UIColor"  value="ColorStyleMilkWhite" />
+    </labminwhite>
+    <labmidwhite>
+        <property name="font"       type="UIFont"   value="FontScaleMid"/>
+        <property name="textColor"  type="UIColor"  value="ColorStyleMilkWhite" />
+    </labmidwhite>
     
     <labmingreen>
         <property name="font"       type="UIFont"   value="FontScaleSmall"/>

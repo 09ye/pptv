@@ -14,4 +14,5 @@
 
 @property (strong, nonatomic) MainViewController *viewController;
 
+-(void)hideTarBarSHDelegate:(BOOL)value;
 @end

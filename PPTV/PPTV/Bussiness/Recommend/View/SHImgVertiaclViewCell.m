@@ -12,18 +12,25 @@
 
 
 @implementation SHImgVertiaclViewCell
+@synthesize list = _list;
 
 - (void)awakeFromNib
 {
     [super awakeFromNib];
     [mCollectView registerClass:[SHVerticalCollectionViewCell class] forCellWithReuseIdentifier:@"sh_vertical_collectview_cell"];
 }
-
+-(void) setList:(NSMutableArray *)list_
+{
+    _list = [list_ mutableCopy];
+    [mCollectView reloadData];
+}
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
     SHVerticalCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"sh_vertical_collectview_cell" forIndexPath:indexPath];
     cell.tag = indexPath.row;
+    cell.imgDeatil.image = [UIImage imageNamed:[self.list objectAtIndex:indexPath.row
+                                        ]];
 //    cell.labTitle.text = @"aaa";
 //    cell.labContent.text = @"ssss";
     return cell;
@@ -31,7 +38,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 10;
+    return self.list.count;
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView

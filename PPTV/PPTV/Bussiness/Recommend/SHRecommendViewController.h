@@ -15,6 +15,7 @@
     BestScrollView     *csView;
     NSInteger      imagesCount;
     NSMutableArray *imagesArray;
+    AppDelegate* app;
 }
 @property(nonatomic,retain) UINavigationController *navController; // If this view controller has been pushed onto a navigation controller, return it.
 

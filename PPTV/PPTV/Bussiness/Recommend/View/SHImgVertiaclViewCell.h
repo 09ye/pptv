@@ -17,4 +17,5 @@
     
 }
 @property(nonatomic,strong) UINavigationController *navController;
+@property(nonatomic,strong) NSMutableArray * list;
 @end

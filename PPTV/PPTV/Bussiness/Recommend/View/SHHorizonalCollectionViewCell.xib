@@ -13,7 +13,7 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="160" height="160"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_home_content_default3.png" translatesAutoresizingMaskIntoConstraints="NO" id="r77-hf-RLr" customClass="SHImageView">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="default320x182.png" translatesAutoresizingMaskIntoConstraints="NO" id="r77-hf-RLr" customClass="SHImageView">
                         <rect key="frame" x="0.0" y="0.0" width="160" height="90"/>
                     </imageView>
                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="动漫" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9OL-vQ-zym">
@@ -29,16 +29,31 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="3D版植物大战僵尸" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sa1-ze-Ptk">
-                        <rect key="frame" x="0.0" y="100" width="160" height="21"/>
+                        <rect key="frame" x="0.0" y="98" width="160" height="22"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="userstyle" value="labmiddark"/>
+                        </userDefinedRuntimeAttributes>
+                    </label>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="3D版植物大战僵尸3D版植物大战" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CyT-D9-9tE" userLabel="3D版植物大战僵尸2">
+                        <rect key="frame" x="0.0" y="97" width="160" height="44"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="userstyle" value="labmiddark"/>
+                        </userDefinedRuntimeAttributes>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="更可怕的3D僵尸来了" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hj2-Mg-lY3">
-                        <rect key="frame" x="0.0" y="130" width="160" height="21"/>
+                        <rect key="frame" x="0.0" y="123" width="160" height="22"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="userstyle" value="labminlight"/>
+                        </userDefinedRuntimeAttributes>
                     </label>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -49,10 +64,11 @@
                 <outlet property="labLogoContent" destination="b82-k7-4aO" id="lIX-xb-64v"/>
                 <outlet property="labLogoName" destination="9OL-vQ-zym" id="BjN-xH-a3h"/>
                 <outlet property="labTitle" destination="sa1-ze-Ptk" id="aa2-qm-yye"/>
+                <outlet property="labTitle2" destination="CyT-D9-9tE" id="KOX-IX-Swc"/>
             </connections>
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="ic_home_content_default3.png" width="320" height="182"/>
+        <image name="default320x182.png" width="320" height="182"/>
     </resources>
 </document>
