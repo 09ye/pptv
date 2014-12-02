@@ -34,7 +34,7 @@
     mShowViewControll.videoTitle = @"xxx";
     mShowViewControll.videoUrl = @"http://183.136.140.38/gsws/z.m3u8";
     mShowViewControll.videoUrl = @"http://hot.vrs.sohu.com/ipad1407291_4596271359934_4618512.m3u8";
-//    mShowViewControll.videoUrl = @"http://padlive1-cnc.wasu.cn/gsws/z.m3u8";
+    mShowViewControll.videoUrl = @"http://padload-cnc.wasu.cn/pcsan08/mams/vod/201409/29/16/201409291618156309b21cbd8_4e58bd54.mp4";
    
     mShowViewControll.view.frame = mViewVideo.bounds;
     videoRect = mViewVideo.frame;
