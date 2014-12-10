@@ -25,6 +25,10 @@
    
     self.title = @"播放详情";
     
+    NSLog(@"[[UIScreen mainScreen] bounds]%@",NSStringFromCGRect([[UIScreen mainScreen] bounds]));
+    NSLog(@"[[UIScreen mainScreen] sss]%@",NSStringFromCGRect([[UIScreen mainScreen]applicationFrame]));
+   
+    
     app=(AppDelegate*)[UIApplication sharedApplication].delegate;
     videoRect = mViewVideo.frame;
     
@@ -35,8 +39,10 @@
     mShowViewControll.videoUrl = @"http://hot.vrs.sohu.com/ipad1407291_4596271359934_4618512.m3u8";
     mShowViewControll.videoUrl = @"http://padlive2-cnc.wasu.cn/cctv7/z.m3u8";
     mShowViewControll.view.frame = mViewVideo.bounds;
-    
-    mShowViewControll.resetBtn.enabled = NO;
+    mShowViewControll.curPosLbl.hidden = YES;
+    mShowViewControll.progressSld.hidden = YES;
+    mShowViewControll.durationLbl.hidden = YES;
+//    mShowViewControll.resetBtn.enabled = NO;
     
     mListViewControll = [[SHLiveListViewController alloc]init];
     mListViewControll.list = [[NSMutableArray alloc]init ];
@@ -44,15 +50,11 @@
     [mViewContent addSubview:mListViewControll.view];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 -(void) viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:YES];
-    [mViewVideo addSubview:mShowViewControll.view];
-
+    [self.view addSubview:mShowViewControll.view];
+    
     [mListViewControll.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
     
 }
@@ -63,18 +65,23 @@
     
     [UIView animateWithDuration:0.3 animations:^{
         if (isFull) {
-             [app hideTarBarSHDelegate:YES];
-            mViewContent.hidden = YES;
-            mViewDown.hidden = YES;
-            mViewVideo.frame = CGRectMake(0, 0, [[UIScreen mainScreen] applicationFrame].size.width, [[UIScreen mainScreen] applicationFrame].size.height-44) ;
-//            mShowViewControll.view.frame = mViewVideo.bounds;
+            CGRect rect = self.view.frame;
+            rect.size.height +=49;
+            self.view.frame = rect;
+            [app hideTarBarSHDelegate:YES];
+            mShowViewControll.view.frame = CGRectMake(0, 0, UIScreenWidth, UIScreenHeight-64);
+           
+            
+            
             
         } else {
-            mViewContent.hidden = NO;
+            CGRect rect = self.view.frame;
+            rect.size.height -=49;
+            self.view.frame = rect;
+
+             mShowViewControll.view.frame = mViewVideo.bounds;
             [app hideTarBarSHDelegate:NO];
-            mViewDown.hidden = NO;
-            mViewVideo.frame = videoRect;
-//            mShowViewControll.view.frame = mViewVideo.bounds;
+          
         }
     }completion:^(BOOL finished) {
         

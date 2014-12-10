@@ -20,7 +20,8 @@
      __weak IBOutlet UIView *mViewVideoMenu;
     __weak IBOutlet UIView *mViewContent;
     __weak IBOutlet UIView *mViewDown;
-    CGRect videoRect;
+
 }
+
 
 @end

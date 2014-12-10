@@ -28,7 +28,7 @@
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     // Do any additional setup after loading the view from its nib.
-    self.title = [self.intent.args valueForKey:@"title"];
+//    self.title = [self.intent.args valueForKey:@"title"];
     NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:[self.intent.args valueForKey:@"url"]]];
      [mWebView setScalesPageToFit:YES];
     [mWebView loadRequest:request];

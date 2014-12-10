@@ -13,8 +13,8 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="345" height="50"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg_tv_logo_default.png" translatesAutoresizingMaskIntoConstraints="NO" id="meq-VJ-49N">
-                        <rect key="frame" x="0.0" y="10" width="50" height="30"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg_tv_logo_default.png" translatesAutoresizingMaskIntoConstraints="NO" id="meq-VJ-49N" customClass="SHImageView">
+                        <rect key="frame" x="6" y="5" width="40" height="40"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="哈尔滨卫视" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CHs-Mr-lg2">
                         <rect key="frame" x="59" y="14" width="100" height="21"/>
@@ -42,6 +42,11 @@
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <size key="customSize" width="50" height="49"/>
+            <connections>
+                <outlet property="imgLogo" destination="meq-VJ-49N" id="RTl-CU-t8w"/>
+                <outlet property="labContent" destination="mba-mH-2Li" id="AGK-Nw-bVx"/>
+                <outlet property="labName" destination="CHs-Mr-lg2" id="Qxh-QO-sbX"/>
+            </connections>
             <point key="canvasLocation" x="230" y="204"/>
         </collectionViewCell>
     </objects>

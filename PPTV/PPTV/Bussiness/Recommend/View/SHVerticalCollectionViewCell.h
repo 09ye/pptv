@@ -12,5 +12,6 @@
 @property (weak, nonatomic) IBOutlet SHImageView *imgDeatil;
 @property (weak, nonatomic) IBOutlet UILabel *labTitle;
 @property (weak, nonatomic) IBOutlet UILabel *labContent;
+@property (weak, nonatomic) IBOutlet UILabel *labStatus;
 
 @end

@@ -60,7 +60,7 @@
 {
     SHHttpTask* taskDefaultImag= [[SHHttpTask alloc]init];
     taskDefaultImag.URL = url_;
-//    taskDefaultImag.cachetype = CacheTypeTimes;
+    taskDefaultImag.cachetype = CacheTypeTimes;
     self.urlTask = taskDefaultImag;
 }
 -(void)setCircleStyle:(UIColor *)bordercolor

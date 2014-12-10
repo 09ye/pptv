@@ -11,8 +11,10 @@
 @interface SHImgHorizaonalViewCell : SHTableViewCell
 {
     __weak IBOutlet UICollectionView *mCollectView;
+    NSArray * mList;
 
 }
 @property(nonatomic,strong) UINavigationController *navController;
 @property (nonatomic,assign) int type;// 0 综艺 1 纪录片
+@property (nonatomic,strong) NSMutableDictionary * detail;
 @end

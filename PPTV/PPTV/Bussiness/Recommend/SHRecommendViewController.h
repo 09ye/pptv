@@ -9,13 +9,14 @@
 #import "SHTableViewController.h"
 #import "BestScrollView.h"
 
-@interface SHRecommendViewController : SHTableViewController<BestScrollViewDatasource,BestScrollViewDelegate,SHTaskDelegate>
+@interface SHRecommendViewController : SHTableViewController<BestScrollViewDatasource,BestScrollViewDelegate,SHTaskDelegate,EGORefreshTableHeaderDelegate>
 {
-    NSArray * mListItme;
+    EGORefreshTableHeaderView* _refreshHeaderView;
     BestScrollView     *csView;
     NSInteger      imagesCount;
     NSMutableArray *imagesArray;
     AppDelegate* app;
+    NSDictionary * mResult;
 }
 @property(nonatomic,retain) UINavigationController *navController; // If this view controller has been pushed onto a navigation controller, return it.
 

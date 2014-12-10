@@ -9,7 +9,7 @@
 #import "SHRecomendSecondTitleCell.h"
 
 @implementation SHRecomendSecondTitleCell
-@synthesize detail = _detail;
+@synthesize detailArray = _detailArray;
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
@@ -17,11 +17,10 @@
     // Drawing code
 }
 */
--(void) setDetail:(NSMutableDictionary *)detail_
+-(void) setDetailArray:(NSMutableArray *)detailArray_
 {
-    _detail = detail_;
-    self.imgBig1.image = [UIImage imageNamed:@"ic_home_title_default2"];
-    self.imgBig2.image = [UIImage imageNamed:@"ic_home_title_default2"];
+    _detailArray = detailArray_;
+    
 }
 - (IBAction)btnImgBigOntouch:(UIButton *)sender {
     SHIntent * intent = [[SHIntent alloc ]init];

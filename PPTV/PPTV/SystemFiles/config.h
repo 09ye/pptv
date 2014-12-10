@@ -12,12 +12,12 @@
 #import "SHAppDelegate.h"
 
 
-#define URL_HEADER @ "http://zambon-test.mobilitychina.com:8093"
+#define URL_HEADER @ "http://123.103.20.88:18014"
 
 
-#define URL_BATA @ "http://zambon-test.mobilitychina.com:8093"
+#define URL_BATA @ "http://123.103.20.88:18014"
 
-#define URL_DEVELOPER @ "http://zambon-test.mobilitychina.com:8093"
+#define URL_DEVELOPER @ "http://pad.cs.wasu.cn:18014"
 
 #define URL_UPDATE @"http://zambon-update1.mobilitychina.com:8095/get_config"
 
@@ -56,4 +56,6 @@
 #define RETAIN ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 960), [[UIScreen mainScreen] currentMode].size) : NO)
 
 #define IPHONE4 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 960), [[UIScreen mainScreen] currentMode].size) : NO)
+#define UIScreenWidth MAX([[UIScreen mainScreen]bounds].size.width ,[[UIScreen mainScreen]bounds].size.height)
+#define UIScreenHeight MIN([[UIScreen mainScreen]bounds].size.width ,[[UIScreen mainScreen]bounds].size.height)
 

@@ -18,10 +18,116 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
      self.tableView.backgroundColor = [UIColor clearColor];
-    mFilterView = [[[NSBundle mainBundle]loadNibNamed:@"SHFilterView" owner:nil options:nil] objectAtIndex:0];;
+    
+    [self reloadRequest];
+    if (_refreshHeaderView == nil) {
+        _refreshHeaderView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0, 0-self.tableView.bounds.size.height, self.tableView.frame.size.width, self.tableView.bounds.size.height)];
+        _refreshHeaderView.delegate = self;
+        [self.tableView addSubview:_refreshHeaderView];
+        
+    }
+    
+    [_refreshHeaderView refreshLastUpdatedDate];
+    
+    NSMutableArray * listRadio = [[NSMutableArray alloc]init];
+     NSMutableArray * listRadio2 = [[NSMutableArray alloc]init];
+    NSArray * list = [[NSArray alloc]initWithObjects:@"选项一选项一选项一1",@"选项选项一2",@"选项3一3",@"选项4一4",@"选项5一5",@"选项一6",@"选项7一7", nil];
+    CGRect   lastRect = CGRectZero;
+    
+    for (int i= 0; i<list.count; i++) {
+        NSString *text = [list objectAtIndex:i];
+        CGSize constraint = CGSizeMake(MAXFLOAT, 40.0f);
+        CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:14.00] constrainedToSize:constraint lineBreakMode:NSLineBreakByWordWrapping];
+        RadioBox * radioBox = [[RadioBox alloc]initWithFrame:CGRectMake(20+lastRect.origin.x+lastRect.size.width, 10, size.width+10, 30)];
+        radioBox.text = [list objectAtIndex:i];
+        radioBox.index = i;
+        radioBox.textColor = [UIColor whiteColor];
+        radioBox.onTintColor = [UIColor orangeColor];
+        radioBox.tintColor= [UIColor clearColor];
+        
+        radioBox.value = @{@"name":@"xx"};
+        
+        lastRect = radioBox.frame;
+        [listRadio addObject:radioBox];
+        [listRadio2 addObject:radioBox];
+    }
+    
+    UIView * view1 =[[UIView alloc]initWithFrame:CGRectMake(0, 0, 1024, 50)];
+    RadioGroup * radioGroup1 = [[RadioGroup alloc] initWithFrame:CGRectMake(0, 0, 1024, 50) WithControl:listRadio];
+    radioGroup1.backgroundColor = [UIColor whiteColor];
+    radioGroup1.textFont = [UIFont systemFontOfSize:14.0];
+    radioGroup1.selectValue = 2;
+    radioGroup1.delegate = self;
+    [view1 addSubview:radioGroup1];
+    RadioGroup *radioGroup2 = [[RadioGroup alloc] initWithFrame:CGRectMake(0, 50, 1024, 50) WithControl:listRadio2];
+    radioGroup2.backgroundColor = [UIColor whiteColor];
+    radioGroup2.textFont = [UIFont systemFontOfSize:14.0];
+    radioGroup2.selectValue = 2;
+    radioGroup2.delegate = self;
+    RadioGroup *radioGroup3 = [[RadioGroup alloc] initWithFrame:CGRectMake(0, 100, 1024, 50) WithControl:listRadio2];
+    radioGroup3.backgroundColor = [UIColor whiteColor];
+    radioGroup3.textFont = [UIFont systemFontOfSize:14.0];
+    radioGroup3.selectValue = 2;
+    radioGroup3.delegate = self;
+
+    
+//    mFilterView = [[[NSBundle mainBundle]loadNibNamed:@"SHFilterView" owner:nil options:nil] objectAtIndex:0];
+    mFilterView = [[SHFilterView alloc]initWithFrame:self.view.bounds];
+    [mFilterView addSubview:view1];
+    [mFilterView addSubview:radioGroup2];
+    [mFilterView addSubview:radioGroup3];
     mFilterView.imgArrow = imgArrow;
     mList =  [[[NSArray alloc]initWithObjects:@"1",@"1",@"1",@"4",@"5",@"6",@"2",@"3",@"5",@"6",@"3",@"2",@"1",@"6",@"3",@"2",@"1",@"3",@"2" ,nil]mutableCopy];
+    
+    
 }
+-(void) reloadRequest
+{
+    SHPostTaskM * post = [[SHPostTaskM alloc]init];
+    post.URL = URL_FOR(@"Pad/home");
+    post.delegate = self;
+    [post start:^(SHTask *t) {
+        [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
+        
+//        mResult = (NSDictionary *)[t result];
+//        imagesArray = [mResult objectForKey:@"slide_area"];
+        
+//        [self.tableView reloadData];
+    } taskWillTry:^(SHTask *t) {
+        
+    } taskDidFailed:^(SHTask *t) {
+        [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
+        
+    }];
+}
+- (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view
+{
+    [self reloadRequest];
+}
+
+- (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view
+{
+    return NO;
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    [_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
+}
+
+-(void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
+    [_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
+}
+
+- (NSDate*)egoRefreshTableHeaderDataSourceLastUpdated:(EGORefreshTableHeaderView*)view{
+    
+    return [NSDate date]; // should return date data source was last changed
+}
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    [_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
+    
+}
+
 -(float) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return ((mList.count-1)/5+1)*315;

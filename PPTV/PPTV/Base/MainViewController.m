@@ -108,7 +108,7 @@
        
         if(value){
             homeViewController.tabbar.alpha = 0;
-            homeViewController.tabbar.frame = CGRectMake( homeViewController.tabbar.frame.origin.x, [[UIScreen mainScreen] currentMode].size.height, homeViewController.tabbar.frame.size.width, homeViewController.tabbar.frame.size.height);
+            homeViewController.tabbar.frame = CGRectMake( homeViewController.tabbar.frame.origin.x, UIScreenHeight, homeViewController.tabbar.frame.size.width, homeViewController.tabbar.frame.size.height);
         }else{
             homeViewController.tabbar.hidden = NO;
             homeViewController.tabbar.alpha = 0.7;

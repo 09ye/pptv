@@ -40,22 +40,12 @@
                         </button>
                         <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="otE-Uu-Le5">
                             <rect key="frame" x="120" y="7" width="60" height="30"/>
-                            <state key="normal" title="最新发布">
-                                <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="btnSelectMainOntouch:" destination="-1" eventType="touchUpInside" id="2oQ-dU-WQM"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uRc-6X-kV5">
-                            <rect key="frame" x="210" y="7" width="60" height="30"/>
                             <state key="normal" title="最多播放">
                                 <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="btnSelectMainOntouch:" destination="-1" eventType="touchUpInside" id="W4P-Ae-bjX"/>
+                                <action selector="btnSelectMainOntouch:" destination="-1" eventType="touchUpInside" id="2oQ-dU-WQM"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eTI-h2-8wT">

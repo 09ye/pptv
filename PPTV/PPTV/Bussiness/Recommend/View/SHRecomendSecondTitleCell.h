@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet SHImageView *imgBig2;
 @property(nonatomic,strong) UINavigationController *navController;
 
-@property (nonatomic,strong) NSMutableDictionary * detail;
+@property (nonatomic,strong) NSMutableArray * detailArray;
+
 - (IBAction)btnImgBigOntouch:(UIButton *)sender;
 @end

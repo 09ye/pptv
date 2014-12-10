@@ -92,6 +92,12 @@
         <property name="textColor"  type="UIColor"  value="ColorStyleMilkWhite" />
     </labmidwhite>
     
+    <labmidwhitebold>
+        <property name="font"       type="UIFont"   value="FontScaleMidBold"/>
+        <property name="textColor"  type="UIColor"  value="ColorStyleMilkWhite" />
+    </labmidwhitebold>
+    
+    
     <labmingreen>
         <property name="font"       type="UIFont"   value="FontScaleSmall"/>
         <property name="textColor"  type="UIColor"  value="ColorBase" />

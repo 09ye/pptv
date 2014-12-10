@@ -49,8 +49,33 @@
 		[mMPayer setupPlayerWithCarrierView:self.carrier withDelegate:self];
 		[self setupObservers];
 	}
+    UIPinchGestureRecognizer * pinchRecongizer = [[UIPinchGestureRecognizer alloc]initWithTarget:self action:@selector(scaleRecongizer:)];
+    [self.backView addGestureRecognizer:pinchRecongizer];
 }
+-(void) scaleRecongizer :(UIPinchGestureRecognizer*) sender
+{
+    static CGFloat beganScale;
+    if([sender state] == UIGestureRecognizerStateBegan) {
+        NSLog(@"begin====>>>>>%f",[(UIPinchGestureRecognizer*)sender scale]);
+        beganScale = [(UIPinchGestureRecognizer*)sender scale];
+    }
+    if([sender state] == UIGestureRecognizerStateEnded) {
+      NSLog(@"end====>>>>>%f",[(UIPinchGestureRecognizer*)sender scale]);
 
+      NSLog(@"end=3333===>>>>>%f",[(UIPinchGestureRecognizer*)sender scale]-beganScale);
+        CGFloat scale = [(UIPinchGestureRecognizer*)sender scale]-beganScale;
+        if(scale>0 && !_isfull){// 放大
+
+            [self setIsfull:YES];
+        }else if(scale<0 && _isfull){
+
+            [self setIsfull:NO];
+        }
+        return;
+    }
+   
+    NSLog(@"scale%f====",[(UIPinchGestureRecognizer*)sender scale]);
+}
 - (void)viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
@@ -176,7 +201,7 @@
 
 - (void)mediaPlayer:(VMediaPlayer *)player didPrepared:(id)arg
 {
-	[player setVideoFillMode:VMVideoFillModeStretch];
+	[player setVideoFillMode:VMVideoFillModeFit];
     
 	mDuration = [player getDuration];
     [player start];
@@ -213,12 +238,13 @@
 {
 	player.decodingSchemeHint = VMDecodingSchemeSoftware;
 	player.autoSwitchDecodingScheme = NO;
+    // {print_error:368} avformat_open_input: Input/output error : -5   yes
 }
 
 - (void)mediaPlayer:(VMediaPlayer *)player setupPlayerPreference:(id)arg
 {
 	// Set buffer size, default is 1024KB(1*1024*1024).
-    //	[player setBufferSize:256*1024];
+
 	[player setBufferSize:2*1024];
 //    [player setAdaptiveStream:YES];
     
@@ -469,13 +495,13 @@
 	NSString *title = nil;
 	long lastPos = 0;
     
-	if (DELEGATE_IS_READY(playCtrlGetPrevMediaTitle:lastPlayPos:)) {
+	if (DELEGATE_IS_READY(playCtrlGetNextMediaTitle:lastPlayPos:)) {
 		url = [self.delegate playCtrlGetNextMediaTitle:&title lastPlayPos:&lastPos];
 	}
 	if (url) {
 		[self quicklyReplayMovie:url title:title seekToPos:lastPos];
 	} else {
-     [self quicklyPlayMovie:[NSURL URLWithString:@"http://hot.vrs.sohu.com/ipad1407291_4596271359934_4618512.m3u8"] title:title seekToPos:lastPos];
+     [self quicklyReplayMovie:[NSURL URLWithString:@"http://hot.vrs.sohu.com/ipad1407291_4596271359934_4618512.m3u8"] title:title seekToPos:lastPos];
 		NSLog(@"WARN: No previous media url found!");
 	}
 }
@@ -497,30 +523,19 @@
 
 -(IBAction)resetButtonAction:(id)sender
 {
-//	static int bigView = 0;
-   
-	[UIView animateWithDuration:0.3 animations:^{
-		if (!_isfull) {
-            
-//			self.view.frame = CGRectMake(0, 0, [[UIScreen mainScreen] applicationFrame].size.width, [[UIScreen mainScreen] applicationFrame].size.height-44) ;
-			_isfull = 1;
-		} else {
-//			self.view.frame = self.view.bounds;
-			_isfull = 0;
-		}
-		NSLog(@"NAL 1NBV &&&& backview.frame=%@", NSStringFromCGRect(self.backView.frame));
-	}];
-    if(self.delegate && [self.delegate respondsToSelector:@selector(showVideoControllerFullScreen:full:)]){
-        [self.delegate showVideoControllerFullScreen:self full:_isfull];
-    }
-   
-   
-    
-//    	[self quicklyStopMovie];
+    self.isfull = !_isfull;
 }
 -(void) setIsfull:(BOOL)isfull_
 {
     _isfull = isfull_;
+    if (_isfull) {
+        [self.resetBtn setBackgroundImage:[UIImage imageNamed:@"btn_small_normal"] forState:UIControlStateNormal];
+        [self.resetBtn setBackgroundImage:[UIImage imageNamed:@"btn_small_select"] forState:UIControlStateHighlighted];
+    } else {
+        [self.resetBtn setBackgroundImage:[UIImage imageNamed:@"btn_full_normal"] forState:UIControlStateNormal];
+        [self.resetBtn setBackgroundImage:[UIImage imageNamed:@"btn_full_select"] forState:UIControlStateHighlighted];
+    }
+    
     if(self.delegate && [self.delegate respondsToSelector:@selector(showVideoControllerFullScreen:full:)]){
         [self.delegate showVideoControllerFullScreen:self full:isfull_];
     }

@@ -92,7 +92,14 @@ typedef NS_ENUM(NSInteger, RMoveDirection) {
 	//initWithImage:[UIImage imageNamed:@"NaviBack"] target:self action:@selector(btnBack:)// Do any additional setup after loading the view.
     if(self.navigationController.viewControllers.count > 1){
         UIBarButtonItem * barbutton = [[UIBarButtonItem alloc]initWithCustomView:button];
-        self.navigationItem.leftBarButtonItem = barbutton;
+        if([self.intent.args objectForKey:@"title"]){
+            UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:@"xxxx" style:UIBarButtonItemStyleBordered target:self action:nil];
+            [self.navigationItem setBackBarButtonItem:backItem];
+        }else{
+            self.navigationItem.leftBarButtonItem = barbutton;
+
+        }
+       
     }
     [self loadSkin];
     

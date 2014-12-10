@@ -10,4 +10,7 @@
 
 @interface SHChannelCollectionViewCell : UICollectionViewCell
 
+@property (weak, nonatomic) IBOutlet SHImageView *imgLogo;
+@property (weak, nonatomic) IBOutlet UILabel *labName;
+@property (weak, nonatomic) IBOutlet UILabel *labContent;
 @end

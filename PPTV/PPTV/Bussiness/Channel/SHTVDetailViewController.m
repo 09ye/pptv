@@ -18,7 +18,7 @@
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     self.view.backgroundColor =[SHSkin.instance colorOfStyle:@"ColorBaseBlack"];
-    self.title = @"播放详情";
+    
     AppDelegate* app=(AppDelegate*)[UIApplication sharedApplication].delegate;
     
     mScrollview.datasource = self;
@@ -26,33 +26,46 @@
     mList = [[[NSArray alloc]initWithObjects:@"1",@"2",@"2" ,@"1",@"2",@"2" ,nil]mutableCopy ];
     [mScrollview reloadData];
    
-//        [mShowViewControll showIn:app.viewController.view];
-//    [self.view addSubview:mShowViewControll.view];
-//     [self.navigationController pushViewController:mShowViewControll animated:YES];
+
     mShowViewControll = [[SHShowVideoViewController alloc]init];
     mShowViewControll.delegate = self;
     mShowViewControll.videoTitle = @"xxx";
     mShowViewControll.videoUrl = @"http://183.136.140.38/gsws/z.m3u8";
     mShowViewControll.videoUrl = @"http://hot.vrs.sohu.com/ipad1407291_4596271359934_4618512.m3u8";
-    mShowViewControll.videoUrl = @"http://padload-cnc.wasu.cn/pcsan08/mams/vod/201409/29/16/201409291618156309b21cbd8_4e58bd54.mp4";
+    if ([[self.intent.args objectForKey:@"type"]intValue] == 0) {
+        self.title = @"播放详情(标清)";
+         mShowViewControll.videoUrl = @"http://padload-cnc.wasu.cn/pcsan08/mams/vod/201409/29/16/201409291618464557d5afdfe_5f77c692.mp4?wsiphost=local";
+    }else if ([[self.intent.args objectForKey:@"type"]intValue] == 1) {
+        self.title = @"播放详情(高清)";
+         mShowViewControll.videoUrl = @"http://padload-cnc.wasu.cn/pcsan08/mams/vod/201409/29/16/2014092916192198605db245e_e0a8255b.mp4?wsiphost=local";
+    }else {
+        self.title = @"播放详情(超清)";
+        mShowViewControll.videoUrl = @"http://padload-cnc.wasu.cn/pcsan08/mams/vod/201409/29/16/201409291618156309b21cbd8_4e58bd54.mp4";
+    }
    
-    mShowViewControll.view.frame = mViewVideo.bounds;
-    videoRect = mViewVideo.frame;
-//      mShowViewControll.isfull = YES;
+   
+    
+   
+     mShowViewControll.view.frame = CGRectMake(0, 0, UIScreenWidth, UIScreenHeight-64);
+
+    mShowViewControll.isfull = YES;
+    mViewVideoMenu.hidden = YES;
     
     mDrameViewControll = [[SHTVDrameViewController alloc]init];
     mDrameViewControll.list = [[NSMutableArray alloc]init ];
     mDrameViewControll.view.frame = mViewContent.bounds;
     [mViewContent addSubview:mDrameViewControll.view];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
-   
+  
+    
+    
+    
 }
 -(void) viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:YES];
-    
-    [mViewVideo insertSubview:mShowViewControll.view atIndex:0];
-   
+    [self.view addSubview:mShowViewControll.view];
+    [self.view bringSubviewToFront:mViewVideoMenu];
     [mDrameViewControll.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
 
 }
@@ -88,7 +101,10 @@
     
     
 }
-
+- (NSURL *)playCtrlGetNextMediaTitle:(NSString **)title lastPlayPos:(long *)lastPlayPos
+{
+    return [[NSURL alloc]initWithString:@"http://183.136.140.38/gsws/z.m3u8"];
+}
 #pragma video
 - (void) showVideoControllerFullScreen:(SHShowVideoViewController*) control full:(BOOL) isFull
 {
@@ -96,18 +112,16 @@
     [UIView animateWithDuration:0.3 animations:^{
         if (isFull) {
             
-            mViewContent.hidden = YES;
             mViewVideoMenu.hidden = YES;
-            mViewDown.hidden = YES;
-            mViewVideo.frame = CGRectMake(0, 0, [[UIScreen mainScreen] applicationFrame].size.width, [[UIScreen mainScreen] applicationFrame].size.height-44) ;
-            mShowViewControll.view.frame = mViewVideo.bounds;
+            mShowViewControll.view.frame = CGRectMake(0, 0, UIScreenWidth, UIScreenHeight-64);
+//            [[UIApplication sharedApplication] setStatusBarHidden:YES];
+//            [self.navigationController setNavigationBarHidden:YES animated:YES];
+//            [self.view bringSubviewToFront:mShowViewControll.view];
             
         } else {
-            mViewContent.hidden = NO;
-          
-            mViewDown.hidden = NO;
-            mViewVideo.frame = videoRect;
+
             mShowViewControll.view.frame = mViewVideo.bounds;
+           
         }
     }completion:^(BOOL finished) {
         if (!isFull) {

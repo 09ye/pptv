@@ -15,6 +15,9 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
+        UIButton * button = [[UIButton alloc]initWithFrame:frame];
+        [button addTarget:self action:@selector(close) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:button];
     }
     return self;
 }

@@ -21,31 +21,60 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    mListItme = [[NSArray alloc]initWithObjects:@"",@"精彩专题",@"今日热点",@"热播电影",@"同步剧场",@"小编推荐",@"精品推荐",nil];
+
     self.tableView.backgroundColor = [UIColor clearColor];
     app=(AppDelegate*)[UIApplication sharedApplication].delegate;
     UIView * viewTitleBar = [app.viewController hideSearchView:NO];
     viewTitleBar.alpha = 0.9;
     
-    imagesArray = [[[NSArray alloc]initWithObjects:@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1", nil] mutableCopy];
-    [self.tableView reloadData];
+    [self reloadRequest];
+    if (_refreshHeaderView == nil) {
+        _refreshHeaderView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0, 0-self.tableView.bounds.size.height, self.tableView.frame.size.width, self.tableView.bounds.size.height)];
+        _refreshHeaderView.delegate = self;
+        [self.tableView addSubview:_refreshHeaderView];
+        
+    }
     
-//    SHPostTask * post = [[SHPostTaskM alloc]init];
-//    post.URL = @"http://mobile.9191offer.com/getguidepic";
-//    post.delegate = self;
-//    [post start:^(SHTask *t) {
-//        imagesArray = [[t result]mutableCopy];
-//       
-//    } taskWillTry:^(SHTask *t) {
-//        
-//    } taskDidFailed:^(SHTask *t) {
-//        
-//    }];
-    
+    [_refreshHeaderView refreshLastUpdatedDate];
     
   
 }
 
+-(void)reloadRequest
+{
+    SHPostTaskM * post = [[SHPostTaskM alloc]init];
+    post.URL = URL_FOR(@"Pad/home");
+    post.delegate = self;
+    [post start:^(SHTask *t) {
+        [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
+
+        mResult = (NSDictionary *)[t result];
+        imagesArray = [mResult objectForKey:@"slide_area"];
+        
+        [self.tableView reloadData];
+    } taskWillTry:^(SHTask *t) {
+        
+    } taskDidFailed:^(SHTask *t) {
+        [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
+
+    }];
+    
+    SHPostTaskM * post1 = [[SHPostTaskM alloc]init];
+    post1.URL = URL_FOR(@"Pad/vodinfo");
+    [post1.postArgs setValue:[NSNumber numberWithInt:4935184] forKey:@"id"];
+    post1.delegate = self;
+    [post1 start:^(SHTask *t) {
+        
+        NSMutableDictionary*  mResult = (NSDictionary *)[t result];
+        
+        
+        
+    } taskWillTry:^(SHTask *t) {
+        
+    } taskDidFailed:^(SHTask *t) {
+        
+    }];
+}
 //-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 //{
 //    if (section == 0) {
@@ -68,8 +97,31 @@
 //    label.textAlignment = NSTextAlignmentLeft;
 //    return label;
 //}
+- (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view
+{
+    [self reloadRequest];
+}
+
+- (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view
+{
+    return NO;
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    [_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
+}
+
+-(void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
+    [_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
+}
+
+- (NSDate*)egoRefreshTableHeaderDataSourceLastUpdated:(EGORefreshTableHeaderView*)view{
+    
+    return [NSDate date]; // should return date data source was last changed
+}
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
+    [_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
     static float currentPostion = 0;
     static float lastPosition = 0;
     currentPostion = scrollView.contentOffset.y ;
@@ -123,15 +175,18 @@
         if(cell == nil){
             cell = (SHBestAdCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHBestAdCell" owner:nil options:nil] objectAtIndex:0];
         }
-//        imagesArray=[NSMutableArray arrayWithArray:mListItme];
+    
         if(imagesArray.count>0){
             [cell.contentView insertSubview:[self showScrollView:imagesArray WithAnimation:YES] atIndex:0];
+        }else{
+            UIImageView * defaultImg  = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 1024, 330)];
+            defaultImg.image = [UIImage imageNamed:@"default2048x600"];
+            [cell.contentView addSubview:defaultImg];
         }
 
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-      
         return cell;
         
     }else if (indexPath.row == 1){
@@ -139,7 +194,7 @@
         if(cell == nil){
             cell = (SHRecomendFirstCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHRecomendFirstCell" owner:nil options:nil] objectAtIndex:0];
         }
-        cell.detail = [[NSMutableDictionary alloc]init];
+        cell.detail = [mResult mutableCopy];
         cell.navController = self.navController;
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -151,11 +206,19 @@
         if(cell == nil){
             cell = (SHRecomendSecondTitleCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHRecomendSecondTitleCell" owner:nil options:nil] objectAtIndex:0];
         }
-        cell.btnBg.backgroundColor = [UIColor colorWithRed:234/255.0 green:143/255.0 blue:50/255.0 alpha:1];
-        cell.detail = [[NSMutableDictionary alloc]init];
+        cell.btnBg.backgroundColor = [UIColor colorWithRed:237/255.0 green:144/255.0 blue:41/255.0 alpha:1];
+        
+        NSMutableArray * array = [mResult objectForKey:@"cartoon_rec"];
+        cell.detailArray = [array mutableCopy];
+        if(array.count>1){
+            [cell.imgBig1 setUrl:[[array objectAtIndex:0]objectForKey:@"pic"]];
+            [cell.imgBig2 setUrl:[[array objectAtIndex:1]objectForKey:@"pic"]];
+        }
+        
+        cell.labContentLogo.text = [NSString stringWithFormat:@"共%d部",[[mResult objectForKey:@"cartoon_count"]intValue]];
+        
         cell.imgLogo.image = [UIImage imageNamed:@"ic_home_animation"];
         cell.labNameLogo.text = @"动漫";
-        cell.labContentLogo.text = @"共1234部";
         cell.navController = self.navController;
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -166,7 +229,7 @@
         if(cell == nil){
             cell = (SHImgVertiaclViewCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHImgVertiaclViewCell" owner:nil options:nil] objectAtIndex:0];
         }
-        cell.list = [[[NSArray alloc]initWithObjects:@"1",@"2",@"3",@"4",@"5",@"6",@"3",@"7",@"2",@"1",nil]mutableCopy];
+        cell.list = [[mResult objectForKey:@"cartoon_index"]mutableCopy];
         cell.navController = self.navController;
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -177,11 +240,19 @@
         if(cell == nil){
             cell = (SHRecomendSecondTitleCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHRecomendSecondTitleCell" owner:nil options:nil] objectAtIndex:0];
         }
-         cell.detail = [[NSMutableDictionary alloc]init];
-        cell.btnBg.backgroundColor = [UIColor colorWithRed:158/255.0 green:178/255.0 blue:35/255.0 alpha:1];
+        
+        cell.btnBg.backgroundColor = [UIColor colorWithRed:160/255.0 green:177/255.0 blue:1/255.0 alpha:1];
+        NSMutableArray * array = [mResult objectForKey:@"tele_rec"];
+        cell.detailArray = [array mutableCopy];
+        if(array.count>1){
+            [cell.imgBig1 setUrl:[[array objectAtIndex:0]objectForKey:@"pic"]];
+            [cell.imgBig2 setUrl:[[array objectAtIndex:1]objectForKey:@"pic"]];
+        }
+        
+        cell.labContentLogo.text = [NSString stringWithFormat:@"共%d部",[[mResult objectForKey:@"tele_count"]intValue]];
+        
         cell.imgLogo.image = [UIImage imageNamed:@"ic_home_tv"];
         cell.labNameLogo.text = @"电视剧";
-        cell.labContentLogo.text = @"共1234部";
         cell.navController = self.navController;
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -192,7 +263,7 @@
         if(cell == nil){
             cell = (SHImgVertiaclViewCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHImgVertiaclViewCell" owner:nil options:nil] objectAtIndex:0];
         }
-         cell.list = [[[NSArray alloc]initWithObjects:@"3",@"2",@"1",@"1",@"3",@"6",@"2",@"7",@"2",@"1",nil]mutableCopy];
+        cell.list = [[mResult objectForKey:@"tele_index"]mutableCopy];
         cell.navController = self.navController;
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -203,11 +274,18 @@
         if(cell == nil){
             cell = (SHRecomendSecondTitleCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHRecomendSecondTitleCell" owner:nil options:nil] objectAtIndex:0];
         }
-         cell.detail = [[NSMutableDictionary alloc]init];
-        cell.btnBg.backgroundColor = [UIColor colorWithRed:31/255.0 green:166/255.0 blue:212/255.0 alpha:1];
+        cell.btnBg.backgroundColor = [UIColor colorWithRed:0/255.0 green:166/255.0 blue:241/255.0 alpha:1];
+        NSMutableArray * array = [mResult objectForKey:@"movie_rec"];
+        cell.detailArray = [array mutableCopy];
+        if(array.count>1){
+            [cell.imgBig1 setUrl:[[array objectAtIndex:0]objectForKey:@"pic"]];
+            [cell.imgBig2 setUrl:[[array objectAtIndex:1]objectForKey:@"pic"]];
+        }
+        
+        cell.labContentLogo.text = [NSString stringWithFormat:@"共%d部",[[mResult objectForKey:@"movie_count"]intValue]];
+        
         cell.imgLogo.image = [UIImage imageNamed:@"ic_home_movice"];
         cell.labNameLogo.text = @"电影";
-        cell.labContentLogo.text = @"共1234部";
         cell.navController = self.navController;
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -218,7 +296,7 @@
         if(cell == nil){
             cell = (SHImgVertiaclViewCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHImgVertiaclViewCell" owner:nil options:nil] objectAtIndex:0];
         }
-         cell.list = [[[NSArray alloc]initWithObjects:@"2",@"5",@"3",@"1",@"6",@"2",@"7",@"2",@"1",@"4",nil]mutableCopy];
+        cell.list = [[mResult objectForKey:@"movie_index"]mutableCopy];
         cell.navController = self.navController;
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -230,11 +308,18 @@
         if(cell == nil){
             cell = (SHRecomendSecondTitleCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHRecomendSecondTitleCell" owner:nil options:nil] objectAtIndex:0];
         }
-         cell.detail = [[NSMutableDictionary alloc]init];
-        cell.btnBg.backgroundColor = [UIColor colorWithRed:18/255.0 green:196/255.0 blue:170/255.0 alpha:1];
+        cell.btnBg.backgroundColor = [UIColor colorWithRed:1/255.0 green:195/255.0 blue:169/255.0 alpha:1];
+        NSMutableArray * array = [mResult objectForKey:@"micro_rec"];
+        cell.detailArray = [array mutableCopy];
+        if(array.count>1){
+            [cell.imgBig1 setUrl:[[array objectAtIndex:0]objectForKey:@"pic"]];
+            [cell.imgBig2 setUrl:[[array objectAtIndex:1]objectForKey:@"pic"]];
+        }
+        
+        cell.labContentLogo.text = [NSString stringWithFormat:@"共%d部",[[mResult objectForKey:@"micro_count"]intValue]];
+        
         cell.imgLogo.image = [UIImage imageNamed:@"ic_home_movice_micro"];
         cell.labNameLogo.text = @"微电影";
-        cell.labContentLogo.text = @"共1234部";
         cell.navController = self.navController;
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -245,7 +330,7 @@
         if(cell == nil){
             cell = (SHImgVertiaclViewCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHImgVertiaclViewCell" owner:nil options:nil] objectAtIndex:0];
         }
-         cell.list = [[[NSArray alloc]initWithObjects:@"2",@"1",@"3",@"4",@"5",@"2",@"6",@"7",@"2",@"4",nil]mutableCopy];
+        cell.list = [[mResult objectForKey:@"micro_index"]mutableCopy];
         cell.navController = self.navController;
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -258,6 +343,7 @@
         
         cell.navController = self.navController;
         cell.type = 0;
+        cell.detail = [mResult mutableCopy];
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
@@ -268,6 +354,7 @@
         }
         cell.navController = self.navController;
         cell.type = 1;
+        cell.detail = [mResult mutableCopy];
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
@@ -343,8 +430,8 @@
 - (UIView *)pageAtIndex:(NSInteger)index
 {
     SHImageView  *imageView=[[SHImageView alloc]  initWithFrame: CGRectMake(0, 0, 1024, 330)];
-//    [imageView setUrl:[[imagesArray objectAtIndex:index] objectForKey:@"PicUrl"]];
-    imageView.image = [UIImage imageNamed:@"bg_ad1"];
+    [imageView setUrl:[[imagesArray objectAtIndex:index] objectForKey:@"pic"]];
+    
     return imageView;
 }
 

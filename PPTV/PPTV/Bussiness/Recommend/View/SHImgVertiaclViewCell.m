@@ -28,11 +28,17 @@
 {
     
     SHVerticalCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"sh_vertical_collectview_cell" forIndexPath:indexPath];
+    NSDictionary * dic = [self.list objectAtIndex:indexPath.row];
     cell.tag = indexPath.row;
-    cell.imgDeatil.image = [UIImage imageNamed:[self.list objectAtIndex:indexPath.row
-                                        ]];
-//    cell.labTitle.text = @"aaa";
-//    cell.labContent.text = @"ssss";
+    if ( [dic isKindOfClass:[NSDictionary class]]) {
+        [cell.imgDeatil setUrl:[dic objectForKey:@"pic"]];
+        cell.labTitle.text = [dic objectForKey:@"title"];
+        cell.labContent.text = [dic objectForKey:@"focus"];
+        cell.labStatus.text = [dic objectForKey:@"status"];
+    }
+    
+
+
     return cell;
 }
 
@@ -48,22 +54,12 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    mShowViewControll = [[SHShowVideoViewController alloc] initWithNibName:@"SHShowVideoViewController" bundle:nil];;
-    mShowViewControll.delegate = self;
-    mShowViewControll.videoTitle = @"xxx";
-    mShowViewControll.videoUrl = @"http://hot.vrs.sohu.com/ipad1407291_4596271359934_4618512.m3u8";
-     AppDelegate* app=(AppDelegate*)[UIApplication sharedApplication].delegate;
-    
-//    [mShowViewControll showIn:self];
-//    [self addSubview:mShowViewControll.view]
-//
-//    //    showViewControll.view.frame = CGRectMake(20, 20, 1000, 600);
-//    
-//    [self.navController pushViewController:mShowViewControll animated:YES];
+ 
     
     SHIntent * intent = [[SHIntent alloc ]init];
     intent.target = @"SHTVDetailViewController";
     intent.container = self.navController;
+    [intent.args setValue:[NSNumber numberWithInt:indexPath.row] forKey:@"type"];
     [[UIApplication sharedApplication] open:intent];
 }
 
