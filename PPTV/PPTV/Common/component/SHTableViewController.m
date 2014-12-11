@@ -180,6 +180,7 @@
             cell = [self dequeueReusableLoadingCell];
             [self loadNext];
         }
+        cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }else{

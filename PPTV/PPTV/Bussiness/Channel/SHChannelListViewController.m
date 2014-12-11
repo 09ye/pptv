@@ -18,6 +18,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
      self.tableView.backgroundColor = [UIColor clearColor];
+    pageSize = LIST_PAGE_SIZE;
+    pagenum = 1;
+    mIsEnd = NO;
     
     [self reloadRequest];
     if (_refreshHeaderView == nil) {
@@ -77,29 +80,11 @@
     [mFilterView addSubview:radioGroup2];
     [mFilterView addSubview:radioGroup3];
     mFilterView.imgArrow = imgArrow;
-    mList =  [[[NSArray alloc]initWithObjects:@"1",@"1",@"1",@"4",@"5",@"6",@"2",@"3",@"5",@"6",@"3",@"2",@"1",@"6",@"3",@"2",@"1",@"3",@"2" ,nil]mutableCopy];
+//    mList =  [[[NSArray alloc]initWithObjects:@"1",@"1",@"1",@"4",@"5",@"6",@"2",@"3",@"5",@"6",@"3",@"2",@"1",@"6",@"3",@"2",@"1",@"3",@"2" ,nil]mutableCopy];
     
     
 }
--(void) reloadRequest
-{
-    SHPostTaskM * post = [[SHPostTaskM alloc]init];
-    post.URL = URL_FOR(@"Pad/home");
-    post.delegate = self;
-    [post start:^(SHTask *t) {
-        [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
-        
-//        mResult = (NSDictionary *)[t result];
-//        imagesArray = [mResult objectForKey:@"slide_area"];
-        
-//        [self.tableView reloadData];
-    } taskWillTry:^(SHTask *t) {
-        
-    } taskDidFailed:^(SHTask *t) {
-        [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
-        
-    }];
-}
+
 - (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view
 {
     [self reloadRequest];
@@ -130,14 +115,19 @@
 
 -(float) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return ((mList.count-1)/5+1)*315;
+    if(indexPath.row >= mList.count || mList.count == 0 ){
+        return 44;
+    }else{
+         return ((mList.count-1)/5+1)*315;
+    }
+   
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     
     return 1;
 }
--(SHTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+-(UITableViewCell*) tableView:(UITableView *)tableView dequeueReusableStandardCellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SHImgVertiaclViewCell * cell = [self.tableView dequeueReusableCellWithIdentifier:@"table_img_vertical_cell"];
     if(cell == nil){
@@ -155,7 +145,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-
+#pragma  筛选
 
 - (IBAction)btnShowSearchOntouch:(UIButton *)sender {
      [mFilterView showIn:self.view :CGRectMake(0, 44, self.view.frame.size.width, self.view.frame.size.height-44)];
@@ -181,5 +171,52 @@
      [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
     
     
+}
+#pragma request
+-(void) reloadRequest
+{
+    pagenum = 1;
+    mIsEnd = NO;
+    [mList removeAllObjects];
+    [self loadNext];
+}
+- (void)loadNext
+{
+    SHPostTaskM * post = [[SHPostTaskM alloc]init];
+    post.URL = URL_FOR(@"getalljobfairs");
+    [post.postArgs setValue:[NSString stringWithFormat:@"%d",pageSize] forKeyPath:@"pagesize"];
+    [post.postArgs setValue:[NSString stringWithFormat:@"%d",pagenum] forKeyPath:@"pagenum"];
+    post.delegate = self;
+    [post start];
+    pagenum++;
+}
+- (void)taskDidFinished:(SHTask*) task
+{
+    [self dismissWaitDialog];
+    [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
+    
+    mResult = [[task result] mutableCopy];
+    NSArray * list = [task.result valueForKeyPath:@"JobList"];
+    if([[mResult objectForKey:@"TotalPage"]intValue] < pagenum){
+        mIsEnd = YES;
+    }
+    
+    if(list.count > 0){
+        if(mList == NULL){
+            mList = [[NSMutableArray alloc] init];
+        }
+        [mList addObjectsFromArray:list];
+        
+    }
+    [self.tableView reloadData];
+    
+    
+    
+}
+- (void)taskDidFailed:(SHTask *)task
+{
+    [self dismissWaitDialog];
+    [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
+    [task.respinfo show];
 }
 @end

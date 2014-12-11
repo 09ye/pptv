@@ -16,6 +16,11 @@
     EGORefreshTableHeaderView* _refreshHeaderView;
     SHFilterView * mFilterView;
     __weak IBOutlet UIImageView *imgArrow;
+    
+    int pageSize;
+    int pagenum;
+    
+    NSMutableDictionary * mResult;
 }
 @property(nonatomic,retain) UINavigationController *navController; // If this view controller has been pushed onto a navigation controller, return it.
 @property (nonatomic,strong) NSString * type;//频道类型

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment defaultVersion="1552" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -14,9 +15,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="正在加载数据..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Vja-t9-Ld1">
-                        <rect key="frame" x="102" y="11" width="117" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="正在加载..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vja-t9-Ld1">
+                        <rect key="frame" x="130" y="11" width="83" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
@@ -24,15 +24,31 @@
                             <userDefinedRuntimeAttribute type="string" keyPath="userstyle" value="labmiddark"/>
                         </userDefinedRuntimeAttributes>
                     </label>
-                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="RDJ-Uh-8Yo">
-                        <rect key="frame" x="80" y="11" width="20" height="20"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="RDJ-Uh-8Yo">
+                        <rect key="frame" x="108" y="12" width="20" height="20"/>
                     </activityIndicatorView>
                 </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottomMargin" secondItem="RDJ-Uh-8Yo" secondAttribute="bottom" constant="4" id="Jw7-rk-sgh"/>
+                    <constraint firstAttribute="centerY" secondItem="RDJ-Uh-8Yo" secondAttribute="centerY" id="L4H-el-tJ5"/>
+                    <constraint firstAttribute="centerY" secondItem="Vja-t9-Ld1" secondAttribute="centerY" id="cki-0x-Uxz"/>
+                    <constraint firstItem="RDJ-Uh-8Yo" firstAttribute="top" secondItem="eS1-ga-myU" secondAttribute="topMargin" constant="3" id="eZy-yr-Urb"/>
+                    <constraint firstItem="Vja-t9-Ld1" firstAttribute="leading" secondItem="RDJ-Uh-8Yo" secondAttribute="trailing" constant="2" id="hF1-5S-ZHz"/>
+                    <constraint firstAttribute="centerX" secondItem="Vja-t9-Ld1" secondAttribute="centerX" id="lIC-58-IAD"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="RDJ-Uh-8Yo" secondAttribute="bottom" constant="3" id="pyP-ls-kM1"/>
+                    <constraint firstItem="RDJ-Uh-8Yo" firstAttribute="top" secondItem="eS1-ga-myU" secondAttribute="topMargin" constant="4" id="z3e-bd-CIn"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="Jw7-rk-sgh"/>
+                        <exclude reference="eZy-yr-Urb"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="chrysanthemum" destination="RDJ-Uh-8Yo" id="dcy-dQ-WSA"/>
             </connections>
+            <point key="canvasLocation" x="280" y="229"/>
         </tableViewCell>
     </objects>
 </document>

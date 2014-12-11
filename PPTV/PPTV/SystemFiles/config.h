@@ -28,7 +28,7 @@
 
 
 
-
+#define LIST_PAGE_SIZE 10
 
 #define RECT_RIGHTSHOW CGRectMake(87, 23, 930, 730)
 #define RECT_RIGHTNAVIGATION CGRectMake(0, 0, 930, 44)
