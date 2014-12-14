@@ -5,8 +5,9 @@
 //  Created by yebaohua on 14/11/19.
 //  Copyright (c) 2014年 yebaohua. All rights reserved.
 //
-
+// detailInfo
 #import "SHTVDetailViewController.h"
+#import "SHChannelHorizontalCell.h"
 
 @interface SHTVDetailViewController ()
 
@@ -17,15 +18,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
     self.view.backgroundColor =[SHSkin.instance colorOfStyle:@"ColorBaseBlack"];
     
     AppDelegate* app=(AppDelegate*)[UIApplication sharedApplication].delegate;
     
+    dicPreInfo = [self.intent.args objectForKey:@"detailInfo"];
     mScrollview.datasource = self;
     mScrollview.delegate = self;
-    mList = [[[NSArray alloc]initWithObjects:@"1",@"2",@"2" ,@"1",@"2",@"2" ,nil]mutableCopy ];
-    [mScrollview reloadData];
    
+   
+   
+    
 
     mShowViewControll = [[SHShowVideoViewController alloc]init];
     mShowViewControll.delegate = self;
@@ -46,27 +50,52 @@
    
     
    
-     mShowViewControll.view.frame = CGRectMake(0, 0, UIScreenWidth, UIScreenHeight-64);
+    mShowViewControll.view.frame = CGRectMake(0, 0, UIScreenWidth, UIScreenHeight);
 
     mShowViewControll.isfull = YES;
-    mViewVideoMenu.hidden = YES;
-    
-    mDrameViewControll = [[SHTVDrameViewController alloc]init];
-    mDrameViewControll.list = [[NSMutableArray alloc]init ];
-    mDrameViewControll.view.frame = mViewContent.bounds;
-    [mViewContent addSubview:mDrameViewControll.view];
-    [[UIApplication sharedApplication] setStatusBarHidden:NO];
-  
-    
-    
-    
-}
--(void) viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:YES];
     [self.view addSubview:mShowViewControll.view];
-    [self.view bringSubviewToFront:mViewVideoMenu];
+    
+    [self request:[[dicPreInfo objectForKey:@"id"]intValue]];
+
     [mDrameViewControll.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
+}
+-(void) request:(NSInteger)videoID
+{
+ 
+    SHPostTaskM * post = [[SHPostTaskM alloc]init];
+    post.URL = URL_FOR(@"Pad/vodinfo");
+    [post.postArgs setValue:[NSNumber numberWithInt:videoID] forKey:@"id"];
+    post.delegate = self;
+    [post start:^(SHTask *t) {
+        
+        mResultDetail = [[t result]mutableCopy];
+        mVideotitle = [mResultDetail objectForKey:@"title"];
+        mVideoUrl = [[mResultDetail objectForKey:@"vods"]objectForKey:@"hd2" ];
+        self.title = mVideotitle;
+        NSURL * videoUrl = [NSURL URLWithString:mVideoUrl];
+        [mShowViewControll quicklyReplayMovie:videoUrl title:[mResultDetail objectForKey:@"title"] seekToPos:0];
+        
+        if (mDemandDetailViewControll==nil) {// 详情
+            mDemandDetailViewControll = [[SHDemandDetailViewController alloc]init];
+            mDemandDetailViewControll.view.frame = mViewContent.bounds;
+        }
+        mDemandDetailViewControll.detail = [mResultDetail mutableCopy];
+        if (mDrameViewControll ==nil) {// 剧集
+            mDrameViewControll = [[SHTVDrameViewController alloc]init];
+            mDrameViewControll.view.frame = mViewContent.bounds;
+        }
+        
+        mDrameViewControll.list = [[NSMutableArray alloc]init ];
+        [mViewContent addSubview:mDrameViewControll.view];
+        // 大家都在看
+        mList = [[mResultDetail objectForKey:@"recoms"]mutableCopy];
+        [mScrollview reloadData];
+        
+    } taskWillTry:^(SHTask *t) {
+        
+    } taskDidFailed:^(SHTask *t) {
+        
+    }];
 
 }
 
@@ -80,10 +109,10 @@
         cell = [array objectAtIndex:0];
         cell.identifier = @"defalut_cell";
     }
-    
-    
-    
-//    ((SHChannelHorizontalCell*)cell).labName.text = [mList objectAtIndex:indexPath.row];
+    NSDictionary * dic = [mList objectAtIndex:indexPath.row];
+    [((SHChannelHorizontalCell*)cell).imgPic setUrl:[dic objectForKey:@"pic"]];
+    ((SHChannelHorizontalCell*)cell).labTitle.text = [dic objectForKey:@"title"];
+    ((SHChannelHorizontalCell*)cell).labContent.text = [dic objectForKey:@"focus"];
     
     return cell;
     
@@ -98,22 +127,26 @@
 {
     //    CGRect rectInTableView = [tableView rectForRowAtIndexPath:indexPath];
     //    CGRect rect = [tableView convertRect:rectInTableView toView:[tableView superview]];
-    
+//    [mScrollview selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
+
+
+    [self request:[[[mList objectAtIndex:indexPath.row] objectForKey:@"id"]intValue]];
     
 }
+#pragma video delegate
 - (NSURL *)playCtrlGetNextMediaTitle:(NSString **)title lastPlayPos:(long *)lastPlayPos
 {
     return [[NSURL alloc]initWithString:@"http://183.136.140.38/gsws/z.m3u8"];
 }
-#pragma video
+
 - (void) showVideoControllerFullScreen:(SHShowVideoViewController*) control full:(BOOL) isFull
 {
 
     [UIView animateWithDuration:0.3 animations:^{
         if (isFull) {
             
-            mViewVideoMenu.hidden = YES;
-            mShowViewControll.view.frame = CGRectMake(0, 0, UIScreenWidth, UIScreenHeight-64);
+
+            mShowViewControll.view.frame = self.view.bounds;
 //            [[UIApplication sharedApplication] setStatusBarHidden:YES];
 //            [self.navigationController setNavigationBarHidden:YES animated:YES];
 //            [self.view bringSubviewToFront:mShowViewControll.view];
@@ -124,10 +157,38 @@
            
         }
     }completion:^(BOOL finished) {
-        if (!isFull) {
-              mViewVideoMenu.hidden = NO;
-        }
+        
     }];
+}
+-(void) showVideoControllerMenuDidSelct:(SHShowVideoViewController *)control sender:(UIButton *)sender tag:(int)tag
+{
+    
+    [self changeRightViewContent:tag];
+}
+
+#pragma  菜单响应变化
+-(void) changeRightViewContent:(int) index
+{
+    for (UIView * view in mViewContent.subviews) {
+        [view removeFromSuperview];
+    }
+    switch (index) {
+        case 1:// 剧集
+            [mViewContent addSubview:mDrameViewControll.view];
+            break;
+        case 2:// 详情
+            [mViewContent addSubview:mDemandDetailViewControll.view];
+            break;
+        case 3:// 下载
+            
+            break;
+        case 4://收藏
+            
+            break;
+            
+        default:
+            break;
+    }
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

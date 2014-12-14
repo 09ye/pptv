@@ -39,9 +39,7 @@
     mShowViewControll.videoUrl = @"http://hot.vrs.sohu.com/ipad1407291_4596271359934_4618512.m3u8";
     mShowViewControll.videoUrl = @"http://padlive2-cnc.wasu.cn/cctv7/z.m3u8";
     mShowViewControll.view.frame = mViewVideo.bounds;
-    mShowViewControll.curPosLbl.hidden = YES;
-    mShowViewControll.progressSld.hidden = YES;
-    mShowViewControll.durationLbl.hidden = YES;
+    [mShowViewControll setIsLive:YES];
 //    mShowViewControll.resetBtn.enabled = NO;
     
     mListViewControll = [[SHLiveListViewController alloc]init];

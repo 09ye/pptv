@@ -11,7 +11,7 @@
             <rect key="frame" x="0.0" y="0.0" width="135" height="140"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_movice_defaul.png" translatesAutoresizingMaskIntoConstraints="NO" id="y7r-zJ-d61">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="default168x108.png" translatesAutoresizingMaskIntoConstraints="NO" id="y7r-zJ-d61" customClass="SHImageView">
                     <rect key="frame" x="5" y="0.0" width="125" height="70"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="3D版植物大战僵尸" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="imF-Ll-v90">
@@ -35,10 +35,15 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="imgPic" destination="y7r-zJ-d61" id="g4v-TY-g4x"/>
+                <outlet property="labContent" destination="JXh-A1-6pJ" id="8pY-8d-NUe"/>
+                <outlet property="labTitle" destination="imF-Ll-v90" id="H5y-gl-pkw"/>
+            </connections>
             <point key="canvasLocation" x="36" y="111"/>
         </view>
     </objects>
     <resources>
-        <image name="ic_movice_defaul.png" width="250" height="140"/>
+        <image name="default168x108.png" width="168" height="108"/>
     </resources>
 </document>

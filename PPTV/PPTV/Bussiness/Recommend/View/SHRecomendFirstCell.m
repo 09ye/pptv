@@ -10,7 +10,7 @@
 
 @implementation SHRecomendFirstCell
 @synthesize detail = _detail;
-
+@synthesize listLive = _listLive;
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
@@ -31,18 +31,21 @@
     NSArray * arry =[_detail objectForKey:@"live_area"];// 热门直播
     if (arry.count>1) {
         NSDictionary * dic1 =[arry objectAtIndex:0];
-
         self.labLive1.text =  [dic1 objectForKey:@"title"];
         [self.imgLive1 setUrl:[dic1 objectForKey:@"pic"]];
+        self.imgLive2.layer.borderColor = [[UIColor blackColor]CGColor];
+        self.imgLive2.layer.borderWidth = 1.0;
         NSDictionary * dic2 =[arry objectAtIndex:1];
         [self.imgLive2 setUrl:[dic2 objectForKey:@"pic"]];
         self.labLive2.text =  [dic2 objectForKey:@"title"];
-        
+        self.imgLive2.layer.borderColor = [[UIColor blackColor]CGColor];
+        self.imgLive2.layer.borderWidth = 1.0;
     }
     NSArray * arry2 =[_detail objectForKey:@"series_area"];// 同步剧场
     for(int j=0;j<arry2.count;j++){
         NSDictionary * dic =[arry2 objectAtIndex:j];
         if (j== 0) {
+            mDicSelectSysn= dic;
             [self.imgLiveSynch setUrl:[dic objectForKey:@"pic"]];
             [self.imgLiveSynch1 setUrl:[dic objectForKey:@"pic"]];
         }else if(j== 1){
@@ -57,7 +60,11 @@
     
    
     
-    mList = [_detail objectForKey:@"live_index"];
+   
+}
+-(void) setListLive:(NSMutableArray *)listLive_
+{
+    _listLive = listLive_;
     [mCollectView reloadData];
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -65,7 +72,7 @@
     
     SHChannelCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"sh_channel_collectview_cell" forIndexPath:indexPath];
     cell.tag = indexPath.row;
-    NSDictionary * dic = [mList objectAtIndex:indexPath.row];
+    NSDictionary * dic = [_listLive objectAtIndex:indexPath.row];
     [cell.imgLogo setUrl:[dic objectForKey:@"pic"]];
     cell.labName.text = [dic objectForKey:@"title"];
     cell.labContent.text = [dic objectForKey:@"focus"];
@@ -74,7 +81,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return mList.count;
+    return _listLive.count;
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -85,19 +92,16 @@
 {
 
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-    
     SHIntent * intent = [[SHIntent alloc ]init];
     intent.target = @"SHLiveViewController";
-    
-    [intent.args setValue:[NSNumber numberWithBool:YES] forKey:@"readOnly"];
+     [intent.args setValue:[_listLive objectAtIndex:indexPath.row] forKey:@"detailInfo"];
     intent.container = self.navController;
     [[UIApplication sharedApplication] open:intent];
 }
 - (IBAction)btnLiveOntouch:(UIButton *)sender {
     SHIntent * intent = [[SHIntent alloc ]init];
     intent.target = @"SHLiveViewController";
-    
-    [intent.args setValue:[NSNumber numberWithBool:YES] forKey:@"readOnly"];
+     [intent.args setValue:mDicSelectSysn forKey:@"detailInfo"];
     intent.container = self.navController;
     [[UIApplication sharedApplication] open:intent];
 }
@@ -106,12 +110,16 @@
     if ([[_detail objectForKey:@"series_area"] count]<3) {
         return;
     }
+    if (sender.tag>0) {
+        mDicSelectSysn= [[_detail objectForKey:@"series_area"]objectAtIndex:sender.tag-1];
+    }
+    
     switch (sender.tag) {
         case 0:
         {
             SHIntent * intent = [[SHIntent alloc ]init];
             intent.target = @"SHTVDetailViewController";
-            [intent.args setValue:[NSNumber numberWithBool:YES] forKey:@"readOnly"];
+            [intent.args setValue:mDicSelectSysn forKey:@"detailInfo"];
             intent.container = self.navController;
             [[UIApplication sharedApplication] open:intent];
         }

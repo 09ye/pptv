@@ -13,6 +13,7 @@
 {
      __weak IBOutlet UICollectionView *mCollectView;
     NSMutableArray * mList;
+    NSDictionary * mDicSelectSysn;
 }
 @property(nonatomic,strong) UINavigationController *navController;
 @property (weak, nonatomic) IBOutlet SHImageView *imgLive1;
@@ -26,6 +27,7 @@
 @property (weak, nonatomic) IBOutlet SHImageView *imgLiveSynch3;
 @property (weak, nonatomic) IBOutlet SHImageView *imgLiveSynch4;
 @property (nonatomic,strong) NSMutableDictionary * detail;
+@property (nonatomic,strong) NSMutableArray * listLive;
 - (IBAction)btnLiveOntouch:(UIButton *)sender;
 - (IBAction)btnLiveSynchOntouch:(UIButton *)sender;
 

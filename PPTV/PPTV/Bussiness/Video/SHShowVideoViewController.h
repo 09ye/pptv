@@ -15,9 +15,11 @@
 - (NSURL *)playCtrlGetCurrMediaTitle:(NSString **)title lastPlayPos:(long *)lastPlayPos;
 - (NSURL *)playCtrlGetNextMediaTitle:(NSString **)title lastPlayPos:(long *)lastPlayPos;
 - (NSURL *)playCtrlGetPrevMediaTitle:(NSString **)title lastPlayPos:(long *)lastPlayPos;
+
 - (void) showVideoControllerDidComplete:(SHShowVideoViewController*) control;
 - (void) showVideoControllerFullScreen:(SHShowVideoViewController*) control full:(BOOL) isFull;
 
+-(void) showVideoControllerMenuDidSelct:(SHShowVideoViewController *)control sender:(UIButton*) sender tag:(int) tag;
 @end
 @interface SHShowVideoViewController : SHViewController<VMediaPlayerDelegate>
 {
@@ -25,8 +27,45 @@
     long               mDuration;
     long               mCurPostion;
     NSTimer            *mSyncSeekTimer;
+    NSTimer * mtimeViewHidden;
+   
+    UIView * mViewControl;
+    UIView * mViewMenu;
+    
+    NSArray * arrayBtn;
+    BOOL isVideoShow;
+    BOOL isLock;
 }
+@property (weak, nonatomic) IBOutlet UIView *viewMenuDown;
+@property (weak, nonatomic) IBOutlet UIButton *btnSeriesDown;
+@property (weak, nonatomic) IBOutlet UIButton *btnDeatilDown;
+@property (weak, nonatomic) IBOutlet UIButton *btnDownDown;
+@property (weak, nonatomic) IBOutlet UIButton *btnStoreDown;
+
+@property (weak, nonatomic) IBOutlet UIView *viewMenuNo;
+@property (weak, nonatomic) IBOutlet UIButton *btnSeries;
+@property (weak, nonatomic) IBOutlet UIButton *btnDeatil;
+@property (weak, nonatomic) IBOutlet UIButton *btnStore;
+
+@property (weak, nonatomic) IBOutlet UIView *viewLock;
+@property (weak, nonatomic) IBOutlet UIButton *btnLock;
+
+@property (weak, nonatomic) IBOutlet UIView *viewDemand;
+@property (weak, nonatomic) IBOutlet UIButton *startPause1;
+@property (weak, nonatomic) IBOutlet UIButton *btnVolume1;
+@property (weak, nonatomic) IBOutlet UISlider *sliderVolume1;
+@property (weak, nonatomic) IBOutlet UIButton *prevBtn1;
+@property (weak, nonatomic) IBOutlet UIButton *nextBtn1;
+@property (weak, nonatomic) IBOutlet UIButton *btnDefinition;
+
+@property (weak, nonatomic) IBOutlet UIView *viewLive;
+@property (weak, nonatomic) IBOutlet UIButton *startPause2;
+@property (weak, nonatomic) IBOutlet UIButton *btnVolume2;
+@property (weak, nonatomic) IBOutlet UISlider *sliderVolume2;
+
+
 @property (nonatomic, assign) id<SHShowVideoViewControllerDelegate> delegate;
+@property (weak, nonatomic) IBOutlet UIView *viewProgress;
 @property (nonatomic, assign) IBOutlet UIButton *startPause;
 @property (nonatomic, assign) IBOutlet UIButton *prevBtn;
 @property (nonatomic, assign) IBOutlet UIButton *nextBtn;
@@ -42,12 +81,22 @@
 @property (nonatomic, assign) IBOutlet UIView  	*backView;
 @property (nonatomic, assign) IBOutlet UIView  	*carrier;
 
+-(void)quicklyPlayMovie:(NSURL*)fileURL title:(NSString*)title seekToPos:(long)pos;
+-(void)quicklyReplayMovie:(NSURL*)fileURL title:(NSString*)title seekToPos:(long)pos;
+
+- (IBAction)btnDefintionOntouch:(id)sender;
+
 @property (nonatomic, copy)   NSURL *videoURL;
 @property (nonatomic, retain) UIActivityIndicatorView *activityView;
 @property (nonatomic, assign) BOOL progressDragging;
 @property (nonatomic,strong) NSString * videoTitle;
 @property (nonatomic,strong) NSString * videoUrl;
 @property (nonatomic, assign) BOOL isfull;
+@property (nonatomic, assign) BOOL isLive;
+- (IBAction)btnMenuOntouch:(UIButton *)sender;
+- (IBAction)btnLockOntouch:(id)sender;
+- (IBAction)btnVolumeOntouch:(UIButton *)sender;
+
 
 - (void)showIn:(UIView *)view;
 

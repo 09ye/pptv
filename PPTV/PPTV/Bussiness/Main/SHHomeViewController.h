@@ -7,6 +7,7 @@
 //
 
 #import "SHTableViewController.h"
+#import "SHShowRightView.h"
 
 @interface SHHomeViewController : SHTableViewController<UISearchBarDelegate>
 {
@@ -32,6 +33,7 @@
     __weak IBOutlet UIButton *btnMicroShow;
     
     NSArray * arrayBtn;
+    SHShowRightView *mViewRight;
     
 
 }

@@ -10,16 +10,22 @@
 #import "SHShowVideoViewController.h"
 #import "SHChannelHorizontalCell.h"
 #import "SHTVDrameViewController.h"
+#import "SHDemandDetailViewController.h"
 
-@interface SHTVDetailViewController : SHTableViewController<SHTableHorizontalViewDataSource,SHTableHorizontalViewDelegate,SHShowVideoViewControllerDelegate>
+@interface SHTVDetailViewController : SHTableViewController<SHTableHorizontalViewDataSource,SHTableHorizontalViewDelegate,SHShowVideoViewControllerDelegate,SHTaskDelegate>
 {
     SHShowVideoViewController* mShowViewControll;
     SHTVDrameViewController * mDrameViewControll;
+    SHDemandDetailViewController * mDemandDetailViewControll;
     __weak IBOutlet SHTableHorizontalView *mScrollview;
     __weak IBOutlet UIView *mViewVideo;
-     __weak IBOutlet UIView *mViewVideoMenu;
     __weak IBOutlet UIView *mViewContent;
     __weak IBOutlet UIView *mViewDown;
+    NSDictionary * dicPreInfo;
+    NSDictionary * mResultDetail;
+    NSString * mVideoUrl;
+    NSString * mVideotitle;
+    
 
 }
 

@@ -19,7 +19,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.view.backgroundColor = [UIColor clearColor];
-    self.tableView.backgroundColor = [SHSkin.instance colorOfStyle:@"ColorBase"];
+    self.tableView.backgroundColor = [UIColor clearColor];//[SHSkin.instance colorOfStyle:@"ColorBase"]
     
   
 }

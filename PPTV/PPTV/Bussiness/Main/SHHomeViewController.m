@@ -10,6 +10,8 @@
 #import "SHRecommendViewController.h"
 #import "SHChannelListViewController.H"
 #import "SHLiveViewController.h"
+#import "SHCollectViewController.h"
+#import "SHRecordViewController.h"
 
 @interface SHHomeViewController ()
 
@@ -26,7 +28,23 @@
     self.tabbar.barTintColor = [[UIColor alloc]initWithRed:38/255 green:38/255 blue:38/255 alpha:1];
     self.tabbar.selectedImageTintColor = [SHSkin.instance colorOfStyle:@"ColorTextOrg"];
     
-      arrayBtn = [[NSArray alloc]initWithObjects:btnOration,btnOriginal,btnEntertainment,btnLife,btnCar,btnSports,btnTravel,btnMicroShow, nil];
+    arrayBtn = [[NSArray alloc]initWithObjects:btnOration,btnOriginal,btnEntertainment,btnLife,btnCar,btnSports,btnTravel,btnMicroShow, nil];
+    mViewRight = [[[NSBundle mainBundle]loadNibNamed:@"SHShowRightView" owner:self options:nil]objectAtIndex:0];
+    
+    SHPostTaskM * postKeyWord = [[SHPostTaskM alloc]init];
+    postKeyWord.URL = URL_FOR(@"Pad/keywordrecom");
+    postKeyWord.delegate = self;
+    [postKeyWord start:^(SHTask *t) {
+        
+        NSMutableArray * list = [[t result]mutableCopy];
+        mSearch.placeholder = [[list objectAtIndex:arc4random()%list.count] objectForKey:@"name"];
+        
+    } taskWillTry:^(SHTask *t) {
+        
+    } taskDidFailed:^(SHTask *t) {
+        
+        
+    }];
 
     
 }
@@ -38,7 +56,12 @@
 }
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
 {
-    
+    if(mViewRight.isShow && (item.tag != 9 && item.tag !=10)){
+        [mViewRight close];
+    }
+    if(mIsShow){
+        [self close];
+    }
     SHTableViewController * nacontroller;
     if(item.tag == 0){
         nacontroller =[ mDictionary valueForKey:@"SHRecommendViewController"];
@@ -114,23 +137,20 @@
         return;
         
     }else if (item.tag == 9){
-        nacontroller =[ mDictionary valueForKey:@"SHChannelListViewController"];
-        if(!nacontroller){
-            SHChannelListViewController * viewcontroller = [[SHChannelListViewController alloc]init];
-            nacontroller = viewcontroller;
-            [mDictionary setValue:nacontroller forKey:@"SHChannelListViewController"];
-        }
+//        if (mViewRight.isShow) {
+//            [mViewRight close];
+//        }else{
+             [mViewRight show:[[SHCollectViewController alloc]init] inView:self.view direction:Right];
+//        }
+       
+
+        return;
     }else if (item.tag == 10){
-        nacontroller =[ mDictionary valueForKey:@"SHChannelListViewController"];
-        if(!nacontroller){
-            SHChannelListViewController * viewcontroller = [[SHChannelListViewController alloc]init];
-            nacontroller = viewcontroller;
-            [mDictionary setValue:nacontroller forKey:@"SHChannelListViewController"];
-        }
+        
+        [mViewRight show:[[SHRecordViewController alloc]init] inView:self.view direction:Right];
+        return;
     }
-    if(mIsShow){
-        [self close];
-    }
+    
     if(lastnacontroller != nacontroller){
         
         ((SHRecommendViewController*)nacontroller).navController = self.navigationController;
@@ -351,16 +371,16 @@
 }
 -(void) changeMoreViewColor:(int)selectTag
 {
-        for (UIButton * button in arrayBtn) {
+    for (UIButton * button in arrayBtn) {
         if (button.tag == selectTag) {
             [button setTitleColor:[SHSkin.instance colorOfStyle:@"ColorTextOrg"] forState:UIControlStateNormal];
-
+            
             [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"ic_tab_select_%d",button.tag]] forState:UIControlStateNormal];
         }else{
             [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"ic_tab_normal_%d",button.tag]] forState:UIControlStateNormal];
         }
     }
-
+    
 }
 @end

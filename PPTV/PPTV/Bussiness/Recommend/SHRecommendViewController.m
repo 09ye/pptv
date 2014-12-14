@@ -37,7 +37,7 @@
     
     [_refreshHeaderView refreshLastUpdatedDate];
     
-  
+    mTimerLive = [NSTimer scheduledTimerWithTimeInterval:60*10 target:self selector:@selector(reloadLiveRequest) userInfo:nil repeats:YES];
 }
 
 -(void)reloadRequest
@@ -48,7 +48,7 @@
     [post start:^(SHTask *t) {
         [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
 
-        mResult = (NSDictionary *)[t result];
+        mResult = [[t result]mutableCopy];
         imagesArray = [mResult objectForKey:@"slide_area"];
         
         [self.tableView reloadData];
@@ -59,21 +59,26 @@
 
     }];
     
+
+    [self reloadLiveRequest];
+}
+-(void)reloadLiveRequest
+{
     SHPostTaskM * post1 = [[SHPostTaskM alloc]init];
-    post1.URL = URL_FOR(@"Pad/vodinfo");
-    [post1.postArgs setValue:[NSNumber numberWithInt:4935184] forKey:@"id"];
+    post1.URL = URL_FOR(@"Pad/indexlive");
     post1.delegate = self;
     [post1 start:^(SHTask *t) {
         
-        NSMutableDictionary*  mResult = (NSDictionary *)[t result];
-        
-        
+        mListLive = [[t result]mutableCopy];
+        NSIndexPath *te=[NSIndexPath indexPathForRow:1 inSection:0];
+        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:te,nil] withRowAnimation:UITableViewRowAnimationNone];
         
     } taskWillTry:^(SHTask *t) {
         
     } taskDidFailed:^(SHTask *t) {
         
     }];
+    
 }
 //-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 //{
@@ -195,6 +200,7 @@
             cell = (SHRecomendFirstCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHRecomendFirstCell" owner:nil options:nil] objectAtIndex:0];
         }
         cell.detail = [mResult mutableCopy];
+        cell.listLive = mListLive;
         cell.navController = self.navController;
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -439,13 +445,14 @@
 {
     
     // 进入大图
-    
+    if ([[[imagesArray objectAtIndex:index] objectForKey:@"url"]isEqualToString:@""]) {
+        return;
+    }
     SHIntent *intent = [[SHIntent alloc]init];
     intent.target = @"WebViewController";
-//    [intent.args setValue:[[imagesArray objectAtIndex:index] objectForKey:@"LinkUrl"] forKeyPath:@"url"];
-//    [intent.args setValue:[[imagesArray objectAtIndex:index] objectForKey:@"Title"] forKeyPath:@"title"];
-    [intent.args setValue:@"http://www.wasu.cn/"  forKeyPath:@"url"];
-    [intent.args setValue:@"广告" forKeyPath:@"title"];
+    [intent.args setValue:[[imagesArray objectAtIndex:index] objectForKey:@"url"] forKeyPath:@"url"];
+    [intent.args setValue:[[imagesArray objectAtIndex:index] objectForKey:@"title"] forKeyPath:@"title"];
+//   [intent.args setValue:@"http://www.wasu.cn/"  forKeyPath:@"url"];
     intent.container = self.navController;
     [[UIApplication sharedApplication]open:intent];
 }

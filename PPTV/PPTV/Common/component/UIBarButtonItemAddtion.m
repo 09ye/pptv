@@ -37,7 +37,6 @@
     frame = btn.frame;
     frame.size.width = sz.width ;
     btn.frame = frame;
-    
     [btn setTitle:title forState:UIControlStateNormal];
     btn.userstyle = @"btnnavigation";
     //btn.backgroundColor = [UIColor blackColor];

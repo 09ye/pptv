@@ -9,5 +9,8 @@
 #import "SHTableHorizontalView.h"
 
 @interface SHChannelHorizontalCell : SHTableHorizontalViewCell
+@property (weak, nonatomic) IBOutlet SHImageView *imgPic;
+@property (weak, nonatomic) IBOutlet UILabel *labTitle;
+@property (weak, nonatomic) IBOutlet UILabel *labContent;
 
 @end
