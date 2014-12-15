@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PPTV/Bussiness/Video/SHShowVideoViewController.m"
-            timestampString = "440250588.408837"
+            timestampString = "440262118.97246"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "677"
-            endingLineNumber = "677"
+            startingLineNumber = "679"
+            endingLineNumber = "679"
             landmarkName = "-currButtonAction:"
             landmarkType = "5">
          </BreakpointContent>
@@ -121,13 +121,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "PPTV/Bussiness/Channel/SHTVDetailViewController.m"
-            timestampString = "440251163.134405"
+            filePath = "PPTV/Bussiness/Video/SHShowVideoViewController.m"
+            timestampString = "440258588.185917"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "156"
-            endingLineNumber = "156"
-            landmarkName = "-showVideoControllerFullScreen:full:"
+            startingLineNumber = "294"
+            endingLineNumber = "294"
+            landmarkName = "-mediaPlayer:playbackComplete:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PPTV/Bussiness/Video/SHShowVideoViewController.m"
+            timestampString = "440262118.97246"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "640"
+            endingLineNumber = "640"
+            landmarkName = "-goBackButtonAction:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

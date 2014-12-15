@@ -101,6 +101,9 @@ typedef NS_ENUM(NSInteger, RMoveDirection) {
         }
        
     }
+    UILabel *label =[[UILabel alloc]initWithFrame:CGRectMake(0, 40, 100, 40)];
+    label.text = @"xxxxxxx";
+    [self.navigationController.navigationBar addSubview:label];
     [self loadSkin];
     
     _LeftSContentOffset = [self leftSContentOffset];

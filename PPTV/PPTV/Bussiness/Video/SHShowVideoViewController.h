@@ -13,10 +13,10 @@
 @protocol SHShowVideoViewControllerDelegate <NSObject>
 
 - (NSURL *)playCtrlGetCurrMediaTitle:(NSString **)title lastPlayPos:(long *)lastPlayPos;
-- (NSURL *)playCtrlGetNextMediaTitle:(NSString **)title lastPlayPos:(long *)lastPlayPos;
-- (NSURL *)playCtrlGetPrevMediaTitle:(NSString **)title lastPlayPos:(long *)lastPlayPos;
+- (void)playCtrlGetNextMediaTitle:(SHShowVideoViewController *)control lastPlayPos:(long *)lastPlayPos;
+- (void)playCtrlGetPrevMediaTitle:(SHShowVideoViewController **)control lastPlayPos:(long *)lastPlayPo;
 
-- (void) showVideoControllerDidComplete:(SHShowVideoViewController*) control;
+//- (void) showVideoControllerDidComplete:(SHShowVideoViewController*) control;
 - (void) showVideoControllerFullScreen:(SHShowVideoViewController*) control full:(BOOL) isFull;
 
 -(void) showVideoControllerMenuDidSelct:(SHShowVideoViewController *)control sender:(UIButton*) sender tag:(int) tag;

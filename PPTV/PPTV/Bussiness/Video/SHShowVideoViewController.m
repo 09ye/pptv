@@ -8,7 +8,7 @@
 
 #import "SHShowVideoViewController.h"
 #import "MediaPlayer/MPMoviePlayerController.h"
-
+#define DELEGATE_IS_READY(x) (self.delegate && [self.delegate respondsToSelector:@selector(x)])
 @interface SHShowVideoViewController ()
 
 @end
@@ -291,9 +291,11 @@
 
 - (void)mediaPlayer:(VMediaPlayer *)player playbackComplete:(id)arg
 {
-    [self goBackButtonAction:nil];
-    if(self.delegate && [self.delegate respondsToSelector:@selector(showVideoControllerDidComplete:)]){
-        [self.delegate showVideoControllerDidComplete:self];
+//    [self goBackButtonAction:nil];
+    if (DELEGATE_IS_READY(playCtrlGetNextMediaTitle:lastPlayPos:)) {
+        [self.delegate playCtrlGetNextMediaTitle:self lastPlayPos:0];
+    }else {
+        NSLog(@"WARN: No previous media url found!");
     }
 }
 
@@ -489,7 +491,7 @@
 #endif
     
     [mMPayer prepareAsync];
-    [self startActivityWithMsg:@"正在加载..."];
+    [self startActivityWithMsg:@"正在全力加载中..."];//上次观看至第N分钟，正在全力加载中…
 }
 
 -(void)quicklyReplayMovie:(NSURL*)fileURL title:(NSString*)title seekToPos:(long)pos
@@ -631,7 +633,7 @@
 }
 #pragma mark - UI Actions
 
-#define DELEGATE_IS_READY(x) (self.delegate && [self.delegate respondsToSelector:@selector(x)])
+
 
 -(IBAction)goBackButtonAction:(id)sender
 {
@@ -683,16 +685,9 @@
     [self.prevBtn1 setBackgroundImage:[UIImage imageNamed:@"btn_pre_normal"] forState:UIControlStateNormal];
     [self.prevBtn1 setBackgroundImage:[UIImage imageNamed:@"btn_pre_select"] forState:UIControlStateHighlighted];
     
-    
-    NSURL *url = nil;
-    NSString *title = nil;
-    long lastPos = 0;
     if (DELEGATE_IS_READY(playCtrlGetPrevMediaTitle:lastPlayPos:)) {
-        url = [self.delegate playCtrlGetPrevMediaTitle:&title lastPlayPos:&lastPos];
-    }
-    if (url) {
-        [self quicklyReplayMovie:url title:title seekToPos:lastPos];
-    } else {
+        [self.delegate playCtrlGetNextMediaTitle:self lastPlayPos:0];
+    }else {
         NSLog(@"WARN: No previous media url found!");
     }
 }
@@ -703,17 +698,9 @@
     [self.nextBtn1 setBackgroundImage:[UIImage imageNamed:@"btn_next_normal"] forState:UIControlStateNormal];
     [self.nextBtn1 setBackgroundImage:[UIImage imageNamed:@"btn_next_select"] forState:UIControlStateHighlighted];
     
-    NSURL *url = nil;
-    NSString *title = nil;
-    long lastPos = 0;
-    
     if (DELEGATE_IS_READY(playCtrlGetNextMediaTitle:lastPlayPos:)) {
-        url = [self.delegate playCtrlGetNextMediaTitle:&title lastPlayPos:&lastPos];
-    }
-    if (url) {
-        [self quicklyReplayMovie:url title:title seekToPos:lastPos];
-    } else {
-        [self quicklyReplayMovie:[NSURL URLWithString:@"http://hot.vrs.sohu.com/ipad1407291_4596271359934_4618512.m3u8"] title:title seekToPos:lastPos];
+        [self.delegate playCtrlGetNextMediaTitle:self lastPlayPos:0];
+    }else {
         NSLog(@"WARN: No previous media url found!");
     }
 }

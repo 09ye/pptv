@@ -11,11 +11,14 @@
             <rect key="frame" x="0.0" y="0.0" width="1024" height="652"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w8U-gb-adP">
-                    <rect key="frame" x="620" y="0.0" width="400" height="652"/>
+                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w8U-gb-adP">
+                    <rect key="frame" x="620" y="0.0" width="400" height="650"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="400" id="6tQ-t1-lWd"/>
+                    </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jzb-kc-dwK">
+                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jzb-kc-dwK">
                     <rect key="frame" x="0.0" y="0.0" width="620" height="652"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <state key="normal">
@@ -27,6 +30,12 @@
                 </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="w8U-gb-adP" firstAttribute="leading" secondItem="jzb-kc-dwK" secondAttribute="trailing" id="0eb-F7-jsV"/>
+                <constraint firstAttribute="trailing" secondItem="w8U-gb-adP" secondAttribute="trailing" constant="4" id="9nR-Dy-Jsc"/>
+                <constraint firstAttribute="bottom" secondItem="w8U-gb-adP" secondAttribute="bottom" id="fzg-9D-LQW"/>
+                <constraint firstItem="w8U-gb-adP" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="hAD-4b-XZw"/>
+            </constraints>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>

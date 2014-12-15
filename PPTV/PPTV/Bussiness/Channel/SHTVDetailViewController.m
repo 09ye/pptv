@@ -134,9 +134,10 @@
     
 }
 #pragma video delegate
-- (NSURL *)playCtrlGetNextMediaTitle:(NSString **)title lastPlayPos:(long *)lastPlayPos
+- (void)playCtrlGetNextMediaTitle:(SHShowVideoViewController *)control lastPlayPos:(long *)lastPlayPos
 {
-    return [[NSURL alloc]initWithString:@"http://183.136.140.38/gsws/z.m3u8"];
+    
+    [mShowViewControll quicklyReplayMovie:[NSURL URLWithString:mVideoUrl] title:mVideotitle seekToPos:0];
 }
 
 - (void) showVideoControllerFullScreen:(SHShowVideoViewController*) control full:(BOOL) isFull
@@ -153,7 +154,7 @@
             
         } else {
 
-            mShowViewControll.view.frame = mViewVideo.bounds;
+            mShowViewControll.view.frame = mViewVideo.frame;
            
         }
     }completion:^(BOOL finished) {
