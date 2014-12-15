@@ -14,8 +14,6 @@
 @end
 
 @implementation SHShowVideoViewController
-@synthesize videoTitle = _videoTitle;
-@synthesize videoUrl = _videoUrl;
 @synthesize isfull = _isfull;
 @synthesize isLive = _isLive;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -30,7 +28,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = _videoTitle;
+
     // Do any additional setup after loading the view from its nib.
     //    self.view.bounds = [[UIScreen mainScreen] bounds];
     self.activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:
@@ -55,9 +53,39 @@
     UITapGestureRecognizer * tapRecongizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapRecongizer:)];
     [self.backView addGestureRecognizer:tapRecongizer];
     mtimeViewHidden = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(hiddenView) userInfo:nil repeats:YES];
-    mViewControl = self.viewDemand;
-    mViewMenu = self.viewMenuDown;
-    arrayBtn = [[NSArray alloc]initWithObjects:self.btnSeriesDown,self.btnDeatilDown,self.btnDownDown,self.btnStoreDown, nil];
+    
+    if (_isLive) {
+        arrayBtn = [[NSArray alloc]initWithObjects:self.btnSeries,self.btnDeatil,self.btnStore, nil];
+        mViewControl = self.viewLive;
+        mViewMenu = self.viewMenuNo;
+        self.viewMenuNo.hidden = NO;
+        self.viewMenuDown.hidden = YES;
+        self.viewLive.hidden = YES;
+        self.viewDemand.hidden = YES;
+        self.viewLock.hidden = YES;
+        self.durationLbl.hidden = YES;
+        self.progressSld.hidden = YES;
+        self.curPosLbl.hidden = YES;
+        
+        
+    }else{
+        arrayBtn = [[NSArray alloc]initWithObjects:self.btnSeriesDown,self.btnDeatilDown,self.btnDownDown,self.btnStoreDown, nil];
+        mViewControl = self.viewDemand;
+        mViewMenu = self.viewMenuDown;
+        self.viewMenuNo.hidden = YES;
+        self.viewMenuDown.hidden = NO;
+        self.viewLive.hidden = YES;
+        self.viewDemand.hidden = NO;
+        self.durationLbl.hidden = NO;
+        self.progressSld.hidden = NO;
+        self.curPosLbl.hidden = NO;
+    }
+   
+   
+
+  
+    
+
 }
 -(void) scaleRecongizer :(UIPinchGestureRecognizer*) sender
 {
@@ -85,7 +113,7 @@
 }
 -(void)tapRecongizer :(UITapGestureRecognizer*)sender
 {
-[self resetTimeViewhidden];
+    [self resetTimeViewhidden];
     if(_isfull){
         if (isLock) {// b)	如果处于锁屏状态，仅出现锁屏按钮
             if (self.viewLock.hidden) {
@@ -321,7 +349,7 @@
 {
     // Set buffer size, default is 1024KB(1*1024*1024).
     
-    [player setBufferSize:2*1024];
+    [player setBufferSize:517*1024];
     //    [player setAdaptiveStream:YES];
     
     [player setVideoQuality:VMVideoQualityHigh];
@@ -521,11 +549,16 @@
 #pragma set
 -(void) setIsfull:(BOOL)isfull_
 {
+    
     _isfull = isfull_;
+   
     if (_isfull) {
         mViewControl.hidden = YES;
 //        mViewMenu.hidden = YES;
-        [self viewMenuHiddenAnimate:YES];
+        if(mViewMenu){
+            [self viewMenuHiddenAnimate:YES];
+        }
+   
         self.viewLock.hidden = NO;
         self.startPause.hidden = YES;
         [self.resetBtn setBackgroundImage:[UIImage imageNamed:@"btn_small_normal"] forState:UIControlStateNormal];
@@ -533,7 +566,9 @@
     } else {
         mViewControl.hidden = YES;
 //        mViewMenu.hidden = NO;
-         [self viewMenuHiddenAnimate:NO];
+        if(mViewMenu){
+            [self viewMenuHiddenAnimate:NO];
+        }
         self.viewLock.hidden = YES;
         self.startPause.hidden = NO;
         
@@ -546,36 +581,7 @@
         [self.delegate showVideoControllerFullScreen:self full:isfull_];
     }
 }
--(void)setIsLive:(BOOL)isLive_
-{
-    _isLive = isLive_;
-    if (_isLive) {
-        arrayBtn = [[NSArray alloc]initWithObjects:self.btnSeries,self.btnDeatil,self.btnStore, nil];
-        mViewControl = self.viewLive;
-        mViewMenu = self.viewMenuNo;
-        self.viewMenuNo.hidden = NO;
-        self.viewMenuDown.hidden = YES;
-        self.viewLive.hidden = YES;
-        self.viewDemand.hidden = YES;
-        self.viewLock.hidden = YES;
-        self.durationLbl.hidden = YES;
-        self.progressSld.hidden = YES;
-        self.curPosLbl.hidden = YES;
-        
-        
-    }else{
-        arrayBtn = [[NSArray alloc]initWithObjects:self.btnSeriesDown,self.btnDeatilDown,self.btnDownDown,self.btnStoreDown, nil];
-        mViewControl = self.viewDemand;
-        mViewMenu = self.viewMenuDown;
-        self.viewMenuNo.hidden = YES;
-        self.viewMenuDown.hidden = NO;
-        self.viewLive.hidden = YES;
-        self.viewDemand.hidden = NO;
-        self.durationLbl.hidden = NO;
-        self.progressSld.hidden = NO;
-        self.curPosLbl.hidden = NO;
-    }
-}
+
 -(void) viewMenuHiddenAnimate:(BOOL) value
 {
     if ((value && mViewMenu.hidden)|| (!value && !mViewMenu.hidden)) {
@@ -605,31 +611,6 @@
     } completion:^(BOOL finished) {
         mViewMenu.hidden = value;
     }];
-}
--(void) updatViewShow
-{
-    if (_isLive) {
-        mViewControl = self.viewLive;
-        mViewMenu = self.viewMenuNo;
-        self.viewMenuNo.hidden = NO;
-        self.viewMenuDown.hidden = YES;
-        self.viewLive.hidden = NO;
-        self.viewDemand.hidden = YES;
-        self.durationLbl.hidden = YES;
-        self.progressSld.hidden = YES;
-        self.curPosLbl.hidden = YES;
-        
-    }else{
-        mViewControl = self.viewDemand;
-        mViewMenu = self.viewMenuDown;
-        self.viewMenuNo.hidden = YES;
-        self.viewMenuDown.hidden = NO;
-        self.viewLive.hidden = YES;
-        self.viewDemand.hidden = NO;
-        self.durationLbl.hidden = NO;
-        self.progressSld.hidden = NO;
-        self.curPosLbl.hidden = NO;
-    }
 }
 #pragma mark - UI Actions
 
@@ -676,7 +657,7 @@
     NSString *title = nil;
     long lastPos = 0;
     
-    [self quicklyPlayMovie:[NSURL URLWithString:self.videoUrl ] title:title seekToPos:lastPos];
+    [self quicklyPlayMovie:self.videoURL title:title seekToPos:lastPos];
     
 }
 
@@ -721,7 +702,8 @@
 }
 
 -(IBAction)resetButtonAction:(id)sender
-{ [self resetTimeViewhidden];
+{
+    [self resetTimeViewhidden];
     self.isfull = !_isfull;
 }
 

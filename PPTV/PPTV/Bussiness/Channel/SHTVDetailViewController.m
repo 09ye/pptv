@@ -33,22 +33,6 @@
 
     mShowViewControll = [[SHShowVideoViewController alloc]init];
     mShowViewControll.delegate = self;
-    mShowViewControll.videoTitle = @"xxx";
-    mShowViewControll.videoUrl = @"http://183.136.140.38/gsws/z.m3u8";
-    mShowViewControll.videoUrl = @"http://hot.vrs.sohu.com/ipad1407291_4596271359934_4618512.m3u8";
-    if ([[self.intent.args objectForKey:@"type"]intValue] == 0) {
-        self.title = @"播放详情(标清)";
-         mShowViewControll.videoUrl = @"http://padload-cnc.wasu.cn/pcsan08/mams/vod/201409/29/16/201409291618464557d5afdfe_5f77c692.mp4?wsiphost=local";
-    }else if ([[self.intent.args objectForKey:@"type"]intValue] == 1) {
-        self.title = @"播放详情(高清)";
-         mShowViewControll.videoUrl = @"http://padload-cnc.wasu.cn/pcsan08/mams/vod/201409/29/16/2014092916192198605db245e_e0a8255b.mp4?wsiphost=local";
-    }else {
-        self.title = @"播放详情(超清)";
-        mShowViewControll.videoUrl = @"http://padload-cnc.wasu.cn/pcsan08/mams/vod/201409/29/16/201409291618156309b21cbd8_4e58bd54.mp4";
-    }
-   
-   
-    
    
     mShowViewControll.view.frame = CGRectMake(0, 0, UIScreenWidth, UIScreenHeight);
 

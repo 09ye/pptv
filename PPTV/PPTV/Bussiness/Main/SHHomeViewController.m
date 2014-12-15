@@ -72,11 +72,11 @@
         }
     }else if (item.tag == 1){
         nacontroller =[ mDictionary valueForKey:@"SHLiveViewController"];
-        if(!nacontroller){
+//        if(!nacontroller){
             SHLiveViewController * viewcontroller = [[SHLiveViewController alloc]init];
             nacontroller = viewcontroller;
             [mDictionary setValue:nacontroller forKey:@"SHLiveViewController"];
-        }
+//        }
     }else if (item.tag == 2){
         nacontroller =[ mDictionary valueForKey:@"SHChannelListViewController2"];
         if(!nacontroller){

@@ -94,14 +94,14 @@
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     SHIntent * intent = [[SHIntent alloc ]init];
     intent.target = @"SHLiveViewController";
-     [intent.args setValue:[_listLive objectAtIndex:indexPath.row] forKey:@"detailInfo"];
+    [intent.args setValue:[_listLive objectAtIndex:indexPath.row] forKey:@"detailInfo"];
     intent.container = self.navController;
     [[UIApplication sharedApplication] open:intent];
 }
 - (IBAction)btnLiveOntouch:(UIButton *)sender {
     SHIntent * intent = [[SHIntent alloc ]init];
     intent.target = @"SHLiveViewController";
-     [intent.args setValue:mDicSelectSysn forKey:@"detailInfo"];
+    [intent.args setValue:[[_detail objectForKey:@"live_area"]objectAtIndex:sender.tag] forKey:@"detailInfo"];
     intent.container = self.navController;
     [[UIApplication sharedApplication] open:intent];
 }
@@ -118,7 +118,7 @@
         case 0:
         {
             SHIntent * intent = [[SHIntent alloc ]init];
-            intent.target = @"SHTVDetailViewController";
+            intent.target = @"SHLiveViewController";
             [intent.args setValue:mDicSelectSysn forKey:@"detailInfo"];
             intent.container = self.navController;
             [[UIApplication sharedApplication] open:intent];

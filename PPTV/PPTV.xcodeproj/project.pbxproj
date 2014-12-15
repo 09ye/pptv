@@ -288,6 +288,12 @@
 		77A07EAA1A29BFAB007D379A /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A07EA71A29BFAB007D379A /* WebViewController.m */; };
 		77A07EAE1A29E23B007D379A /* SHChannelCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A07EAC1A29E23B007D379A /* SHChannelCollectionViewCell.m */; };
 		77A07EAF1A29E23B007D379A /* SHChannelCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77A07EAD1A29E23B007D379A /* SHChannelCollectionViewCell.xib */; };
+		77AAE8AA1A3F1DD000014895 /* SHBillListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77AAE8A81A3F1DD000014895 /* SHBillListViewController.m */; };
+		77AAE8AB1A3F1DD000014895 /* SHBillListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77AAE8A91A3F1DD000014895 /* SHBillListViewController.xib */; };
+		77AAE8AE1A3F204100014895 /* UIViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 77AAE8AC1A3F204100014895 /* UIViewAdditions.m */; };
+		77AAE8B11A3F306B00014895 /* SHBillCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 77AAE8B01A3F306B00014895 /* SHBillCell.m */; };
+		77AAE8B31A3F307600014895 /* SHBillCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77AAE8B21A3F307600014895 /* SHBillCell.xib */; };
+		77AAE8B51A3F372A00014895 /* bg_line.png in Resources */ = {isa = PBXBuildFile; fileRef = 77AAE8B41A3F372A00014895 /* bg_line.png */; };
 		77AEE44F1A1B4E7A00366AEB /* ic_tab_animation.png in Resources */ = {isa = PBXBuildFile; fileRef = 77AEE4391A1B4E7A00366AEB /* ic_tab_animation.png */; };
 		77AEE4501A1B4E7A00366AEB /* ic_tab_animation@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77AEE43A1A1B4E7A00366AEB /* ic_tab_animation@2x.png */; };
 		77AEE4511A1B4E7A00366AEB /* ic_tab_documentary.png in Resources */ = {isa = PBXBuildFile; fileRef = 77AEE43B1A1B4E7A00366AEB /* ic_tab_documentary.png */; };
@@ -982,6 +988,15 @@
 		77A07EAB1A29E23B007D379A /* SHChannelCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHChannelCollectionViewCell.h; sourceTree = "<group>"; };
 		77A07EAC1A29E23B007D379A /* SHChannelCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHChannelCollectionViewCell.m; sourceTree = "<group>"; };
 		77A07EAD1A29E23B007D379A /* SHChannelCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SHChannelCollectionViewCell.xib; sourceTree = "<group>"; };
+		77AAE8A71A3F1DD000014895 /* SHBillListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHBillListViewController.h; sourceTree = "<group>"; };
+		77AAE8A81A3F1DD000014895 /* SHBillListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHBillListViewController.m; sourceTree = "<group>"; };
+		77AAE8A91A3F1DD000014895 /* SHBillListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SHBillListViewController.xib; sourceTree = "<group>"; };
+		77AAE8AC1A3F204100014895 /* UIViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewAdditions.m; sourceTree = "<group>"; };
+		77AAE8AD1A3F204100014895 /* UIViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewAdditions.h; sourceTree = "<group>"; };
+		77AAE8AF1A3F306B00014895 /* SHBillCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHBillCell.h; sourceTree = "<group>"; };
+		77AAE8B01A3F306B00014895 /* SHBillCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHBillCell.m; sourceTree = "<group>"; };
+		77AAE8B21A3F307600014895 /* SHBillCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SHBillCell.xib; sourceTree = "<group>"; };
+		77AAE8B41A3F372A00014895 /* bg_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_line.png; sourceTree = "<group>"; };
 		77AEE4391A1B4E7A00366AEB /* ic_tab_animation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_tab_animation.png; sourceTree = "<group>"; };
 		77AEE43A1A1B4E7A00366AEB /* ic_tab_animation@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_tab_animation@2x.png"; sourceTree = "<group>"; };
 		77AEE43B1A1B4E7A00366AEB /* ic_tab_documentary.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_tab_documentary.png; sourceTree = "<group>"; };
@@ -1264,6 +1279,14 @@
 		773F2CFB1A2C982300082C32 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				77AAE8AC1A3F204100014895 /* UIViewAdditions.m */,
+				77AAE8AD1A3F204100014895 /* UIViewAdditions.h */,
+				77AAE8A71A3F1DD000014895 /* SHBillListViewController.h */,
+				77AAE8A81A3F1DD000014895 /* SHBillListViewController.m */,
+				77AAE8A91A3F1DD000014895 /* SHBillListViewController.xib */,
+				77AAE8AF1A3F306B00014895 /* SHBillCell.h */,
+				77AAE8B01A3F306B00014895 /* SHBillCell.m */,
+				77AAE8B21A3F307600014895 /* SHBillCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2117,6 +2140,7 @@
 		77566DDF1A18960E00194562 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				77AAE8B41A3F372A00014895 /* bg_line.png */,
 				77C7E5CA1A37E15F00F96E4A /* 详情 */,
 				77C7E57E1A36A10500F96E4A /* more */,
 				775D5DEB1A32DFAA00AA7E27 /* bg_more.png */,
@@ -2833,6 +2857,7 @@
 				77AEE4601A1B4E7A00366AEB /* ic_tab_store@2x.png in Resources */,
 				773F2D0A1A2CB57600082C32 /* c4.png in Resources */,
 				77566EC31A18960E00194562 /* ShareSDKLocalizable.strings in Resources */,
+				77AAE8AB1A3F1DD000014895 /* SHBillListViewController.xib in Resources */,
 				77566E3B1A18960E00194562 /* NaviBack@2x.png in Resources */,
 				77B16B0B1A39DB3B0041D7CE /* btn_unlock_normal.png in Resources */,
 				77E25DF41A2B68AB002BD10C /* movice2.png in Resources */,
@@ -2843,6 +2868,7 @@
 				77566E2F1A18960E00194562 /* blackArrow.png in Resources */,
 				7777D5D21A388D3E00B0532E /* btn_full_definition_select.png in Resources */,
 				77566E6D1A18960E00194562 /* timeline_image_loading.png in Resources */,
+				77AAE8B31A3F307600014895 /* SHBillCell.xib in Resources */,
 				77566E781A18960E00194562 /* SHLoadingViewCell.xib in Resources */,
 				7740A5051A1A3BE80036FCA2 /* ic_video_default.png in Resources */,
 				77F831A61A3C87B200184BCC /* SHRecordViewController.xib in Resources */,
@@ -2862,6 +2888,7 @@
 				77F70EED1A1C82CB00D5CD41 /* LICENSE in Resources */,
 				77E25DDB1A2B5A3A002BD10C /* 5.png in Resources */,
 				77AEE4511A1B4E7A00366AEB /* ic_tab_documentary.png in Resources */,
+				77AAE8B51A3F372A00014895 /* bg_line.png in Resources */,
 				77566E541A18960E00194562 /* MBProgressHUD.bundle in Resources */,
 				77566E751A18960E00194562 /* ic_re_error.png in Resources */,
 				77C7E5B61A374A3300F96E4A /* ic_tab_select_21.png in Resources */,
@@ -3066,6 +3093,7 @@
 				77F70F011A1C864100D5CD41 /* VAppInfo.m in Sources */,
 				77F831981A3C6EAC00184BCC /* SHShowRightView.m in Sources */,
 				77566E831A18960E00194562 /* SHTableViewTitleContentCell.m in Sources */,
+				77AAE8AE1A3F204100014895 /* UIViewAdditions.m in Sources */,
 				77566E141A18960E00194562 /* SHContentViewController.m in Sources */,
 				77566E371A18960E00194562 /* EGORefreshTableHeaderView.m in Sources */,
 				77566EB51A18960E00194562 /* SHIntentManager.m in Sources */,
@@ -3128,7 +3156,9 @@
 				77566E3E1A18960E00194562 /* PCHalfPieChart.m in Sources */,
 				77566E9E1A18960E00194562 /* UITableViewAddtion.m in Sources */,
 				77F70F151A1CDB3700D5CD41 /* SHFilterView.m in Sources */,
+				77AAE8AA1A3F1DD000014895 /* SHBillListViewController.m in Sources */,
 				77566EB31A18960E00194562 /* NSObjectAddtion.m in Sources */,
+				77AAE8B11A3F306B00014895 /* SHBillCell.m in Sources */,
 				77566EE91A18971F00194562 /* SHUpdatePasswordViewController.m in Sources */,
 				77566E1E1A18960E00194562 /* DSLCalendarRange.m in Sources */,
 				77F831A51A3C87B200184BCC /* SHRecordViewController.m in Sources */,

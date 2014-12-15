@@ -266,7 +266,7 @@
                     <rect key="frame" x="370" y="436" width="242" height="92"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
-                    <color key="textColor" red="1" green="0.44595696410000002" blue="0.14455912800000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" id="Wvs-a1-jKz" userLabel="View_buffer">

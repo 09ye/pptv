@@ -89,8 +89,6 @@
 @property (nonatomic, copy)   NSURL *videoURL;
 @property (nonatomic, retain) UIActivityIndicatorView *activityView;
 @property (nonatomic, assign) BOOL progressDragging;
-@property (nonatomic,strong) NSString * videoTitle;
-@property (nonatomic,strong) NSString * videoUrl;
 @property (nonatomic, assign) BOOL isfull;
 @property (nonatomic, assign) BOOL isLive;
 - (IBAction)btnMenuOntouch:(UIButton *)sender;
