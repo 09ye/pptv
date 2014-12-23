@@ -10,7 +10,12 @@
 
 @interface SHCollectViewController : SHTableViewController
 {
+    __weak IBOutlet UIView *mViewDelete;
+    NSMutableArray * mArraySelect;
     
 }
+- (IBAction)btnDeleteOntouch:(id)sender;
+- (IBAction)btnClearAllOntouch:(id)sender;
+- (IBAction)btnCancaleOntouch:(id)sender;
 
 @end

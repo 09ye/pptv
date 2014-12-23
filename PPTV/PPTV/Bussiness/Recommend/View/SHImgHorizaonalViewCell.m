@@ -101,8 +101,7 @@
     
     SHIntent * intent = [[SHIntent alloc ]init];
     intent.target = @"SHTVDetailViewController";
-    
-    [intent.args setValue:[NSNumber numberWithBool:YES] forKey:@"readOnly"];
+    [intent.args setValue:[mList objectAtIndex:indexPath.row-1] forKey:@"detailInfo"];
     intent.container = self.navController;
     [[UIApplication sharedApplication] open:intent];
 }

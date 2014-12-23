@@ -18,7 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
      self.tableView.backgroundColor = [UIColor clearColor];
-    pageSize = LIST_PAGE_SIZE;
+     app=(AppDelegate*)[UIApplication sharedApplication].delegate;
     pagenum = 1;
     mIsEnd = NO;
     
@@ -32,57 +32,13 @@
     
     [_refreshHeaderView refreshLastUpdatedDate];
     
-    NSMutableArray * listRadio = [[NSMutableArray alloc]init];
-     NSMutableArray * listRadio2 = [[NSMutableArray alloc]init];
-    NSArray * list = [[NSArray alloc]initWithObjects:@"选项一选项一选项一1",@"选项选项一2",@"选项3一3",@"选项4一4",@"选项5一5",@"选项一6",@"选项7一7", nil];
-    CGRect   lastRect = CGRectZero;
-    
-    for (int i= 0; i<list.count; i++) {
-        NSString *text = [list objectAtIndex:i];
-        CGSize constraint = CGSizeMake(MAXFLOAT, 40.0f);
-        CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:14.00] constrainedToSize:constraint lineBreakMode:NSLineBreakByWordWrapping];
-        RadioBox * radioBox = [[RadioBox alloc]initWithFrame:CGRectMake(20+lastRect.origin.x+lastRect.size.width, 10, size.width+10, 30)];
-        radioBox.text = [list objectAtIndex:i];
-        radioBox.index = i;
-        radioBox.textColor = [UIColor whiteColor];
-        radioBox.onTintColor = [UIColor orangeColor];
-        radioBox.tintColor= [UIColor clearColor];
-        
-        radioBox.value = @{@"name":@"xx"};
-        
-        lastRect = radioBox.frame;
-        [listRadio addObject:radioBox];
-        [listRadio2 addObject:radioBox];
-    }
-    
-    UIView * view1 =[[UIView alloc]initWithFrame:CGRectMake(0, 0, 1024, 50)];
-    RadioGroup * radioGroup1 = [[RadioGroup alloc] initWithFrame:CGRectMake(0, 0, 1024, 50) WithControl:listRadio];
-    radioGroup1.backgroundColor = [UIColor whiteColor];
-    radioGroup1.textFont = [UIFont systemFontOfSize:14.0];
-    radioGroup1.selectValue = 2;
-    radioGroup1.delegate = self;
-    [view1 addSubview:radioGroup1];
-    RadioGroup *radioGroup2 = [[RadioGroup alloc] initWithFrame:CGRectMake(0, 50, 1024, 50) WithControl:listRadio2];
-    radioGroup2.backgroundColor = [UIColor whiteColor];
-    radioGroup2.textFont = [UIFont systemFontOfSize:14.0];
-    radioGroup2.selectValue = 2;
-    radioGroup2.delegate = self;
-    RadioGroup *radioGroup3 = [[RadioGroup alloc] initWithFrame:CGRectMake(0, 100, 1024, 50) WithControl:listRadio2];
-    radioGroup3.backgroundColor = [UIColor whiteColor];
-    radioGroup3.textFont = [UIFont systemFontOfSize:14.0];
-    radioGroup3.selectValue = 2;
-    radioGroup3.delegate = self;
-
-    
+   
 //    mFilterView = [[[NSBundle mainBundle]loadNibNamed:@"SHFilterView" owner:nil options:nil] objectAtIndex:0];
     mFilterView = [[SHFilterView alloc]initWithFrame:self.view.bounds];
-    [mFilterView addSubview:view1];
-    [mFilterView addSubview:radioGroup2];
-    [mFilterView addSubview:radioGroup3];
+   
     mFilterView.imgArrow = imgArrow;
-//    mList =  [[[NSArray alloc]initWithObjects:@"1",@"1",@"1",@"4",@"5",@"6",@"2",@"3",@"5",@"6",@"3",@"2",@"1",@"6",@"3",@"2",@"1",@"3",@"2" ,nil]mutableCopy];
     
-    
+    [self requetFilter];
 }
 
 - (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view
@@ -115,17 +71,43 @@
 
 -(float) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.row >= mList.count || mList.count == 0 ){
+    if(indexPath.row >= 1 || mList.count == 0 ){
         return 44;
     }else{
-         return ((mList.count-1)/5+1)*315;
+         return ((mList.count-1)/5+1)*304+15;
     }
    
 }
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    
-    return 1;
+    if (mIsEnd) {
+        return 1;
+    }else{
+        if(mList.count == 0){
+            return 1;
+        }else{
+            return 2;
+        }
+    }
+}
+- (UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.row ==1 || mList.count == 0 ){
+        SHNoneViewCell * cell;
+        if(mIsEnd){
+            cell = [self dequeueReusableNoneViewCell];
+            cell.labContent.text = @"暂无相关讯息...";
+        }else{
+            cell = [self.tableView dequeueReusableLoadingCell];
+            [self loadNext];
+        }
+        cell.backgroundColor = [UIColor clearColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
+    }else{
+        return [self tableView:tableView dequeueReusableStandardCellForRowAtIndexPath:indexPath];
+    }
+    return nil;
 }
 -(UITableViewCell*) tableView:(UITableView *)tableView dequeueReusableStandardCellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -134,6 +116,7 @@
         cell = (SHImgVertiaclViewCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHImgVertiaclViewCell" owner:nil options:nil] objectAtIndex:0];
     }
     cell.list = [mList mutableCopy];
+    cell.type = self.type;
     cell.navController = self.navController;
     cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -145,34 +128,17 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma  筛选
 
-- (IBAction)btnShowSearchOntouch:(UIButton *)sender {
-     [mFilterView showIn:self.view :CGRectMake(0, 44, self.view.frame.size.width, self.view.frame.size.height-44)];
-   
-}
-
-- (IBAction)btnSelectMainOntouch:(UIButton *)sender {
-    [mFilterView close];
-    switch (sender.tag ) {
-        case 0:
-            mList =  [[[NSArray alloc]initWithObjects:@"2",@"2",@"3",@"4",@"5",@"6",@"2",@"3",@"5",@"6",@"3",@"2",@"1",@"7",@"3",@"2",@"1",@"3",@"2" ,nil]mutableCopy];
-            break;
-        case 1:
-            mList =  [[[NSArray alloc]initWithObjects:@"6",@"5",@"6",@"4",@"2",@"1",@"5",@"3",@"4",@"2",@"1",nil]mutableCopy];
-            break;
-        case 2:
-            mList =  [[[NSArray alloc]initWithObjects:@"2",@"3",@"2",@"4" ,nil]mutableCopy];
-            break;
-            
-        default:
-            break;
-    }
-     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
-    
-    
-}
 #pragma request
+-(void) requetFilter
+{
+    SHPostTaskM * post = [[SHPostTaskM alloc]init];
+    post.URL = URL_FOR(@"Pad/listfilter");
+    [post.postArgs setValue:[app.viewController categoryForKey:[self.type objectForKey:@"name"] defaultPic:[[self.type objectForKey:@"id"]intValue]] forKeyPath:@"pid"];
+    post.delegate = self;
+    post.tag = 1000;
+    [post start];
+}
 -(void) reloadRequest
 {
     pagenum = 1;
@@ -183,9 +149,11 @@
 - (void)loadNext
 {
     SHPostTaskM * post = [[SHPostTaskM alloc]init];
-    post.URL = URL_FOR(@"getalljobfairs");
-    [post.postArgs setValue:[NSString stringWithFormat:@"%d",pageSize] forKeyPath:@"pagesize"];
-    [post.postArgs setValue:[NSString stringWithFormat:@"%d",pagenum] forKeyPath:@"pagenum"];
+    post.URL = URL_FOR(@"Pad/listdata");
+    [post.postArgs setValue:[NSString stringWithFormat:@"%d",LIST_PAGE_SIZE] forKeyPath:@"limit"];
+    [post.postArgs setValue:[NSString stringWithFormat:@"%d",pagenum] forKeyPath:@"p"];
+    [post.postArgs setValue:[app.viewController categoryForKey:[self.type objectForKey:@"name"] defaultPic:[[self.type objectForKey:@"id"]intValue]] forKeyPath:@"cid"];
+    [post.postArgs setValuesForKeysWithDictionary:mSelect];
     post.delegate = self;
     [post start];
     pagenum++;
@@ -193,22 +161,30 @@
 - (void)taskDidFinished:(SHTask*) task
 {
     [self dismissWaitDialog];
-    [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
-    
-    mResult = [[task result] mutableCopy];
-    NSArray * list = [task.result valueForKeyPath:@"JobList"];
-    if([[mResult objectForKey:@"TotalPage"]intValue] < pagenum){
-        mIsEnd = YES;
-    }
-    
-    if(list.count > 0){
-        if(mList == NULL){
-            mList = [[NSMutableArray alloc] init];
-        }
-        [mList addObjectsFromArray:list];
+    if (task.tag == 1000) {
+        mArrayFilter= [[task result]mutableCopy];
+        mSelect = [[NSMutableDictionary alloc]init];
+        [mSelect setValue:@"1" forKey:@"sort"];//排序 ( 1, 更新时间; 2, 点击量 )
+        [self createFilterView];
         
+    }else{
+        [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
+        mResult = [[task result] mutableCopy];
+        NSArray * list = [task.result valueForKeyPath:@"list"];
+        if([[mResult objectForKey:@"total"]intValue] < pagenum){
+            mIsEnd = YES;
+        }
+        if(list.count > 0){
+            if(mList == NULL){
+                mList = [[NSMutableArray alloc] init];
+            }
+            [mList addObjectsFromArray:list];
+            
+        }
+        [self.tableView reloadData];
+
     }
-    [self.tableView reloadData];
+    
     
     
     
@@ -219,4 +195,76 @@
     [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
     [task.respinfo show];
 }
+
+#pragma  筛选
+
+- (IBAction)btnShowSearchOntouch:(UIButton *)sender {
+    [mFilterView showIn:self.view rect:CGRectMake(0, 44, self.view.frame.size.width, self.view.frame.size.height-44)];
+    
+}
+
+- (IBAction)btnSelectMainOntouch:(UIButton *)sender {
+    [mFilterView close];
+    [mSelect setValue:[NSNumber numberWithInt:sender.tag] forKey:@"sort"];//排序 ( 1, 更新时间; 2, 点击量 )
+    [self reloadRequest];
+    
+    
+}
+-(void)createFilterView
+{
+    for (UIView * view  in mFilterView.subviews) {
+        if (view.tag <10000) {
+            [view removeFromSuperview];
+        }
+        
+    }
+    for (int i = 0; i< mArrayFilter.count; i++) {
+        NSDictionary *dic = [mArrayFilter objectAtIndex:i];
+        NSArray * listData = [dic objectForKey:@"data"];
+        NSMutableArray * listRadio = [[NSMutableArray alloc]init];
+        CGRect   lastRect = CGRectZero;
+        for (int j= 0; j<listData.count; j++) {
+            NSDictionary * resultName = [listData objectAtIndex:j];
+            NSString *text = [NSString stringWithFormat:@"%@",[resultName objectForKey:@"name"]];
+            CGSize constraint = CGSizeMake(MAXFLOAT, 40.0f);
+            CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:14.00] constrainedToSize:constraint lineBreakMode:NSLineBreakByWordWrapping];
+            RadioBox * radioBox = [[RadioBox alloc]initWithFrame:CGRectMake(20+lastRect.origin.x+lastRect.size.width, 10, size.width+10, 30)];
+            radioBox.text = [NSString stringWithFormat:@"%@",[resultName objectForKey:@"name"]];
+            radioBox.index = j;
+            radioBox.textColor = [UIColor whiteColor];
+            radioBox.onTintColor = [UIColor orangeColor];
+            radioBox.tintColor= [UIColor clearColor];
+            radioBox.value = resultName;
+            lastRect = radioBox.frame;
+            [listRadio addObject:radioBox];
+        }
+        UILabel * lable = [[UILabel alloc]initWithFrame:CGRectMake(0, 1+i*50, 90, 50)];
+        lable.userstyle = @"labmindark";
+        lable.backgroundColor =[UIColor whiteColor];
+        lable.text  =[NSString stringWithFormat:@"%@:",[dic objectForKey:@"name"]];
+        lable.textAlignment = NSTextAlignmentCenter;
+        //        [lable sizeToFit];
+        
+        [mFilterView addSubview:lable];
+        RadioGroup * radioGroup = [[RadioGroup alloc] initWithFrame:CGRectMake(70, 1+i*50, 1024-70, 50) WithControl:listRadio];
+        radioGroup.backgroundColor = [UIColor whiteColor];
+        radioGroup.textFont = [UIFont systemFontOfSize:14.0];
+        radioGroup.selectValue = 0;
+        radioGroup.value = dic;
+        radioGroup.delegate = self;
+        radioGroup.alpha = 0.97;
+        [mFilterView addSubview:radioGroup];
+    }
+    
+    
+    
+}
+-(void) radioGroupDidSelect:(RadioGroup*)radioGroup radioBox:(RadioBox*)radioBox select:(BOOL) isSelect
+{
+    
+    [mSelect setValue:[radioBox.value objectForKey:@"id" ]forKey:[radioGroup.value objectForKey:@"id"]];
+    [self reloadRequest];
+    
+}
+
 @end

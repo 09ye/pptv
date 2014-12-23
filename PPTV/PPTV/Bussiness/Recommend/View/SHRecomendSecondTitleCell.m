@@ -25,8 +25,7 @@
 - (IBAction)btnImgBigOntouch:(UIButton *)sender {
     SHIntent * intent = [[SHIntent alloc ]init];
     intent.target = @"SHTVDetailViewController";
-    
-    [intent.args setValue:[NSNumber numberWithBool:YES] forKey:@"readOnly"];
+    [intent.args setValue:[_detailArray objectAtIndex:sender.tag] forKey:@"detailInfo"];
     intent.container = self.navController;
     [[UIApplication sharedApplication] open:intent];
 }

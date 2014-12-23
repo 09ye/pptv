@@ -12,7 +12,7 @@
 #import "SHTVDrameViewController.h"
 #import "SHDemandDetailViewController.h"
 
-@interface SHTVDetailViewController : SHTableViewController<SHTableHorizontalViewDataSource,SHTableHorizontalViewDelegate,SHShowVideoViewControllerDelegate,SHTaskDelegate>
+@interface SHTVDetailViewController : SHTableViewController<SHTableHorizontalViewDataSource,SHTableHorizontalViewDelegate,SHShowVideoViewControllerDelegate,SHTaskDelegate,SHTVDrameViewControllerDelegate>
 {
     SHShowVideoViewController* mShowViewControll;
     SHTVDrameViewController * mDrameViewControll;
@@ -25,6 +25,8 @@
     NSDictionary * mResultDetail;
     NSString * mVideoUrl;
     NSString * mVideotitle;
+    NSMutableArray * arrayCollect;
+    NSDictionary*  mDicVideoCurrent;//正在播放的视频 name id time
     
 
 }

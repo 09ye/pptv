@@ -11,7 +11,8 @@
 #import "SHLiveListViewController.h"
 #import "SHBillListViewController.h"
 #import "UIViewAdditions.h"
-@interface SHLiveViewController : SHTableViewController<SHTaskDelegate,SHShowVideoViewControllerDelegate,UIPageViewControllerDelegate,UIPageViewControllerDataSource>
+#import "SHDemandDetailViewController.h"
+@interface SHLiveViewController : SHTableViewController<SHTaskDelegate,SHShowVideoViewControllerDelegate,UIPageViewControllerDelegate,UIPageViewControllerDataSource,SHLiveListViewControllerDelegate>
 {
     
 
@@ -24,6 +25,8 @@
     SHLiveListViewController * mListViewControll;
     SHShowVideoViewController* mShowViewControll;
     SHBillListViewController * mBillViewControll;
+    SHDemandDetailViewController * mDemandDetailViewControll;
+
     AppDelegate * app;
     NSDictionary * dicPreInfo;
     NSDictionary * mResultDetail;
@@ -33,6 +36,8 @@
     NSMutableArray * mListPagesView;
     NSArray * arrayBtnDay;
     NSArray * arrayLine;
+    NSArray * arrayDate;
+    NSMutableArray * arrayCollect;
     __weak IBOutlet UIButton *mbtnDay1;
     __weak IBOutlet UIButton *mbtnDay2;
     __weak IBOutlet UIButton *mbtnDay3;

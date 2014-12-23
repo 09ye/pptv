@@ -26,6 +26,7 @@
 @property (nonatomic, strong) UIColor *textColor;
 @property (nonatomic, strong) UIFont *textFont;
 @property (nonatomic) NSInteger index;
+@property (nonatomic,strong) NSDictionary* value;
 
 @property (nonatomic,assign) id <RadioGroupDelegate> delegate;
 

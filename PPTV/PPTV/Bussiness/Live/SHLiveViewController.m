@@ -16,9 +16,8 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-     self.view.backgroundColor =[SHSkin.instance colorOfStyle:@"ColorBaseBlack"];
-    arrayLine = [[NSArray alloc]initWithObjects:@"-610",@"-525",@"-432",@"-334",@"-224",@"-121",@"-16", nil];
-    arrayBtnDay = [[NSArray alloc]initWithObjects:mbtnDay1,mbtnDay2,mbtnDay3,mbtnDay4,mbtnDay5,mbtnDay6,mbtnDay7, nil];
+     self.view.backgroundColor =[SHSkin.instance colorOfStyle:@"ColorBackGroundVideo"];
+   
 }
 
 - (void)viewDidLoad {
@@ -26,38 +25,15 @@
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
-    self.title = @"播放详情";
 //    app=(AppDelegate*)[UIApplication sharedApplication].delegate;
     dicPreInfo = [self.intent.args objectForKey:@"detailInfo"];
     
-    pageVC = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll
-                                                  navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
-                                                                options:nil];
-    pageVC.dataSource = self;
-    pageVC.delegate   = self;
-    mListPagesView = [NSMutableArray array];
-    for (int i = 0; i<7; i++) {
-        mBillViewControll = [[SHBillListViewController alloc]init];
-        mBillViewControll.tag = i;
-        mBillViewControll.list = [[NSMutableArray alloc]init];
-        mBillViewControll.view.frame = mViewBill.bounds;
-        [mListPagesView addObject:mBillViewControll];
-    }
-    [pageVC setViewControllers: @[[mListPagesView objectAtIndex:0]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:^(BOOL finished) {
-        
-                NSLog(@"xxxxxxx");
-            } ];
-
-    
-   
-    [self addChildViewController:pageVC];
-    [mViewBill addSubview:pageVC.view];
-    pageVC.view.frame = mViewBill.bounds;
-    [pageVC didMoveToParentViewController:self];
+    [self createDateView];
+    [self createBill];
     
     mListViewControll = [[SHLiveListViewController alloc]init];
-    mListViewControll.list = [[NSMutableArray alloc]init ];
     mListViewControll.view.frame = mViewContent.bounds;
+    mListViewControll.delegate = self;
     [mViewContent addSubview:mListViewControll.view];
     
     mShowViewControll = [[SHShowVideoViewController alloc]init];
@@ -73,8 +49,20 @@
 
     [self.view addSubview:mShowViewControll.view];
     
-    [mListViewControll.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
-    [self request:[[dicPreInfo objectForKey:@"id"]intValue]];
+    arrayCollect = [[NSMutableArray alloc]init];
+    NSData * data  = [[NSUserDefaults standardUserDefaults] valueForKey:COLLECT_LIST];
+    if (data) {
+        arrayCollect = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    }
+    if ([arrayCollect containsObject:dicPreInfo]) {
+        mShowViewControll.isStore = YES;
+    }
+    
+//    [mListViewControll.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
+    if (dicPreInfo) {
+        [self request:[[dicPreInfo objectForKey:@"id"]intValue]];
+    }
+    
     
     
 }
@@ -85,25 +73,82 @@
     
     SHPostTaskM * post = [[SHPostTaskM alloc]init];
     post.URL = URL_FOR(@"Pad/liveinfo");
-    [post.postArgs setValue:@"123456" forKey:@"id"];
+    [post.postArgs setValue:[NSNumber numberWithInt:videoID] forKey:@"id"];
     post.delegate = self;
     [post start:^(SHTask *t) {
         
         mResultDetail = [[t result]mutableCopy];
         mVideotitle = [mResultDetail objectForKey:@"title"];
-        mVideoUrl = [mResultDetail objectForKey:@"playurl"];
-        mVideoUrl = @"http://padlive2-cnc.wasu.cn/cctv7/z.m3u8";
-        self.title = mVideotitle;
+        if (![[mResultDetail objectForKey:@"playurl"]isEqualToString:@""]) {
+             mVideoUrl = [mResultDetail objectForKey:@"playurl"];
+        }else if (![[mResultDetail objectForKey:@"playurl2"]isEqualToString:@""]) {
+            mVideoUrl = [mResultDetail objectForKey:@"playurl2"];
+        }else{
+            mVideoUrl = @"";
+        }
+       
+
+        self.leftTitle = mVideotitle;
         NSURL * videoUrl = [NSURL URLWithString:mVideoUrl];
         [mShowViewControll quicklyReplayMovie:videoUrl title:[mResultDetail objectForKey:@"title"] seekToPos:0];
         
+        if (mDemandDetailViewControll==nil) {// 详情
+            mDemandDetailViewControll = [[SHDemandDetailViewController alloc]init];
+            mDemandDetailViewControll.view.frame = mViewContent.bounds;
+        }
+        mDemandDetailViewControll.detail = [mResultDetail mutableCopy];
+      
         
     } taskWillTry:^(SHTask *t) {
         
     } taskDidFailed:^(SHTask *t) {
-        
+        [t.respinfo show];
     }];
     
+}
+#pragma 日期
+-(void) createDateView
+{
+    arrayLine = [[NSArray alloc]initWithObjects:@"-610",@"-525",@"-432",@"-334",@"-224",@"-121",@"-16", nil];
+    arrayBtnDay = [[NSArray alloc]initWithObjects:mbtnDay1,mbtnDay2,mbtnDay3,mbtnDay4,mbtnDay5,mbtnDay6,mbtnDay7, nil];
+    arrayDate =[[NSDate date] arrayNextSevenDay];
+    NSArray * arrayWeek = @[@"星期一",@"星期二",@"星期三",@"星期四",@"星期五",@"星期六",@"星期天"];
+    for (int i = 2; i< arrayDate.count; i++) {
+        int today = [[NSDate date]dayOfWeek:[arrayDate objectAtIndex:i]];
+        UIButton * button = [arrayBtnDay objectAtIndex:i];
+        [button setTitle:[arrayWeek objectAtIndex:today-1] forState:UIControlStateNormal];
+    }
+}
+/**
+ 节目单
+ */
+-(void) createBill
+{
+    pageVC = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll
+                                             navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
+                                                           options:nil];
+    pageVC.dataSource = self;
+    pageVC.delegate   = self;
+    mListPagesView = [NSMutableArray array];
+    for (int i = 0; i<7; i++) {
+        mBillViewControll = [[SHBillListViewController alloc]init];
+        mBillViewControll.tag = i;
+        mBillViewControll.list = [[NSMutableArray alloc]init];
+        mBillViewControll.view.frame = mViewBill.bounds;
+        [mListPagesView addObject:mBillViewControll];
+    }
+    [pageVC setViewControllers: @[[mListPagesView objectAtIndex:0]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:^(BOOL finished) {
+        
+        NSLog(@"xxxxxxx");
+    } ];
+    
+    
+    
+    [self addChildViewController:pageVC];
+    [mViewBill addSubview:pageVC.view];
+    pageVC.view.frame = mViewBill.bounds;
+    [pageVC didMoveToParentViewController:self];
+
 }
 #pragma video delegate
 - (void)playCtrlGetNextMediaTitle:(SHShowVideoViewController *)control lastPlayPos:(long *)lastPlayPos
@@ -145,8 +190,57 @@
     }completion:^(BOOL finished) {
         
     }];
-
 }
+-(void) showVideoControllerMenuDidSelct:(SHShowVideoViewController *)control sender:(UIButton *)sender tag:(int)tag
+{
+    
+    [self changeRightViewContent:tag];
+}
+-(void) liveListDidSelect:(SHLiveListViewController*)controll info:(NSDictionary*)detail
+{
+    [self request:[[detail objectForKey:@"id"]intValue]];
+}
+#pragma  菜单响应变化
+-(void) changeRightViewContent:(int) index
+{
+    for (UIView * view in mViewContent.subviews) {
+        [view removeFromSuperview];
+    }
+    switch (index) {
+        case 1:// 剧集
+            [mViewContent addSubview:mListViewControll.view];
+            break;
+        case 2:// 详情
+            [mViewContent addSubview:mDemandDetailViewControll.view];
+            break;
+        case 3:// 下载
+            
+            break;
+        case 4://收藏
+            {
+                if(!dicPreInfo){
+                    return;
+                }
+                if([arrayCollect containsObject:dicPreInfo]){// 取消收藏
+                    mShowViewControll.isStore = NO;
+                    [arrayCollect removeObject:dicPreInfo];
+                }else{
+                    mShowViewControll.isStore = YES;
+                    [arrayCollect addObject:dicPreInfo];
+                }
+                NSData * data = [NSKeyedArchiver archivedDataWithRootObject:arrayCollect];
+                [[NSUserDefaults standardUserDefaults ] setValue:data forKey:COLLECT_LIST];
+                [[NSUserDefaults standardUserDefaults]synchronize];
+            
+            }
+         
+            break;
+            
+        default:
+            break;
+    }
+}
+
 #pragma mark UIPageViewControllerDataSource methods
 
 
@@ -185,5 +279,9 @@
 }
 - (IBAction)btnDaySelectOntouch:(UIButton *)sender {
     [self changeBill:sender.tag];
+    [pageVC setViewControllers: @[[mListPagesView   objectAtIndex:sender.tag] ] direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:^(BOOL finished) {
+        
+        NSLog(@"xxxxxxx");
+    } ];
 }
 @end

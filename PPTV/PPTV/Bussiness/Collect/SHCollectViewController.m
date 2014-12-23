@@ -7,6 +7,7 @@
 //
 
 #import "SHCollectViewController.h"
+#import "SHCollectCell.h"
 
 @interface SHCollectViewController ()
 
@@ -17,11 +18,37 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"收藏记录";
-    // Do any additional setup after loading the view from its nib.
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"编辑" target:self action:@selector(btnEdit)];
+    self.view.backgroundColor = [SHSkin.instance colorOfStyle:@"ColorBackGroundRightView"];
+    self.tableView.backgroundColor = [UIColor clearColor];
+    NSData * data  = [[NSUserDefaults standardUserDefaults] valueForKey:COLLECT_LIST];
+    if (data) {
+        mList = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    }
+    
+    mArraySelect = [[NSMutableArray alloc]init];
+    
+   
+}
+-(void) btnEdit
+{
+    mArraySelect = [[NSMutableArray alloc]init];
+   
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"" target:self action:@selector(btnEdit)];
+    CGContextRef context=UIGraphicsGetCurrentContext();
+    [UIView beginAnimations:nil context:context];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+    [UIView setAnimationDuration:0.4f];
+    mViewDelete.hidden = NO;
+    CGRect rect = self.tableView.frame;
+    rect.size.height-=50;
+    self.tableView.frame = rect;
+    [self.tableView reloadData];
+    [UIView commitAnimations];
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 12;
+    return mList.count+1;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -29,9 +56,71 @@
 }
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SHTableViewGeneralCell * cell = [self.tableView dequeueReusableGeneralCell];
-    cell.labTitle.text = @"xx";
+    
+    SHCollectCell * cell = [self.tableView dequeueReusableCellWithIdentifier:@"table_collect_cell"];
+    if(cell == nil){
+        cell = (SHCollectCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHCollectCell" owner:nil options:nil] objectAtIndex:0];
+    }
+    if (indexPath.row == 0) {
+
+        cell.labTitle.text =[NSString stringWithFormat:@"已有%d/50条收藏记录   ",mList.count];
+        cell.labTitle.textAlignment = NSTextAlignmentCenter;
+        cell.labTitle.userstyle = @"labmiddark";
+
+    }else{
+        NSDictionary * dic = [mList objectAtIndex:indexPath.row-1];
+        cell.labTitle.text = [dic objectForKey:@"title"];
+        if (!mViewDelete.hidden) {
+            cell.btnSelect.hidden = NO;
+        }
+        [cell.btnSelect addTarget:self action:@selector(btnCollectSelect:) forControlEvents:UIControlEventTouchUpInside];
+        cell.btnSelect.tag = indexPath.row;
+        if([mArraySelect containsObject:dic]){
+            [cell.btnSelect setBackgroundImage:[UIImage imageNamed:@"btn_collect_list_select.png"] forState:UIControlStateNormal];
+        }else{
+            [cell.btnSelect setBackgroundImage:[UIImage imageNamed:@"btn_collect_list_normal.png"] forState:UIControlStateNormal];
+        }
+    }
+   
+    cell.backgroundColor = [UIColor colorWithRed:231/255.0 green:231/255.0 blue:231/255.0 alpha:1];
     return cell;
+}
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
+   
+    if (indexPath.row ==0) {
+        return NO;
+    }
+    return YES;
+}
+-(NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return @"删除";
+}
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {// 删除
+    
+    [mList removeObjectAtIndex:indexPath.row-1];
+    [self.tableView reloadData];
+    NSData * data = [NSKeyedArchiver archivedDataWithRootObject:mList];
+    [[NSUserDefaults standardUserDefaults ] setValue:data forKey:COLLECT_LIST];
+    [[NSUserDefaults standardUserDefaults]synchronize];
+
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+}
+-(void) btnCollectSelect:(UIButton *)sender
+{
+     NSIndexPath *te=[NSIndexPath indexPathForRow:sender.tag inSection:0];
+     NSDictionary * dic = [mList objectAtIndex:sender.tag-1];
+    if([mArraySelect containsObject:dic]){
+        [mArraySelect removeObject:dic];
+       
+        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:te,nil] withRowAnimation:UITableViewRowAnimationNone];
+    }else{
+        [mArraySelect addObject:dic];
+        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:te,nil] withRowAnimation:UITableViewRowAnimationNone];
+    }
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -40,4 +129,35 @@
 
 
 
+- (IBAction)btnDeleteOntouch:(id)sender {
+    [mList removeObjectsInArray:mArraySelect];
+    [self.tableView reloadData];
+    NSData * data = [NSKeyedArchiver archivedDataWithRootObject:mList];
+    [[NSUserDefaults standardUserDefaults ] setValue:data forKey:COLLECT_LIST];
+    [[NSUserDefaults standardUserDefaults]synchronize];
+}
+
+- (IBAction)btnClearAllOntouch:(id)sender {
+    [mList removeAllObjects];
+    [self.tableView reloadData];
+    NSData * data = [NSKeyedArchiver archivedDataWithRootObject:mList];
+    [[NSUserDefaults standardUserDefaults ] setValue:data forKey:COLLECT_LIST];
+    [[NSUserDefaults standardUserDefaults]synchronize];
+
+}
+
+- (IBAction)btnCancaleOntouch:(id)sender {
+   
+   self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"编辑" target:self action:@selector(btnEdit)];
+    CGContextRef context=UIGraphicsGetCurrentContext();
+    [UIView beginAnimations:nil context:context];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+    [UIView setAnimationDuration:0.4f];
+    mViewDelete.hidden = YES;
+    CGRect rect = self.tableView.frame;
+    rect.size.height+=50;
+    self.tableView.frame = rect;
+    [self.tableView reloadData];
+    [UIView commitAnimations];
+}
 @end

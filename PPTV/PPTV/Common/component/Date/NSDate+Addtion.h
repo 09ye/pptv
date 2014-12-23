@@ -13,6 +13,8 @@
 @interface NSDate(DateHelper)
 //获取今天是星期几
 - (NSInteger)dayOfWeek;
+//获取某天是星期几
+- (NSInteger)dayOfWeek:(NSDate *) date;
 //获取每月有多少天
 - (NSInteger)monthOfDay;
 //本周开始时间
@@ -33,6 +35,8 @@
 - (NSString*)dateToTW:(NSString*)string;
 //获取当前周
 - (NSArray *)arrayCurWeek;
+//未来7天时间包括当天
+- (NSArray *)arrayNextSevenDay;
 //+ (NSDate *) dateByLocal;
 //是不是本周
 - (BOOL)isCurrentWeek:(NSString*) string ;

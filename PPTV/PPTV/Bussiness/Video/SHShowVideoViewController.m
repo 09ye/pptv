@@ -8,6 +8,8 @@
 
 #import "SHShowVideoViewController.h"
 #import "MediaPlayer/MPMoviePlayerController.h"
+#import "MediaPlayer/MPVolumeView.h"
+#import "MediaPlayer/MPMusicPlayerController.h"
 #define DELEGATE_IS_READY(x) (self.delegate && [self.delegate respondsToSelector:@selector(x)])
 @interface SHShowVideoViewController ()
 
@@ -16,6 +18,7 @@
 @implementation SHShowVideoViewController
 @synthesize isfull = _isfull;
 @synthesize isLive = _isLive;
+@synthesize isStore = _isStore;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -52,12 +55,20 @@
     [self.backView addGestureRecognizer:pinchRecongizer];
     UITapGestureRecognizer * tapRecongizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapRecongizer:)];
     [self.backView addGestureRecognizer:tapRecongizer];
+    UIPanGestureRecognizer *panGes = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handelPan:)];
+    [self.backView  addGestureRecognizer:panGes];
+    
+
+
+
     mtimeViewHidden = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(hiddenView) userInfo:nil repeats:YES];
     
     if (_isLive) {
-        arrayBtn = [[NSArray alloc]initWithObjects:self.btnSeries,self.btnDeatil,self.btnStore, nil];
+        arrayBtn = [[NSArray alloc]initWithObjects:self.btnSeries,self.btnDeatil, nil];
         mViewControl = self.viewLive;
         mViewMenu = self.viewMenuNo;
+        mbtnStore = self.btnStore;
+        mSliderVolume = self.sliderVolume2;
         self.viewMenuNo.hidden = NO;
         self.viewMenuDown.hidden = YES;
         self.viewLive.hidden = YES;
@@ -69,9 +80,11 @@
         
         
     }else{
-        arrayBtn = [[NSArray alloc]initWithObjects:self.btnSeriesDown,self.btnDeatilDown,self.btnDownDown,self.btnStoreDown, nil];
+        arrayBtn = [[NSArray alloc]initWithObjects:self.btnSeriesDown,self.btnDeatilDown,self.btnDownDown, nil];
         mViewControl = self.viewDemand;
         mViewMenu = self.viewMenuDown;
+        mbtnStore = self.btnStoreDown;
+        mSliderVolume = self.sliderVolume1;
         self.viewMenuNo.hidden = YES;
         self.viewMenuDown.hidden = NO;
         self.viewLive.hidden = YES;
@@ -81,11 +94,60 @@
         self.curPosLbl.hidden = NO;
     }
    
-   
+   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(volumeChanged:) name:@"AVSystemController_SystemVolumeDidChangeNotification" object:nil];
 
-  
+    MPVolumeView *volumeView = [[MPVolumeView alloc] init];
+    [self.view addSubview:volumeView];
+    [volumeView sizeToFit];
+    NSLog(@"%@",volumeView.subviews);
     
+//    self.sliderVolume1 = [[UISlider alloc]init];
+//    self.sliderVolume1.backgroundColor = [UIColor blueColor];
+    for (UIControl *view in volumeView.subviews) {
+        if ([view.superclass isSubclassOfClass:[UISlider class]]) {
+            NSLog(@"1");
+            mSliderSystemVolume = (UISlider *)view;
+        }
+    }
+    mSliderSystemVolume.autoresizesSubviews = NO;
+    mSliderSystemVolume.autoresizingMask = UIViewAutoresizingNone;
+    [self.view addSubview:mSliderSystemVolume];
+    [self.view bringSubviewToFront:mSliderSystemVolume];
+    mSliderSystemVolume.hidden = YES;
+    mSliderVolume.tag = 1000;
+    mSliderVolume.maximumValue = mSliderSystemVolume.maximumValue;
+    mSliderVolume.minimumValue = mSliderSystemVolume.minimumValue;
+    mSliderVolume.value = mSliderSystemVolume.value;
+    [mSliderVolume addTarget:self action:@selector(sliderVolumeOntouch:) forControlEvents:UIControlEventValueChanged];
+    
+     self.view.userInteractionEnabled = NO;
 
+}
+#pragma  手势
+-(void)handelPan:(UIPanGestureRecognizer*)gestureRecognizer{
+    [NSRunLoop cancelPreviousPerformRequestsWithTarget:self];//双击事件取消延时
+    CGPoint curPoint = [gestureRecognizer locationInView:self.view];
+    if([gestureRecognizer state] == UIGestureRecognizerStateBegan) {
+        self.firstPoint = curPoint;
+        NSLog(@"begin====>>>>>%f===%f",curPoint.x ,curPoint.y);
+
+    }
+    if([gestureRecognizer state] == UIGestureRecognizerStateChanged) {
+        NSLog(@"begin====>>>>>%f===%f",curPoint.x ,curPoint.y);
+        self.secondPoint = curPoint;
+        if(abs(self.firstPoint.y - self.secondPoint.y)>20){
+           mSliderSystemVolume.value += (self.firstPoint.y - self.secondPoint.y)/500.0;   
+        }
+      
+    }
+    
+    if([gestureRecognizer state] == UIGestureRecognizerStateEnded) {
+        NSLog(@"end====>>>>>%f===%f",curPoint.x ,curPoint.y);
+        self.firstPoint = self.secondPoint = CGPointZero;
+   
+    }
+    
+    
 }
 -(void) scaleRecongizer :(UIPinchGestureRecognizer*) sender
 {
@@ -172,6 +234,7 @@
     [super viewDidAppear:animated];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+    
     //	[self becomeFirstResponder];
     
 //    [self currButtonAction:nil];
@@ -184,6 +247,13 @@
     [[UIApplication sharedApplication] endReceivingRemoteControlEvents];
     [self resignFirstResponder];
     [self quicklyStopMovie];
+    
+    [self unSetupObservers];
+    
+    [mMPayer unSetupPlayer];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"AVSystemController_SystemVolumeDidChangeNotification" object:nil];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -198,9 +268,10 @@
     
     [mMPayer unSetupPlayer];
     
-    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"AVSystemController_SystemVolumeDidChangeNotification" object:nil];
     
 }
+
 
 - (BOOL)shouldAutorotate
 {
@@ -308,7 +379,8 @@
     mDuration = [player getDuration];
     [player start];
     
-    [self setBtnEnableStatus:YES];
+//    [self setBtnEnableStatus:YES];
+    self.view.userInteractionEnabled = YES;
     [self stopActivity];
     mSyncSeekTimer = [NSTimer scheduledTimerWithTimeInterval:1.0/3
                                                       target:self
@@ -332,8 +404,10 @@
     NSLog(@"NAL 1RRE &&&& VMediaPlayer Error: %@", arg);
     [self showAlertDialog:@"对不起,播放错误未找到对应的播放源！"];
     [self stopActivity];
-    //	[self showVideoLoadingError];
-    [self setBtnEnableStatus:YES];
+//    	[self showVideoLoadingError];
+//    [self setBtnEnableStatus:YES];
+    self.view.userInteractionEnabled = YES;
+    [self quicklyStopMovie];
 }
 
 #pragma mark VMediaPlayerDelegate Implement / Optional
@@ -464,7 +538,8 @@
 -(void)quicklyPlayMovie:(NSURL*)fileURL title:(NSString*)title seekToPos:(long)pos
 {
     [UIApplication sharedApplication].idleTimerDisabled = YES;
-    //	[self setBtnEnableStatus:NO];
+//    [self setBtnEnableStatus:NO];
+    self.view.userInteractionEnabled = NO;
     
     NSString *docDir = [NSString stringWithFormat:@"%@/Documents", NSHomeDirectory()];
     NSLog(@"NAL &&& Doc: %@", docDir);
@@ -543,8 +618,10 @@
     mDuration = 0;
     mCurPostion = 0;
     [self stopActivity];
-    [self setBtnEnableStatus:YES];
+//    [self setBtnEnableStatus:YES];
+    
     [UIApplication sharedApplication].idleTimerDisabled = NO;
+    self.view.userInteractionEnabled = YES;
 }
 #pragma set
 -(void) setIsfull:(BOOL)isfull_
@@ -581,7 +658,19 @@
         [self.delegate showVideoControllerFullScreen:self full:isfull_];
     }
 }
-
+-(void) setIsStore:(BOOL)isStore_
+{
+    _isStore = isStore_;
+    if (_isStore) {
+        [mbtnStore setTitleColor:[SHSkin.instance colorOfStyle:@"ColorTextOrg"] forState:UIControlStateNormal];
+        
+        [mbtnStore setImage:[UIImage imageNamed:@"ic_video_select_4"] forState:UIControlStateNormal];
+    }else{
+        [mbtnStore setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [mbtnStore setImage:[UIImage imageNamed:@"ic_video_normal_4"] forState:UIControlStateNormal];
+    }
+    
+}
 -(void) viewMenuHiddenAnimate:(BOOL) value
 {
     if ((value && mViewMenu.hidden)|| (!value && !mViewMenu.hidden)) {
@@ -614,24 +703,6 @@
 }
 #pragma mark - UI Actions
 
-
-
--(IBAction)goBackButtonAction:(id)sender
-{
-    [self quicklyStopMovie];
-    [self dismissModalViewControllerAnimated:YES];
-}
-
--(IBAction)startPauseButtonAction:(id)sender
-{ [self resetTimeViewhidden];
-    BOOL isPlaying = [mMPayer isPlaying];
-    if (isPlaying) {
-        [mMPayer pause];
-    } else {
-        [mMPayer start];
-    }
-    [self changeStartPauseImg:isPlaying];
-}
 -(void) changeStartPauseImg:(BOOL) isplay
 {
     if (isplay) {
@@ -651,6 +722,40 @@
         
     }
 }
+-(void) changeVolumImg:(float) volumeValue
+{
+    if (volumeValue>0) {
+        
+        [self.btnVolume1 setBackgroundImage:[UIImage imageNamed:@"btn_volume_max_normal"] forState:UIControlStateNormal];
+        [self.btnVolume1 setBackgroundImage:[UIImage imageNamed:@"btn_volume_max_select"] forState:UIControlStateHighlighted];
+        [self.btnVolume2 setBackgroundImage:[UIImage imageNamed:@"btn_volume_max_normal"] forState:UIControlStateNormal];
+        [self.btnVolume2 setBackgroundImage:[UIImage imageNamed:@"btn_volume_max_select"] forState:UIControlStateHighlighted];
+    } else {
+        [self.btnVolume1 setBackgroundImage:[UIImage imageNamed:@"btn_volume_min_normal"] forState:UIControlStateNormal];
+        [self.btnVolume1 setBackgroundImage:[UIImage imageNamed:@"btn_volume_min_select"] forState:UIControlStateHighlighted];
+        [self.btnVolume2 setBackgroundImage:[UIImage imageNamed:@"btn_volume_min_normal"] forState:UIControlStateNormal];
+        [self.btnVolume2 setBackgroundImage:[UIImage imageNamed:@"btn_volume_min_select"] forState:UIControlStateHighlighted];
+        
+    }
+}
+
+-(IBAction)goBackButtonAction:(id)sender
+{
+    [self quicklyStopMovie];
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+-(IBAction)startPauseButtonAction:(id)sender
+{ [self resetTimeViewhidden];
+    BOOL isPlaying = [mMPayer isPlaying];
+    if (isPlaying) {
+        [mMPayer pause];
+    } else {
+        [mMPayer start];
+    }
+    [self changeStartPauseImg:isPlaying];
+}
+
 -(void)currButtonAction:(id)sender
 {
     NSURL *url = nil;
@@ -748,19 +853,23 @@
 
 - (IBAction)btnMenuOntouch:(UIButton *)sender {
     [self resetTimeViewhidden];
-    for (UIButton * button in arrayBtn) {
-        if (button == sender) {
-            [button setTitleColor:[SHSkin.instance colorOfStyle:@"ColorTextOrg"] forState:UIControlStateNormal];
-            
-            [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"ic_video_select_%d",button.tag]] forState:UIControlStateNormal];
-        }else{
-            [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"ic_video_normal_%d",button.tag]] forState:UIControlStateNormal];
+    if(sender.tag != 4){
+        for (UIButton * button in arrayBtn) {
+            if (button == sender) {
+                [button setTitleColor:[SHSkin.instance colorOfStyle:@"ColorTextOrg"] forState:UIControlStateNormal];
+                
+                [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"ic_video_select_%d",button.tag]] forState:UIControlStateNormal];
+            }else{
+                [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"ic_video_normal_%d",button.tag]] forState:UIControlStateNormal];
+            }
+        }
+        
+        if(_isfull){
+            self.isfull = NO;
         }
     }
-    if(_isfull){
-        self.isfull = NO;
-    }
+    
     if(self.delegate && [self.delegate respondsToSelector:@selector(showVideoControllerMenuDidSelct:sender:tag:)]){
         [self.delegate showVideoControllerMenuDidSelct:self sender:sender  tag:sender.tag];
     }
@@ -791,23 +900,32 @@
 
 - (IBAction)btnVolumeOntouch:(UIButton *)sender {
     [self resetTimeViewhidden];
-    BOOL isPlaying = [mMPayer isPlaying];
-    if (isPlaying) {
-        [mMPayer pause];
-        [self.btnVolume1 setBackgroundImage:[UIImage imageNamed:@"btn_volume_min_normal"] forState:UIControlStateNormal];
-        [self.btnVolume1 setBackgroundImage:[UIImage imageNamed:@"btn_volume_min_select"] forState:UIControlStateHighlighted];
-        [self.btnVolume2 setBackgroundImage:[UIImage imageNamed:@"btn_volume_min_normal"] forState:UIControlStateNormal];
-        [self.btnVolume2 setBackgroundImage:[UIImage imageNamed:@"btn_volume_min_select"] forState:UIControlStateHighlighted];
+    if (mSliderSystemVolume.value>0) {
+        mSliderVolume.value = 0;
+        mSliderSystemVolume.value = 0;
         
     } else {
-        [mMPayer start];
-        [self.btnVolume1 setBackgroundImage:[UIImage imageNamed:@"btn_volume_max_normal"] forState:UIControlStateNormal];
-        [self.btnVolume1 setBackgroundImage:[UIImage imageNamed:@"btn_volume_max_select"] forState:UIControlStateHighlighted];
-        [self.btnVolume2 setBackgroundImage:[UIImage imageNamed:@"btn_volume_max_normal"] forState:UIControlStateNormal];
-        [self.btnVolume2 setBackgroundImage:[UIImage imageNamed:@"btn_volume_max_select"] forState:UIControlStateHighlighted];
-        
+        mSliderVolume.value = 1;
+        mSliderSystemVolume.value = 1;
     }
+    [self changeVolumImg:mSliderVolume.value];
 }
+- (void)volumeChanged:(NSNotification *)notification
+{
+    // service logic here.
+    float volume =[[[notification userInfo]objectForKey:@"AVSystemController_AudioVolumeNotificationParameter"]floatValue];
+    NSLog(@"volumn is %f", volume);
+    mSliderVolume.value = volume;
+   
+    
+}
+-(void) sliderVolumeOntouch:(UISlider *)slider
+{
+    mSliderSystemVolume.value = slider.value;
+    mSliderVolume.value = slider.value;
+    [self changeVolumImg:mSliderVolume.value];
+}
+
 
 - (IBAction)btnDefintionOntouch:(id)sender {
     [self resetTimeViewhidden];
@@ -848,6 +966,9 @@
     self.prevBtn.enabled = enable;
     self.nextBtn.enabled = enable;
     self.modeBtn.enabled = enable;
+    self.resetBtn.enabled = enable;
+    self.progressSld.enabled = enable;
+    mViewControl.userInteractionEnabled = enable;
 }
 
 - (void)setupObservers

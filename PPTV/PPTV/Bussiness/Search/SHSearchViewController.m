@@ -17,6 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    mSearch.placeholder = [self.intent.args objectForKey:@"keyword"];
     [mSearch becomeFirstResponder];
 }
 

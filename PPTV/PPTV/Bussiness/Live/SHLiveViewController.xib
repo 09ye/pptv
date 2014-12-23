@@ -12,12 +12,12 @@
                 <outlet property="mViewDown" destination="0NA-Jp-qB0" id="10M-SS-xZg"/>
                 <outlet property="mViewVideo" destination="daT-fR-t4c" id="cqQ-mI-fUd"/>
                 <outlet property="mbtnDay1" destination="cqQ-Rr-ZWE" id="l0C-6G-WvK"/>
-                <outlet property="mbtnDay2" destination="QMN-8O-EQf" id="paH-f4-XZe"/>
-                <outlet property="mbtnDay3" destination="v27-J0-DFU" id="haO-vM-igX"/>
-                <outlet property="mbtnDay4" destination="c7z-3a-DPY" id="aMT-N0-cJt"/>
+                <outlet property="mbtnDay2" destination="c7z-3a-DPY" id="jWF-ce-bkj"/>
+                <outlet property="mbtnDay3" destination="QMN-8O-EQf" id="sNM-ZD-Hbg"/>
+                <outlet property="mbtnDay4" destination="v27-J0-DFU" id="woW-gP-1CG"/>
                 <outlet property="mbtnDay5" destination="KqF-Q6-U4t" id="5cL-k9-0mi"/>
-                <outlet property="mbtnDay6" destination="8kF-zz-3Sq" id="5Qv-Yy-4MJ"/>
-                <outlet property="mbtnDay7" destination="1Wl-TX-Rar" id="Oxd-s7-uxm"/>
+                <outlet property="mbtnDay6" destination="1Wl-TX-Rar" id="aGw-a9-3ug"/>
+                <outlet property="mbtnDay7" destination="8kF-zz-3Sq" id="JTp-GV-v1k"/>
                 <outlet property="moveImageView" destination="jBC-aj-Hyc" id="wn0-j9-745"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -73,7 +73,7 @@
                         <button opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v27-J0-DFU">
                             <rect key="frame" x="283" y="17" width="90" height="30"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <state key="normal" title="星期二">
+                            <state key="normal" title="星期三">
                                 <color key="titleColor" red="0.16862745100000001" green="0.18039215689999999" blue="0.20784313730000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </state>
@@ -84,7 +84,7 @@
                         <button opaque="NO" tag="4" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KqF-Q6-U4t">
                             <rect key="frame" x="389" y="17" width="90" height="30"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <state key="normal" title="星期二">
+                            <state key="normal" title="星期四">
                                 <color key="titleColor" red="0.16862745100000001" green="0.18039215689999999" blue="0.20784313730000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </state>
@@ -95,7 +95,7 @@
                         <button opaque="NO" tag="5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Wl-TX-Rar">
                             <rect key="frame" x="495" y="17" width="90" height="30"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <state key="normal" title="星期二">
+                            <state key="normal" title="星期五">
                                 <color key="titleColor" red="0.16862745100000001" green="0.18039215689999999" blue="0.20784313730000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </state>
@@ -106,7 +106,7 @@
                         <button opaque="NO" tag="6" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8kF-zz-3Sq">
                             <rect key="frame" x="601" y="17" width="90" height="30"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <state key="normal" title="星期二">
+                            <state key="normal" title="星期六">
                                 <color key="titleColor" red="0.16862745100000001" green="0.18039215689999999" blue="0.20784313730000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </state>
@@ -133,11 +133,7 @@
                 </view>
                 <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lyF-DB-YNa" userLabel="View-集数">
                     <rect key="frame" x="709" y="5" width="310" height="758"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                </view>
-                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="daT-fR-t4c" userLabel="View-video">
-                    <rect key="frame" x="5" y="5" width="701" height="452"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.1137254902" green="0.1176470588" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4E7-4o-yjf" userLabel="View-黑块">
                     <rect key="frame" x="0.0" y="505" width="5" height="5"/>
@@ -146,6 +142,10 @@
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jPX-sr-R4c" userLabel="View-黑块">
                     <rect key="frame" x="706" y="505" width="5" height="5"/>
                     <color key="backgroundColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </view>
+                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="daT-fR-t4c" userLabel="View-video">
+                    <rect key="frame" x="5" y="5" width="701" height="452"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.16862745100000001" green="0.18039215689999999" blue="0.20784313730000001" alpha="1" colorSpace="calibratedRGB"/>

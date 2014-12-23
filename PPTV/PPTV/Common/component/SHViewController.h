@@ -14,6 +14,7 @@
 {
     
      NSMutableArray * mListTxt;
+     UILabel * mLeftLabel;
 }
 
 /**
@@ -31,6 +32,8 @@
 @property (nonatomic,assign) id delegate;
 
 @property (nonatomic,strong) SHIntent * intent;
+
+@property (nonatomic,strong) NSString * leftTitle;
 
 - (BOOL)checkIntent:(NSString*)error;
 /**

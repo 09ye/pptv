@@ -18,4 +18,5 @@
 }
 @property(nonatomic,strong) UINavigationController *navController;
 @property(nonatomic,strong) NSMutableArray * list;
+@property (nonatomic,strong) NSDictionary * type;//频道类型 ["name":"电影"，“id”：“1”]
 @end

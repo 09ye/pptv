@@ -27,7 +27,7 @@
     UIView * viewTitleBar = [app.viewController hideSearchView:NO];
     viewTitleBar.alpha = 0.9;
     
-    [self reloadRequest];
+    [self reloadRequest:YES];
     if (_refreshHeaderView == nil) {
         _refreshHeaderView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0, 0-self.tableView.bounds.size.height, self.tableView.frame.size.width, self.tableView.bounds.size.height)];
         _refreshHeaderView.delegate = self;
@@ -40,10 +40,13 @@
     mTimerLive = [NSTimer scheduledTimerWithTimeInterval:60*10 target:self selector:@selector(reloadLiveRequest) userInfo:nil repeats:YES];
 }
 
--(void)reloadRequest
+-(void)reloadRequest:(BOOL) cache
 {
     SHPostTaskM * post = [[SHPostTaskM alloc]init];
     post.URL = URL_FOR(@"Pad/home");
+    if (cache) {
+        post.cachetype  = CacheTypeTimes;
+    }
     post.delegate = self;
     [post start:^(SHTask *t) {
         [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
@@ -56,6 +59,7 @@
         
     } taskDidFailed:^(SHTask *t) {
         [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
+        [t.respinfo show];
 
     }];
     
@@ -104,7 +108,7 @@
 //}
 - (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view
 {
-    [self reloadRequest];
+    [self reloadRequest:NO];
 }
 
 - (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view

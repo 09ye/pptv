@@ -47,6 +47,7 @@
         if (j== 0) {
             mDicSelectSysn= dic;
             [self.imgLiveSynch setUrl:[dic objectForKey:@"pic"]];
+            self.labLiveSynch.text = [dic objectForKey:@"title"];
             [self.imgLiveSynch1 setUrl:[dic objectForKey:@"pic"]];
         }else if(j== 1){
             [self.imgLiveSynch2 setUrl:[dic objectForKey:@"pic"]];
@@ -107,7 +108,7 @@
 }
 
 - (IBAction)btnLiveSynchOntouch:(UIButton *)sender {
-    if ([[_detail objectForKey:@"series_area"] count]<3) {
+    if ([[_detail objectForKey:@"series_area"] count]<sender.tag) {
         return;
     }
     if (sender.tag>0) {
@@ -118,7 +119,7 @@
         case 0:
         {
             SHIntent * intent = [[SHIntent alloc ]init];
-            intent.target = @"SHLiveViewController";
+            intent.target = @"SHTVDetailViewController";
             [intent.args setValue:mDicSelectSysn forKey:@"detailInfo"];
             intent.container = self.navController;
             [[UIApplication sharedApplication] open:intent];

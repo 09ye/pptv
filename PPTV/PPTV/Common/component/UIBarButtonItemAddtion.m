@@ -39,6 +39,7 @@
     btn.frame = frame;
     [btn setTitle:title forState:UIControlStateNormal];
     btn.userstyle = @"btnnavigation";
+
     //btn.backgroundColor = [UIColor blackColor];
     if(image_){
         [btn setBackgroundImage:[SHSkin.instance stretchImage:@"button_item_bg"] forState:(UIControlState)UIControlStateNormal];

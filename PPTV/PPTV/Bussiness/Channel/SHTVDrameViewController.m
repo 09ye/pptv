@@ -14,7 +14,6 @@
 @end
 
 @implementation SHTVDrameViewController
-@synthesize  list = _list;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -23,13 +22,27 @@
     
   
 }
--(void) setList:(NSMutableArray *)list_
+-(void) refresh:(NSInteger)videoID
 {
-    _list = list_;
-    _list = [[[NSArray alloc]initWithObjects:@"movice3" ,@"movice2",@"movice1" ,@"movice2",@"movice3" ,@"movice2",@"movice1" ,@"movice3",@"movice1" ,@"movice2" ,nil]mutableCopy ];
-  
-    [self.tableView reloadData];
-      
+    selctID = videoID;
+    SHPostTaskM * post = [[SHPostTaskM alloc]init];
+    post.URL = URL_FOR(@"Pad/iteminfo");
+    [post.postArgs setValue:[NSNumber numberWithInt:videoID] forKey:@"id"];
+    post.delegate = self;
+    [post start:^(SHTask *task) {
+
+        mList = [[task result]mutableCopy];
+        [self.tableView reloadData];
+
+    } taskWillTry:^(SHTask *task) {
+        
+    } taskDidFailed:^(SHTask *task) {
+        [task.respinfo show];
+    }];
+}
+-(void) viewWillAppear:(BOOL)animated
+{
+//    [super viewWillAppear:YES];
 }
 
 -(float) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -39,7 +52,7 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     
-    return _list.count;
+    return mList.count;
 }
 -(SHTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -47,16 +60,25 @@
     if(cell == nil){
         cell = (SHDrameMoviceViewCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHDrameMoviceViewCell" owner:nil options:nil] objectAtIndex:0];
     }
-    cell.imgDetail.image = [UIImage imageNamed:[_list objectAtIndex:indexPath.row]];
+    NSDictionary * dic = [mList objectAtIndex:indexPath.row];
+    [cell.imgDetail setUrl:[dic objectForKey:@"pic"]];
+    cell.labTitle.text = [dic objectForKey:@"title"];
+    cell.labContent.text = [dic objectForKey:@"focus"];
     cell.backgroundColor = [UIColor clearColor];
-    cell.selected = YES;
+    if ([[dic objectForKey:@"id"]integerValue] == selctID) {
+
+            [tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionTop];
+    }
+
 
     return cell;
     
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(drameDidSelect:info:)]) {
+        [self.delegate drameDidSelect:self info:[mList objectAtIndex:indexPath.row]];
+    }
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

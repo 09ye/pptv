@@ -19,29 +19,41 @@
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
-    self.view.backgroundColor =[SHSkin.instance colorOfStyle:@"ColorBaseBlack"];
+    self.view.backgroundColor =[SHSkin.instance colorOfStyle:@"ColorBackGroundVideo"];
     
     AppDelegate* app=(AppDelegate*)[UIApplication sharedApplication].delegate;
     
     dicPreInfo = [self.intent.args objectForKey:@"detailInfo"];
     mScrollview.datasource = self;
     mScrollview.delegate = self;
-   
-   
-   
     
-
+    if (mDrameViewControll ==nil) {// 剧集
+        mDrameViewControll = [[SHTVDrameViewController alloc]init];
+        mDrameViewControll.view.frame = mViewContent.bounds;
+        mDrameViewControll.delegate = self;
+    }
+    [mDrameViewControll refresh:[[dicPreInfo objectForKey:@"id"]intValue]];
+    
+    [mViewContent addSubview:mDrameViewControll.view];
+    
+    
     mShowViewControll = [[SHShowVideoViewController alloc]init];
     mShowViewControll.delegate = self;
-   
     mShowViewControll.view.frame = CGRectMake(0, 0, UIScreenWidth, UIScreenHeight);
-
     mShowViewControll.isfull = YES;
     [self.view addSubview:mShowViewControll.view];
     
+    arrayCollect = [[NSMutableArray alloc]init];
+    NSData * data  = [[NSUserDefaults standardUserDefaults] valueForKey:COLLECT_LIST];
+    if (data) {
+        arrayCollect = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    }
+    if ([arrayCollect containsObject:dicPreInfo]) {
+        mShowViewControll.isStore = YES;
+    }
+    
     [self request:[[dicPreInfo objectForKey:@"id"]intValue]];
 
-    [mDrameViewControll.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
 }
 -(void) request:(NSInteger)videoID
 {
@@ -51,11 +63,19 @@
     [post.postArgs setValue:[NSNumber numberWithInt:videoID] forKey:@"id"];
     post.delegate = self;
     [post start:^(SHTask *t) {
-        
-        mResultDetail = [[t result]mutableCopy];
+
+        mResultDetail = [[t result]mutableCopy];        
         mVideotitle = [mResultDetail objectForKey:@"title"];
-        mVideoUrl = [[mResultDetail objectForKey:@"vods"]objectForKey:@"hd2" ];
-        self.title = mVideotitle;
+        self.leftTitle = mVideotitle;
+        mVideoUrl = @"";
+        NSDictionary *urls = [mResultDetail objectForKey:@"vods"];
+        NSArray *keys = urls.allKeys;
+        for (int i = 0; i< keys.count; i++) {
+            if (![[urls objectForKey:[keys objectAtIndex:i]] isEqualToString:@""]) {
+                mVideoUrl = [urls objectForKey:[keys objectAtIndex:i]];
+                break;
+            }
+        }
         NSURL * videoUrl = [NSURL URLWithString:mVideoUrl];
         [mShowViewControll quicklyReplayMovie:videoUrl title:[mResultDetail objectForKey:@"title"] seekToPos:0];
         
@@ -64,13 +84,7 @@
             mDemandDetailViewControll.view.frame = mViewContent.bounds;
         }
         mDemandDetailViewControll.detail = [mResultDetail mutableCopy];
-        if (mDrameViewControll ==nil) {// 剧集
-            mDrameViewControll = [[SHTVDrameViewController alloc]init];
-            mDrameViewControll.view.frame = mViewContent.bounds;
-        }
         
-        mDrameViewControll.list = [[NSMutableArray alloc]init ];
-        [mViewContent addSubview:mDrameViewControll.view];
         // 大家都在看
         mList = [[mResultDetail objectForKey:@"recoms"]mutableCopy];
         [mScrollview reloadData];
@@ -78,7 +92,7 @@
     } taskWillTry:^(SHTask *t) {
         
     } taskDidFailed:^(SHTask *t) {
-        
+        [t.respinfo show];
     }];
 
 }
@@ -151,6 +165,10 @@
     [self changeRightViewContent:tag];
 }
 
+-(void) drameDidSelect:(SHTVDrameViewController*)controll info:(NSDictionary*)detail
+{
+    [self request:[[detail objectForKey:@"id"]intValue]];
+}
 #pragma  菜单响应变化
 -(void) changeRightViewContent:(int) index
 {
@@ -168,7 +186,19 @@
             
             break;
         case 4://收藏
+        {
+            if([arrayCollect containsObject:dicPreInfo]){// 取消收藏
+                mShowViewControll.isStore = NO;
+                [arrayCollect removeObject:dicPreInfo];
+            }else{
+                mShowViewControll.isStore = YES;
+                [arrayCollect addObject:dicPreInfo];
+            }
+            NSData * data = [NSKeyedArchiver archivedDataWithRootObject:arrayCollect];
+            [[NSUserDefaults standardUserDefaults ] setValue:data forKey:COLLECT_LIST];
+            [[NSUserDefaults standardUserDefaults]synchronize];
             
+        }
             break;
             
         default:
@@ -180,6 +210,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void) dealloc
+{
+    
+}
 
 
 @end

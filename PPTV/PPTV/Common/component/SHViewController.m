@@ -81,9 +81,9 @@ typedef NS_ENUM(NSInteger, RMoveDirection) {
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    if([self.intent.args valueForKeyPath:@"title"]){
-        self.title = [self.intent.args valueForKeyPath:@"title"];
-    }
+//    if([self.intent.args valueForKeyPath:@"title"]){
+//        self.title = [self.intent.args valueForKeyPath:@"title"];
+//    }
     UIButton* button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40, 40)];
     [button setImage:[UIImage imageNamed:@"NaviBack"] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(btnBack:) forControlEvents:UIControlEventTouchUpInside];
@@ -92,18 +92,9 @@ typedef NS_ENUM(NSInteger, RMoveDirection) {
 	//initWithImage:[UIImage imageNamed:@"NaviBack"] target:self action:@selector(btnBack:)// Do any additional setup after loading the view.
     if(self.navigationController.viewControllers.count > 1){
         UIBarButtonItem * barbutton = [[UIBarButtonItem alloc]initWithCustomView:button];
-        if([self.intent.args objectForKey:@"title"]){
-            UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:@"xxxx" style:UIBarButtonItemStyleBordered target:self action:nil];
-            [self.navigationItem setBackBarButtonItem:backItem];
-        }else{
-            self.navigationItem.leftBarButtonItem = barbutton;
-
-        }
-       
+        self.navigationItem.leftBarButtonItem = barbutton;
     }
-    UILabel *label =[[UILabel alloc]initWithFrame:CGRectMake(0, 40, 100, 40)];
-    label.text = @"xxxxxxx";
-    [self.navigationController.navigationBar addSubview:label];
+   
     [self loadSkin];
     
     _LeftSContentOffset = [self leftSContentOffset];
@@ -134,7 +125,26 @@ typedef NS_ENUM(NSInteger, RMoveDirection) {
     [self.view addGestureRecognizer:tapGestureRecognizer];
     //    mValidate.
 }
+-(void) setLeftTitle:(NSString *)leftTitle_
+{
 
+    for (UIView *view in self.navigationController.navigationBar.subviews) {
+        if ([view isKindOfClass:[UILabel class]] && [view viewWithTag:10000]) {
+            [view removeFromSuperview];
+        }
+    }
+    if (mLeftLabel) {
+         mLeftLabel.text = leftTitle_;
+    }else{
+        mLeftLabel =[[UILabel alloc]initWithFrame:CGRectMake(50, 0, 300, 44)];
+        mLeftLabel.text = leftTitle_;
+        mLeftLabel.textColor = [UIColor whiteColor];
+        mLeftLabel.tag = 10000;
+    }
+    [self.navigationController.navigationBar addSubview:mLeftLabel];
+    
+   
+}
 -(void)keyboardHide:(UITapGestureRecognizer*)tap{
     //    if (mIsShowKeyboard) {
     [self resignKeyBoardInView:self.view];

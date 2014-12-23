@@ -12,6 +12,7 @@
 #import "SHLiveViewController.h"
 #import "SHCollectViewController.h"
 #import "SHRecordViewController.h"
+#import "SHSettingViewController.h"
 
 @interface SHHomeViewController ()
 
@@ -59,8 +60,12 @@
     if(mViewRight.isShow && (item.tag != 9 && item.tag !=10)){
         [mViewRight close];
     }
-    if(mIsShow){
+    if(mIsShow ){
         [self close];
+        if(item.tag ==8){
+            return;
+        }
+        
     }
     SHTableViewController * nacontroller;
     if(item.tag == 0){
@@ -81,8 +86,7 @@
         nacontroller =[ mDictionary valueForKey:@"SHChannelListViewController2"];
         if(!nacontroller){
             SHChannelListViewController * viewcontroller = [[SHChannelListViewController alloc]init];
-            viewcontroller.type = @"动漫";
-            viewcontroller.tag = 2;
+            viewcontroller.type = @{@"name":@"动漫",@"id":@"19"};
             nacontroller = viewcontroller;
             [mDictionary setValue:nacontroller forKey:@"SHChannelListViewController2"];
         }
@@ -90,44 +94,39 @@
         nacontroller =[ mDictionary valueForKey:@"SHChannelListViewController3"];
         if(!nacontroller){
             SHChannelListViewController * viewcontroller = [[SHChannelListViewController alloc]init];
-            viewcontroller.tag = 3;
             nacontroller = viewcontroller;
-            viewcontroller.type = @"电视剧";
+            viewcontroller.type = @{@"name":@"电视剧",@"id":@"11"};
             [mDictionary setValue:nacontroller forKey:@"SHChannelListViewController3"];
         }
     }else if (item.tag == 4){
         nacontroller =[ mDictionary valueForKey:@"SHChannelListViewController4"];
         if(!nacontroller){
             SHChannelListViewController * viewcontroller = [[SHChannelListViewController alloc]init];
-            viewcontroller.tag = 4;
             nacontroller = viewcontroller;
-            viewcontroller.type = @"电影";
+            viewcontroller.type = @{@"name":@"电影",@"id":@"1"};
             [mDictionary setValue:nacontroller forKey:@"SHChannelListViewController4"];
         }
     }else if (item.tag == 5){
         nacontroller =[ mDictionary valueForKey:@"SHChannelListViewController5"];
         if(!nacontroller){
             SHChannelListViewController * viewcontroller = [[SHChannelListViewController alloc]init];
-            viewcontroller.tag = 5;
             nacontroller = viewcontroller;
-            viewcontroller.type = @"微电影";
+            viewcontroller.type = @{@"name":@"微电影",@"id":@"96"};
             [mDictionary setValue:nacontroller forKey:@"SHChannelListViewController5"];
         }
     }else if (item.tag == 6){
         nacontroller =[ mDictionary valueForKey:@"SHChannelListViewController6"];
         if(!nacontroller){
             SHChannelListViewController * viewcontroller = [[SHChannelListViewController alloc]init];
-            viewcontroller.tag = 6;
             nacontroller = viewcontroller;
-            viewcontroller.type = @"综艺";
+            viewcontroller.type = @{@"name":@"综艺",@"id":@"37"};
             [mDictionary setValue:nacontroller forKey:@"SHChannelListViewController6"];
         }
     }else if (item.tag == 7){
         nacontroller =[ mDictionary valueForKey:@"SHChannelListViewController7"];
         if(!nacontroller){
             SHChannelListViewController * viewcontroller = [[SHChannelListViewController alloc]init];
-            viewcontroller.tag = 7;
-            viewcontroller.type = @"纪录片";
+            viewcontroller.type = @{@"name":@"纪录片",@"id":@"86"};
             nacontroller = viewcontroller;
             [mDictionary setValue:nacontroller forKey:@"SHChannelListViewController7"];
         }
@@ -147,7 +146,7 @@
         return;
     }else if (item.tag == 10){
         
-        [mViewRight show:[[SHRecordViewController alloc]init] inView:self.view direction:Right];
+        [mViewRight show:[[SHSettingViewController alloc]init] inView:self.view direction:Right];
         return;
     }
     
@@ -186,6 +185,8 @@
 
 
 - (IBAction)btnWatchRecordOntouch:(UIButton *)sender {
+    
+    [mViewRight show:[[SHRecordViewController alloc]init] inView:self.view direction:Right];
 }
 
 - (IBAction)btnDownloadOntouch:(UIButton *)sender {
@@ -194,6 +195,7 @@
 {
     SHIntent * intent = [[SHIntent alloc]init];
     intent.target = @"SHSearchViewController";
+    [intent.args setValue:searchBar.placeholder forKey:@"keyword"];
     intent.container = self.navigationController;
     [[UIApplication sharedApplication]open:intent];
     return NO;
@@ -232,7 +234,7 @@
     if(mIsShow){
         mIsShow = NO;
         [UIView animateWithDuration:0.5 animations:^{
-            mViewMoreContent.frame = CGRectMake( mViewMoreContent.frame.origin.x, [[UIScreen mainScreen] applicationFrame].size.height-50, mViewMoreContent.frame.size.width, mViewMoreContent.frame.size.height);
+            mViewMoreContent.frame = CGRectMake( mViewMoreContent.frame.origin.x, UIScreenHeight+50, mViewMoreContent.frame.size.width, mViewMoreContent.frame.size.height);
             mViewMore.alpha = 0;
             
         } completion:^(BOOL finished) {
@@ -255,8 +257,8 @@
             nacontroller =[ mDictionary valueForKey:@"SHChannelListViewController21"];
             if(!nacontroller){
                 SHChannelListViewController * viewcontroller = [[SHChannelListViewController alloc]init];
-                viewcontroller.type = @"资讯";
-                viewcontroller.tag = 21;
+                viewcontroller.type = @{@"name":@"资讯",@"id":@"22"};
+
                 nacontroller = viewcontroller;
                 [mDictionary setValue:nacontroller forKey:@"SHChannelListViewController21"];
             }
@@ -266,8 +268,8 @@
             nacontroller =[ mDictionary valueForKey:@"SHChannelListViewController22"];
             if(!nacontroller){
                 SHChannelListViewController * viewcontroller = [[SHChannelListViewController alloc]init];
-                viewcontroller.type = @"原创";
-                viewcontroller.tag = 22;
+                viewcontroller.type = @{@"name":@"原创",@"id":@"91"};
+
                 nacontroller = viewcontroller;
                 [mDictionary setValue:nacontroller forKey:@"SHChannelListViewController22"];
             }
@@ -278,8 +280,7 @@
             nacontroller =[ mDictionary valueForKey:@"SHChannelListViewController23"];
             if(!nacontroller){
                 SHChannelListViewController * viewcontroller = [[SHChannelListViewController alloc]init];
-                viewcontroller.type = @"原创";
-                viewcontroller.tag = 22;
+                viewcontroller.type = @{@"name":@"娱乐",@"id":@"26"};
                 nacontroller = viewcontroller;
                 [mDictionary setValue:nacontroller forKey:@"SHChannelListViewController23"];
             }
@@ -290,8 +291,7 @@
             nacontroller =[ mDictionary valueForKey:@"SHChannelListViewController24"];
             if(!nacontroller){
                 SHChannelListViewController * viewcontroller = [[SHChannelListViewController alloc]init];
-                viewcontroller.type = @"原创";
-                viewcontroller.tag = 22;
+                viewcontroller.type = @{@"name":@"生活",@"id":@"137"};
                 nacontroller = viewcontroller;
                 [mDictionary setValue:nacontroller forKey:@"SHChannelListViewController24"];
             }
@@ -302,8 +302,7 @@
             nacontroller =[ mDictionary valueForKey:@"SHChannelListViewController25"];
             if(!nacontroller){
                 SHChannelListViewController * viewcontroller = [[SHChannelListViewController alloc]init];
-                viewcontroller.type = @"原创";
-                viewcontroller.tag = 22;
+                viewcontroller.type = @{@"name":@"汽车",@"id":@"102"};
                 nacontroller = viewcontroller;
                 [mDictionary setValue:nacontroller forKey:@"SHChannelListViewController25"];
             }
@@ -314,8 +313,7 @@
             nacontroller =[ mDictionary valueForKey:@"SHChannelListViewController26"];
             if(!nacontroller){
                 SHChannelListViewController * viewcontroller = [[SHChannelListViewController alloc]init];
-                viewcontroller.type = @"原创";
-                viewcontroller.tag = 22;
+                viewcontroller.type = @{@"name":@"体育",@"id":@"32"};
                 nacontroller = viewcontroller;
                 [mDictionary setValue:nacontroller forKey:@"SHChannelListViewController26"];
             }
@@ -326,8 +324,7 @@
             nacontroller =[ mDictionary valueForKey:@"SHChannelListViewController27"];
             if(!nacontroller){
                 SHChannelListViewController * viewcontroller = [[SHChannelListViewController alloc]init];
-                viewcontroller.type = @"原创";
-                viewcontroller.tag = 22;
+                viewcontroller.type = @{@"name":@"旅游",@"id":@"55"};
                 nacontroller = viewcontroller;
                 [mDictionary setValue:nacontroller forKey:@"SHChannelListViewController27"];
             }
@@ -338,8 +335,7 @@
             nacontroller =[ mDictionary valueForKey:@"SHChannelListViewController28"];
             if(!nacontroller){
                 SHChannelListViewController * viewcontroller = [[SHChannelListViewController alloc]init];
-                viewcontroller.type = @"原创";
-                viewcontroller.tag = 22;
+                viewcontroller.type = @{@"name":@"微秀社区",@"id":@"60"};
                 nacontroller = viewcontroller;
                 [mDictionary setValue:nacontroller forKey:@"SHChannelListViewController28"];
             }

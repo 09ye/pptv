@@ -68,11 +68,11 @@
         <property name="font"       type="UIFont"   value="FontScaleMid"/>
         <property name="textColor"  type="UIColor"  value="ColorStyleLight" />
     </labmidlight>
-    <labminlightSelect>
-        <property name="font"       type="UIFont"   value="FontScaleSmall"/>
+    <labmidlightSelect>
+        <property name="font"       type="UIFont"   value="FontScaleMid"/>
         <property name="textColor"  type="UIColor"  value="ColorStyleLight" />
         <property name="highlightedTextColor"  type="UIColor"  value="ColorStyleDark" />
-    </labminlightSelect >
+    </labmidlightSelect >
     <!--白色的文本结构-->
     <lablargewhite>
         <property name="font"       type="UIFont"   value="FontScaleLarge"/>
@@ -153,7 +153,7 @@
     <btnnavigation >
         <property name="font"       type="UIFont"   value="FontScaleMid"/>
         <property name="titleColor:forState" type="UIColor" value="ColorStyleWhite" externType = "int"  extern = "1"/>
-        <property name="titleColor:forState" type="UIColor" value="ColorStyleWhite" externType = "int"  extern = "0"/>
+        <property name="titleColor:forState" type="UIColor" value="ColorStyleLight" externType = "int"  extern = "0"/>
     </btnnavigation>
     <btnmilkwhite>
         <property name="font"       type="UIFont"   value="FontScaleSmall"/>

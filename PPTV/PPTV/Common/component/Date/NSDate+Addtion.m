@@ -26,7 +26,23 @@
     }
     return result;
 }
-
+- (NSInteger)dayOfWeek:(NSDate *) date
+{
+    NSCalendar*calendar =[NSCalendar currentCalendar];
+    NSDateComponents*offsetComponents =[calendar components:(NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit)
+                                                   fromDate:date];
+    NSInteger y=[offsetComponents year];
+    NSInteger m=[offsetComponents month];
+    NSInteger d=[offsetComponents day];
+    static int t[]={0,3,2,5,0,3,5,1,4,6,2,4};
+    y -= m <3;
+    
+    NSInteger result=(y +y/4-y/100+y/400+t[m-1]+d)%7;
+    if(result==0){
+        result=7;
+    }
+    return result;
+}
 - (NSArray *) arrayCurWeek
 {
     NSMutableArray * array = [[NSMutableArray alloc]init];
@@ -37,7 +53,15 @@
     }
     return array;
 }
-
+-(NSArray *)arrayNextSevenDay
+{
+    NSMutableArray * array = [[NSMutableArray alloc]init];
+    NSDate * date = [NSDate date];
+    for (int i = 0; i< 7; i++) {
+        [array addObject:[date addDay:i]];
+    }
+    return array;
+}
 //获取每月有多少天
 -(NSInteger)monthOfDay{
     NSCalendar*calendar =[NSCalendar currentCalendar];

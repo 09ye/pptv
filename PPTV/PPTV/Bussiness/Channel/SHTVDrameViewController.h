@@ -7,8 +7,16 @@
 //
 
 #import "SHTableViewController.h"
+@class SHTVDrameViewController;
+@protocol SHTVDrameViewControllerDelegate <NSObject>
 
-@interface SHTVDrameViewController : SHTableViewController
+-(void) drameDidSelect:(SHTVDrameViewController*)controll info:(NSDictionary*)detail ;
+@end
+@interface SHTVDrameViewController : SHTableViewController<SHTaskDelegate>
+{
+    int selctID;
+}
+@property (nonatomic,assign) id <SHTVDrameViewControllerDelegate> delegate;
 
-@property (nonatomic,strong) NSMutableArray * list;
+-(void) refresh:(NSInteger)videoID;
 @end

@@ -7,10 +7,21 @@
 //
 
 #import "SHTableViewController.h"
+@class SHLiveListViewController;
+@protocol SHLiveListViewControllerDelegate <NSObject>
 
-@interface SHLiveListViewController : SHTableViewController
+-(void) liveListDidSelect:(SHLiveListViewController*)controll info:(NSDictionary*)detail ;
+@end
+@interface SHLiveListViewController : SHTableViewController<SHTaskDelegate>
 {
+    NSArray * mListCategory;
+    __weak IBOutlet UIScrollView *mScrollviewCate;
     
+    int pagenum;
+    NSDictionary * mResult;
+    int cid;
+    
+    int selctID;
 }
-@property (nonatomic,strong) NSMutableArray * list;
+@property (nonatomic,assign) id <SHLiveListViewControllerDelegate> delegate;
 @end

@@ -29,16 +29,15 @@
     
     SHVerticalCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"sh_vertical_collectview_cell" forIndexPath:indexPath];
     NSDictionary * dic = [self.list objectAtIndex:indexPath.row];
-    cell.tag = indexPath.row;
-    if ( [dic isKindOfClass:[NSDictionary class]]) {
-        [cell.imgDeatil setUrl:[dic objectForKey:@"pic"]];
-        cell.labTitle.text = [dic objectForKey:@"title"];
-        cell.labContent.text = [dic objectForKey:@"focus"];
-        cell.labStatus.text = [dic objectForKey:@"status"];
-    }
     
-
-
+    [cell.imgDeatil setUrl:[dic objectForKey:@"pic"]];
+    cell.labTitle.text = [dic objectForKey:@"title"];
+    cell.labContent.text = [dic objectForKey:@"focus"];
+    cell.labStatus.text = [dic objectForKey:@"status"];
+    
+    
+    
+    
     return cell;
 }
 
@@ -54,12 +53,12 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
- 
+    
     
     SHIntent * intent = [[SHIntent alloc ]init];
     intent.target = @"SHTVDetailViewController";
+    [intent.args setValue:[self.list objectAtIndex:indexPath.row] forKey:@"detailInfo"];
     intent.container = self.navController;
-    [intent.args setValue:[NSNumber numberWithInt:indexPath.row] forKey:@"type"];
     [[UIApplication sharedApplication] open:intent];
 }
 

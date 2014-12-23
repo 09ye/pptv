@@ -15,9 +15,15 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        UIButton * button = [[UIButton alloc]initWithFrame:frame];
+        UIButton * button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 1024, 768)];
         [button addTarget:self action:@selector(close) forControlEvents:UIControlEventTouchUpInside];
+        button.backgroundColor =[UIColor clearColor];
+        button.tag = 10001;
         [self addSubview:button];
+        UIView * line = [[UIView alloc]initWithFrame:CGRectMake(30, 0, 964, 1)];
+        line.backgroundColor = [SHSkin.instance colorOfStyle:@"ColorBaseBackGround"];
+        line.tag = 10002;
+        [self addSubview:line];
     }
     return self;
 }
@@ -37,7 +43,7 @@
     self.backGround.backgroundColor = [UIColor whiteColor];
 }
 
-- (void)showIn:(UIView *)view :(CGRect)rect 
+- (void)showIn:(UIView *)view rect:(CGRect)rect 
 {
     if(!mIsShow){
         mIsShow = YES;

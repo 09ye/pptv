@@ -19,7 +19,7 @@
 
 - (IBAction)btnCloseOnTouch:(id)sender;
 
-- (void)showIn:(UIView *) view :(CGRect) rect;
+- (void)showIn:(UIView *) view rect:(CGRect) rect;
 
 - (void)close;
 @end

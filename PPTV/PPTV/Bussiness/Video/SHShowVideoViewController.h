@@ -31,10 +31,13 @@
    
     UIView * mViewControl;
     UIView * mViewMenu;
+    UIButton * mbtnStore;
     
     NSArray * arrayBtn;
     BOOL isVideoShow;
     BOOL isLock;
+    UISlider * mSliderSystemVolume;
+    UISlider * mSliderVolume;
 }
 @property (weak, nonatomic) IBOutlet UIView *viewMenuDown;
 @property (weak, nonatomic) IBOutlet UIButton *btnSeriesDown;
@@ -63,8 +66,11 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnVolume2;
 @property (weak, nonatomic) IBOutlet UISlider *sliderVolume2;
 
+@property (nonatomic,assign)CGPoint firstPoint;
+@property (nonatomic,assign)CGPoint secondPoint;
 
-@property (nonatomic, assign) id<SHShowVideoViewControllerDelegate> delegate;
+
+@property (nonatomic, weak) id<SHShowVideoViewControllerDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UIView *viewProgress;
 @property (nonatomic, assign) IBOutlet UIButton *startPause;
 @property (nonatomic, assign) IBOutlet UIButton *prevBtn;
@@ -91,6 +97,7 @@
 @property (nonatomic, assign) BOOL progressDragging;
 @property (nonatomic, assign) BOOL isfull;
 @property (nonatomic, assign) BOOL isLive;
+@property (nonatomic,assign)  BOOL isStore;
 - (IBAction)btnMenuOntouch:(UIButton *)sender;
 - (IBAction)btnLockOntouch:(id)sender;
 - (IBAction)btnVolumeOntouch:(UIButton *)sender;

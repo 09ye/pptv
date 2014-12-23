@@ -16,8 +16,10 @@
     <property name="ColorBaseBlack" R="29" G="30" B= "34" A="1" />
     <property name="ColorBackGround" R="42" G="42" B= "42" A="1" />
     <property name="ColorBackGroundCellHead" R="251" G="244" B= "224" A="1" />
-     <property name="ColorMoviceSelected" R="226" G="128" B= "24" A="1" />
+    <property name="ColorBackGroundRightView" R="201" G="201" B= "201" A="1" />
+     <property name="ColorMoviceSelected" R="255" G="144" B= "0" A="1" />
    
+   <property name="ColorBackGroundVideo" R="42" G="45" B= "52" A="1" />
     <property name="ColorLine" R="216" G="216" B= "216" A="1" />
     <property name="ColorSettingBackGround" R="129" G="140" B= "150" A="1" />
     <property name="ColorBackGroundGray" R="233" G="233" B= "233" A="1" />

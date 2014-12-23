@@ -45,6 +45,9 @@
 #define USER_CENTER_LOGINNAME @"user_center_loginname"
 #define USER_CENTER_PASSWORD @"user_center_password"
 
+#define COLLECT_LIST @"collect_list"
+#define RECORD_LIST @"record_list"
+
 //notification
 #define NOTIFICATION_LOGIN_SUCCESSFUL @"notification_login_successful"
 #define NOTIFY_SinaAuthon_Success     @"SinaAuthonSuccess"

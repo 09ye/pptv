@@ -36,9 +36,29 @@
     // 引导页
     [self  showGuidePage] ;
     // Do any additional setup after loading the view from its nib.
+    
+    SHPostTaskM * post = [[SHPostTaskM alloc]init];
+    post.URL = URL_FOR(@"Pad/listcategory");
+    post.cachetype = CacheTypeTimes;
+    post.delegate = self;
+    [post start:^(SHTask *task) {
+        self.listCategory = [[task result]mutableCopy];
+    } taskWillTry:^(SHTask *task) {
+        
+    } taskDidFailed:^(SHTask *task) {
+        
+    }];
    
 }
-
+-(NSNumber *) categoryForKey:(NSString *) key defaultPic:(int)defaultPic
+{
+    for(NSDictionary *dic in self.listCategory){
+        if ([[dic objectForKey:@"name"] caseInsensitiveCompare:key] == NSOrderedSame) {
+            return [NSNumber numberWithInt:[[dic objectForKey:@"id"]intValue]];
+        }
+    }
+    return defaultPic?[NSNumber numberWithInt:defaultPic]:[NSNumber numberWithInt:1];
+}
 -(void)bootSetting{
     
    
