@@ -131,7 +131,7 @@
 - (void)taskDidFailed:(SHTask *)task
 {
     [self dismissWaitDialog];
-    [task.respinfo show];
+//    [task.respinfo show];
 }
 #pragma  btnaction
 -(void) btnCategory:(UIButton *)sender

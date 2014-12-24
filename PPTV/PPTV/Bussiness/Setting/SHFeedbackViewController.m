@@ -68,7 +68,7 @@
     [mtxtCompany resignFirstResponder];
 }
 
--(void)textFieldDidBeginEditing:(UITextField *)textField
+-(void)textFieldDidBeginEditing:(UITextView *)textField
 {
     
     [UIView animateWithDuration:0.3
@@ -77,7 +77,7 @@
                      }];
 }
 
--(void)textFieldDidEndEditing:(UITextField *)textField
+-(void)textFieldDidEndEditing:(UITextView *)textField
 {
     [UIView animateWithDuration:0.3
                      animations:^{

@@ -9,6 +9,7 @@
 #import "SHTVDetailViewController.h"
 #import "SHChannelHorizontalCell.h"
 
+
 @interface SHTVDetailViewController ()
 
 @end
@@ -27,14 +28,7 @@
     mScrollview.datasource = self;
     mScrollview.delegate = self;
     
-    if (mDrameViewControll ==nil) {// 剧集
-        mDrameViewControll = [[SHTVDrameViewController alloc]init];
-        mDrameViewControll.view.frame = mViewContent.bounds;
-        mDrameViewControll.delegate = self;
-    }
-    [mDrameViewControll refresh:[[dicPreInfo objectForKey:@"id"]intValue]];
     
-    [mViewContent addSubview:mDrameViewControll.view];
     
     
     mShowViewControll = [[SHShowVideoViewController alloc]init];
@@ -78,10 +72,22 @@
         }
         NSURL * videoUrl = [NSURL URLWithString:mVideoUrl];
         [mShowViewControll quicklyReplayMovie:videoUrl title:[mResultDetail objectForKey:@"title"] seekToPos:0];
+        if (mDrameViewControll ==nil) {// 剧集
+            mDrameViewControll = [[SHTVDrameViewController alloc]init];
+            mDrameViewControll.view.frame = mViewContent.bounds;
+            mDrameViewControll.delegate = self;
+        }
+        [mDrameViewControll refresh:[[dicPreInfo objectForKey:@"id"]intValue]];
         
+        [mViewContent addSubview:mDrameViewControll.view];
         if (mDemandDetailViewControll==nil) {// 详情
             mDemandDetailViewControll = [[SHDemandDetailViewController alloc]init];
             mDemandDetailViewControll.view.frame = mViewContent.bounds;
+        }
+        if (mMoviceDownloadViewControll == nil) {
+            mMoviceDownloadViewControll = [[SHMoviceDownloadViewController alloc]init];
+            mMoviceDownloadViewControll.view.frame = mViewContent.bounds;
+            mMoviceDownloadViewControll.detail = mResultDetail;
         }
         mDemandDetailViewControll.detail = [mResultDetail mutableCopy];
         
@@ -177,12 +183,19 @@
     }
     switch (index) {
         case 1:// 剧集
+            mDrameViewControll.isDownload = NO;
             [mViewContent addSubview:mDrameViewControll.view];
             break;
         case 2:// 详情
             [mViewContent addSubview:mDemandDetailViewControll.view];
             break;
         case 3:// 下载
+            if ([[mResultDetail objectForKey:@"pid"]intValue] == 1) {// 电影
+                [mViewContent addSubview:mMoviceDownloadViewControll.view];
+            }else{
+                mDrameViewControll.isDownload = YES;
+                [mViewContent addSubview:mDrameViewControll.view];
+            }
             
             break;
         case 4://收藏

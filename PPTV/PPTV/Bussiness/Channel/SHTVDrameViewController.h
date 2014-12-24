@@ -15,8 +15,11 @@
 @interface SHTVDrameViewController : SHTableViewController<SHTaskDelegate>
 {
     int selctID;
+    __weak IBOutlet UIView *mViewDownload;
+    __weak IBOutlet UILabel *mlabTitleDown;
 }
 @property (nonatomic,assign) id <SHTVDrameViewControllerDelegate> delegate;
+@property (nonatomic,assign) BOOL isDownload;
 
 -(void) refresh:(NSInteger)videoID;
 @end

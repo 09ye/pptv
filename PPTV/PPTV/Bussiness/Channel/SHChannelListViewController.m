@@ -193,7 +193,7 @@
 {
     [self dismissWaitDialog];
     [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
-    [task.respinfo show];
+//    [task.respinfo show];
 }
 
 #pragma  筛选

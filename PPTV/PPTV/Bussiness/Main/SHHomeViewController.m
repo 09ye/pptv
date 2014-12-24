@@ -13,6 +13,7 @@
 #import "SHCollectViewController.h"
 #import "SHRecordViewController.h"
 #import "SHSettingViewController.h"
+#import "SHDownloadViewController.H"
 
 @interface SHHomeViewController ()
 
@@ -57,32 +58,40 @@
 }
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
 {
-    if(mViewRight.isShow && (item.tag != 9 && item.tag !=10)){
+    [self tabBarDidSelect:item.tag];
+}
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+-(void) tabBarDidSelect:(int) tag
+{
+    if(mViewRight.isShow && (tag != 9 && tag !=10)){
         [mViewRight close];
     }
     if(mIsShow ){
         [self close];
-        if(item.tag ==8){
+        if(tag ==8){
             return;
         }
         
     }
     SHTableViewController * nacontroller;
-    if(item.tag == 0){
+    if(tag == 0){
         nacontroller =[ mDictionary valueForKey:@"SHRecommendViewController"];
         if(!nacontroller){
             SHRecommendViewController * viewcontroller = [[SHRecommendViewController alloc]init];
             nacontroller = viewcontroller;
             [mDictionary setValue:nacontroller forKey:@"SHRecommendViewController"];
         }
-    }else if (item.tag == 1){
+    }else if (tag == 1){
         nacontroller =[ mDictionary valueForKey:@"SHLiveViewController"];
-//        if(!nacontroller){
-            SHLiveViewController * viewcontroller = [[SHLiveViewController alloc]init];
-            nacontroller = viewcontroller;
-            [mDictionary setValue:nacontroller forKey:@"SHLiveViewController"];
-//        }
-    }else if (item.tag == 2){
+        //        if(!nacontroller){
+        SHLiveViewController * viewcontroller = [[SHLiveViewController alloc]init];
+        nacontroller = viewcontroller;
+        [mDictionary setValue:nacontroller forKey:@"SHLiveViewController"];
+        //        }
+    }else if (tag == 2){
         nacontroller =[ mDictionary valueForKey:@"SHChannelListViewController2"];
         if(!nacontroller){
             SHChannelListViewController * viewcontroller = [[SHChannelListViewController alloc]init];
@@ -90,7 +99,7 @@
             nacontroller = viewcontroller;
             [mDictionary setValue:nacontroller forKey:@"SHChannelListViewController2"];
         }
-    }else if (item.tag == 3){
+    }else if (tag == 3){
         nacontroller =[ mDictionary valueForKey:@"SHChannelListViewController3"];
         if(!nacontroller){
             SHChannelListViewController * viewcontroller = [[SHChannelListViewController alloc]init];
@@ -98,7 +107,7 @@
             viewcontroller.type = @{@"name":@"电视剧",@"id":@"11"};
             [mDictionary setValue:nacontroller forKey:@"SHChannelListViewController3"];
         }
-    }else if (item.tag == 4){
+    }else if (tag == 4){
         nacontroller =[ mDictionary valueForKey:@"SHChannelListViewController4"];
         if(!nacontroller){
             SHChannelListViewController * viewcontroller = [[SHChannelListViewController alloc]init];
@@ -106,7 +115,7 @@
             viewcontroller.type = @{@"name":@"电影",@"id":@"1"};
             [mDictionary setValue:nacontroller forKey:@"SHChannelListViewController4"];
         }
-    }else if (item.tag == 5){
+    }else if (tag == 5){
         nacontroller =[ mDictionary valueForKey:@"SHChannelListViewController5"];
         if(!nacontroller){
             SHChannelListViewController * viewcontroller = [[SHChannelListViewController alloc]init];
@@ -114,7 +123,7 @@
             viewcontroller.type = @{@"name":@"微电影",@"id":@"96"};
             [mDictionary setValue:nacontroller forKey:@"SHChannelListViewController5"];
         }
-    }else if (item.tag == 6){
+    }else if (tag == 6){
         nacontroller =[ mDictionary valueForKey:@"SHChannelListViewController6"];
         if(!nacontroller){
             SHChannelListViewController * viewcontroller = [[SHChannelListViewController alloc]init];
@@ -122,7 +131,7 @@
             viewcontroller.type = @{@"name":@"综艺",@"id":@"37"};
             [mDictionary setValue:nacontroller forKey:@"SHChannelListViewController6"];
         }
-    }else if (item.tag == 7){
+    }else if (tag == 7){
         nacontroller =[ mDictionary valueForKey:@"SHChannelListViewController7"];
         if(!nacontroller){
             SHChannelListViewController * viewcontroller = [[SHChannelListViewController alloc]init];
@@ -130,35 +139,43 @@
             nacontroller = viewcontroller;
             [mDictionary setValue:nacontroller forKey:@"SHChannelListViewController7"];
         }
-    }else if (item.tag == 8){// more
+    }else if (tag == 8){// more
         [self changeMoreViewColor:lastMoreTag];
         [self showIn:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-44)];
         return;
         
-    }else if (item.tag == 9){
-//        if (mViewRight.isShow) {
-//            [mViewRight close];
-//        }else{
-             [mViewRight show:[[SHCollectViewController alloc]init] inView:self.view direction:Right];
-//        }
-       
-
+    }else if (tag == 9){
+        //        if (mViewRight.isShow) {
+        //            [mViewRight close];
+        //        }else{
+        [mViewRight show:[[SHCollectViewController alloc]init] inView:self.view direction:Right];
+        //        }
+        
+        
         return;
-    }else if (item.tag == 10){
+    }else if (tag == 10){
         
         [mViewRight show:[[SHSettingViewController alloc]init] inView:self.view direction:Right];
         return;
+    }else if (tag == 100){// 下载
+        nacontroller =[ mDictionary valueForKey:@"SHDownloadViewController"];
+        if(!nacontroller){
+            SHDownloadViewController * viewcontroller = [[SHDownloadViewController alloc]init];
+//            viewcontroller.type = @{@"name":@"纪录片",@"id":@"86"};
+            nacontroller = viewcontroller;
+            [mDictionary setValue:nacontroller forKey:@"SHDownloadViewController"];
+        }
     }
     
     if(lastnacontroller != nacontroller){
         
         ((SHRecommendViewController*)nacontroller).navController = self.navigationController;
         nacontroller.view.backgroundColor =[UIColor clearColor];
-        if(item.tag == 0){
+        if(tag == 0){
             nacontroller.view.frame = self.view.bounds;
             mViewContain.hidden = YES;
             [self.view insertSubview:nacontroller.view atIndex:0];
-        }else if(item.tag == 1){
+        }else if(tag == 1){
             CGRect rect = mViewContain.frame;
             //            rect.size.height +=49;
             nacontroller.view.frame = rect;
@@ -176,13 +193,8 @@
         lastnacontroller = nacontroller;
         lastMoreTag = 0;
     }
-    
-}
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
+}
 
 - (IBAction)btnWatchRecordOntouch:(UIButton *)sender {
     
@@ -190,6 +202,8 @@
 }
 
 - (IBAction)btnDownloadOntouch:(UIButton *)sender {
+    [self tabBarDidSelect:100];
+
 }
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
 {

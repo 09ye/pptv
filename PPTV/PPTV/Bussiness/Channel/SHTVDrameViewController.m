@@ -84,7 +84,59 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+-(void) setIsDownload:(BOOL)isDownload_
+{
+    if (isDownload_) {
+        CGContextRef context=UIGraphicsGetCurrentContext();
+        [UIView beginAnimations:nil context:context];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+        [UIView setAnimationDuration:0.4f];
+//        mViewDownload.hidden = NO;
+//        mlabTitleDown.hidden = NO;
+//        CGRect rect = self.tableView.frame;
+//        rect.size.height-=50;
+//        self.tableView.frame = rect;
+//        [self.tableView reloadData];
+//        [UIView commitAnimations];
+        
+        [UIView animateWithDuration:0.5 animations:^{
+            
+            CGRect rect = self.tableView.frame;
+            rect.origin.y = 34;
+            rect.size.height-=74;
+            
+            self.tableView.frame = rect;
+            [self.tableView reloadData];
+            
+        } completion:^(BOOL finished) {
+            mViewDownload.hidden = NO;
+            mlabTitleDown.hidden = NO;
+            
+        }];
+        
+    }else{
+        CGContextRef context=UIGraphicsGetCurrentContext();
+        [UIView beginAnimations:nil context:context];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+//        [UIView setAnimationDuration:0.4f];
+       
+//        [UIView commitAnimations];
+    
+        [UIView animateWithDuration:0.5 animations:^{
+            
+            CGRect rect = self.tableView.frame;
+            rect.size.height+=74;
+            rect.origin.y = 0;
+            self.tableView.frame = rect;
+            [self.tableView reloadData];
+            
+        } completion:^(BOOL finished) {
+             mViewDownload.hidden = YES;
+             mlabTitleDown.hidden = YES;
 
+        }];
+    }
+}
 /*
 #pragma mark - Navigation
 
