@@ -13,6 +13,8 @@
 #import "ShareConfig.h"
 #import <ShareSDK/ShareSDK.h>
 #import "SHAnalyzeFactory.h"
+#import "FileModel.h"
+#import "SHFileManager.h"
 
 //@interface SHAnalyzeFactoryExtension1 : SHAnalyzeFactoryExtension
 //
@@ -43,6 +45,15 @@
 - (void) sendTextContent:(NSString *)shareStr;
 
 -(void)sendLoginSina:(UIViewController *)vc;
+
+
+@property(nonatomic,retain)NSMutableArray *finishedlist;//已下载完成的文件列表（文件对象）
+
+@property(nonatomic,retain)NSMutableArray *downinglist;//正在下载的文件列表(ASIHttpRequest对象)
+
+@property(nonatomic,strong)NSMutableArray *cacheslist;//caches 目录下得文件 .temp 和。MP4
+
+-(void)beginRequest:(FileModel *)fileInfo isBeginDown:(BOOL)isBeginDown;
 
 
 

@@ -7,6 +7,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SHDownloadViewController">
             <connections>
+                <outlet property="mCollection" destination="QBI-80-sVt" id="RCb-4G-cbU"/>
+                <outlet property="mProgressSize" destination="bOo-BY-0le" id="JGG-T3-chM"/>
+                <outlet property="mViewNoData" destination="9tf-x1-1Aj" id="0tW-vi-FYp"/>
+                <outlet property="mlabDownSize" destination="TAr-oU-0Yw" id="TS2-lF-4Cw"/>
+                <outlet property="mlabFree" destination="Hmh-gq-Xyg" id="ak3-YN-MJJ"/>
+                <outlet property="mlabTotal" destination="gJp-i5-kbb" id="2Kq-Fm-CMa"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -73,11 +79,15 @@
                     <rect key="frame" x="0.0" y="44" width="1024" height="567"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Z2j-YH-3K0">
-                        <size key="itemSize" width="50" height="50"/>
+                        <size key="itemSize" width="220" height="160"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="d2V-31-feH"/>
+                        <outlet property="delegate" destination="-1" id="PbW-Ib-tP5"/>
+                    </connections>
                 </collectionView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

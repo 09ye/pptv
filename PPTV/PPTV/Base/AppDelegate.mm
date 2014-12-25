@@ -12,6 +12,7 @@
 #import <TencentOpenAPI/QQApiInterface.h>
 #import <TencentOpenAPI/TencentOAuth.h>
 #import "WeiboApi.h"
+#import "ASIHTTPRequest.h"
 
 
 @implementation AppDelegate
@@ -28,68 +29,47 @@ static bool __isupdate = NO;
     // Override point for customization after application launch.
 
     
-    
-    // 新浪微博
-    [WeiboSDK enableDebugMode:YES];
-    [WeiboSDK registerApp:APPID_Sina];
-    
-    [WXApi  registerApp:APPID_WeoXin];
-    //需要注意的是，SendMessageToWXReq的scene成员，如果scene填WXSceneSession，那么消息会发送至微信的会话内。如果scene填WXSceneTimeline，那么消息会发送至朋友圈。如果scene填WXSceneFavorite,那么消息会发送到“我的收藏”中。scene默认值为WXSceneSession。
-    _scene = WXSceneTimeline;
-    _mapManager = [[BMKMapManager alloc]init];
-    _locService = [[BMKLocationService alloc]init];
-    _locService.delegate = self;
-    _geocodesearch = [[BMKGeoCodeSearch alloc]init];
-    _geocodesearch.delegate = self;
-    
-    BOOL ret = [_mapManager start:@"XUhLsGNq9Ch1HfTgZH8LFZs8"  generalDelegate:self];// ybh ky
-//zambon key  RNuxCab28lK3wgb3jGhsrpa3
-    if (!ret) {
-        NSLog(@"manager start failed!");
-    }
+//    
+//    // 新浪微博
+//    [WeiboSDK enableDebugMode:YES];
+//    [WeiboSDK registerApp:APPID_Sina];
+//    
+//    [WXApi  registerApp:APPID_WeoXin];
+//    //需要注意的是，SendMessageToWXReq的scene成员，如果scene填WXSceneSession，那么消息会发送至微信的会话内。如果scene填WXSceneTimeline，那么消息会发送至朋友圈。如果scene填WXSceneFavorite,那么消息会发送到“我的收藏”中。scene默认值为WXSceneSession。
+//    _scene = WXSceneTimeline;
+//    _mapManager = [[BMKMapManager alloc]init];
+//    _locService = [[BMKLocationService alloc]init];
+//    _locService.delegate = self;
+//    _geocodesearch = [[BMKGeoCodeSearch alloc]init];
+//    _geocodesearch.delegate = self;
+//    
+//    BOOL ret = [_mapManager start:@"XUhLsGNq9Ch1HfTgZH8LFZs8"  generalDelegate:self];// ybh ky
+////zambon key  RNuxCab28lK3wgb3jGhsrpa3
+//    if (!ret) {
+//        NSLog(@"manager start failed!");
+//    }
     [super application:application didFinishLaunchingWithOptions:launchOptions];
-    [_locService startUserLocationService];
-    
-    
-    [ShareSDK registerApp:@"24732465ea3a"];     //参数为ShareSDK官网中添加应用后得到的AppKey
-    
-    
-    [ShareSDK connectSinaWeiboWithAppKey:APPID_Sina
-                               appSecret:APPID_KEY_Sina
-                             redirectUri:Sina_RedirectURI];
-    //添加腾讯微博应用 注册网址 http://dev.t.qq.com
-    //    [ShareSDK connectTencentWeiboWithAppKey:@"801307650"
-    //                                  appSecret:@"ae36f4ee3946e1cbb98d6965b0b2ff5c"
-    //                                redirectUri:@"http://www.sharesdk.cn"
-    //                                   wbApiCls:[WeiboApi class]];
-    //    [ShareSDK connectQZoneWithAppKey:APPID_QQ appSecret:APPID_KEY_QQ];
-    //    [ShareSDK connectQQWithAppId:APPID_QQ qqApiCls:[QQApi class]];
-    //    [ShareSDK connectWeChatFavWithAppId:APPID_QQ wechatCls:[WXApi class]];
-    //    [ShareSDK connectWeChatSessionWithAppId:APPID_QQ wechatCls:[WXApi class]];
-    //    [ShareSDK connectWeChatTimelineWithAppId:APPID_QQ wechatCls:[WXApi class]];
-    
-    
-    /**
-     连接微信应用以使用相关功能，此应用需要引用WeChatConnection.framework和微信官方SDK
-     http://open.weixin.qq.com上注册应用，并将相关信息填写以下字段
-     **/
-    [ShareSDK connectWeChatWithAppId:@"wx4868b35061f87885" wechatCls:[WXApi class]];
-    /**
-     连接QQ应用以使用相关功能，此应用需要引用QQConnection.framework和QQApi.framework库
-     http://mobile.qq.com/api/上注册应用，并将相关信息填写到以下字段
-     **/
-    //旧版中申请的AppId（如：QQxxxxxx类型），可以通过下面方法进行初始化
-    //   [ShareSDK connectQQWithAppId:@"QQ075BCD15" qqApiCls:[QQApi class]];
-    
-    [ShareSDK connectQQWithQZoneAppKey:@"100371282"
-                     qqApiInterfaceCls:[QQApiInterface class]
-                       tencentOAuthCls:[TencentOAuth class]];
+//    [_locService startUserLocationService];
+//    
+//    
+//    [ShareSDK registerApp:@"24732465ea3a"];     //参数为ShareSDK官网中添加应用后得到的AppKey
+//    
+//    
+//    [ShareSDK connectSinaWeiboWithAppKey:APPID_Sina
+//                               appSecret:APPID_KEY_Sina
+//                             redirectUri:Sina_RedirectURI];
+//    
+//    [ShareSDK connectQQWithQZoneAppKey:@"100371282"
+//                     qqApiInterfaceCls:[QQApiInterface class]
+//                       tencentOAuthCls:[TencentOAuth class]];
     
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(configUpdate:) name:CORE_NOTIFICATION_CONFIG_STATUS_CHANGED object:nil];
     [SHConfigManager instance];
 //    [SHConfigManager instance].URL = URL_FOR(@"get_config");
     
+    [self loadFinishedfiles];
+    [self loadTempfiles];
     return YES;
 }
 - (void)configUpdate:(NSObject*)sender
@@ -408,5 +388,188 @@ static bool __isupdate = NO;
 {
     
 }
+#pragma  download
+-(void)beginRequest:(FileModel *)fileInfo isBeginDown:(BOOL)isBeginDown
+{
+    //如果不存在则创建临时存储目录
+//    NSFileManager *fileManager=[NSFileManager defaultManager];
+//    if(![fileManager fileExistsAtPath:[SHFileManager getTempFolderPath]])
+//    {
+//        [fileManager createDirectoryAtPath:[SHFileManager getTempFolderPath] withIntermediateDirectories:YES attributes:nil error:nil];
+//    }
+//    
+//    //文件开始下载时，把文件名、文件总大小、文件URL写入文件，上海滩.rtf中间用逗号隔开
+////    NSString *writeMsg=[fileInfo.fileName stringByAppendingFormat:@",%@,%@",fileInfo.fileSize,fileInfo.fileURL];
+////    NSInteger index=[fileInfo.fileName rangeOfString:@"."].location;
+////    NSString *name=[fileInfo.fileName substringToIndex:index];
+////    [writeMsg writeToFile:[[SHFileManager getTempFolderPath]stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.rtf",name]] atomically:YES encoding:NSUTF8StringEncoding error:&error];
+//    
+//    
+//    //按照获取的文件名获取临时文件的大小，即已下载的大小
+//    fileInfo.isFistReceived=YES;
+//    NSData *fileData=[fileManager contentsAtPath:[[SHFileManager getTempFolderPath]stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.temp",fileInfo.fileName]]];
+//    NSInteger receivedDataLength=[fileData length];
+//    fileInfo.fileReceivedSize=[NSString stringWithFormat:@"%d",receivedDataLength];
+//    
+//    //如果文件重复下载或暂停、继续，则把队列中的请求删除，重新添加
+//    for(ASIHTTPRequest *tempRequest in self.downinglist)
+//    {
+//        if([[NSString stringWithFormat:@"%@",tempRequest.url] isEqual:fileInfo.fileURL])
+//        {
+//            [self.downinglist removeObject:tempRequest];
+//            break;
+//        }
+//    }
+//    
+    ASIHTTPRequest *request=[[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:fileInfo.fileURL]];
+    request.delegate=self;
+    [request setDownloadDestinationPath:[[SHFileManager getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mp4",fileInfo.fileName]]];
+    [request setTemporaryFileDownloadPath:[[SHFileManager getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.temp",fileInfo.fileName]]];
+    [request setDownloadProgressDelegate:self];
+    //    [request setDownloadProgressDelegate:downCell.progress];//设置进度条的代理,这里由于下载是在AppDelegate里进行的全局下载，所以没有使用自带的进度条委托，这里自己设置了一个委托，用于更新UI
+    [request setAllowResumeForFileDownloads:YES];//支持断点续传
+    [request setTimeOutSeconds:120];
+    [request setNumberOfTimesToRetryOnTimeout:3];
+//    if(isBeginDown)
+//    {
+//        fileInfo.isDownloading=YES;
+//    }
+//    else
+//    {
+//        fileInfo.isDownloading=NO;
+//    }
+    [request setUserInfo:[NSDictionary dictionaryWithObject:fileInfo forKey:@"File"]];//设置上下文的文件基本信息
 
+//    if (isBeginDown) {
+        [request startAsynchronous];
+//    }
+    [self.downinglist addObject:request];
+}
+-(void)loadTempfiles
+{
+    self.downinglist=[[NSMutableArray alloc] init];
+    NSFileManager *fileManager=[NSFileManager defaultManager];
+    NSError *error;
+    NSArray *filelist=[fileManager contentsOfDirectoryAtPath:[SHFileManager getTempFolderPath] error:&error];
+    if(!error)
+    {
+        NSLog(@"%@",[error description]);
+    }
+    for(NSString *file in filelist)
+    {
+        if([file rangeOfString:@".temp"].location<=100)//以.rtf结尾的文件是下载文件的配置文件，存在文件名称，文件总大小，文件下载URL
+        {
+            NSInteger index=[file rangeOfString:@"."].location;
+            NSString *trueName=[file substringToIndex:index];
+            
+            //临时文件的配置文件的内容
+            NSString *msg=[[NSString alloc] initWithData:[NSData dataWithContentsOfFile:[[SHFileManager getTempFolderPath]stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.temp",trueName]]] encoding:NSUTF8StringEncoding];
+            
+            //取得第一个逗号前的文件名
+            index=[msg rangeOfString:@","].location;
+            NSString *name=[msg substringToIndex:index];
+            msg=[msg substringFromIndex:index+1];
+            
+            //取得第一个逗号和第二个逗间的文件总大小
+            index=[msg rangeOfString:@","].location;
+            NSString *totalSize=[msg substringToIndex:index];
+            msg=[msg substringFromIndex:index+1];
+            
+            //取得第二个逗号后的所有内容，即文件下载的URL
+            NSString *url=msg;
+            
+            //按照获取的文件名获取临时文件的大小，即已下载的大小
+            NSData *fileData=[fileManager contentsAtPath:[[SHFileManager getTempFolderPath]stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.temp",name]]];
+            NSInteger receivedDataLength=[fileData length];
+            
+            //实例化新的文件对象，添加到下载的全局列表，但不开始下载
+            FileModel *tempFile=[[FileModel alloc] init];
+            tempFile.fileName=name;
+            tempFile.fileSize=totalSize;
+            tempFile.fileReceivedSize=[NSString stringWithFormat:@"%d",receivedDataLength];
+            tempFile.fileURL=url;
+            tempFile.isDownloading=NO;
+            [self beginRequest:tempFile isBeginDown:NO];
+
+        }
+    }
+}
+
+-(void)loadFinishedfiles
+{
+    self.finishedlist=[[NSMutableArray alloc] init];
+    NSFileManager *fileManager=[NSFileManager defaultManager];
+    NSError *error;
+    NSArray *filelist=[fileManager contentsOfDirectoryAtPath:[SHFileManager getTargetFloderPath] error:&error];
+    if(!error)
+    {
+        NSLog(@"%@",[error description]);
+    }
+    for(NSString *fileName in filelist)
+    {
+        if([fileName rangeOfString:@"."].location<100)//出去Temp文件夹
+        {
+            FileModel *finishedFile=[[FileModel alloc] init];
+            finishedFile.fileName=fileName;
+            
+            //根据文件名获取文件的大小
+            NSInteger length=[[fileManager contentsAtPath:[[SHFileManager getTargetFloderPath] stringByAppendingPathComponent:fileName]] length];
+            finishedFile.fileSize=[SHFileManager getFileSizeString:[NSString stringWithFormat:@"%d",length]];
+            
+            [self.finishedlist addObject:finishedFile];
+        }
+    }
+}
+-(void) loadCachesfiles
+{
+    self.cacheslist=[[NSMutableArray alloc] init];
+    NSFileManager *fileManager=[NSFileManager defaultManager];
+    NSError *error;
+    NSArray *filelist=[fileManager contentsOfDirectoryAtPath:[SHFileManager getTargetFloderPath] error:&error];
+    if(!error)
+    {
+        NSLog(@"%@",[error description]);
+    }
+    for(NSString *fileName in filelist)
+    {
+        if([fileName rangeOfString:@"."].location<100)//出去Temp文件夹
+        {
+            FileModel *finishedFile=[[FileModel alloc] init];
+            finishedFile.fileName=fileName;
+            
+            //根据文件名获取文件的大小
+            NSInteger length=[[fileManager contentsAtPath:[[SHFileManager getTargetFloderPath] stringByAppendingPathComponent:fileName]] length];
+            finishedFile.fileSize=[SHFileManager getFileSizeString:[NSString stringWithFormat:@"%d",length]];
+            
+            [self.finishedlist addObject:finishedFile];
+        }
+    }
+    
+}
+#pragma ASIHttpRequest回调委托
+
+//出错了，如果是等待超时，则继续下载
+-(void)requestFailed:(ASIHTTPRequest *)request
+{
+    NSError *error=[request error];
+    NSLog(@"ASIHttpRequest出错了!%@",error);
+
+}
+
+-(void)requestStarted:(ASIHTTPRequest *)request
+{
+    NSLog(@"开始了!");
+}
+- (void)request:(ASIHTTPRequest *)request didReceiveResponseHeaders:(NSDictionary *)responseHeaders {
+    
+    NSLog(@"didReceiveResponseHeaders-%@",[responseHeaders valueForKey:@"Content-Length"]);
+    NSLog(@"收到回复了！");
+    FileModel *fileInfo=[request.userInfo objectForKey:@"File"];
+    fileInfo.fileSize=[SHFileManager getFileSizeString:[[request responseHeaders] objectForKey:@"Content-Length"]];
+}
+
+-(void)setProgress:(float)newProgress
+{
+    NSLog(@"setProgress-%f",newProgress);
+}
 @end

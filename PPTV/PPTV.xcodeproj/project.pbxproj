@@ -21,6 +21,10 @@
 		770919F71A49A210001DDCCD /* xiaolian.png in Resources */ = {isa = PBXBuildFile; fileRef = 770919F61A49A210001DDCCD /* xiaolian.png */; };
 		770919FB1A49BBE6001DDCCD /* SHMoviceDownloadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 770919F91A49BBE6001DDCCD /* SHMoviceDownloadViewController.m */; };
 		770919FC1A49BBE6001DDCCD /* SHMoviceDownloadViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 770919FA1A49BBE6001DDCCD /* SHMoviceDownloadViewController.xib */; };
+		770919FF1A4A9D54001DDCCD /* SHFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 770919FE1A4A9D54001DDCCD /* SHFileManager.m */; };
+		77091A051A4AE953001DDCCD /* FileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 77091A041A4AE953001DDCCD /* FileModel.m */; };
+		77091A091A4AF4CA001DDCCD /* SHDownloadCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 77091A071A4AF4CA001DDCCD /* SHDownloadCollectionViewCell.m */; };
+		77091A0A1A4AF4CA001DDCCD /* SHDownloadCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77091A081A4AF4CA001DDCCD /* SHDownloadCollectionViewCell.xib */; };
 		773F2CF91A2C94E700082C32 /* ic_arrow_up.png in Resources */ = {isa = PBXBuildFile; fileRef = 773F2CF81A2C94E700082C32 /* ic_arrow_up.png */; };
 		773F2CFF1A2C984A00082C32 /* SHLiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 773F2CFD1A2C984A00082C32 /* SHLiveViewController.m */; };
 		773F2D001A2C984A00082C32 /* SHLiveViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 773F2CFE1A2C984A00082C32 /* SHLiveViewController.xib */; };
@@ -519,6 +523,13 @@
 		770919F81A49BBE6001DDCCD /* SHMoviceDownloadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHMoviceDownloadViewController.h; sourceTree = "<group>"; };
 		770919F91A49BBE6001DDCCD /* SHMoviceDownloadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHMoviceDownloadViewController.m; sourceTree = "<group>"; };
 		770919FA1A49BBE6001DDCCD /* SHMoviceDownloadViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SHMoviceDownloadViewController.xib; sourceTree = "<group>"; };
+		770919FD1A4A9D54001DDCCD /* SHFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHFileManager.h; sourceTree = "<group>"; };
+		770919FE1A4A9D54001DDCCD /* SHFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHFileManager.m; sourceTree = "<group>"; };
+		77091A031A4AE953001DDCCD /* FileModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileModel.h; sourceTree = "<group>"; };
+		77091A041A4AE953001DDCCD /* FileModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileModel.m; sourceTree = "<group>"; };
+		77091A061A4AF4CA001DDCCD /* SHDownloadCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHDownloadCollectionViewCell.h; sourceTree = "<group>"; };
+		77091A071A4AF4CA001DDCCD /* SHDownloadCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHDownloadCollectionViewCell.m; sourceTree = "<group>"; };
+		77091A081A4AF4CA001DDCCD /* SHDownloadCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SHDownloadCollectionViewCell.xib; sourceTree = "<group>"; };
 		773F2CF81A2C94E700082C32 /* ic_arrow_up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_arrow_up.png; sourceTree = "<group>"; };
 		773F2CFC1A2C984A00082C32 /* SHLiveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHLiveViewController.h; sourceTree = "<group>"; };
 		773F2CFD1A2C984A00082C32 /* SHLiveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHLiveViewController.m; sourceTree = "<group>"; };
@@ -1513,6 +1524,8 @@
 				77566C411A18960D00194562 /* MainViewController.h */,
 				77566C421A18960D00194562 /* MainViewController.m */,
 				77566C431A18960D00194562 /* MainViewController.xib */,
+				770919FD1A4A9D54001DDCCD /* SHFileManager.h */,
+				770919FE1A4A9D54001DDCCD /* SHFileManager.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -2470,6 +2483,11 @@
 		77816FC21A44633800B45AEB /* View */ = {
 			isa = PBXGroup;
 			children = (
+				77091A031A4AE953001DDCCD /* FileModel.h */,
+				77091A041A4AE953001DDCCD /* FileModel.m */,
+				77091A061A4AF4CA001DDCCD /* SHDownloadCollectionViewCell.h */,
+				77091A071A4AF4CA001DDCCD /* SHDownloadCollectionViewCell.m */,
+				77091A081A4AF4CA001DDCCD /* SHDownloadCollectionViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2909,6 +2927,7 @@
 				773F2D001A2C984A00082C32 /* SHLiveViewController.xib in Resources */,
 				77C7E5CF1A37E15F00F96E4A /* bg_download_video_select.png in Resources */,
 				77B16B161A39F27E0041D7CE /* ic_video_select_3.png in Resources */,
+				77091A0A1A4AF4CA001DDCCD /* SHDownloadCollectionViewCell.xib in Resources */,
 				77AEE4561A1B4E7A00366AEB /* ic_tab_live@2x.png in Resources */,
 				77C7E5B91A374A3300F96E4A /* ic_tab_select_22@2x.png in Resources */,
 				77EFB0B31A2C79C900A534D8 /* default706x320.png in Resources */,
@@ -3238,6 +3257,7 @@
 				77566EA61A18960E00194562 /* UIView+convenience.m in Sources */,
 				77566E1A1A18960E00194562 /* DSLCalendarDayView.m in Sources */,
 				77566E881A18960E00194562 /* SHTableViewUnReadNumberCell.m in Sources */,
+				77091A051A4AE953001DDCCD /* FileModel.m in Sources */,
 				77566EB21A18960E00194562 /* SHLogger.m in Sources */,
 				77566E691A18960E00194562 /* UIImage+MultiFormat.m in Sources */,
 				77566E6C1A18960E00194562 /* UIImageView+WebCache.m in Sources */,
@@ -3269,6 +3289,7 @@
 				77566EB41A18960E00194562 /* SHAppDelegate.m in Sources */,
 				77566EE71A18971F00194562 /* SHLoginViewController.m in Sources */,
 				770919EB1A499316001DDCCD /* ASIDataDecompressor.m in Sources */,
+				770919FF1A4A9D54001DDCCD /* SHFileManager.m in Sources */,
 				7740A5141A1A42C90036FCA2 /* SHRecomendSecondTitleCell.m in Sources */,
 				77F70EE91A1C82CB00D5CD41 /* CHANGELOG.md in Sources */,
 				77566E611A18960E00194562 /* SDWebImageDecoder.m in Sources */,
@@ -3326,6 +3347,7 @@
 				77566E5E1A18960E00194562 /* NSData+GIF.m in Sources */,
 				77566E0F1A18960E00194562 /* MainViewController.m in Sources */,
 				77566E771A18960E00194562 /* SHLoadingViewCell.m in Sources */,
+				77091A091A4AF4CA001DDCCD /* SHDownloadCollectionViewCell.m in Sources */,
 				77566E111A18960E00194562 /* UIButton+Addition.m in Sources */,
 				77566E901A18960E00194562 /* BWStatusBarOverlay.m in Sources */,
 				77AAE8B81A4060A500014895 /* SHCollectCell.m in Sources */,

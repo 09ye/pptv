@@ -8,6 +8,7 @@
 // detailInfo
 #import "SHTVDetailViewController.h"
 #import "SHChannelHorizontalCell.h"
+#import "FileModel.h"
 
 
 @interface SHTVDetailViewController ()
@@ -190,13 +191,27 @@
             [mViewContent addSubview:mDemandDetailViewControll.view];
             break;
         case 3:// 下载
+        {
             if ([[mResultDetail objectForKey:@"pid"]intValue] == 1) {// 电影
                 [mViewContent addSubview:mMoviceDownloadViewControll.view];
             }else{
                 mDrameViewControll.isDownload = YES;
                 [mViewContent addSubview:mDrameViewControll.view];
             }
-            
+            FileModel* currentFile=[[FileModel alloc] init];
+            currentFile.fileReceivedData=[[NSMutableData alloc] init];
+            currentFile.fileReceivedSize=@"0";
+            currentFile.fileID=@"";
+            currentFile.fileName=  mVideotitle;
+            currentFile.fileSize=@"未知";
+            currentFile.fileURL= mVideoUrl;
+            currentFile.isDownloading=NO;
+            currentFile.isP2P=NO;
+
+            AppDelegate* app=(AppDelegate*)[UIApplication sharedApplication].delegate;
+            [app beginRequest:currentFile isBeginDown:YES];
+
+        }
             break;
         case 4://收藏
         {
