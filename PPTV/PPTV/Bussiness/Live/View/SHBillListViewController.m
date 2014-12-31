@@ -14,21 +14,30 @@
 @end
 
 @implementation SHBillListViewController
-
+@synthesize list = _list;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.view.backgroundColor = [UIColor clearColor];
     self.tableView.backgroundColor = [UIColor clearColor];
-    
+    if(_list.count>0){
+        mlabNodata.hidden = YES;
+    }else{
+        mlabNodata.hidden = NO;
+    }
     
 }
 -(void) setList:(NSMutableArray *)list_
 {
     _list = list_;
-    _list = [[[NSArray alloc]initWithObjects:@"c1" ,@"c2",@"c3" ,@"c4",@"c2" ,@"c2",@"c1" ,@"c1",@"c4" ,@"c1" ,nil]mutableCopy ];
-    
+    if(_list.count>0){
+        mlabNodata.hidden = YES;
+        
+    }else{
+        mlabNodata.hidden = NO;
+    }
     [self.tableView reloadData];
+    
     
 }
 
@@ -47,14 +56,27 @@
     if(cell == nil){
         cell = (SHBillCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHBillCell" owner:nil options:nil] objectAtIndex:0];
     }
-    cell.labTitle.text = @"浙江卫视";
-    if (indexPath.row ==2) {
+    NSDictionary * dic = [_list objectAtIndex:indexPath.row];
+    NSDateFormatter *dataformart = [[NSDateFormatter alloc]init];
+    [dataformart setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate *date = [dataformart dateFromString:[dic objectForKey:@"starttime"]];
+    NSDate *nextdate = [NSDate date];
+    if (_list.count >indexPath.row +1) {
+        nextdate = [dataformart dateFromString:[[_list objectAtIndex:indexPath.row+1] objectForKey:@"starttime"]];
+    }
+   
+    NSString *dateString = [dataformart stringFromDate:[NSDate date]];
+    [dataformart setDateFormat:@"HH:mm"];
+    cell.labTitle.text = [NSString stringWithFormat:@"%@  %@",[dataformart stringFromDate:date],[dic objectForKey:@"title"]];
+    if ([date timeIntervalSinceDate:[NSDate date]]<0.0  && [nextdate timeIntervalSinceDate:[NSDate date]]>0.0) {
         cell.labContent.hidden = NO;
         cell.backgroundColor = [SHSkin.instance colorOfStyle:@"ColorBaseBackGround"];
+
     }else{
         cell.labContent.hidden = YES;
         cell.backgroundColor = [UIColor clearColor];
     }
+    
     cell.selected = YES;
     
     return cell;

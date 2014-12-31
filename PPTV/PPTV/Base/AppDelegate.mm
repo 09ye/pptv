@@ -13,6 +13,7 @@
 #import <TencentOpenAPI/TencentOAuth.h>
 #import "WeiboApi.h"
 #import "ASIHTTPRequest.h"
+#import "SHDownloadCollectionViewCell.h"
 
 
 @implementation AppDelegate
@@ -68,8 +69,9 @@ static bool __isupdate = NO;
     [SHConfigManager instance];
 //    [SHConfigManager instance].URL = URL_FOR(@"get_config");
     
-    [self loadFinishedfiles];
-    [self loadTempfiles];
+//    [self loadCachesfiles];
+    
+    [self loadCacheList];
     return YES;
 }
 - (void)configUpdate:(NSObject*)sender
@@ -389,160 +391,67 @@ static bool __isupdate = NO;
     
 }
 #pragma  download
--(void)beginRequest:(FileModel *)fileInfo isBeginDown:(BOOL)isBeginDown
+-(void)beginRequest:(NSMutableDictionary *)fileInfo isBeginDown:(BOOL)isBeginDown
 {
-    //如果不存在则创建临时存储目录
-//    NSFileManager *fileManager=[NSFileManager defaultManager];
-//    if(![fileManager fileExistsAtPath:[SHFileManager getTempFolderPath]])
-//    {
-//        [fileManager createDirectoryAtPath:[SHFileManager getTempFolderPath] withIntermediateDirectories:YES attributes:nil error:nil];
-//    }
-//    
-//    //文件开始下载时，把文件名、文件总大小、文件URL写入文件，上海滩.rtf中间用逗号隔开
-////    NSString *writeMsg=[fileInfo.fileName stringByAppendingFormat:@",%@,%@",fileInfo.fileSize,fileInfo.fileURL];
-////    NSInteger index=[fileInfo.fileName rangeOfString:@"."].location;
-////    NSString *name=[fileInfo.fileName substringToIndex:index];
-////    [writeMsg writeToFile:[[SHFileManager getTempFolderPath]stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.rtf",name]] atomically:YES encoding:NSUTF8StringEncoding error:&error];
-//    
-//    
-//    //按照获取的文件名获取临时文件的大小，即已下载的大小
-//    fileInfo.isFistReceived=YES;
-//    NSData *fileData=[fileManager contentsAtPath:[[SHFileManager getTempFolderPath]stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.temp",fileInfo.fileName]]];
-//    NSInteger receivedDataLength=[fileData length];
-//    fileInfo.fileReceivedSize=[NSString stringWithFormat:@"%d",receivedDataLength];
-//    
-//    //如果文件重复下载或暂停、继续，则把队列中的请求删除，重新添加
-//    for(ASIHTTPRequest *tempRequest in self.downinglist)
-//    {
-//        if([[NSString stringWithFormat:@"%@",tempRequest.url] isEqual:fileInfo.fileURL])
-//        {
-//            [self.downinglist removeObject:tempRequest];
-//            break;
-//        }
-//    }
-//    
-    ASIHTTPRequest *request=[[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:fileInfo.fileURL]];
+////    如果不存在则创建临时存储目录
+    NSFileManager *fileManager=[NSFileManager defaultManager];
+    if(![fileManager fileExistsAtPath:[SHFileManager getTargetFloderPath]])
+    {
+        [fileManager createDirectoryAtPath:[SHFileManager getTargetFloderPath] withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    if (!self.requestlist) {
+        self.requestlist = [[NSMutableArray alloc]init];
+    }
+    
+//    文件开始下载时，把id;文件名;图片url;文件URL
+    
+//    NSString *fileName=[[fileInfo objectForKey:@"id"] stringByAppendingFormat:@";%@;%@;%@;",[fileInfo objectForKey:@"title"],[fileInfo objectForKey:@"pic"],[fileInfo objectForKey:@"url"]];
+
+//    [fileInfo setValue:@"http://padload-cnc.wasu.cn/pcsan08/mams/vod/201409/29/16/201409291618156309b21cbd8_4e58bd54.mp4" forKey:@"url"];
+    if([fileManager fileExistsAtPath:[[SHFileManager getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mp4",[fileInfo objectForKey:@"id"]]]])//存在已经下好的MP4
+    {
+        return;
+    }
+    [fileInfo setValue:[[SHFileManager getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@",[fileInfo objectForKey:@"id"]]] forKey:@"path"];// 没有格式
+    [fileInfo setValue:@"1" forKey:@"state"];
+    ASIHTTPRequest *request=[[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:[fileInfo objectForKey:@"url"]]];
     request.delegate=self;
-    [request setDownloadDestinationPath:[[SHFileManager getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mp4",fileInfo.fileName]]];
-    [request setTemporaryFileDownloadPath:[[SHFileManager getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.temp",fileInfo.fileName]]];
-    [request setDownloadProgressDelegate:self];
+    [request setDownloadDestinationPath:[[SHFileManager getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mp4",[fileInfo objectForKey:@"id"]]]];
+    [request setTemporaryFileDownloadPath:[[SHFileManager getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.temp",[fileInfo objectForKey:@"id"]]]];
+//    [request setDownloadProgressDelegate:self];
     //    [request setDownloadProgressDelegate:downCell.progress];//设置进度条的代理,这里由于下载是在AppDelegate里进行的全局下载，所以没有使用自带的进度条委托，这里自己设置了一个委托，用于更新UI
     [request setAllowResumeForFileDownloads:YES];//支持断点续传
     [request setTimeOutSeconds:120];
     [request setNumberOfTimesToRetryOnTimeout:3];
-//    if(isBeginDown)
-//    {
-//        fileInfo.isDownloading=YES;
-//    }
-//    else
-//    {
-//        fileInfo.isDownloading=NO;
-//    }
-    [request setUserInfo:[NSDictionary dictionaryWithObject:fileInfo forKey:@"File"]];//设置上下文的文件基本信息
+    [request setUserInfo:[NSDictionary dictionaryWithObject:fileInfo forKey:@"file"]];//设置上下文的文件基本信息
+    [request startAsynchronous];
+    if (isBeginDown) {
+        [self.cachesInfolist addObject:fileInfo];
+    }
+    [self.requestlist addObject:request];
 
-//    if (isBeginDown) {
-        [request startAsynchronous];
-//    }
-    [self.downinglist addObject:request];
 }
--(void)loadTempfiles
+-(void) loadCacheList
 {
-    self.downinglist=[[NSMutableArray alloc] init];
+    NSData * data  = [[NSUserDefaults standardUserDefaults] valueForKey:DOWNLOAD_INFO_LIST];// 下载文件信息
+    if (data) {
+        self.cachesInfolist = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    }
+    if (!self.cachesInfolist) {
+        self.cachesInfolist  = [[NSMutableArray alloc]init];
+    }
     NSFileManager *fileManager=[NSFileManager defaultManager];
-    NSError *error;
-    NSArray *filelist=[fileManager contentsOfDirectoryAtPath:[SHFileManager getTempFolderPath] error:&error];
-    if(!error)
-    {
-        NSLog(@"%@",[error description]);
-    }
-    for(NSString *file in filelist)
-    {
-        if([file rangeOfString:@".temp"].location<=100)//以.rtf结尾的文件是下载文件的配置文件，存在文件名称，文件总大小，文件下载URL
-        {
-            NSInteger index=[file rangeOfString:@"."].location;
-            NSString *trueName=[file substringToIndex:index];
-            
-            //临时文件的配置文件的内容
-            NSString *msg=[[NSString alloc] initWithData:[NSData dataWithContentsOfFile:[[SHFileManager getTempFolderPath]stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.temp",trueName]]] encoding:NSUTF8StringEncoding];
-            
-            //取得第一个逗号前的文件名
-            index=[msg rangeOfString:@","].location;
-            NSString *name=[msg substringToIndex:index];
-            msg=[msg substringFromIndex:index+1];
-            
-            //取得第一个逗号和第二个逗间的文件总大小
-            index=[msg rangeOfString:@","].location;
-            NSString *totalSize=[msg substringToIndex:index];
-            msg=[msg substringFromIndex:index+1];
-            
-            //取得第二个逗号后的所有内容，即文件下载的URL
-            NSString *url=msg;
-            
-            //按照获取的文件名获取临时文件的大小，即已下载的大小
-            NSData *fileData=[fileManager contentsAtPath:[[SHFileManager getTempFolderPath]stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.temp",name]]];
-            NSInteger receivedDataLength=[fileData length];
-            
-            //实例化新的文件对象，添加到下载的全局列表，但不开始下载
-            FileModel *tempFile=[[FileModel alloc] init];
-            tempFile.fileName=name;
-            tempFile.fileSize=totalSize;
-            tempFile.fileReceivedSize=[NSString stringWithFormat:@"%d",receivedDataLength];
-            tempFile.fileURL=url;
-            tempFile.isDownloading=NO;
-            [self beginRequest:tempFile isBeginDown:NO];
-
+   
+    for (int i = 0; i<self.cachesInfolist.count; i++) {
+        NSMutableDictionary * dic = [self.cachesInfolist objectAtIndex:i];
+        
+        if([fileManager fileExistsAtPath:[NSString stringWithFormat:@"%@.temp",[dic objectForKey:@"path"]]]){
+            [self beginRequest:dic  isBeginDown:NO];
         }
-    }
-}
-
--(void)loadFinishedfiles
-{
-    self.finishedlist=[[NSMutableArray alloc] init];
-    NSFileManager *fileManager=[NSFileManager defaultManager];
-    NSError *error;
-    NSArray *filelist=[fileManager contentsOfDirectoryAtPath:[SHFileManager getTargetFloderPath] error:&error];
-    if(!error)
-    {
-        NSLog(@"%@",[error description]);
-    }
-    for(NSString *fileName in filelist)
-    {
-        if([fileName rangeOfString:@"."].location<100)//出去Temp文件夹
-        {
-            FileModel *finishedFile=[[FileModel alloc] init];
-            finishedFile.fileName=fileName;
-            
-            //根据文件名获取文件的大小
-            NSInteger length=[[fileManager contentsAtPath:[[SHFileManager getTargetFloderPath] stringByAppendingPathComponent:fileName]] length];
-            finishedFile.fileSize=[SHFileManager getFileSizeString:[NSString stringWithFormat:@"%d",length]];
-            
-            [self.finishedlist addObject:finishedFile];
+        if([fileManager fileExistsAtPath:[NSString stringWithFormat:@"%@.mp4",[dic objectForKey:@"path"]]]){
+            [dic setValue:@"0" forKey:@"state"];
         }
-    }
-}
--(void) loadCachesfiles
-{
-    self.cacheslist=[[NSMutableArray alloc] init];
-    NSFileManager *fileManager=[NSFileManager defaultManager];
-    NSError *error;
-    NSArray *filelist=[fileManager contentsOfDirectoryAtPath:[SHFileManager getTargetFloderPath] error:&error];
-    if(!error)
-    {
-        NSLog(@"%@",[error description]);
-    }
-    for(NSString *fileName in filelist)
-    {
-        if([fileName rangeOfString:@"."].location<100)//出去Temp文件夹
-        {
-            FileModel *finishedFile=[[FileModel alloc] init];
-            finishedFile.fileName=fileName;
-            
-            //根据文件名获取文件的大小
-            NSInteger length=[[fileManager contentsAtPath:[[SHFileManager getTargetFloderPath] stringByAppendingPathComponent:fileName]] length];
-            finishedFile.fileSize=[SHFileManager getFileSizeString:[NSString stringWithFormat:@"%d",length]];
-            
-            [self.finishedlist addObject:finishedFile];
-        }
+      
     }
     
 }
@@ -564,8 +473,16 @@ static bool __isupdate = NO;
     
     NSLog(@"didReceiveResponseHeaders-%@",[responseHeaders valueForKey:@"Content-Length"]);
     NSLog(@"收到回复了！");
-    FileModel *fileInfo=[request.userInfo objectForKey:@"File"];
-    fileInfo.fileSize=[SHFileManager getFileSizeString:[[request responseHeaders] objectForKey:@"Content-Length"]];
+    NSMutableDictionary *fileInfo=[request.userInfo objectForKey:@"file"];
+    [fileInfo setValue:[SHFileManager getFileSizeString:[[request responseHeaders] objectForKey:@"Content-Length"]] forKey:@"fileSize"];
+    
+   
+    
+    NSData * data = [NSKeyedArchiver archivedDataWithRootObject:self.cachesInfolist];
+    [[NSUserDefaults standardUserDefaults ] setValue:data forKey:DOWNLOAD_INFO_LIST];
+    [[NSUserDefaults standardUserDefaults]synchronize];
+    
+
 }
 
 -(void)setProgress:(float)newProgress

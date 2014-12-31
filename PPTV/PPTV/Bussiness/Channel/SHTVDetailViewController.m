@@ -78,23 +78,40 @@
             mDrameViewControll.view.frame = mViewContent.bounds;
             mDrameViewControll.delegate = self;
         }
-        [mDrameViewControll refresh:[[dicPreInfo objectForKey:@"id"]intValue]];
+        [mDrameViewControll refresh:[[mResultDetail objectForKey:@"id"]intValue]];
         
         [mViewContent addSubview:mDrameViewControll.view];
         if (mDemandDetailViewControll==nil) {// 详情
             mDemandDetailViewControll = [[SHDemandDetailViewController alloc]init];
             mDemandDetailViewControll.view.frame = mViewContent.bounds;
         }
+        mDemandDetailViewControll.detail = [mResultDetail mutableCopy];
         if (mMoviceDownloadViewControll == nil) {
             mMoviceDownloadViewControll = [[SHMoviceDownloadViewController alloc]init];
             mMoviceDownloadViewControll.view.frame = mViewContent.bounds;
-            mMoviceDownloadViewControll.detail = mResultDetail;
+            mMoviceDownloadViewControll.detail = [mResultDetail mutableCopy];
         }
-        mDemandDetailViewControll.detail = [mResultDetail mutableCopy];
+        
         
         // 大家都在看
-        mList = [[mResultDetail objectForKey:@"recoms"]mutableCopy];
-        [mScrollview reloadData];
+        SHPostTaskM * post = [[SHPostTaskM alloc]init];
+        post.URL = URL_FOR(@"Pad/recominfo");
+        [post.postArgs setValue:[mResultDetail objectForKey:@"id"] forKey:@"id"];
+        post.delegate = self;
+        [post start:^(SHTask *task) {
+            NSDictionary * dic  =[[task result]mutableCopy];
+            mLabTitleRec.text = [dic objectForKey:@"title"];
+            if ([[dic objectForKey:@"title"] caseInsensitiveCompare:@"大家都在看"] != NSOrderedSame) {
+                [mImgRec setImage:[UIImage imageNamed:@"cainixihuan"]];
+            }
+            mList = [[dic objectForKey:@"list"]mutableCopy];
+            [mScrollview reloadData];
+        } taskWillTry:^(SHTask *task) {
+            
+        } taskDidFailed:^(SHTask *task) {
+            
+        }];
+        
         
     } taskWillTry:^(SHTask *t) {
         
@@ -142,7 +159,21 @@
 - (void)playCtrlGetNextMediaTitle:(SHShowVideoViewController *)control lastPlayPos:(long *)lastPlayPos
 {
     
-    [mShowViewControll quicklyReplayMovie:[NSURL URLWithString:mVideoUrl] title:mVideotitle seekToPos:0];
+    if (![mDrameViewControll showNextVideo]) {
+        NSIndexPath *indexPath =[self.tableView indexPathForSelectedRow];
+        if (indexPath && indexPath.row+1<mList.count) {
+
+            [self request:[[[mList objectAtIndex:indexPath.row+1] objectForKey:@"id"]intValue]];
+
+        }else if(!indexPath && mList.count>0){
+            [self request:[[[mList objectAtIndex:0] objectForKey:@"id"]intValue]];
+        }else{
+           [self.navigationController popViewControllerAnimated:YES];
+        }
+    }
+    
+    
+//    [mShowViewControll quicklyReplayMovie:[NSURL URLWithString:mVideoUrl] title:mVideotitle seekToPos:0];
 }
 
 - (void) showVideoControllerFullScreen:(SHShowVideoViewController*) control full:(BOOL) isFull
@@ -198,18 +229,7 @@
                 mDrameViewControll.isDownload = YES;
                 [mViewContent addSubview:mDrameViewControll.view];
             }
-            FileModel* currentFile=[[FileModel alloc] init];
-            currentFile.fileReceivedData=[[NSMutableData alloc] init];
-            currentFile.fileReceivedSize=@"0";
-            currentFile.fileID=@"";
-            currentFile.fileName=  mVideotitle;
-            currentFile.fileSize=@"未知";
-            currentFile.fileURL= mVideoUrl;
-            currentFile.isDownloading=NO;
-            currentFile.isP2P=NO;
-
-            AppDelegate* app=(AppDelegate*)[UIApplication sharedApplication].delegate;
-            [app beginRequest:currentFile isBeginDown:YES];
+           
 
         }
             break;

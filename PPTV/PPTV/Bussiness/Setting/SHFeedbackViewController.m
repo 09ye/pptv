@@ -31,6 +31,7 @@
     mtxtPhone.layer.borderColor = [[UIColor grayColor]CGColor ];
     mtxtPhone.placeholder = @"QQ/手机/邮箱";
      mtxtPhone.delegate = self;
+
     
     mtxtArea.layer.cornerRadius = 5;
     mtxtArea.layer.borderWidth = 0.4f;
@@ -68,23 +69,50 @@
     [mtxtCompany resignFirstResponder];
 }
 
--(void)textFieldDidBeginEditing:(UITextView *)textField
+-(void)textViewDidBeginEditing:(UITextView *)textView
 {
+    int y = 10;
+    if (textView ==mtxtCOntent) {
+        y = -150;
+    }else if (textView ==mtxtPhone) {
+        y = -240;
+    }else if (textView ==mtxtArea) {
+        y = -300;
+    }else if (textView ==mtxtCompany) {
+        y = -350;
+    }
     
     [UIView animateWithDuration:0.3
                      animations:^{
-                         self.view.frame = CGRectMake(0, 20, self.view.frame.size.width, self.view.frame.size.height);
+                         mScrollview.frame = CGRectMake(10, y, mScrollview.frame.size.width, mScrollview.frame.size.height);
                      }];
 }
 
--(void)textFieldDidEndEditing:(UITextView *)textField
+-(void)textViewDidEndEditing:(UITextView *)textView
 {
     [UIView animateWithDuration:0.3
                      animations:^{
-                         self.view.frame = CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height);
+                         mScrollview.frame = CGRectMake(10, 10, mScrollview.frame.size.width, mScrollview.frame.size.height);
                      }];
 }
-
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    
+    if ([text isEqualToString:@"\n"]) {
+        if (textView ==mtxtCOntent) {
+            [mtxtPhone becomeFirstResponder];
+        }else if (textView ==mtxtPhone) {
+            [mtxtArea becomeFirstResponder];
+        }else if (textView ==mtxtArea) {
+            [mtxtCompany becomeFirstResponder];
+        }else if (textView ==mtxtCompany) {
+            [textView resignFirstResponder];
+        }
+        return NO;
+    }
+    
+    return YES;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

@@ -8,11 +8,16 @@
 
 #import "SHTableViewController.h"
 
-@interface SHSearchViewController : SHTableViewController
+@interface SHSearchViewController : SHTableViewController<SHTaskDelegate>
 {
      __weak IBOutlet UISearchBar *mSearch;
+    __weak IBOutlet UIView *mViewRecomend;
+    __weak IBOutlet UIView *mViewRecord;
+    NSMutableArray * mArrayRecord;
+    NSMutableArray * mArrayRecomend;
 }
 - (IBAction)btnWatchRecordOntouch:(UIButton *)sender;
 - (IBAction)btnDownloadOntouch:(UIButton *)sender;
 - (IBAction)btnGoBack:(UIButton *)sender;
+- (IBAction)btnClearOntouch:(id)sender;
 @end

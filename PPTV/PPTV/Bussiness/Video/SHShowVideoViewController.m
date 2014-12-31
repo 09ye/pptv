@@ -765,30 +765,36 @@
     [self quicklyPlayMovie:self.videoURL title:title seekToPos:lastPos];
     
 }
-
+// 快退
 -(IBAction)prevButtonAction:(id)sender
-{ [self resetTimeViewhidden];
+{
+    [self resetTimeViewhidden];
     [self.prevBtn1 setBackgroundImage:[UIImage imageNamed:@"btn_pre_normal"] forState:UIControlStateNormal];
     [self.prevBtn1 setBackgroundImage:[UIImage imageNamed:@"btn_pre_select"] forState:UIControlStateHighlighted];
     
-    if (DELEGATE_IS_READY(playCtrlGetPrevMediaTitle:lastPlayPos:)) {
-        [self.delegate playCtrlGetNextMediaTitle:self lastPlayPos:0];
-    }else {
-        NSLog(@"WARN: No previous media url found!");
-    }
+    [self startActivityWithMsg:@"Buffering"];
+    [mMPayer seekTo:[mMPayer getCurrentPosition]-30*1000];
+//    if (DELEGATE_IS_READY(playCtrlGetPrevMediaTitle:lastPlayPos:)) {
+//        [self.delegate playCtrlGetNextMediaTitle:self lastPlayPos:0];
+//    }else {
+//        NSLog(@"WARN: No previous media url found!");
+//    }
 }
-
+// 快进
 -(IBAction)nextButtonAction:(id)sender
 {
     [self resetTimeViewhidden];
     [self.nextBtn1 setBackgroundImage:[UIImage imageNamed:@"btn_next_normal"] forState:UIControlStateNormal];
     [self.nextBtn1 setBackgroundImage:[UIImage imageNamed:@"btn_next_select"] forState:UIControlStateHighlighted];
     
-    if (DELEGATE_IS_READY(playCtrlGetNextMediaTitle:lastPlayPos:)) {
-        [self.delegate playCtrlGetNextMediaTitle:self lastPlayPos:0];
-    }else {
-        NSLog(@"WARN: No previous media url found!");
-    }
+    [self startActivityWithMsg:@"Buffering"];
+    [mMPayer seekTo:[mMPayer getCurrentPosition]+25*1000];
+    
+//    if (DELEGATE_IS_READY(playCtrlGetNextMediaTitle:lastPlayPos:)) {
+//        [self.delegate playCtrlGetNextMediaTitle:self lastPlayPos:0];
+//    }else {
+//        NSLog(@"WARN: No previous media url found!");
+//    }
 }
 
 -(IBAction)switchVideoViewModeButtonAction:(id)sender
@@ -814,14 +820,16 @@
 
 
 -(IBAction)progressSliderDownAction:(id)sender
-{ [self resetTimeViewhidden];
+{
+    [self resetTimeViewhidden];
     self.progressDragging = YES;
     NSLog(@"NAL 4HBT &&&&&&&&&&&&&&&&.......&&&&&&&&&&&&&&&&&");
     NSLog(@"NAL 1DOW &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& Touch Down");
 }
 
 -(IBAction)progressSliderUpAction:(id)sender
-{ [self resetTimeViewhidden];
+{
+    [self resetTimeViewhidden];
     UISlider *sld = (UISlider *)sender;
     NSLog(@"NAL 1BVC &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& seek = %ld", (long)(sld.value * mDuration));
     [self startActivityWithMsg:@"Buffering"];
@@ -849,6 +857,7 @@
     NSLog(@"NAL 2BVC &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& seek = %ld", seek);
     [self startActivityWithMsg:@"Buffering"];
     [mMPayer seekTo:seek];
+    
 }
 
 - (IBAction)btnMenuOntouch:(UIButton *)sender {

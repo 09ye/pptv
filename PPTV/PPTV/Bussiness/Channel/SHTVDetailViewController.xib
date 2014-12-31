@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SHTVDetailViewController">
             <connections>
+                <outlet property="mImgRec" destination="qVF-CU-rv6" id="4K1-aS-kR8"/>
+                <outlet property="mLabTitleRec" destination="nj1-VR-LAa" id="A7I-uU-jaq"/>
                 <outlet property="mScrollview" destination="2Nc-xo-QCk" id="Qx0-RB-lm1"/>
                 <outlet property="mViewContent" destination="FbI-zT-AJm" id="uav-7M-585"/>
                 <outlet property="mViewDown" destination="cdx-74-e9X" id="lHB-N5-2am"/>
@@ -30,7 +32,7 @@
                             <rect key="frame" x="8" y="15" width="25" height="25"/>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="大家都在看" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nj1-VR-LAa">
-                            <rect key="frame" x="57" y="17" width="85" height="21"/>
+                            <rect key="frame" x="55" y="17" width="150" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>

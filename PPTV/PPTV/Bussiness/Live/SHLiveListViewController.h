@@ -22,6 +22,7 @@
     int cid;
     
     int selctID;
+    NSMutableArray * arrayBtnCate;
 }
 @property (nonatomic,assign) id <SHLiveListViewControllerDelegate> delegate;
 @end

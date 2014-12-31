@@ -27,9 +27,9 @@
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
 //    app=(AppDelegate*)[UIApplication sharedApplication].delegate;
     dicPreInfo = [self.intent.args objectForKey:@"detailInfo"];
-    
-    [self createDateView];
     [self createBill];
+    [self createDateView];
+    
     
     mListViewControll = [[SHLiveListViewController alloc]init];
     mListViewControll.view.frame = mViewContent.bounds;
@@ -87,7 +87,7 @@
             mVideoUrl = @"";
         }
        
-
+//     mVideoUrl = @"http://183.136.140.38/hd_hbws/z.m3u8";
         self.leftTitle = mVideotitle;
         NSURL * videoUrl = [NSURL URLWithString:mVideoUrl];
         [mShowViewControll quicklyReplayMovie:videoUrl title:[mResultDetail objectForKey:@"title"] seekToPos:0];
@@ -98,6 +98,31 @@
         }
         mDemandDetailViewControll.detail = [mResultDetail mutableCopy];
       
+        // 节目单
+        SHPostTaskM * post = [[SHPostTaskM alloc]init];
+        post.URL = URL_FOR(@"Pad/livebill");
+        [post.postArgs setValue:[mResultDetail objectForKey:@"id"] forKey:@"id"];
+        post.delegate = self;
+        [post start:^(SHTask *task) {
+            
+            arrayBills  =[[task result]mutableCopy];
+//            [self createBill];
+            for (int i = 0; i< mListPagesView.count; i++) {
+                SHBillListViewController * viewControll = [mListPagesView objectAtIndex:i];
+                viewControll.list = arrayBills;
+            }
+
+
+        } taskWillTry:^(SHTask *task) {
+            
+        } taskDidFailed:^(SHTask *task) {
+            arrayBills  =[[NSMutableArray alloc]init];
+            for (int i = 0; i< mListPagesView.count; i++) {
+                SHBillListViewController * viewControll = [mListPagesView objectAtIndex:i];
+                viewControll.list = arrayBills;
+            }
+
+        }];
         
     } taskWillTry:^(SHTask *t) {
         
@@ -127,13 +152,14 @@
     pageVC = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll
                                              navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
                                                            options:nil];
+    [pageVC removeFromParentViewController];
     pageVC.dataSource = self;
     pageVC.delegate   = self;
     mListPagesView = [NSMutableArray array];
     for (int i = 0; i<7; i++) {
         mBillViewControll = [[SHBillListViewController alloc]init];
         mBillViewControll.tag = i;
-        mBillViewControll.list = [[NSMutableArray alloc]init];
+        mBillViewControll.list = arrayBills;
         mBillViewControll.view.frame = mViewBill.bounds;
         [mListPagesView addObject:mBillViewControll];
     }

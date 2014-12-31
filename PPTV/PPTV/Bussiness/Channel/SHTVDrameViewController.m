@@ -22,6 +22,8 @@
     
   
 }
+
+
 -(void) refresh:(NSInteger)videoID
 {
     selctID = videoID;
@@ -30,10 +32,24 @@
     [post.postArgs setValue:[NSNumber numberWithInt:videoID] forKey:@"id"];
     post.delegate = self;
     [post start:^(SHTask *task) {
-
-        mList = [[task result]mutableCopy];
+        mResult = [[task result]mutableCopy];
+        
+        mList = [mResult objectForKey:@"list"];
+       
+        
+        mListCategory = [mResult objectForKey:@"group"];
+        mCurrentGroup = @"";
+        if (mListCategory.count>0) {
+            mCurrentGroup = [mListCategory objectAtIndex:0];
+            CGRect rect = self.tableView.frame;
+            rect.origin.y = 44;
+            rect.size.height=758-44-60;
+            self.tableView.frame = rect;
+            [self createGroupView];
+        }
+        
         [self.tableView reloadData];
-
+       
     } taskWillTry:^(SHTask *task) {
         
     } taskDidFailed:^(SHTask *task) {
@@ -47,7 +63,11 @@
 
 -(float) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 80;
+    NSDictionary * dic = [mList objectAtIndex:indexPath.row];
+    if ([mCurrentGroup isEqualToString:@""] || [[dic objectForKey:@"group"] isEqualToString:mCurrentGroup]) {
+        return 80;
+    }
+    return 0;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -69,16 +89,34 @@
 
             [tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionTop];
     }
-
-
+    if ([mCurrentGroup isEqualToString:@""] || [[dic objectForKey:@"group"] isEqualToString:mCurrentGroup]) {
+        cell.hidden  = NO;
+    }else{
+        cell.hidden =  YES;
+    }
+    
     return cell;
     
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(drameDidSelect:info:)]) {
-        [self.delegate drameDidSelect:self info:[mList objectAtIndex:indexPath.row]];
+    
+    if (self.isDownload) {
+         [self showAlertDialog:@"成功添加至离线观看"];
+//        NSMutableDictionary * dic = [[NSMutableDictionary alloc]init];
+//        [dic setValue:[self.detail objectForKey:@"title"] forKey:@"title"];
+//        [dic setValue:[self.detail objectForKey:@"id"] forKey:@"id"];
+//        [dic setValue:[self.detail objectForKey:@"pic"] forKey:@"pic"];
+//        [dic setValue:url forKey:@"url"];
+//        AppDelegate* app=(AppDelegate*)[UIApplication sharedApplication].delegate;
+//        [app beginRequest:dic isBeginDown:YES];
+    }else{
+        if (self.delegate && [self.delegate respondsToSelector:@selector(drameDidSelect:info:)]) {
+            [self.delegate drameDidSelect:self info:[mList objectAtIndex:indexPath.row]];
+        }
     }
+    
+
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -86,26 +124,26 @@
 }
 -(void) setIsDownload:(BOOL)isDownload_
 {
+    _isDownload = isDownload_;
     if (isDownload_) {
-        CGContextRef context=UIGraphicsGetCurrentContext();
-        [UIView beginAnimations:nil context:context];
-        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-        [UIView setAnimationDuration:0.4f];
-//        mViewDownload.hidden = NO;
-//        mlabTitleDown.hidden = NO;
-//        CGRect rect = self.tableView.frame;
-//        rect.size.height-=50;
-//        self.tableView.frame = rect;
-//        [self.tableView reloadData];
-//        [UIView commitAnimations];
         
-        [UIView animateWithDuration:0.5 animations:^{
+        [UIView animateWithDuration:0.4 animations:^{
             
-            CGRect rect = self.tableView.frame;
+            CGRect rect = mViewContain.frame;
             rect.origin.y = 34;
-            rect.size.height-=74;
-            
-            self.tableView.frame = rect;
+            rect.size.height = 768-34-50;
+            mViewContain.frame = rect;
+            if (mListCategory.count>0) {
+                CGRect rect = self.tableView.frame;
+                rect.origin.y = 44;
+                rect.size.height=758-34-50-44-60;
+                self.tableView.frame = rect;
+            }else{
+                CGRect rect = self.tableView.frame;
+                rect.origin.y = 0;
+                rect.size.height=758-34-50-60;
+                self.tableView.frame = rect;
+            }
             [self.tableView reloadData];
             
         } completion:^(BOOL finished) {
@@ -115,36 +153,130 @@
         }];
         
     }else{
-        CGContextRef context=UIGraphicsGetCurrentContext();
-        [UIView beginAnimations:nil context:context];
-        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-//        [UIView setAnimationDuration:0.4f];
-       
-//        [UIView commitAnimations];
-    
-        [UIView animateWithDuration:0.5 animations:^{
+        
+        [UIView animateWithDuration:0.4 animations:^{
             
-            CGRect rect = self.tableView.frame;
-            rect.size.height+=74;
+            mViewDownload.hidden = YES;
+            mlabTitleDown.hidden = YES;
+            CGRect rect = mViewContain.frame;
+            rect.size.height= 768;
             rect.origin.y = 0;
-            self.tableView.frame = rect;
+            mViewContain.frame = rect;
+            if (mListCategory.count>0) {
+                CGRect rect = self.tableView.frame;
+                rect.origin.y = 44;
+                rect.size.height=758-44-60;
+                self.tableView.frame = rect;
+            }else{
+                CGRect rect = self.tableView.frame;
+                rect.origin.y = 0;
+                rect.size.height=758;
+                self.tableView.frame = rect;
+            }
             [self.tableView reloadData];
             
+            
         } completion:^(BOOL finished) {
-             mViewDownload.hidden = YES;
-             mlabTitleDown.hidden = YES;
+            
 
         }];
     }
 }
-/*
-#pragma mark - Navigation
+-(void) createGroupView
+{
+    arrayBtnCate = [[NSMutableArray alloc]init];
+    CGRect  lastRect = CGRectZero;
+    for (int i=0; i<mListCategory.count; i++) {
+//        NSDictionary * dic = ;
+        UIButton * button = [[UIButton alloc]initWithFrame:CGRectMake(lastRect.origin.x+lastRect.size.width+20, 5, 50, 34)];
+        [button setTitle:[mListCategory objectAtIndex:i] forState:UIControlStateNormal];
+        button.tag = i;
+        [button addTarget:self action:@selector(btnCategory:) forControlEvents:UIControlEventTouchUpInside];
+        [button sizeToFit];
+        lastRect = button.frame;
+        [arrayBtnCate addObject:button];
+        [mScrollviewCate addSubview:button];
+    }
+    [[arrayBtnCate objectAtIndex:0] setTitleColor:[SHSkin.instance colorOfStyle:@"ColorTextOrg"] forState:UIControlStateNormal];
+    mScrollviewCate.contentSize = CGSizeMake(lastRect.origin.x+lastRect.size.width+20.f, 44);
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
 }
-*/
+-(void) btnCategory:(UIButton *)sender
+{
+    
+    mCurrentGroup  =[mListCategory objectAtIndex:sender.tag];
+    [self.tableView reloadData];
+
+    
+    for (UIButton * button in arrayBtnCate) {
+        if (button == sender) {
+            [button setTitleColor:[SHSkin.instance colorOfStyle:@"ColorTextOrg"] forState:UIControlStateNormal];
+        }else{
+            
+            [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        }
+    }
+}
+
+- (IBAction)btnDownModeOntouch:(UIButton *)sender {
+    switch (sender.tag) {
+        case 0:
+            [mbtn1 setTitleColor:[SHSkin.instance colorOfStyle:@"ColorTextOrg"] forState:UIControlStateNormal];
+            [mbtn2 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [mbtn3 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [mbtnMode setTitle:@"流畅" forState:UIControlStateNormal];
+
+            break;
+        case 1:
+            [mbtn2 setTitleColor:[SHSkin.instance colorOfStyle:@"ColorTextOrg"] forState:UIControlStateNormal];
+            [mbtn1 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [mbtn3 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [mbtnMode setTitle:@"高清" forState:UIControlStateNormal];
+
+            break;
+        case 2:
+            [mbtn3 setTitleColor:[SHSkin.instance colorOfStyle:@"ColorTextOrg"] forState:UIControlStateNormal];
+            [mbtn1 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [mbtn2 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [mbtnMode setTitle:@"超清" forState:UIControlStateNormal];
+
+            break;
+            
+        default:
+            break;
+    }
+    mViewDownSelect.hidden = YES;
+}
+
+- (IBAction)btnShowModeOntouch:(UIButton *)sender {
+    if(mViewDownSelect.hidden){
+        [UIView animateWithDuration:0.4 animations:^{
+            mViewDownSelect.hidden = NO;
+        } completion:^(BOOL finished) {
+            
+        }];
+    }
+}
+
+- (IBAction)btnModeCloseOntouch:(id)sender {
+    mViewDownSelect.hidden = YES;
+}
+-(BOOL)showNextVideo{
+    NSIndexPath *indexPath =[self.tableView indexPathForSelectedRow];
+    if (indexPath && indexPath.row+1<mList.count) {
+        
+        if (self.delegate && [self.delegate respondsToSelector:@selector(drameDidSelect:info:)]) {
+            [self.delegate drameDidSelect:self info:[mList objectAtIndex:indexPath.row+1]];
+            return YES;
+        }
+        
+    }else if(!indexPath &&mList.count>0){
+        if (self.delegate && [self.delegate respondsToSelector:@selector(drameDidSelect:info:)]) {
+            [self.delegate drameDidSelect:self info:[mList objectAtIndex:0]];
+            return YES;
+        }
+    }
+    return NO;
+}
 
 @end

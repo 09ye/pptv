@@ -55,7 +55,7 @@
     if(self.isShow){
         return;
     }
-    self.frame = CGRectMake(0, 64, 1024, 655);
+    self.frame = CGRectMake(0, 64, 1024, 648);
     self.alpha = 0;
     
     mViewContain.frame = CGRectMake( 1024, mViewContain.frame.origin.y, mViewContain.frame.size.width, mViewContain.frame.size.height);

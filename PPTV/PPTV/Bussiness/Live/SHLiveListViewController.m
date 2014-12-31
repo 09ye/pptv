@@ -96,6 +96,7 @@
     [self dismissWaitDialog];
     if (task.tag == 1000) {
         mListCategory = [[task result]mutableCopy];
+        arrayBtnCate = [[NSMutableArray alloc]init];
         CGRect  lastRect = CGRectZero;
         for (int i=0; i<mListCategory.count; i++) {
             NSDictionary * dic = [mListCategory objectAtIndex:i];
@@ -105,7 +106,11 @@
             [button addTarget:self action:@selector(btnCategory:) forControlEvents:UIControlEventTouchUpInside];
             [button sizeToFit];
             lastRect = button.frame;
+            [arrayBtnCate addObject:button];
             [mScrollviewCate addSubview:button];
+        }
+        if (arrayBtnCate.count>0) {
+              [[arrayBtnCate objectAtIndex:0] setTitleColor:[SHSkin.instance colorOfStyle:@"ColorTextOrg"] forState:UIControlStateNormal];
         }
         mScrollviewCate.contentSize = CGSizeMake(lastRect.origin.x+lastRect.size.width+20.f, 44);
         
@@ -136,9 +141,19 @@
 #pragma  btnaction
 -(void) btnCategory:(UIButton *)sender
 {
+    
     NSDictionary* dic  =[mListCategory objectAtIndex:sender.tag];
     cid = [[dic objectForKey:@"id"]integerValue];
     [self reloadRequest];
+    
+    for (UIButton * button in arrayBtnCate) {
+        if (button == sender) {
+            [button setTitleColor:[SHSkin.instance colorOfStyle:@"ColorTextOrg"] forState:UIControlStateNormal];
+        }else{
+            
+            [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        }
+    }
 }
 
 @end

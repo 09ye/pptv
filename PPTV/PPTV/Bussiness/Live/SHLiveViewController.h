@@ -38,6 +38,7 @@
     NSArray * arrayLine;
     NSArray * arrayDate;
     NSMutableArray * arrayCollect;
+    NSMutableArray * arrayBills;
     __weak IBOutlet UIButton *mbtnDay1;
     __weak IBOutlet UIButton *mbtnDay2;
     __weak IBOutlet UIButton *mbtnDay3;
@@ -45,6 +46,7 @@
     __weak IBOutlet UIButton *mbtnDay5;
     __weak IBOutlet UIButton *mbtnDay6;
     __weak IBOutlet UIButton *mbtnDay7;
+     
 }
 
 - (IBAction)btnDaySelectOntouch:(UIButton *)sender;

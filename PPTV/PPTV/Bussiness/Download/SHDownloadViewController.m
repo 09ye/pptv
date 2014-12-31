@@ -43,38 +43,31 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-    if(app.downinglist.count>0){
+    if(app.cachesInfolist.count>0){
         mViewNoData.hidden = YES;
+        [mCollection reloadData];
     }else{
         mViewNoData.hidden = NO;
     }
-     [mCollection reloadData];
+    
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
     SHDownloadCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"collection_download_cell" forIndexPath:indexPath];
 //    NSDictionary * dic = [app.downinglist objectAtIndex:indexPath.row];
-    ASIHTTPRequest *theRequest=[app.downinglist objectAtIndex:indexPath.row];
-    FileModel *fileInfo=[theRequest.userInfo objectForKey:@"File"];
-    theRequest.downloadProgressDelegate = self;
-//    [cell.imgDeatil setUrl:[dic objectForKey:@"pic"]];
-    cell.labTitle.text = fileInfo.fileName;
-//    cell.labContent.text = [dic objectForKey:@"focus"];
-//    cell.labStatus.text = [dic objectForKey:@"status"];
-    
+    NSDictionary * dic=[app.cachesInfolist objectAtIndex:indexPath.row];
+    cell.detail = [dic mutableCopy];;
+       
     
     
     
     return cell;
 }
--(void)setProgress:(float)newProgress
-{
-    NSLog(@"setProgress-%f",newProgress);
-}
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return app.downinglist.count;
+    return app.cachesInfolist.count;
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -86,11 +79,7 @@
 {
     
     
-    SHIntent * intent = [[SHIntent alloc ]init];
-    intent.target = @"SHTVDetailViewController";
-//    [intent.args setValue:[self. objectAtIndex:indexPath.row] forKey:@"detailInfo"];
-    intent.container = self.navController;
-    [[UIApplication sharedApplication] open:intent];
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

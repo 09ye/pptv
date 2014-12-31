@@ -23,6 +23,8 @@
     __weak IBOutlet UIView *mViewVideo;
     __weak IBOutlet UIView *mViewContent;
     __weak IBOutlet UIView *mViewDown;
+    __weak IBOutlet UILabel *mLabTitleRec;
+    __weak IBOutlet UIImageView *mImgRec;
     NSDictionary * dicPreInfo;
     NSDictionary * mResultDetail;
     NSString * mVideoUrl;

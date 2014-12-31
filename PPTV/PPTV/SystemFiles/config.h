@@ -47,6 +47,8 @@
 
 #define COLLECT_LIST @"collect_list"
 #define RECORD_LIST @"record_list"
+#define DOWNLOAD_INFO_LIST @"download_info_list"
+#define SEARCH_LIST @"search_list"
 
 //notification
 #define NOTIFICATION_LOGIN_SUCCESSFUL @"notification_login_successful"

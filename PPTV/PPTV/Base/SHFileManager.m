@@ -26,15 +26,15 @@
 {
     if([size floatValue]>=1024*1024)//大于1M，则转化成M单位的字符串
     {
-        return [NSString stringWithFormat:@"%fM",[size floatValue]/1024/1024];
+        return [NSString stringWithFormat:@"%0.1fM",[size floatValue]/1024/1024];
     }
     else if([size floatValue]>=1024&&[size floatValue]<1024*1024) //不到1M,但是超过了1KB，则转化成KB单位
     {
-        return [NSString stringWithFormat:@"%fK",[size floatValue]/1024];
+        return [NSString stringWithFormat:@"%0.1fK",[size floatValue]/1024];
     }
     else//剩下的都是小于1K的，则转化成B单位
     {
-        return [NSString stringWithFormat:@"%fB",[size floatValue]];
+        return [NSString stringWithFormat:@"%0.1fB",[size floatValue]];
     }
 }
 
@@ -108,13 +108,15 @@
     
     for (NSString *url in filelist) {
         
-        NSData *data = [filemgr contentsAtPath:[NSString stringWithFormat:@"%@/%@",savePath,url]];
-        
-        cacheSize = cacheSize + ([data length]/1024.0/1024.0);
+       long long size = [[filemgr attributesOfItemAtPath:[NSString stringWithFormat:@"%@/%@",savePath,url] error:nil] fileSize];
+        if(size){
+            cacheSize = cacheSize + size;
+        }
+       
         
     }
     
-    cacheSize = (cacheSize/1024);
+    cacheSize = (cacheSize/1024.0/1024.0/1024.0);
     
     return cacheSize;
     

@@ -47,13 +47,15 @@
 -(void)sendLoginSina:(UIViewController *)vc;
 
 
-@property(nonatomic,retain)NSMutableArray *finishedlist;//已下载完成的文件列表（文件对象）
+//@property(nonatomic,retain)NSMutableArray *finishedlist;//已下载完成的文件列表（文件对象）
+//
+//@property(nonatomic,retain)NSMutableArray *downinglist;//正在下载的文件列表(ASIHttpRequest对象)
 
-@property(nonatomic,retain)NSMutableArray *downinglist;//正在下载的文件列表(ASIHttpRequest对象)
+@property(nonatomic,strong)NSMutableArray *requestlist;//caches 目录下得文件 .temp 和。MP4
 
-@property(nonatomic,strong)NSMutableArray *cacheslist;//caches 目录下得文件 .temp 和。MP4
+@property(nonatomic,strong)NSMutableArray *cachesInfolist;//下载文件信息 id name pic url
 
--(void)beginRequest:(FileModel *)fileInfo isBeginDown:(BOOL)isBeginDown;
+-(void)beginRequest:(NSMutableDictionary *)fileInfo isBeginDown:(BOOL)isBeginDown;
 
 
 
