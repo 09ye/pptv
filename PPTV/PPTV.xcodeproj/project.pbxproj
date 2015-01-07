@@ -328,6 +328,8 @@
 		77AAE8B51A3F372A00014895 /* bg_line.png in Resources */ = {isa = PBXBuildFile; fileRef = 77AAE8B41A3F372A00014895 /* bg_line.png */; };
 		77AAE8B81A4060A500014895 /* SHCollectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 77AAE8B71A4060A500014895 /* SHCollectCell.m */; };
 		77AAE8BA1A4060C600014895 /* SHCollectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77AAE8B91A4060C600014895 /* SHCollectCell.xib */; };
+		77ABC8651A53F33300E637F5 /* SHRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 77ABC8641A53F33300E637F5 /* SHRecordCell.m */; };
+		77ABC8671A53F33F00E637F5 /* SHRecordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77ABC8661A53F33F00E637F5 /* SHRecordCell.xib */; };
 		77AEE44F1A1B4E7A00366AEB /* ic_tab_animation.png in Resources */ = {isa = PBXBuildFile; fileRef = 77AEE4391A1B4E7A00366AEB /* ic_tab_animation.png */; };
 		77AEE4501A1B4E7A00366AEB /* ic_tab_animation@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77AEE43A1A1B4E7A00366AEB /* ic_tab_animation@2x.png */; };
 		77AEE4511A1B4E7A00366AEB /* ic_tab_documentary.png in Resources */ = {isa = PBXBuildFile; fileRef = 77AEE43B1A1B4E7A00366AEB /* ic_tab_documentary.png */; };
@@ -1080,6 +1082,9 @@
 		77AAE8B61A4060A500014895 /* SHCollectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHCollectCell.h; sourceTree = "<group>"; };
 		77AAE8B71A4060A500014895 /* SHCollectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHCollectCell.m; sourceTree = "<group>"; };
 		77AAE8B91A4060C600014895 /* SHCollectCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SHCollectCell.xib; sourceTree = "<group>"; };
+		77ABC8631A53F33300E637F5 /* SHRecordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHRecordCell.h; sourceTree = "<group>"; };
+		77ABC8641A53F33300E637F5 /* SHRecordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHRecordCell.m; sourceTree = "<group>"; };
+		77ABC8661A53F33F00E637F5 /* SHRecordCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SHRecordCell.xib; sourceTree = "<group>"; };
 		77AEE4391A1B4E7A00366AEB /* ic_tab_animation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_tab_animation.png; sourceTree = "<group>"; };
 		77AEE43A1A1B4E7A00366AEB /* ic_tab_animation@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_tab_animation@2x.png"; sourceTree = "<group>"; };
 		77AEE43B1A1B4E7A00366AEB /* ic_tab_documentary.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_tab_documentary.png; sourceTree = "<group>"; };
@@ -2857,6 +2862,9 @@
 		77F831A11A3C878900184BCC /* View */ = {
 			isa = PBXGroup;
 			children = (
+				77ABC8631A53F33300E637F5 /* SHRecordCell.h */,
+				77ABC8641A53F33300E637F5 /* SHRecordCell.m */,
+				77ABC8661A53F33F00E637F5 /* SHRecordCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3052,6 +3060,7 @@
 				7777D5CE1A388D3E00B0532E /* btn_full_start_select.png in Resources */,
 				77A07EA91A29BFAB007D379A /* WebViewController.xib in Resources */,
 				77566E211A18960E00194562 /* DSLCalendar-nextMonth@2x.png in Resources */,
+				77ABC8671A53F33F00E637F5 /* SHRecordCell.xib in Resources */,
 				77566E7E1A18960E00194562 /* SHTableViewGeneralCell.xib in Resources */,
 				7777D5D81A3891FA00B0532E /* btn_pre_normal.png in Resources */,
 				7740A4241A18B0EA0036FCA2 /* SHRecommendViewController.xib in Resources */,
@@ -3293,6 +3302,7 @@
 				77566EB21A18960E00194562 /* SHLogger.m in Sources */,
 				77566E691A18960E00194562 /* UIImage+MultiFormat.m in Sources */,
 				77566E6C1A18960E00194562 /* UIImageView+WebCache.m in Sources */,
+				77ABC8651A53F33300E637F5 /* SHRecordCell.m in Sources */,
 				77F8319E1A3C79FF00184BCC /* SHCollectViewController.m in Sources */,
 				77566E5B1A18960E00194562 /* MJPhotoToolbar.m in Sources */,
 				77566E671A18960E00194562 /* UIButton+WebCache.m in Sources */,

@@ -39,20 +39,35 @@
     [self.view addSubview:mShowViewControll.view];
     
     arrayCollect = [[NSMutableArray alloc]init];
+    
     NSData * data  = [[NSUserDefaults standardUserDefaults] valueForKey:COLLECT_LIST];
     if (data) {
         arrayCollect = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     }
-    if ([arrayCollect containsObject:dicPreInfo]) {
+    
+    if ([Utility containsObject:arrayCollect forKey:@"id" forValue:[dicPreInfo objectForKey:@"id"]]) {
         mShowViewControll.isStore = YES;
+    }
+    
+    arrayRecord = [[NSMutableArray alloc]init];
+    NSData * data2  = [[NSUserDefaults standardUserDefaults] valueForKey:RECORD_LIST];
+    if (data2) {
+        arrayRecord = [NSKeyedUnarchiver unarchiveObjectWithData:data2];
     }
     
     [self request:[[dicPreInfo objectForKey:@"id"]intValue]];
 
 }
+-(void) viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:YES];
+    [self recordVideoDate];
+}
 -(void) request:(NSInteger)videoID
 {
  
+    [self recordVideoDate];
+    
     SHPostTaskM * post = [[SHPostTaskM alloc]init];
     post.URL = URL_FOR(@"Pad/vodinfo");
     [post.postArgs setValue:[NSNumber numberWithInt:videoID] forKey:@"id"];
@@ -72,7 +87,8 @@
             }
         }
         NSURL * videoUrl = [NSURL URLWithString:mVideoUrl];
-        [mShowViewControll quicklyReplayMovie:videoUrl title:[mResultDetail objectForKey:@"title"] seekToPos:0];
+        
+        [mShowViewControll quicklyReplayMovie:videoUrl title:[mResultDetail objectForKey:@"title"] seekToPos:[self getVideoRecordSeek]];
         if (mDrameViewControll ==nil) {// 剧集
             mDrameViewControll = [[SHTVDrameViewController alloc]init];
             mDrameViewControll.view.frame = mViewContent.bounds;
@@ -235,12 +251,16 @@
             break;
         case 4://收藏
         {
-            if([arrayCollect containsObject:dicPreInfo]){// 取消收藏
+            if([Utility containsObject:arrayCollect forKey:@"id" forValue:[mResultDetail objectForKey:@"id"]]){// 取消收藏
                 mShowViewControll.isStore = NO;
-                [arrayCollect removeObject:dicPreInfo];
+                [Utility removeObject:arrayCollect forKey:@"id" forValue:[mResultDetail objectForKey:@"id"]];
             }else{
                 mShowViewControll.isStore = YES;
-                [arrayCollect addObject:dicPreInfo];
+                NSMutableDictionary * dic = [[NSMutableDictionary alloc]init];
+                [dic setValue:[mResultDetail objectForKey:@"id"] forKey:@"id"];
+                [dic setValue:mVideotitle forKey:@"title"];
+                [dic setValue:[mResultDetail objectForKey:@"cid"] forKey:@"type"];
+                [arrayCollect addObject:dic];
             }
             NSData * data = [NSKeyedArchiver archivedDataWithRootObject:arrayCollect];
             [[NSUserDefaults standardUserDefaults ] setValue:data forKey:COLLECT_LIST];
@@ -252,6 +272,36 @@
         default:
             break;
     }
+}
+-(void) recordVideoDate
+{
+    if(mResultDetail){
+        NSMutableDictionary * recordInfo = [[NSMutableDictionary alloc]init];
+        [recordInfo setValue:[NSDate stringFromDate:[NSDate date] withFormat:@"yyyy-MM-dd"] forKey:@"date"];
+        [recordInfo setValue:[mResultDetail objectForKey:@"id"] forKey:@"id"];
+        [recordInfo setValue:[mResultDetail objectForKey:@"title"] forKey:@"title"];
+        [recordInfo setValuesForKeysWithDictionary:[mShowViewControll getRecordInfo]];
+        for (NSDictionary * dic in arrayRecord) {
+            if ([[dic objectForKey:@"id"] isEqualToString:[mResultDetail objectForKey:@"id"]]) {
+                [arrayRecord removeObject:dic];
+                break;
+            }
+        }
+        [arrayRecord addObject:recordInfo];
+        NSData * data = [NSKeyedArchiver archivedDataWithRootObject:arrayRecord];
+        [[NSUserDefaults standardUserDefaults ] setValue:data forKey:RECORD_LIST];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+    }
+    
+}
+-(long)getVideoRecordSeek{
+    for (NSDictionary * dic in arrayRecord) {
+        if ([[dic objectForKey:@"id"] isEqualToString:[mResultDetail objectForKey:@"id"]]) {
+            return    [[dic objectForKey:@"currentPos"]longValue] ;
+            
+        }
+    }
+    return 0;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

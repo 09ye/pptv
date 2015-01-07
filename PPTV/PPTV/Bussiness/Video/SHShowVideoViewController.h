@@ -38,6 +38,7 @@
     BOOL isLock;
     UISlider * mSliderSystemVolume;
     UISlider * mSliderVolume;
+
 }
 @property (weak, nonatomic) IBOutlet UIView *viewMenuDown;
 @property (weak, nonatomic) IBOutlet UIButton *btnSeriesDown;
@@ -106,5 +107,7 @@
 - (void)showIn:(UIView *)view;
 
 - (IBAction)btnCloseOnTouch:(id)sender;
+
+-(NSDictionary *) getRecordInfo;
 
 @end

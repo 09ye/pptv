@@ -21,7 +21,7 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"编辑" target:self action:@selector(btnEdit)];
     self.view.backgroundColor = [SHSkin.instance colorOfStyle:@"ColorBackGroundRightView"];
     self.tableView.backgroundColor = [UIColor clearColor];
-    NSData * data  = [[NSUserDefaults standardUserDefaults] valueForKey:COLLECT_LIST];
+    NSData * data  = [[NSUserDefaults standardUserDefaults] valueForKey:RECORD_LIST];
     if (data) {
         mList = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     }
@@ -101,14 +101,43 @@
     [mList removeObjectAtIndex:indexPath.row-1];
     [self.tableView reloadData];
     NSData * data = [NSKeyedArchiver archivedDataWithRootObject:mList];
-    [[NSUserDefaults standardUserDefaults ] setValue:data forKey:COLLECT_LIST];
+    [[NSUserDefaults standardUserDefaults ] setValue:data forKey:RECORD_LIST];
     [[NSUserDefaults standardUserDefaults]synchronize];
 
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.row < 1) {
+        return ;
+    }
+    NSDictionary * dic = [mList objectAtIndex:indexPath.row-1];
+    if(self.delegate && [self.delegate respondsToSelector:@selector(collectViewControllerDidSelect:videoInfo:)]){
+        [self.delegate collectViewControllerDidSelect:self videoInfo:dic];
+    }
+    
     
 }
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGFloat cornerRadius = 5.f;
+    if (indexPath.row == 0)
+    {   //最顶端的Cell
+        UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:cell.bounds byRoundingCorners:UIRectCornerTopLeft|UIRectCornerTopRight cornerRadii:CGSizeMake(cornerRadius, cornerRadius)];
+        CAShapeLayer *maskLayer = [CAShapeLayer layer];
+        //        maskLayer.frame = cell.bounds;
+        maskLayer.path = maskPath.CGPath;
+        cell.layer.mask = maskLayer;
+    }
+    else if (indexPath.row == [tableView numberOfRowsInSection:indexPath.section]-1)
+    {   //最底端的Cell
+        UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:cell.bounds byRoundingCorners:UIRectCornerBottomLeft|UIRectCornerBottomRight cornerRadii:CGSizeMake(cornerRadius, cornerRadius )];
+        CAShapeLayer *maskLayer = [CAShapeLayer layer];
+        
+        maskLayer.path = maskPath.CGPath;
+        cell.layer.mask = maskLayer;
+    }
+}
+
 -(void) btnCollectSelect:(UIButton *)sender
 {
      NSIndexPath *te=[NSIndexPath indexPathForRow:sender.tag inSection:0];
@@ -133,7 +162,7 @@
     [mList removeObjectsInArray:mArraySelect];
     [self.tableView reloadData];
     NSData * data = [NSKeyedArchiver archivedDataWithRootObject:mList];
-    [[NSUserDefaults standardUserDefaults ] setValue:data forKey:COLLECT_LIST];
+    [[NSUserDefaults standardUserDefaults ] setValue:data forKey:RECORD_LIST];
     [[NSUserDefaults standardUserDefaults]synchronize];
 }
 
@@ -141,7 +170,7 @@
     [mList removeAllObjects];
     [self.tableView reloadData];
     NSData * data = [NSKeyedArchiver archivedDataWithRootObject:mList];
-    [[NSUserDefaults standardUserDefaults ] setValue:data forKey:COLLECT_LIST];
+    [[NSUserDefaults standardUserDefaults ] setValue:data forKey:RECORD_LIST];
     [[NSUserDefaults standardUserDefaults]synchronize];
 
 }

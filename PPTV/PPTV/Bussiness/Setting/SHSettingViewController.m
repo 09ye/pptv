@@ -95,12 +95,12 @@
         }else if (indexPath.row == 1){
             cell.labTitle.text = @"每次提醒";
             cell.imgChoose.hidden = [[NSUserDefaults standardUserDefaults] boolForKey:@"one_notic"];
-            cell.imgChoose.image = [UIImage imageNamed:@"logo"];
+            cell.imgChoose.image = [UIImage imageNamed:@"ic_select.png"];
         }else{
             cell.labTitle.text = @"提醒一次";
             cell.imgChoose.hidden = ![[NSUserDefaults standardUserDefaults] boolForKey:@"one_notic"];
             cell.viewLine.hidden = YES;
-            cell.imgChoose.image = [UIImage imageNamed:@"logo"];
+            cell.imgChoose.image = [UIImage imageNamed:@"ic_select.png"];
         }
 
     }else if (indexPath.section == 1){
@@ -176,6 +176,27 @@
         }
     }
 }
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGFloat cornerRadius = 5.f;
+    if (indexPath.row == 0)
+    {   //最顶端的Cell
+        UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:cell.bounds byRoundingCorners:UIRectCornerTopLeft|UIRectCornerTopRight cornerRadii:CGSizeMake(cornerRadius, cornerRadius)];
+        CAShapeLayer *maskLayer = [CAShapeLayer layer];
+        //        maskLayer.frame = cell.bounds;
+        maskLayer.path = maskPath.CGPath;
+        cell.layer.mask = maskLayer;
+    }
+    else if (indexPath.row == [tableView numberOfRowsInSection:indexPath.section]-1)
+    {   //最底端的Cell
+        UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:cell.bounds byRoundingCorners:UIRectCornerBottomLeft|UIRectCornerBottomRight cornerRadii:CGSizeMake(cornerRadius, cornerRadius )];
+        CAShapeLayer *maskLayer = [CAShapeLayer layer];
+        
+        maskLayer.path = maskPath.CGPath;
+        cell.layer.mask = maskLayer;
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

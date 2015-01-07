@@ -24,8 +24,16 @@
 }
 - (IBAction)btnImgBigOntouch:(UIButton *)sender {
     SHIntent * intent = [[SHIntent alloc ]init];
-    intent.target = @"SHTVDetailViewController";
-    [intent.args setValue:[_detailArray objectAtIndex:sender.tag] forKey:@"detailInfo"];
+    NSDictionary * dic = [_detailArray objectAtIndex:sender.tag];
+    if([[dic objectForKey:@"type"]intValue] == 4){
+        intent.target = @"WebViewController";
+        
+    }else if([[dic objectForKey:@"type"]intValue] == 2){
+        intent.target = @"SHLiveViewController";
+    }else{
+        intent.target = @"SHTVDetailViewController";
+    }
+    [intent.args setValue:dic forKey:@"detailInfo"];
     intent.container = self.navController;
     [[UIApplication sharedApplication] open:intent];
 }

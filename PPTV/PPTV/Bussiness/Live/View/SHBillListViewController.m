@@ -27,6 +27,27 @@
     }
     
 }
+-(void) refreBill:(NSString *)date detail:(NSDictionary *)dic
+{
+    
+    SHPostTaskM * post = [[SHPostTaskM alloc]init];
+    post.URL = URL_FOR(@"Pad/livebill");
+    [post.postArgs setValue:[dic objectForKey:@"id"] forKey:@"id"];
+    [post.postArgs setValue:date forKey:@"date"];
+    post.delegate = self;
+    [post start:^(SHTask *task) {
+        NSDictionary * dic   =[[task result]mutableCopy];
+        self.list = [dic objectForKey:@"list"];
+        [self.tableView reloadData];
+        
+    } taskWillTry:^(SHTask *task) {
+        
+    } taskDidFailed:^(SHTask *task) {
+        self.list = [[NSMutableArray alloc]init];
+        [self.tableView reloadData];
+        
+    }];
+}
 -(void) setList:(NSMutableArray *)list_
 {
     _list = list_;

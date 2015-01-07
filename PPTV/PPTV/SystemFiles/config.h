@@ -10,6 +10,7 @@
 #import "Core.h"
 #import "common.h"
 #import "SHAppDelegate.h"
+#import "Utility.h"
 
 
 #define URL_HEADER @ "http://123.103.20.88:18014"
@@ -17,7 +18,7 @@
 
 #define URL_BATA @ "http://123.103.20.88:18014"
 
-#define URL_DEVELOPER @ "http://pad.cs.wasu.cn:18014"
+#define URL_DEVELOPER @ "http://pad.cs.wasu.cn:18014"//padapi.wasu.cn//pad.cs.wasu.cn
 
 #define URL_UPDATE @"http://zambon-update1.mobilitychina.com:8095/get_config"
 

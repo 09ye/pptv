@@ -377,6 +377,7 @@
     [player setVideoFillMode:VMVideoFillModeFit];
     
     mDuration = [player getDuration];
+    [player seekTo:mCurPostion];
     [player start];
     
 //    [self setBtnEnableStatus:YES];
@@ -422,7 +423,7 @@
 - (void)mediaPlayer:(VMediaPlayer *)player setupPlayerPreference:(id)arg
 {
     // Set buffer size, default is 1024KB(1*1024*1024).
-    
+
     [player setBufferSize:517*1024];
     //    [player setAdaptiveStream:YES];
     
@@ -544,7 +545,6 @@
     NSString *docDir = [NSString stringWithFormat:@"%@/Documents", NSHomeDirectory()];
     NSLog(@"NAL &&& Doc: %@", docDir);
     
-    
     //	fileURL = [NSURL URLWithString:@"http://v.17173.com/api/5981245-4.m3u8"];
     
     
@@ -560,6 +560,7 @@
     }
     //    [mMPayer setDataSource:self.videoURL header:nil];
     [mMPayer setDataSource:self.videoURL];
+    
 #elif TEST_setOptionsWithKeys // Test setOptionsWithKeys:withValues:
     self.videoURL = [NSURL URLWithString:@"http://padlive2-cnc.wasu.cn/cctv7/z.m3u8"]; // This is a live stream.
     NSMutableArray *keys = [NSMutableArray arrayWithCapacity:0];
@@ -592,9 +593,15 @@
     [list addObject:@"http://112.65.235.140/vlive.qqvideo.tc.qq.com/95V8NuxWX2J.p202.19.mp4?vkey=0D51F428BB12C2C5C015E41997371FC80338924F804D9D688C7B9560C7336A48870873F34189C58D"];
     [mMPayer setDataSegmentsSource:nil fileList:list];
 #endif
-    
     [mMPayer prepareAsync];
-    [self startActivityWithMsg:@"正在全力加载中..."];//上次观看至第N分钟，正在全力加载中…
+    mCurPostion = pos;
+    if (pos>60000) {
+        [self startActivityWithMsg:[NSString stringWithFormat:@"上次观看至第%@分钟，正在全力加载中…",[self stringtTimeToHumanString:pos]]];//上次观看至第N分钟，正在全力加载中…
+    }else{
+       [self startActivityWithMsg:@"正在全力加载中..."];//上次观看至第N分钟，正在全力加载中…
+    }
+    
+    
 }
 
 -(void)quicklyReplayMovie:(NSURL*)fileURL title:(NSString*)title seekToPos:(long)pos
@@ -738,7 +745,16 @@
         
     }
 }
-
+-(NSDictionary *) getRecordInfo;
+{
+    if(mDuration>0){
+        NSMutableDictionary * dic =[[NSMutableDictionary alloc]init];
+        [dic setValue: [NSNumber numberWithLong:mDuration] forKey:@"duration"];
+        [dic setValue:[NSNumber numberWithLong:[mMPayer getCurrentPosition]] forKey:@"currentPos"];
+        return dic;
+    }
+    return nil;
+}
 -(IBAction)goBackButtonAction:(id)sender
 {
     [self quicklyStopMovie];
@@ -979,7 +995,22 @@
     self.progressSld.enabled = enable;
     mViewControl.userInteractionEnabled = enable;
 }
-
+-(NSString *)stringtTimeToHumanString:(unsigned long)ms {
+    unsigned long seconds, h, m, s;
+    char buff[128] = { 0 };
+    NSString *nsRet = nil;
+    
+    seconds = ms / 1000;
+    h = seconds / 3600;
+    m = (seconds - h * 3600) / 60;
+    s = seconds - h * 3600 - m * 60;
+    snprintf(buff, sizeof(buff), "%02ld:%02ld:%02ld", h, m, s);
+    nsRet = [[NSString alloc] initWithCString:buff
+                                     encoding:NSUTF8StringEncoding];
+    
+    
+    return [NSString stringWithFormat:@"%ld",h*60+m];
+}
 - (void)setupObservers
 {
     NSNotificationCenter *def = [NSNotificationCenter defaultCenter];

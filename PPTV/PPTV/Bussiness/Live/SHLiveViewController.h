@@ -24,7 +24,7 @@
 
     SHLiveListViewController * mListViewControll;
     SHShowVideoViewController* mShowViewControll;
-    SHBillListViewController * mBillViewControll;
+//    SHBillListViewController * mBillViewControll;
     SHDemandDetailViewController * mDemandDetailViewControll;
 
     AppDelegate * app;

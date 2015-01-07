@@ -54,10 +54,17 @@
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    
+    NSDictionary * dic = [self.list objectAtIndex:indexPath.row];
     SHIntent * intent = [[SHIntent alloc ]init];
-    intent.target = @"SHTVDetailViewController";
-    [intent.args setValue:[self.list objectAtIndex:indexPath.row] forKey:@"detailInfo"];
+    if([[dic objectForKey:@"type"]intValue] == 4){
+        intent.target = @"WebViewController";
+        
+    }else if([[dic objectForKey:@"type"]intValue] == 2){
+        intent.target = @"SHLiveViewController";
+    }else{
+        intent.target = @"SHTVDetailViewController";
+    }
+    [intent.args setValue:dic forKey:@"detailInfo"];
     intent.container = self.navController;
     [[UIApplication sharedApplication] open:intent];
 }

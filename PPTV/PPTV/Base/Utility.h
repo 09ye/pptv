@@ -13,4 +13,8 @@
 + (NSData *)createPostData:(NSDictionary*) params;
 // data 是星期几 返回[0,周一]。。。
 +(NSArray *)weekDayWithDate:(NSDate *)date;
+//判断数组中是否存在这个key value 的字典
++(BOOL)containsObject:(NSMutableArray *)array forKey:(NSString *)key forValue:(NSString *)value;
+//删除 数组存在 key =value 的索引
++(void)removeObject:(NSMutableArray *)array forKey:(NSString *)key forValue:(NSString *)value;
 @end

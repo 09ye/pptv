@@ -449,14 +449,18 @@
 {
     
     // 进入大图
-    if ([[[imagesArray objectAtIndex:index] objectForKey:@"url"]isEqualToString:@""]) {
-        return;
-    }
+    NSDictionary * dic = [imagesArray objectAtIndex:index];
+   // 1.3 点播  2 直播  4浏览器
     SHIntent *intent = [[SHIntent alloc]init];
-    intent.target = @"WebViewController";
-    [intent.args setValue:[[imagesArray objectAtIndex:index] objectForKey:@"url"] forKeyPath:@"url"];
-    [intent.args setValue:[[imagesArray objectAtIndex:index] objectForKey:@"title"] forKeyPath:@"title"];
-//   [intent.args setValue:@"http://www.wasu.cn/"  forKeyPath:@"url"];
+    if([[dic objectForKey:@"type"]intValue] == 4){
+        intent.target = @"WebViewController";
+        
+    }else if([[dic objectForKey:@"type"]intValue] == 2){
+        intent.target = @"SHLiveViewController";
+    }else{
+        intent.target = @"SHTVDetailViewController";
+    }
+    [intent.args setValue:dic forKeyPath:@"detailInfo"];
     intent.container = self.navController;
     [[UIApplication sharedApplication]open:intent];
 }

@@ -7,9 +7,10 @@
 //
 
 #import "SHTableViewController.h"
+#import "SHRecordViewController.h"
 #import "SHShowRightView.h"
 
-@interface SHHomeViewController : SHTableViewController<UISearchBarDelegate>
+@interface SHHomeViewController : SHTableViewController<UISearchBarDelegate,SHCollectViewControllerDelegate,SHRecordViewControllerDelegate>
 {
     __weak IBOutlet UIView *mViewContain;
 

@@ -145,12 +145,9 @@
         return;
         
     }else if (tag == 9){
-        //        if (mViewRight.isShow) {
-        //            [mViewRight close];
-        //        }else{
-        [mViewRight show:[[SHCollectViewController alloc]init] inView:self.view direction:Right];
-        //        }
-        
+        SHCollectViewController * controller = [[SHCollectViewController alloc]init];
+        controller.delegate = self;
+        [mViewRight show:controller inView:self.view direction:Right];
         
         return;
     }else if (tag == 10){
@@ -197,8 +194,9 @@
 }
 
 - (IBAction)btnWatchRecordOntouch:(UIButton *)sender {
-    
-    [mViewRight show:[[SHRecordViewController alloc]init] inView:self.view direction:Right];
+   SHRecordViewController * controller = [[SHRecordViewController alloc]init];
+    controller.delegate = self;
+    [mViewRight show:controller inView:self.view direction:Right];
 }
 
 - (IBAction)btnDownloadOntouch:(UIButton *)sender {
@@ -393,4 +391,29 @@
     }
     
 }
+#pragma  deleaget
+-(void)collectViewControllerDidSelect:(SHCollectViewController *)controllerr videoInfo:(NSDictionary *)dic
+{
+    [mViewRight close];
+    SHIntent * intent = [[SHIntent alloc ]init];
+    if([[dic objectForKey:@"type"]intValue] == 2){
+        intent.target = @"SHLiveViewController";
+    }else{
+        intent.target = @"SHTVDetailViewController";
+    }
+    
+    [intent.args setValue:dic forKey:@"detailInfo"];
+    intent.container = self.navigationController;
+    [[UIApplication sharedApplication] open:intent];
+}
+-(void)recordViewControllerDidSelect:(SHRecordViewController *)controllerr videoInfo:(NSDictionary *)dic
+{
+    [mViewRight close];
+    SHIntent * intent = [[SHIntent alloc ]init];
+    intent.target = @"SHTVDetailViewController";
+    [intent.args setValue:dic forKey:@"detailInfo"];
+    intent.container = self.navigationController;
+    [[UIApplication sharedApplication] open:intent];
+}
+
 @end

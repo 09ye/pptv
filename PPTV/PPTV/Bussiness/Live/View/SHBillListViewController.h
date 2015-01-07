@@ -8,11 +8,14 @@
 
 #import "SHTableViewController.h"
 
-@interface SHBillListViewController : SHTableViewController
+@interface SHBillListViewController : SHTableViewController<SHTaskDelegate>
 {
 
     __weak IBOutlet UILabel *mlabNodata;
 }
+
 @property (nonatomic,strong) NSMutableArray * list;
 @property (nonatomic,assign) int tag;
+
+-(void) refreBill:(NSString *)date detail:(NSDictionary*)dic;
 @end

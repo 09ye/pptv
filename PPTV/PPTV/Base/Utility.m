@@ -71,5 +71,24 @@
     };
     return week;
 }
++(BOOL)containsObject:(NSMutableArray *)array forKey:(NSString *)key forValue:(NSString *)value
+{
+    for (NSDictionary *dic in array) {
+        if ([[dic objectForKey:key] isEqualToString:value]) {
+            return YES;
+            
+        }
+    }
+    return  NO;
+}
++(void)removeObject:(NSMutableArray *)array forKey:(NSString *)key forValue:(NSString *)value
+{
+    for (NSDictionary *dic in array) {
+        if ([[dic objectForKey:key] isEqualToString:value] ) {
+            [array  removeObject:dic];
+            break;
+        }
+    }
 
+}
 @end

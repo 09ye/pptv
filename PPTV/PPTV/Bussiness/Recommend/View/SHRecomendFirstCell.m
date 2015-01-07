@@ -93,16 +93,32 @@
 {
 
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
+    NSDictionary * dic = [_listLive objectAtIndex:indexPath.row];
     SHIntent * intent = [[SHIntent alloc ]init];
-    intent.target = @"SHLiveViewController";
-    [intent.args setValue:[_listLive objectAtIndex:indexPath.row] forKey:@"detailInfo"];
+    if([[dic objectForKey:@"type"]intValue] == 4){
+        intent.target = @"WebViewController";
+        
+    }else if([[dic objectForKey:@"type"]intValue] == 2){
+        intent.target = @"SHLiveViewController";
+    }else{
+        intent.target = @"SHTVDetailViewController";
+    }
+    [intent.args setValue:dic forKeyPath:@"detailInfo"];
     intent.container = self.navController;
     [[UIApplication sharedApplication] open:intent];
 }
 - (IBAction)btnLiveOntouch:(UIButton *)sender {
+    NSDictionary * dic = [[_detail objectForKey:@"live_area"]objectAtIndex:sender.tag];
     SHIntent * intent = [[SHIntent alloc ]init];
-    intent.target = @"SHLiveViewController";
-    [intent.args setValue:[[_detail objectForKey:@"live_area"]objectAtIndex:sender.tag] forKey:@"detailInfo"];
+    if([[dic objectForKey:@"type"]intValue] == 4){
+        intent.target = @"WebViewController";
+        
+    }else if([[dic objectForKey:@"type"]intValue] == 2){
+        intent.target = @"SHLiveViewController";
+    }else{
+        intent.target = @"SHTVDetailViewController";
+    }
+    [intent.args setValue:dic forKeyPath:@"detailInfo"];
     intent.container = self.navController;
     [[UIApplication sharedApplication] open:intent];
 }
@@ -119,7 +135,14 @@
         case 0:
         {
             SHIntent * intent = [[SHIntent alloc ]init];
-            intent.target = @"SHTVDetailViewController";
+            if([[mDicSelectSysn objectForKey:@"type"]intValue] == 4){
+                intent.target = @"WebViewController";
+                
+            }else if([[mDicSelectSysn objectForKey:@"type"]intValue] == 2){
+                intent.target = @"SHLiveViewController";
+            }else{
+                intent.target = @"SHTVDetailViewController";
+            }
             [intent.args setValue:mDicSelectSysn forKey:@"detailInfo"];
             intent.container = self.navController;
             [[UIApplication sharedApplication] open:intent];

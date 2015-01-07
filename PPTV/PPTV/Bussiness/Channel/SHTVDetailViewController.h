@@ -30,6 +30,7 @@
     NSString * mVideoUrl;
     NSString * mVideotitle;
     NSMutableArray * arrayCollect;
+    NSMutableArray * arrayRecord;
     NSDictionary*  mDicVideoCurrent;//正在播放的视频 name id time
     
 

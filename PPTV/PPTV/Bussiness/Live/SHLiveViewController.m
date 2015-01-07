@@ -27,8 +27,9 @@
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
 //    app=(AppDelegate*)[UIApplication sharedApplication].delegate;
     dicPreInfo = [self.intent.args objectForKey:@"detailInfo"];
-    [self createBill];
     [self createDateView];
+    [self createBill];
+    
     
     
     mListViewControll = [[SHLiveListViewController alloc]init];
@@ -54,7 +55,7 @@
     if (data) {
         arrayCollect = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     }
-    if ([arrayCollect containsObject:dicPreInfo]) {
+    if ([Utility containsObject:arrayCollect forKey:@"id" forValue:[dicPreInfo objectForKey:@"id"]]) {
         mShowViewControll.isStore = YES;
     }
     
@@ -99,30 +100,13 @@
         mDemandDetailViewControll.detail = [mResultDetail mutableCopy];
       
         // 节目单
-        SHPostTaskM * post = [[SHPostTaskM alloc]init];
-        post.URL = URL_FOR(@"Pad/livebill");
-        [post.postArgs setValue:[mResultDetail objectForKey:@"id"] forKey:@"id"];
-        post.delegate = self;
-        [post start:^(SHTask *task) {
+        for (int i = 0; i< mListPagesView.count; i++) {
+            SHBillListViewController * viewControll = [mListPagesView objectAtIndex:i];
+            //                viewControll.list = arrayBills;
+            NSDate * date =[arrayDate objectAtIndex:i];
+            [viewControll refreBill:[date stringWithFormat:@"yyyy-MM-dd"] detail:mResultDetail];
             
-            arrayBills  =[[task result]mutableCopy];
-//            [self createBill];
-            for (int i = 0; i< mListPagesView.count; i++) {
-                SHBillListViewController * viewControll = [mListPagesView objectAtIndex:i];
-                viewControll.list = arrayBills;
-            }
-
-
-        } taskWillTry:^(SHTask *task) {
-            
-        } taskDidFailed:^(SHTask *task) {
-            arrayBills  =[[NSMutableArray alloc]init];
-            for (int i = 0; i< mListPagesView.count; i++) {
-                SHBillListViewController * viewControll = [mListPagesView objectAtIndex:i];
-                viewControll.list = arrayBills;
-            }
-
-        }];
+        }
         
     } taskWillTry:^(SHTask *t) {
         
@@ -157,9 +141,10 @@
     pageVC.delegate   = self;
     mListPagesView = [NSMutableArray array];
     for (int i = 0; i<7; i++) {
-        mBillViewControll = [[SHBillListViewController alloc]init];
+      SHBillListViewController*  mBillViewControll = [[SHBillListViewController alloc]init];
         mBillViewControll.tag = i;
-        mBillViewControll.list = arrayBills;
+//        NSDate * date =[arrayDate objectAtIndex:i];
+//        [mBillViewControll refreBill:[date stringWithFormat:@"yyyy-MM-dd"] detail:mResultDetail];
         mBillViewControll.view.frame = mViewBill.bounds;
         [mListPagesView addObject:mBillViewControll];
     }
@@ -244,15 +229,20 @@
             break;
         case 4://收藏
             {
-                if(!dicPreInfo){
+                if(!mResultDetail){
                     return;
                 }
-                if([arrayCollect containsObject:dicPreInfo]){// 取消收藏
+                
+                if([Utility containsObject:arrayCollect forKey:@"id" forValue:[mResultDetail objectForKey:@"id"]]){// 取消收藏
                     mShowViewControll.isStore = NO;
-                    [arrayCollect removeObject:dicPreInfo];
+                    [Utility removeObject:arrayCollect forKey:@"id" forValue:[mResultDetail objectForKey:@"id"]];
                 }else{
                     mShowViewControll.isStore = YES;
-                    [arrayCollect addObject:dicPreInfo];
+                    NSMutableDictionary * dic = [[NSMutableDictionary alloc]init];
+                    [dic setValue:[mResultDetail objectForKey:@"id"] forKey:@"id"];
+                    [dic setValue:mVideotitle forKey:@"title"];
+                    [dic setValue:@"2" forKey:@"type"];// 直播2
+                    [arrayCollect addObject:dic];
                 }
                 NSData * data = [NSKeyedArchiver archivedDataWithRootObject:arrayCollect];
                 [[NSUserDefaults standardUserDefaults ] setValue:data forKey:COLLECT_LIST];

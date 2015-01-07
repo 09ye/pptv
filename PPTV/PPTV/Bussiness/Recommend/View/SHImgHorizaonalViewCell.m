@@ -100,8 +100,16 @@
     }
     
     SHIntent * intent = [[SHIntent alloc ]init];
-    intent.target = @"SHTVDetailViewController";
-    [intent.args setValue:[mList objectAtIndex:indexPath.row-1] forKey:@"detailInfo"];
+    NSDictionary * dic = [mList objectAtIndex:indexPath.row-1];
+    if([[dic objectForKey:@"type"]intValue] == 4){
+        intent.target = @"WebViewController";
+        
+    }else if([[dic objectForKey:@"type"]intValue] == 2){
+        intent.target = @"SHLiveViewController";
+    }else{
+        intent.target = @"SHTVDetailViewController";
+    }
+    [intent.args setValue:dic forKey:@"detailInfo"];
     intent.container = self.navController;
     [[UIApplication sharedApplication] open:intent];
 }
