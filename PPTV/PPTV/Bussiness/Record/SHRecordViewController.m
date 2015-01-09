@@ -89,14 +89,21 @@
     }
     if(indexPath.section == 0){
         if (indexPath.row == 0) {
-            cell.labTitle.text = @"今天";
-            cell.labTitle.userstyle = @"labmiddark";
+            SHTableViewGeneralCell * cell = [tableView dequeueReusableGeneralCell];
+            cell.labTitle.text = @"        今天";
+            cell.labTitle.userstyle = @"labminlight";
+            cell.backgroundColor =  [UIColor colorWithRed:231/255.0 green:231/255.0 blue:231/255.0 alpha:1];
+            cell.accessoryType = UITableViewCellAccessoryNone;
+            [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+            return cell;
         }else{
             NSDictionary * dic = [[mSection objectForKey:@"today"] objectAtIndex:indexPath.row-1];
             cell.labTitle.text = [dic objectForKey:@"title"];
             cell.labContent.text = [self timeToHumanString:[[dic objectForKey:@"currentPos"]longValue] total:[[dic objectForKey:@"duration"]longValue] ];
             if (!mViewDelete.hidden) {
                 cell.btnSelect.hidden = NO;
+            }else{
+                cell.btnSelect.hidden = YES;
             }
             [cell.btnSelect addTarget:self action:@selector(btnCollectSelect:) forControlEvents:UIControlEventTouchUpInside];
             cell.btnSelect.tag = indexPath.row;
@@ -108,8 +115,13 @@
         }
     }else if (indexPath.section == 1){
         if (indexPath.row == 0) {
-            cell.labTitle.text = @"昨天";
-            cell.labTitle.userstyle = @"labmiddark";
+            SHTableViewGeneralCell * cell = [tableView dequeueReusableGeneralCell];
+            cell.labTitle.text = @"        昨天";
+            cell.labTitle.userstyle = @"labminlight";
+            cell.backgroundColor =  [UIColor colorWithRed:231/255.0 green:231/255.0 blue:231/255.0 alpha:1];
+            cell.accessoryType = UITableViewCellAccessoryNone;
+            [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+            return  cell;
         }else{
             NSDictionary * dic = [[mSection objectForKey:@"yesterday"] objectAtIndex:indexPath.row-1];
             cell.labTitle.text = [dic objectForKey:@"title"];
@@ -117,8 +129,10 @@
             cell.labContent.text = [self timeToHumanString:[[dic objectForKey:@"currentPos"]longValue] total:[[dic objectForKey:@"duration"]longValue] ];
             if (!mViewDelete.hidden) {
                 cell.btnSelect.hidden = NO;
+            }else{
+                cell.btnSelect.hidden = YES;
             }
-            [cell.btnSelect addTarget:self action:@selector(btnCollectSelect:) forControlEvents:UIControlEventTouchUpInside];
+            [cell.btnSelect addTarget:self action:@selector(btnCollectSelect2:) forControlEvents:UIControlEventTouchUpInside];
             cell.btnSelect.tag = indexPath.row;
             if([mArraySelect containsObject:dic]){
                 [cell.btnSelect setBackgroundImage:[UIImage imageNamed:@"btn_collect_list_select.png"] forState:UIControlStateNormal];
@@ -128,8 +142,13 @@
         }
     }else{
         if (indexPath.row == 0) {
-            cell.labTitle.text = @"更早";
-            cell.labTitle.userstyle = @"labmiddark";
+            SHTableViewGeneralCell * cell = [tableView dequeueReusableGeneralCell];
+            cell.labTitle.text = @"        更早";
+            cell.labTitle.userstyle = @"labminlight";
+            cell.backgroundColor =  [UIColor colorWithRed:231/255.0 green:231/255.0 blue:231/255.0 alpha:1];
+            cell.accessoryType = UITableViewCellAccessoryNone;
+            [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+            return  cell;
         }else{
             NSDictionary * dic = [[mSection objectForKey:@"early"] objectAtIndex:indexPath.row-1];
             cell.labTitle.text = [dic objectForKey:@"title"];
@@ -137,8 +156,10 @@
             cell.labContent.text = [self timeToHumanString:[[dic objectForKey:@"currentPos"]longValue] total:[[dic objectForKey:@"duration"]longValue] ];
             if (!mViewDelete.hidden) {
                 cell.btnSelect.hidden = NO;
+            }else{
+                cell.btnSelect.hidden = YES;
             }
-            [cell.btnSelect addTarget:self action:@selector(btnCollectSelect:) forControlEvents:UIControlEventTouchUpInside];
+            [cell.btnSelect addTarget:self action:@selector(btnCollectSelect3:) forControlEvents:UIControlEventTouchUpInside];
             cell.btnSelect.tag = indexPath.row;
             if([mArraySelect containsObject:dic]){
                 [cell.btnSelect setBackgroundImage:[UIImage imageNamed:@"btn_collect_list_select.png"] forState:UIControlStateNormal];
@@ -197,16 +218,43 @@
         [self.delegate recordViewControllerDidSelect:self videoInfo:dic];
     }
 }
+
 -(void) btnCollectSelect:(UIButton *)sender
 {
     NSIndexPath *te=[NSIndexPath indexPathForRow:sender.tag inSection:0];
-    NSDictionary * dic = [mList objectAtIndex:sender.tag-1];
-    if([mArraySelect containsObject:dic]){
-        [mArraySelect removeObject:dic];
+    NSDictionary * dicDelete = [[mSection objectForKey:@"today"] objectAtIndex:sender.tag-1];
+    if([mArraySelect containsObject:dicDelete]){
+        [mArraySelect removeObject:dicDelete];
         
         [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:te,nil] withRowAnimation:UITableViewRowAnimationNone];
     }else{
-        [mArraySelect addObject:dic];
+        [mArraySelect addObject:dicDelete];
+        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:te,nil] withRowAnimation:UITableViewRowAnimationNone];
+    }
+}
+-(void) btnCollectSelect2:(UIButton *)sender
+{
+    NSIndexPath *te=[NSIndexPath indexPathForRow:sender.tag inSection:1];
+    NSDictionary * dicDelete = [[mSection objectForKey:@"yesterday"] objectAtIndex:sender.tag-1];
+    if([mArraySelect containsObject:dicDelete]){
+        [mArraySelect removeObject:dicDelete];
+        
+        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:te,nil] withRowAnimation:UITableViewRowAnimationNone];
+    }else{
+        [mArraySelect addObject:dicDelete];
+        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:te,nil] withRowAnimation:UITableViewRowAnimationNone];
+    }
+}
+-(void) btnCollectSelect3:(UIButton *)sender
+{
+    NSIndexPath *te=[NSIndexPath indexPathForRow:sender.tag inSection:3];
+    NSDictionary * dicDelete = [[mSection objectForKey:@"early"] objectAtIndex:sender.tag-1];
+    if([mArraySelect containsObject:dicDelete]){
+        [mArraySelect removeObject:dicDelete];
+        
+        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:te,nil] withRowAnimation:UITableViewRowAnimationNone];
+    }else{
+        [mArraySelect addObject:dicDelete];
         [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:te,nil] withRowAnimation:UITableViewRowAnimationNone];
     }
 }
@@ -264,7 +312,6 @@
 }
 
 - (IBAction)btnCancaleOntouch:(id)sender {
-    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"编辑" target:self action:@selector(btnEdit)];
     CGContextRef context=UIGraphicsGetCurrentContext();
     [UIView beginAnimations:nil context:context];
@@ -325,7 +372,7 @@
     nsRet = [[NSString alloc] initWithCString:buff
                                      encoding:NSUTF8StringEncoding];
     
-    if(total-ms<3000){
+    if(ms>0 && total-ms<3000){
         return [NSString stringWithFormat:@"已看完"];
     }else if(h>0){
         return [NSString stringWithFormat:@"观看至%ld小时%ld分钟",h,m];

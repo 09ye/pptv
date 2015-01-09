@@ -124,6 +124,13 @@ typedef NS_ENUM(NSInteger, RMoveDirection) {
     //将触摸事件添加到当前view
     [self.view addGestureRecognizer:tapGestureRecognizer];
     //    mValidate.
+
+    for (UIView *view in self.navigationController.navigationBar.subviews) {
+        if ([view isKindOfClass:[UILabel class]] && [view viewWithTag:10000]) {
+            [view removeFromSuperview];
+        }
+    }
+
 }
 -(void) setLeftTitle:(NSString *)leftTitle_
 {
@@ -136,7 +143,7 @@ typedef NS_ENUM(NSInteger, RMoveDirection) {
     if (mLeftLabel) {
          mLeftLabel.text = leftTitle_;
     }else{
-        mLeftLabel =[[UILabel alloc]initWithFrame:CGRectMake(50, 0, 300, 44)];
+        mLeftLabel =[[UILabel alloc]initWithFrame:CGRectMake(50, 0, 400, 44)];
         mLeftLabel.text = leftTitle_;
         mLeftLabel.textColor = [UIColor whiteColor];
         mLeftLabel.tag = 10000;

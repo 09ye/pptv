@@ -32,7 +32,7 @@
                             <userDefinedRuntimeAttribute type="string" keyPath="userstyle" value="labminlight"/>
                         </userDefinedRuntimeAttributes>
                     </label>
-                    <view alpha="0.29999999999999999" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cif-Bx-BHL">
+                    <view hidden="YES" alpha="0.29999999999999999" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cif-Bx-BHL">
                         <rect key="frame" x="10" y="49" width="360" height="1"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>

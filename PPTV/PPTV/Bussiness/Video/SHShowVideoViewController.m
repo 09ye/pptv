@@ -120,7 +120,7 @@
     mSliderVolume.value = mSliderSystemVolume.value;
     [mSliderVolume addTarget:self action:@selector(sliderVolumeOntouch:) forControlEvents:UIControlEventValueChanged];
     
-     self.view.userInteractionEnabled = NO;
+//     self.view.userInteractionEnabled = NO;
 
 }
 #pragma  手势
@@ -380,8 +380,8 @@
     [player seekTo:mCurPostion];
     [player start];
     
-//    [self setBtnEnableStatus:YES];
-    self.view.userInteractionEnabled = YES;
+    [self setBtnEnableStatus:YES];
+//    self.view.userInteractionEnabled = YES;
     [self stopActivity];
     mSyncSeekTimer = [NSTimer scheduledTimerWithTimeInterval:1.0/3
                                                       target:self
@@ -405,9 +405,9 @@
     NSLog(@"NAL 1RRE &&&& VMediaPlayer Error: %@", arg);
     [self showAlertDialog:@"对不起,播放错误未找到对应的播放源！"];
     [self stopActivity];
-//    	[self showVideoLoadingError];
-//    [self setBtnEnableStatus:YES];
-    self.view.userInteractionEnabled = YES;
+
+    [self setBtnEnableStatus:YES];
+//    self.view.userInteractionEnabled = YES;
     [self quicklyStopMovie];
 }
 
@@ -539,8 +539,8 @@
 -(void)quicklyPlayMovie:(NSURL*)fileURL title:(NSString*)title seekToPos:(long)pos
 {
     [UIApplication sharedApplication].idleTimerDisabled = YES;
-//    [self setBtnEnableStatus:NO];
-    self.view.userInteractionEnabled = NO;
+    [self setBtnEnableStatus:NO];
+//    self.view.userInteractionEnabled = NO;
     
     NSString *docDir = [NSString stringWithFormat:@"%@/Documents", NSHomeDirectory()];
     NSLog(@"NAL &&& Doc: %@", docDir);
@@ -625,10 +625,10 @@
     mDuration = 0;
     mCurPostion = 0;
     [self stopActivity];
-//    [self setBtnEnableStatus:YES];
+    [self setBtnEnableStatus:YES];
     
     [UIApplication sharedApplication].idleTimerDisabled = NO;
-    self.view.userInteractionEnabled = YES;
+//    self.view.userInteractionEnabled = YES;
 }
 #pragma set
 -(void) setIsfull:(BOOL)isfull_

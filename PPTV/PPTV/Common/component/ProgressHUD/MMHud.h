@@ -8,28 +8,34 @@
 
 #import <UIKit/UIKit.h>
 
-extern CGFloat const MMProgressHUDAnimateInDurationLong;
-extern CGFloat const MMProgressHUDAnimateInDurationNormal;
-extern CGFloat const MMProgressHUDAnimateInDurationMedium;
-extern CGFloat const MMProgressHUDAnimateInDurationShort;
-extern CGFloat const MMProgressHUDAnimateInDurationVeryShort;
+#ifdef __cplusplus
+#define MMExtern extern "C"
+#else
+#define MMExtern extern
+#endif
 
-extern CGFloat const MMProgressHUDAnimateOutDurationLong;
-extern CGFloat const MMProgressHUDAnimateOutDurationMedium;
-extern CGFloat const MMProgressHUDAnimateOutDurationShort;
+MMExtern CGFloat const MMProgressHUDAnimateInDurationLong;
+MMExtern CGFloat const MMProgressHUDAnimateInDurationNormal;
+MMExtern CGFloat const MMProgressHUDAnimateInDurationMedium;
+MMExtern CGFloat const MMProgressHUDAnimateInDurationShort;
+MMExtern CGFloat const MMProgressHUDAnimateInDurationVeryShort;
+
+MMExtern CGFloat const MMProgressHUDAnimateOutDurationLong;
+MMExtern CGFloat const MMProgressHUDAnimateOutDurationMedium;
+MMExtern CGFloat const MMProgressHUDAnimateOutDurationShort;
 
 typedef NS_ENUM(NSInteger, MMProgressHUDDisplayStyle) {
     MMProgressHUDDisplayStylePlain = 0,
     MMProgressHUDDisplayStyleBordered,
 };
 
-typedef NS_ENUM(NSInteger, MMProgressHUDProgressStyle){
+typedef NS_ENUM(NSInteger, MMProgressHUDProgressStyle) {
     MMProgressHUDProgressStyleIndeterminate = 0,
     MMProgressHUDProgressStyleRadial,
     MMProgressHUDProgressStyleLinear,
-};
+} DEPRECATED_ATTRIBUTE;
 
-typedef NS_ENUM(NSInteger, MMProgressHUDCompletionState){
+typedef NS_ENUM(NSInteger, MMProgressHUDCompletionState) {
     MMProgressHUDCompletionStateNone = 0,
     MMProgressHUDCompletionStateError,
     MMProgressHUDCompletionStateSuccess,
@@ -113,8 +119,22 @@ typedef NS_ENUM(NSInteger, MMProgressHUDCompletionState){
 /** An enum to specifiy the style in which to display progress.
  
  The default style is indeterminate progress.
+ 
+ @warning Deprecated: To use determinate progress, set a progressViewClass on either MMProgressHUD or MMHud and call showDeterminateProgressWithTitle:status and friends. All other show methods default to indeterminate progress.
  */
-@property (nonatomic, assign) MMProgressHUDProgressStyle progressStyle;
+@property (nonatomic, assign) MMProgressHUDProgressStyle progressStyle DEPRECATED_ATTRIBUTE;
+
+/** A boolean to indicate whether or not the HUD has indeterminate progess. When set to NO the HUD will display a progress view which can be customized by setting the progressViewClass.
+ 
+ The default value is YES
+ */
+@property (nonatomic, assign, getter = isIndeterminate) BOOL indeterminate;
+
+/** The class to use for the progress view. Instances of this class must confrom to the MMProgressView protocol. When setting a custom value this value must be set before setting the indeterminate property to YES.
+ 
+ Defaults to MMRadialProgressView
+ */
+@property (nonatomic, assign) Class progressViewClass;
 
 /** The HUD's indeterminate activity indicator. */
 @property (nonatomic, strong, readonly) UIActivityIndicatorView *activityIndicator;

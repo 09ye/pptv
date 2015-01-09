@@ -197,10 +197,15 @@
    SHRecordViewController * controller = [[SHRecordViewController alloc]init];
     controller.delegate = self;
     [mViewRight show:controller inView:self.view direction:Right];
+    AppDelegate* app=(AppDelegate*)[UIApplication sharedApplication].delegate;
+    [app.viewController hideTarbar:NO];
 }
 
 - (IBAction)btnDownloadOntouch:(UIButton *)sender {
+    
     [self tabBarDidSelect:100];
+    AppDelegate* app=(AppDelegate*)[UIApplication sharedApplication].delegate;
+    [app.viewController hideTarbar:NO];
 
 }
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar

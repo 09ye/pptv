@@ -18,6 +18,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    if(iOS8){
+        self.view.frame = CGRectMake(0, 64, 1024, 655);
+    }else{
+        self.view.frame = CGRectMake(0, 64, 1024, 648);
+    }
     app  = (AppDelegate*)[UIApplication sharedApplication].delegate;
     NSString* path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] ;
     

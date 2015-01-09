@@ -402,6 +402,17 @@ static bool __isupdate = NO;
     if (!self.requestlist) {
         self.requestlist = [[NSMutableArray alloc]init];
     }
+    SHPostTaskM * post = [[SHPostTaskM alloc]init];
+    post.URL = URL_FOR(@"download");
+    [post.postArgs setValue:[fileInfo objectForKey:@"id"] forKey:@"id"];
+    post.delegate = self;
+    [post start:^(SHTask *task) {
+    
+    } taskWillTry:^(SHTask *task) {
+        
+    } taskDidFailed:^(SHTask *task) {
+        
+    }];
     
 //    文件开始下载时，把id;文件名;图片url;文件URL
     

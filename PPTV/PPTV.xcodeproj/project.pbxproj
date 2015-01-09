@@ -386,6 +386,7 @@
 		77BAD9E51A35F37A00881DF9 /* btn_full_select.png in Resources */ = {isa = PBXBuildFile; fileRef = 77BAD9E11A35F37A00881DF9 /* btn_full_select.png */; };
 		77BAD9E61A35F37A00881DF9 /* btn_small_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 77BAD9E21A35F37A00881DF9 /* btn_small_normal.png */; };
 		77BAD9E71A35F37A00881DF9 /* btn_small_select.png in Resources */ = {isa = PBXBuildFile; fileRef = 77BAD9E31A35F37A00881DF9 /* btn_small_select.png */; };
+		77C09C401A5EC11100C0BBD1 /* MMLinearProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C09C3D1A5EC11100C0BBD1 /* MMLinearProgressView.m */; };
 		77C47AE31A4E883000919582 /* kaishi.png in Resources */ = {isa = PBXBuildFile; fileRef = 77C47AE01A4E883000919582 /* kaishi.png */; };
 		77C47AE41A4E883000919582 /* xiazai.png in Resources */ = {isa = PBXBuildFile; fileRef = 77C47AE11A4E883000919582 /* xiazai.png */; };
 		77C47AE51A4E883000919582 /* zhanting.png in Resources */ = {isa = PBXBuildFile; fileRef = 77C47AE21A4E883000919582 /* zhanting.png */; };
@@ -1144,6 +1145,10 @@
 		77BAD9E11A35F37A00881DF9 /* btn_full_select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_full_select.png; sourceTree = "<group>"; };
 		77BAD9E21A35F37A00881DF9 /* btn_small_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_small_normal.png; sourceTree = "<group>"; };
 		77BAD9E31A35F37A00881DF9 /* btn_small_select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_small_select.png; sourceTree = "<group>"; };
+		77C09C3C1A5EC11100C0BBD1 /* MMLinearProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMLinearProgressView.h; sourceTree = "<group>"; };
+		77C09C3D1A5EC11100C0BBD1 /* MMLinearProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMLinearProgressView.m; sourceTree = "<group>"; };
+		77C09C3E1A5EC11100C0BBD1 /* MMProgressHUDCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMProgressHUDCommon.h; sourceTree = "<group>"; };
+		77C09C3F1A5EC11100C0BBD1 /* MMProgressView-Protocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MMProgressView-Protocol.h"; sourceTree = "<group>"; };
 		77C47AE01A4E883000919582 /* kaishi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kaishi.png; sourceTree = "<group>"; };
 		77C47AE11A4E883000919582 /* xiazai.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xiazai.png; sourceTree = "<group>"; };
 		77C47AE21A4E883000919582 /* zhanting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zhanting.png; sourceTree = "<group>"; };
@@ -1793,6 +1798,10 @@
 		77566C981A18960D00194562 /* ProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
+				77C09C3C1A5EC11100C0BBD1 /* MMLinearProgressView.h */,
+				77C09C3D1A5EC11100C0BBD1 /* MMLinearProgressView.m */,
+				77C09C3E1A5EC11100C0BBD1 /* MMProgressHUDCommon.h */,
+				77C09C3F1A5EC11100C0BBD1 /* MMProgressView-Protocol.h */,
 				77566C991A18960D00194562 /* MMHud.h */,
 				77566C9A1A18960D00194562 /* MMHud.m */,
 				77566C9B1A18960D00194562 /* MMProgressHUD+Animations.h */,
@@ -3337,6 +3346,7 @@
 				77566E611A18960E00194562 /* SDWebImageDecoder.m in Sources */,
 				77566E1D1A18960E00194562 /* DSLCalendarMonthView.m in Sources */,
 				77E25DFE1A2B7881002BD10C /* SHTVDrameViewController.m in Sources */,
+				77C09C401A5EC11100C0BBD1 /* MMLinearProgressView.m in Sources */,
 				77566EA41A18960E00194562 /* NSMutableArray+convenience.m in Sources */,
 				77566EA81A18960E00194562 /* Command.m in Sources */,
 				77566EAE1A18960E00194562 /* IPConfigCMD.m in Sources */,

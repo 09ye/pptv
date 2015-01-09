@@ -27,6 +27,7 @@
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
 //    app=(AppDelegate*)[UIApplication sharedApplication].delegate;
     dicPreInfo = [self.intent.args objectForKey:@"detailInfo"];
+    self.leftTitle = [dicPreInfo objectForKey:@"title"];
     [self createDateView];
     [self createBill];
     
@@ -242,7 +243,10 @@
                     [dic setValue:[mResultDetail objectForKey:@"id"] forKey:@"id"];
                     [dic setValue:mVideotitle forKey:@"title"];
                     [dic setValue:@"2" forKey:@"type"];// 直播2
-                    [arrayCollect addObject:dic];
+                    [arrayCollect insertObject:dic atIndex:0];
+                    if (arrayCollect.count>50) {
+                        [arrayCollect removeObjectAtIndex:arrayCollect.count-1];
+                    }
                 }
                 NSData * data = [NSKeyedArchiver archivedDataWithRootObject:arrayCollect];
                 [[NSUserDefaults standardUserDefaults ] setValue:data forKey:COLLECT_LIST];

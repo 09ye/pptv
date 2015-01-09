@@ -26,6 +26,7 @@
     AppDelegate* app=(AppDelegate*)[UIApplication sharedApplication].delegate;
     
     dicPreInfo = [self.intent.args objectForKey:@"detailInfo"];
+    self.leftTitle = [dicPreInfo objectForKey:@"title"];
     mScrollview.datasource = self;
     mScrollview.delegate = self;
     
@@ -260,7 +261,10 @@
                 [dic setValue:[mResultDetail objectForKey:@"id"] forKey:@"id"];
                 [dic setValue:mVideotitle forKey:@"title"];
                 [dic setValue:[mResultDetail objectForKey:@"cid"] forKey:@"type"];
-                [arrayCollect addObject:dic];
+                [arrayCollect insertObject:dic atIndex:0];
+                if (arrayCollect.count>50) {
+                    [arrayCollect removeObjectAtIndex:arrayCollect.count-1];
+                }
             }
             NSData * data = [NSKeyedArchiver archivedDataWithRootObject:arrayCollect];
             [[NSUserDefaults standardUserDefaults ] setValue:data forKey:COLLECT_LIST];
@@ -287,7 +291,7 @@
                 break;
             }
         }
-        [arrayRecord addObject:recordInfo];
+        [arrayRecord insertObject:recordInfo atIndex:0];
         NSData * data = [NSKeyedArchiver archivedDataWithRootObject:arrayRecord];
         [[NSUserDefaults standardUserDefaults ] setValue:data forKey:RECORD_LIST];
         [[NSUserDefaults standardUserDefaults]synchronize];

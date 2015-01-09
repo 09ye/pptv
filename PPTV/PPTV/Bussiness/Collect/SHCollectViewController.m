@@ -72,6 +72,8 @@
         cell.labTitle.text = [dic objectForKey:@"title"];
         if (!mViewDelete.hidden) {
             cell.btnSelect.hidden = NO;
+        }else{
+            cell.btnSelect.hidden = YES;
         }
         [cell.btnSelect addTarget:self action:@selector(btnCollectSelect:) forControlEvents:UIControlEventTouchUpInside];
         cell.btnSelect.tag = indexPath.row;
@@ -176,7 +178,7 @@
 }
 
 - (IBAction)btnCancaleOntouch:(id)sender {
-   
+   [mArraySelect  removeAllObjects];
    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"编辑" target:self action:@selector(btnEdit)];
     CGContextRef context=UIGraphicsGetCurrentContext();
     [UIView beginAnimations:nil context:context];
