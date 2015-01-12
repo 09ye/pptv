@@ -88,7 +88,7 @@
                      }];
 }
 
--(void)textViewDidEndEditing:(UITextView *)textView
+- (void)keyboardDidHidden:(NSNotification*)ns
 {
     [UIView animateWithDuration:0.3
                      animations:^{
@@ -140,5 +140,45 @@
 }
 
 - (IBAction)btnSumbitOntouch:(id)sender {
+    if ([mtxtCOntent.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]].length <=0 ||  [mtxtCOntent.text isEqualToString:mtxtCOntent.placeholder]) {
+        [self showAlertDialog:@"请填写您的宝贵意见"];
+        return;
+    }
+    if ([mtxtPhone.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]].length <= 0 ||  [mtxtPhone.text isEqualToString:mtxtPhone.placeholder]) {
+        [self showAlertDialog:@"请填写您联系方式"];
+        return;
+    }
+    
+    if ([mtxtArea.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]].length <= 0 ||  [mtxtPhone.text isEqualToString:mtxtArea.placeholder]) {
+        [self showAlertDialog:@"请填写您的所在地区"];
+        return;
+    }
+    if ([mtxtCompany.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]].length <= 0 ||  [mtxtCompany.text isEqualToString:mtxtCompany.placeholder]) {
+        [self showAlertDialog:@"请填写您的所用网络运营商"];
+        return;
+    }
+    [self showWaitDialog:@"正在提交" state:@"请稍等"];
+    SHPostTaskM * postKeyWord = [[SHPostTaskM alloc]init];
+    postKeyWord.URL = URL_FOR(@"Pad/feedback");
+    [postKeyWord.postArgs setValue:@"1" forKey:@"type"];
+    [postKeyWord.postArgs setValue:mtxtPhone.text forKey:@"contact"];
+    [postKeyWord.postArgs setValue:mtxtArea.text forKey:@"area"];
+    [postKeyWord.postArgs setValue:mtxtCompany.text forKey:@"idc"];
+    [postKeyWord.postArgs setValue:mtxtCOntent.text forKey:@"content"];
+    [postKeyWord.postArgs setValue:@"" forKey:@"ip"];
+    postKeyWord.delegate = self;
+    [postKeyWord start:^(SHTask *t) {
+        
+        [self dismissWaitDialog];
+        [t.respinfo show];
+        [self.navigationController popViewControllerAnimated:YES];
+        
+    } taskWillTry:^(SHTask *t) {
+        
+    } taskDidFailed:^(SHTask *t) {
+        [self dismissWaitDialog];
+        [t.respinfo show];
+        
+    }];
 }
 @end

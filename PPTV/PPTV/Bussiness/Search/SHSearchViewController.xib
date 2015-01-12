@@ -24,7 +24,7 @@
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="3K0-fN-YhE">
                             <rect key="frame" x="89" y="26" width="80" height="32"/>
                         </imageView>
-                        <searchBar contentMode="redraw" fixedFrame="YES" barStyle="black" searchBarStyle="minimal" placeholder="步步惊心" translatesAutoresizingMaskIntoConstraints="NO" id="wdl-d6-BOo">
+                        <searchBar contentMode="redraw" fixedFrame="YES" barStyle="black" searchBarStyle="minimal" placeholder="搜索" translatesAutoresizingMaskIntoConstraints="NO" id="wdl-d6-BOo">
                             <rect key="frame" x="342" y="19" width="340" height="44"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="barTintColor" cocoaTouchSystemColor="darkTextColor"/>

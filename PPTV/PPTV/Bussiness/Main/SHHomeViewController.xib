@@ -75,7 +75,7 @@
                                 <action selector="btnDownloadOntouch:" destination="-1" eventType="touchUpInside" id="3hV-YF-aBV"/>
                             </connections>
                         </button>
-                        <searchBar contentMode="redraw" fixedFrame="YES" barStyle="black" searchBarStyle="minimal" placeholder="步步惊心" translatesAutoresizingMaskIntoConstraints="NO" id="52C-v3-OzX">
+                        <searchBar contentMode="redraw" fixedFrame="YES" barStyle="black" searchBarStyle="minimal" placeholder="搜索" translatesAutoresizingMaskIntoConstraints="NO" id="52C-v3-OzX">
                             <rect key="frame" x="342" y="19" width="340" height="44"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="barTintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

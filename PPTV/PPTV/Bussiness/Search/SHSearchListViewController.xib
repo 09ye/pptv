@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SHSearchListViewController">
+            <connections>
+                <outlet property="mCellSeeMore" destination="UCx-5R-nE4" id="HXz-aV-0aO"/>
+                <outlet property="mSearch" destination="J5c-mI-EIr" id="nyP-wI-p8E"/>
+                <outlet property="mViewSection2" destination="bOv-H0-kkb" id="cDa-nz-gWf"/>
+                <outlet property="mbtnLast" destination="eAS-lx-5lI" id="674-lH-stn"/>
+                <outlet property="mbtnMore" destination="C3Y-EK-bdU" id="30z-Fd-qFT"/>
+                <outlet property="mbtnResultShort" destination="fHP-cK-stN" id="MKR-Y9-YQq"/>
+                <outlet property="tableView" destination="kWE-Zw-ZK6" id="EeZ-rN-F5s"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1K1-jR-u4w" userLabel="View-nav">
+                    <rect key="frame" x="0.0" y="0.0" width="1024" height="64"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="mAn-Ko-Er7">
+                            <rect key="frame" x="89" y="26" width="80" height="32"/>
+                        </imageView>
+                        <searchBar contentMode="redraw" fixedFrame="YES" barStyle="black" searchBarStyle="minimal" text="" placeholder="搜索" translatesAutoresizingMaskIntoConstraints="NO" id="J5c-mI-EIr">
+                            <rect key="frame" x="342" y="19" width="340" height="44"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <color key="barTintColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="FmB-JZ-GhD"/>
+                            </connections>
+                        </searchBar>
+                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_title_records.png" translatesAutoresizingMaskIntoConstraints="NO" id="I5S-6F-OnO">
+                            <rect key="frame" x="850" y="34" width="15" height="15"/>
+                        </imageView>
+                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="看过" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BAE-Fm-ZtW">
+                            <rect key="frame" x="873" y="31" width="34" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_title_download.png" translatesAutoresizingMaskIntoConstraints="NO" id="7BQ-9E-VEw">
+                            <rect key="frame" x="924" y="34" width="15" height="15"/>
+                        </imageView>
+                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="下载" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I3c-j7-Z8L">
+                            <rect key="frame" x="947" y="31" width="34" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gnW-Sz-WMA">
+                            <rect key="frame" x="848" y="20" width="60" height="44"/>
+                            <state key="normal">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                        </button>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zYI-0N-SCa">
+                            <rect key="frame" x="923" y="20" width="60" height="44"/>
+                            <state key="normal">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="etW-ga-z71">
+                            <rect key="frame" x="0.0" y="27" width="85" height="30"/>
+                            <state key="normal" image="NaviBack.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="btnGoBack:" destination="-1" eventType="touchUpInside" id="Fov-F3-YxE"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="kWE-Zw-ZK6">
+                    <rect key="frame" x="0.0" y="64" width="1024" height="704"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="jI3-7Y-mB1"/>
+                        <outlet property="delegate" destination="-1" id="UOS-ir-vAi"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+        </view>
+        <view contentMode="scaleToFill" id="bOv-H0-kkb">
+            <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eAS-lx-5lI">
+                    <rect key="frame" x="30" y="7" width="60" height="30"/>
+                    <state key="normal" title="最近更新">
+                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="btnSelectMainOntouch:" destination="-1" eventType="touchUpInside" id="fzD-s5-Jy4"/>
+                    </connections>
+                </button>
+                <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C3Y-EK-bdU">
+                    <rect key="frame" x="120" y="7" width="60" height="30"/>
+                    <state key="normal" title="最多播放">
+                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="btnSelectMainOntouch:" destination="-1" eventType="touchUpInside" id="b1Z-jU-TP8"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fHP-cK-stN">
+                    <rect key="frame" x="791" y="11" width="200" height="22"/>
+                    <inset key="contentEdgeInsets" minX="-40" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <inset key="imageEdgeInsets" minX="130" minY="5" maxX="0.0" maxY="5"/>
+                    <state key="normal" title="共找到0个结果">
+                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-80" y="801"/>
+        </view>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="UCx-5R-nE4">
+            <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UCx-5R-nE4" id="yxy-3m-mmf">
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w4B-pO-daw">
+                        <rect key="frame" x="462" y="7" width="100" height="30"/>
+                        <state key="normal" title="查看更多">
+                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="btnSeeMoreOntouch:" destination="-1" eventType="touchUpInside" id="233-TA-XCO"/>
+                        </connections>
+                    </button>
+                </subviews>
+            </tableViewCellContentView>
+            <point key="canvasLocation" x="15" y="908"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="NaviBack.png" width="30" height="30"/>
+        <image name="ic_title_download.png" width="38" height="39"/>
+        <image name="ic_title_records.png" width="39" height="39"/>
+        <image name="logo.png" width="163" height="64"/>
+    </resources>
+</document>

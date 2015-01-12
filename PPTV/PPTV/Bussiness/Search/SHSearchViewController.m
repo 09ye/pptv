@@ -125,10 +125,25 @@
 -(void) btnRecord:(UIButton * )sender
 {
     
+    SHIntent * intent = [[SHIntent alloc]init];
+    intent.target = @"SHSearchListViewController";
+    [intent.args setValue:sender.titleLabel.text forKey:@"keyword"];
+    intent.container  = self.navigationController;
+    [[UIApplication sharedApplication]open:intent];
 }
 -(void) btnRecomend:(UIButton * )sender
 {
-    
+    if (![mArrayRecord containsObject:sender.titleLabel.text]) {
+        [mArrayRecord insertObject:sender.titleLabel.text atIndex:0];
+    }
+    if (mArrayRecord.count>10) {
+        [mArrayRecord removeObjectAtIndex:mArrayRecord.count-1];
+    }
+    SHIntent * intent = [[SHIntent alloc]init];
+    intent.target = @"SHSearchListViewController";
+    [intent.args setValue:sender.titleLabel.text forKey:@"keyword"];
+    intent.container  = self.navigationController;
+    [[UIApplication sharedApplication]open:intent];
 }
 - (IBAction)btnGoBack:(UIButton *)sender {
     [self.navigationController popToRootViewControllerAnimated:YES];
@@ -163,6 +178,11 @@
     if (mArrayRecord.count>10) {
         [mArrayRecord removeObjectAtIndex:mArrayRecord.count-1];
     }
+    SHIntent * intent = [[SHIntent alloc]init];
+    intent.target = @"SHSearchListViewController";
+    [intent.args setValue:searchBar.text forKey:@"keyword"];
+    intent.container  = self.navigationController;
+    [[UIApplication sharedApplication]open:intent];
     
 }
 -(void) viewDidDisappear:(BOOL)animated

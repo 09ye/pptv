@@ -443,6 +443,8 @@
 		77E25DFF1A2B7881002BD10C /* SHTVDrameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77E25DFD1A2B7881002BD10C /* SHTVDrameViewController.xib */; };
 		77E25E021A2B7A64002BD10C /* SHDrameMoviceViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E25E011A2B7A64002BD10C /* SHDrameMoviceViewCell.m */; };
 		77E25E041A2B7A78002BD10C /* SHDrameMoviceViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77E25E031A2B7A78002BD10C /* SHDrameMoviceViewCell.xib */; };
+		77ED23E81A61013E00525576 /* SHSearchListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77ED23E61A61013E00525576 /* SHSearchListViewController.m */; };
+		77ED23E91A61013E00525576 /* SHSearchListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77ED23E71A61013E00525576 /* SHSearchListViewController.xib */; };
 		77EFB0AF1A2C79C900A534D8 /* default168x108.png in Resources */ = {isa = PBXBuildFile; fileRef = 77EFB0A91A2C79C900A534D8 /* default168x108.png */; };
 		77EFB0B01A2C79C900A534D8 /* default308x246.png in Resources */ = {isa = PBXBuildFile; fileRef = 77EFB0AA1A2C79C900A534D8 /* default308x246.png */; };
 		77EFB0B11A2C79C900A534D8 /* default320x182.png in Resources */ = {isa = PBXBuildFile; fileRef = 77EFB0AB1A2C79C900A534D8 /* default320x182.png */; };
@@ -1211,6 +1213,9 @@
 		77E25E001A2B7A64002BD10C /* SHDrameMoviceViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHDrameMoviceViewCell.h; sourceTree = "<group>"; };
 		77E25E011A2B7A64002BD10C /* SHDrameMoviceViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHDrameMoviceViewCell.m; sourceTree = "<group>"; };
 		77E25E031A2B7A78002BD10C /* SHDrameMoviceViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SHDrameMoviceViewCell.xib; sourceTree = "<group>"; };
+		77ED23E51A61013E00525576 /* SHSearchListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHSearchListViewController.h; sourceTree = "<group>"; };
+		77ED23E61A61013E00525576 /* SHSearchListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHSearchListViewController.m; sourceTree = "<group>"; };
+		77ED23E71A61013E00525576 /* SHSearchListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SHSearchListViewController.xib; sourceTree = "<group>"; };
 		77EFB0A91A2C79C900A534D8 /* default168x108.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default168x108.png; sourceTree = "<group>"; };
 		77EFB0AA1A2C79C900A534D8 /* default308x246.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default308x246.png; sourceTree = "<group>"; };
 		77EFB0AB1A2C79C900A534D8 /* default320x182.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default320x182.png; sourceTree = "<group>"; };
@@ -2673,6 +2678,9 @@
 				77E25DCD1A2B28ED002BD10C /* SHSearchViewController.h */,
 				77E25DCE1A2B28ED002BD10C /* SHSearchViewController.m */,
 				77E25DCF1A2B28ED002BD10C /* SHSearchViewController.xib */,
+				77ED23E51A61013E00525576 /* SHSearchListViewController.h */,
+				77ED23E61A61013E00525576 /* SHSearchListViewController.m */,
+				77ED23E71A61013E00525576 /* SHSearchListViewController.xib */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -3179,6 +3187,7 @@
 				77C7E5C21A374A3300F96E4A /* ic_tab_select_27.png in Resources */,
 				77B16B171A39F27E0041D7CE /* ic_video_select_2.png in Resources */,
 				77C7E58E1A36A10500F96E4A /* ic_tab_normal_21.png in Resources */,
+				77ED23E91A61013E00525576 /* SHSearchListViewController.xib in Resources */,
 				77566E101A18960E00194562 /* MainViewController.xib in Resources */,
 				77B16AFE1A39C2340041D7CE /* btn_pre_select.png in Resources */,
 				770919F71A49A210001DDCCD /* xiaolian.png in Resources */,
@@ -3279,6 +3288,7 @@
 				77566EAA1A18960E00194562 /* DebugTextView.m in Sources */,
 				77566EB01A18960E00194562 /* NVDebugPanelController.m in Sources */,
 				77566E0E1A18960E00194562 /* AppDelegate.mm in Sources */,
+				77ED23E81A61013E00525576 /* SHSearchListViewController.m in Sources */,
 				77566EA91A18960E00194562 /* CommandFactory.m in Sources */,
 				77566EAB1A18960E00194562 /* DebugView.m in Sources */,
 				77566E791A18960E00194562 /* SHNoneViewCell.m in Sources */,

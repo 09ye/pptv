@@ -250,7 +250,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PPTV/Bussiness/Channel/SHTVDetailViewController.m"
-            timestampString = "442328728.27878"
+            timestampString = "442577698.327627"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "179"
@@ -313,12 +313,12 @@
                   symbolName = "__40-[AppDelegate beginRequest:isBeginDown:]_block_invoke"
                   moduleName = "PPTV"
                   urlString = "file:///Users/yebaohua/Documents/Demo/pptv/project/ios/pptv/PPTV/PPTV/Base/AppDelegate.mm"
-                  timestampString = "442418821.164244"
+                  timestampString = "442661332.583005"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "411"
                   endingLineNumber = "411"
-                  offsetFromSymbolStart = "38">
+                  offsetFromSymbolStart = "54">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -327,12 +327,12 @@
                   symbolName = "__40-[AppDelegate beginRequest:isBeginDown:]_block_invoke_2"
                   moduleName = "PPTV"
                   urlString = "file:///Users/yebaohua/Documents/Demo/pptv/project/ios/pptv/PPTV/PPTV/Base/AppDelegate.mm"
-                  timestampString = "442418821.164406"
+                  timestampString = "442661332.583286"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "411"
                   endingLineNumber = "411"
-                  offsetFromSymbolStart = "34">
+                  offsetFromSymbolStart = "48">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -366,6 +366,116 @@
             startingLineNumber = "408"
             endingLineNumber = "408"
             landmarkName = "-beginRequest:isBeginDown:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PPTV/Bussiness/Record/SHRecordViewController.m"
+            timestampString = "442564186.447943"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "-viewDidLoad"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PPTV/Bussiness/Record/SHRecordViewController.m"
+            timestampString = "442564208.147004"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PPTV/Bussiness/Search/SHSearchListViewController.m"
+            timestampString = "442658805.300478"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
+            landmarkName = "-requestMovice"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__43-[SHSearchListViewController requestMovice]_block_invoke"
+                  moduleName = "PPTV"
+                  urlString = "file:///Users/yebaohua/Documents/Demo/pptv/project/ios/pptv/PPTV/PPTV/Bussiness/Search/SHSearchListViewController.m"
+                  timestampString = "442661332.652781"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "103"
+                  endingLineNumber = "103"
+                  offsetFromSymbolStart = "671">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__43-[SHSearchListViewController requestMovice]_block_invoke98"
+                  moduleName = "PPTV"
+                  urlString = "file:///Users/yebaohua/Documents/Demo/pptv/project/ios/pptv/PPTV/PPTV/Bussiness/Search/SHSearchListViewController.m"
+                  timestampString = "442661332.653119"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "103"
+                  endingLineNumber = "103"
+                  offsetFromSymbolStart = "48">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PPTV/Bussiness/Search/SHSearchListViewController.m"
+            timestampString = "442659308.216169"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "253"
+            endingLineNumber = "253"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PPTV/Bussiness/Search/SHSearchListViewController.m"
+            timestampString = "442658805.300478"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
+            landmarkName = "-loadNext"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -353,7 +353,7 @@
         }
         
         cell.navController = self.navController;
-        cell.type = 0;
+        cell.type = 1;
         cell.detail = [mResult mutableCopy];
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -364,7 +364,7 @@
             cell = (SHImgHorizaonalViewCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHImgHorizaonalViewCell" owner:nil options:nil] objectAtIndex:0];
         }
         cell.navController = self.navController;
-        cell.type = 1;
+        cell.type = 2;
         cell.detail = [mResult mutableCopy];
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
