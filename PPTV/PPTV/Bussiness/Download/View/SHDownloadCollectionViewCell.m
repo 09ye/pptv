@@ -96,7 +96,7 @@
     }else if(mState == Paused){
         [mRequest start];
         [_detail setValue:[NSNumber numberWithInt:Downloading] forKey:@"state"];
-        [app beginRequest:_detail isBeginDown:NO];
+        [app beginRequest:[[_detail objectForKey:@"id"]intValue] hdType:[[_detail objectForKey:@"hd"]intValue] isBeginDown:NO];
         [self setDetail:_detail];
         [sender setImage:[UIImage imageNamed:@"xiazai"] forState:UIControlStateNormal];
         mState = Downloading;

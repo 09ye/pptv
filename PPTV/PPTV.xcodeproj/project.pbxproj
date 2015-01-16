@@ -445,6 +445,8 @@
 		77E25E041A2B7A78002BD10C /* SHDrameMoviceViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77E25E031A2B7A78002BD10C /* SHDrameMoviceViewCell.xib */; };
 		77ED23E81A61013E00525576 /* SHSearchListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77ED23E61A61013E00525576 /* SHSearchListViewController.m */; };
 		77ED23E91A61013E00525576 /* SHSearchListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77ED23E71A61013E00525576 /* SHSearchListViewController.xib */; };
+		77ED24371A66773200525576 /* bg_download_shade.png in Resources */ = {isa = PBXBuildFile; fileRef = 77ED24351A66773200525576 /* bg_download_shade.png */; };
+		77ED24381A66773200525576 /* bg_state_shade.png in Resources */ = {isa = PBXBuildFile; fileRef = 77ED24361A66773200525576 /* bg_state_shade.png */; };
 		77EFB0AF1A2C79C900A534D8 /* default168x108.png in Resources */ = {isa = PBXBuildFile; fileRef = 77EFB0A91A2C79C900A534D8 /* default168x108.png */; };
 		77EFB0B01A2C79C900A534D8 /* default308x246.png in Resources */ = {isa = PBXBuildFile; fileRef = 77EFB0AA1A2C79C900A534D8 /* default308x246.png */; };
 		77EFB0B11A2C79C900A534D8 /* default320x182.png in Resources */ = {isa = PBXBuildFile; fileRef = 77EFB0AB1A2C79C900A534D8 /* default320x182.png */; };
@@ -1216,6 +1218,8 @@
 		77ED23E51A61013E00525576 /* SHSearchListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHSearchListViewController.h; sourceTree = "<group>"; };
 		77ED23E61A61013E00525576 /* SHSearchListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHSearchListViewController.m; sourceTree = "<group>"; };
 		77ED23E71A61013E00525576 /* SHSearchListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SHSearchListViewController.xib; sourceTree = "<group>"; };
+		77ED24351A66773200525576 /* bg_download_shade.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_download_shade.png; sourceTree = "<group>"; };
+		77ED24361A66773200525576 /* bg_state_shade.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_state_shade.png; sourceTree = "<group>"; };
 		77EFB0A91A2C79C900A534D8 /* default168x108.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default168x108.png; sourceTree = "<group>"; };
 		77EFB0AA1A2C79C900A534D8 /* default308x246.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default308x246.png; sourceTree = "<group>"; };
 		77EFB0AB1A2C79C900A534D8 /* default320x182.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default320x182.png; sourceTree = "<group>"; };
@@ -2275,6 +2279,8 @@
 		77566DDF1A18960E00194562 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				77ED24351A66773200525576 /* bg_download_shade.png */,
+				77ED24361A66773200525576 /* bg_state_shade.png */,
 				776DBBBC1A5191C300A0CAF7 /* ic_select.png */,
 				776DBBBA1A51919E00A0CAF7 /* ic_lixian_delete.png */,
 				776DBBB81A51911B00A0CAF7 /* shanchu.png */,
@@ -3024,6 +3030,7 @@
 				77566E201A18960E00194562 /* DSLCalendar-nextMonth.png in Resources */,
 				77566E1C1A18960E00194562 /* DSLCalendarMonthSelectorView.xib in Resources */,
 				77566EEC1A18971F00194562 /* guide02.jpg in Resources */,
+				77ED24381A66773200525576 /* bg_state_shade.png in Resources */,
 				77AEE4591A1B4E7A00366AEB /* ic_tab_movice.png in Resources */,
 				77566BFD1A18927800194562 /* Main.storyboard in Resources */,
 				77E25DEF1A2B68AB002BD10C /* ic_movice_defaul.png in Resources */,
@@ -3050,6 +3057,7 @@
 				77AEE45F1A1B4E7A00366AEB /* ic_tab_store.png in Resources */,
 				77B16B061A39DA6A0041D7CE /* btn_lock_select.png in Resources */,
 				77566E2C1A18960E00194562 /* DSLCalendarDaySelection.png in Resources */,
+				77ED24371A66773200525576 /* bg_download_shade.png in Resources */,
 				773F2CF91A2C94E700082C32 /* ic_arrow_up.png in Resources */,
 				77AEE4601A1B4E7A00366AEB /* ic_tab_store@2x.png in Resources */,
 				773F2D0A1A2CB57600082C32 /* c4.png in Resources */,

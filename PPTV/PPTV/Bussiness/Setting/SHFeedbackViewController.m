@@ -19,7 +19,8 @@
     self.title = @"意见反馈";
     self.view.backgroundColor = [SHSkin.instance colorOfStyle:@"ColorBackGroundRightView"];
     mScrollview.layer.cornerRadius= 5;
-    
+    arrayType = [[NSMutableArray alloc]init];
+    selectType = @"播放卡顿严重";
     mtxtCOntent.layer.cornerRadius = 5;
     mtxtCOntent.layer.borderWidth = 0.4f;
     mtxtCOntent.layer.borderColor = [[UIColor grayColor]CGColor ];
@@ -51,7 +52,8 @@
     mbtnSumbit.layer.cornerRadius = 5;
     
     arrayBtn = [[NSArray alloc]initWithObjects:mbtn1,mbtn2,mbtn3,mbtn4,mbtn5,mbtn6,mbtn7, nil];
-  
+    [self btnSelectReasonOntouch:mbtn1];
+    [self requestType];
     
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];
     //设置成NO表示当前控件响应后会传播到其他控件上，默认为YES。
@@ -68,7 +70,19 @@
     [mtxtArea resignFirstResponder];
     [mtxtCompany resignFirstResponder];
 }
-
+-(void)requestType
+{
+    SHPostTaskM * post = [[SHPostTaskM alloc]init];
+    post.URL = URL_FOR(@"Pad/feedtype");
+    post.delegate = self;
+    [post start:^(SHTask *task) {
+        arrayType = [[task result]mutableCopy];
+    } taskWillTry:^(SHTask *task) {
+        
+    } taskDidFailed:^(SHTask *task) {
+        
+    }];
+}
 -(void)textViewDidBeginEditing:(UITextView *)textView
 {
     int y = 10;
@@ -133,6 +147,10 @@
     for (UIButton * button  in arrayBtn) {
         if (sender == button) {
             [button setImage:[UIImage imageNamed:@"btn_collect_list_select"] forState:UIControlStateNormal];
+            if (sender.tag<arrayType.count) {
+                selectType = [arrayType objectAtIndex:sender.tag];
+            }
+            
         }else{
             [button setImage:[UIImage imageNamed:@"btn_collect_list_normal"] forState:UIControlStateNormal];
         }
@@ -160,7 +178,7 @@
     [self showWaitDialog:@"正在提交" state:@"请稍等"];
     SHPostTaskM * postKeyWord = [[SHPostTaskM alloc]init];
     postKeyWord.URL = URL_FOR(@"Pad/feedback");
-    [postKeyWord.postArgs setValue:@"1" forKey:@"type"];
+    [postKeyWord.postArgs setValue:selectType forKey:@"type"];
     [postKeyWord.postArgs setValue:mtxtPhone.text forKey:@"contact"];
     [postKeyWord.postArgs setValue:mtxtArea.text forKey:@"area"];
     [postKeyWord.postArgs setValue:mtxtCompany.text forKey:@"idc"];

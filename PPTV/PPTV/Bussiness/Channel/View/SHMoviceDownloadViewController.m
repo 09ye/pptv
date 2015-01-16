@@ -27,13 +27,37 @@
 {
     _detail = detail_;
     NSDictionary *urls = [detail_ objectForKey:@"vods"];
-    NSArray *keys = urls.allKeys;
-    for (int i = 0; i< keys.count; i++) {
-        if (![[urls objectForKey:[keys objectAtIndex:i]] isEqualToString:@""]) {
-
-            
-        }
+  
+    if (![[urls objectForKey:@"hd0"] isEqualToString:@""]) {
+        
+        [mbtn1 setTitle:@"流畅(320P)" forState:UIControlStateNormal];
+        mbtn1.hidden = NO;
     }
+    if (![[urls objectForKey:@"hd1"] isEqualToString:@""]) {
+        if(mbtn1.hidden){
+            [mbtn1 setTitle:@"高清(480P)" forState:UIControlStateNormal];
+            mbtn1.hidden = NO;
+        }else{
+            [mbtn2 setTitle:@"高清(480P)" forState:UIControlStateNormal];
+            mbtn2.hidden = NO;
+        }
+        
+        
+    }
+    if (![[urls objectForKey:@"hd2"] isEqualToString:@""]) {
+        if(mbtn1.hidden){
+            [mbtn1 setTitle:@"超清(720P)" forState:UIControlStateNormal];
+            mbtn1.hidden = NO;
+        }else if(mbtn2.hidden){
+            [mbtn2 setTitle:@"超清(720P)" forState:UIControlStateNormal];
+            mbtn2.hidden = NO;
+        }else if(mbtn3.hidden){
+            [mbtn3 setTitle:@"超清(720P)" forState:UIControlStateNormal];
+            mbtn3.hidden = NO;
+        }
+        
+    }
+   
     
 }
 - (void)didReceiveMemoryWarning {
@@ -45,7 +69,7 @@
 
 - (IBAction)btnDownloadOntouch:(UIButton *)sender {
     
-    [self showAlertDialog:@"成功添加至离线观看"];
+//    [self showAlertDialog:@"成功添加至离线观看"];
     NSString * url = @"";
     NSDictionary *vods =[self.detail objectForKey:@"vods"];
     switch (sender.tag) {
@@ -71,12 +95,20 @@
         default:
             break;
     }
+    int  hdType = 0;
+    if ([sender.titleLabel.text isEqualToString:@"流畅(320P)"]) {
+        hdType = 0;
+    }else if ([sender.titleLabel.text isEqualToString:@"高清(480P)"]) {
+        hdType = 1;
+    }else if ([sender.titleLabel.text isEqualToString:@"超清(720P)"]) {
+        hdType = 2;
+    }
     NSMutableDictionary * dic = [[NSMutableDictionary alloc]init];
     [dic setValue:[self.detail objectForKey:@"title"] forKey:@"title"];
     [dic setValue:[self.detail objectForKey:@"id"] forKey:@"id"];
     [dic setValue:[self.detail objectForKey:@"pic"] forKey:@"pic"];
     [dic setValue:url forKey:@"url"];
     AppDelegate* app=(AppDelegate*)[UIApplication sharedApplication].delegate;
-    [app beginRequest:dic isBeginDown:YES];
+    [app beginRequest:[[self.detail objectForKey:@"id"]intValue] hdType:hdType isBeginDown:YES];
 }
 @end

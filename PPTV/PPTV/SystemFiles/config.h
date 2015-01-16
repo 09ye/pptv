@@ -13,12 +13,13 @@
 #import "Utility.h"
 
 
-#define URL_HEADER @ "http://123.103.20.88:18014"
+#define URL_HEADER @ "http://padapi.wasu.cn"
+#define URL_ADS @"http://afp.csbew.com/s.htm"
 
 
 #define URL_BATA @ "http://123.103.20.88:18014"
-
-#define URL_DEVELOPER @ "http://pad.cs.wasu.cn:18014"//padapi.wasu.cn//pad.cs.wasu.cn
+//测试 pad.cs.wasu.cn:18014
+#define URL_DEVELOPER @ "http://padapi.wasu.cn"////pad.cs.wasu.cn
 
 #define URL_UPDATE @"http://zambon-update1.mobilitychina.com:8095/get_config"
 

@@ -82,7 +82,7 @@
         [postKeyWord start:^(SHTask *t) {
             
             mResultMovice = [[t result]mutableCopy];
-            mArrayMoviceSection = [mResultMovice objectForKey:@"count"];
+            mArrayMoviceSection = [mResultMovice objectForKey:@"total"];
             mListMovice = [mResultMovice objectForKey:@"list"];
             mListMoviceSelect = [mListMovice mutableCopy];
             if (mListMovice.count >0) {
@@ -131,8 +131,9 @@
         [postKeyWord start:^(SHTask *t) {
             
             mResultShort = [[t result]mutableCopy];
+            [mbtnResultShort setTitle:[NSString stringWithFormat:@"共找到%@个结果",[mResultShort objectForKey:@"count"]] forState:UIControlStateNormal];
             NSArray * list = [mResultShort valueForKeyPath:@"list"];
-            if([[mResultShort objectForKey:@"total"]intValue] < pagenum){//total 总数
+            if([[mResultShort objectForKey:@"total"]intValue] < pagenum){
                 mIsEnd = YES;
             }
             if(list.count > 0){

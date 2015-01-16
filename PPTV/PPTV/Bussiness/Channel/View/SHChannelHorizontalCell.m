@@ -18,4 +18,14 @@
 }
 */
 
+- (void)setSelected:(BOOL)selected
+{
+    [super setSelected:selected];
+    if(selected){
+        self.backgroundColor = [SHSkin.instance colorOfStyle:@"ColorStyleCellSelected"];
+    }else{
+        self.backgroundColor = [UIColor whiteColor];
+    }
+}
+
 @end

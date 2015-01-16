@@ -66,6 +66,7 @@
             cell.labLogoName.text = @"综艺";
             cell.labLogoContent.text = [NSString stringWithFormat:@"共%d部",[[_detail objectForKey:@"column_count"]intValue]];
             cell.imgDeatil.backgroundColor = [UIColor colorWithRed:92/255.0 green:0/255.0 blue:195/255.0 alpha:1];
+            cell.imgBgState.hidden = YES;
         }else{
             NSDictionary * dic = [_list objectAtIndex:indexPath.row-1];
             cell.labLogoName.hidden = YES;
@@ -96,6 +97,7 @@
             cell.labLogoName.text = @"纪录片";
             cell.labLogoContent.text = [NSString stringWithFormat:@"共%d部",[[_detail objectForKey:@"doc_count"]intValue]];
             cell.imgDeatil.backgroundColor = [UIColor colorWithRed:0/255.0 green:56/255.0 blue:195/255.0 alpha:1];
+            cell.imgBgState.hidden = YES;
         }else{
             NSDictionary * dic = [_list objectAtIndex:indexPath.row-1];
             cell.labLogoName.hidden = YES;

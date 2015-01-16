@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -15,6 +15,9 @@
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="default320x182.png" translatesAutoresizingMaskIntoConstraints="NO" id="r77-hf-RLr" customClass="SHImageView">
                         <rect key="frame" x="0.0" y="0.0" width="160" height="90"/>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg_state_shade.png" translatesAutoresizingMaskIntoConstraints="NO" id="cqE-Co-8KO">
+                        <rect key="frame" x="0.0" y="60" width="160" height="30"/>
                     </imageView>
                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="动漫" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9OL-vQ-zym">
                         <rect key="frame" x="30" y="14" width="100" height="30"/>
@@ -68,6 +71,7 @@
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <connections>
+                <outlet property="imgBgState" destination="cqE-Co-8KO" id="n4b-HL-ez4"/>
                 <outlet property="imgDeatil" destination="r77-hf-RLr" id="Y6B-ZL-8nJ"/>
                 <outlet property="labContent" destination="hj2-Mg-lY3" id="QIV-6n-gZy"/>
                 <outlet property="labLogoContent" destination="b82-k7-4aO" id="lIX-xb-64v"/>
@@ -79,6 +83,7 @@
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="bg_state_shade.png" width="320" height="64"/>
         <image name="default320x182.png" width="320" height="182"/>
     </resources>
 </document>

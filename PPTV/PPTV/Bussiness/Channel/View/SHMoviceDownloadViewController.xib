@@ -27,7 +27,7 @@
                         <userDefinedRuntimeAttribute type="string" keyPath="userstyle" value="labmidlight"/>
                     </userDefinedRuntimeAttributes>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AT9-b3-H8l">
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AT9-b3-H8l">
                     <rect key="frame" x="10" y="50" width="290" height="40"/>
                     <color key="backgroundColor" red="0.17254901960784313" green="0.1764705882352941" blue="0.19215686274509802" alpha="1" colorSpace="calibratedRGB"/>
                     <state key="normal" title="流畅(360p)">
@@ -38,7 +38,7 @@
                         <action selector="btnDownloadOntouch:" destination="-1" eventType="touchUpInside" id="T1b-8D-MYs"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wrV-7r-kKx">
+                <button hidden="YES" opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wrV-7r-kKx">
                     <rect key="frame" x="10" y="100" width="290" height="40"/>
                     <color key="backgroundColor" red="0.17254901959999999" green="0.1764705882" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                     <state key="normal" title="高清(480p)">
@@ -49,7 +49,7 @@
                         <action selector="btnDownloadOntouch:" destination="-1" eventType="touchUpInside" id="xKj-uC-PpI"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6S5-Bk-EGD">
+                <button hidden="YES" opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6S5-Bk-EGD">
                     <rect key="frame" x="10" y="150" width="290" height="40"/>
                     <color key="backgroundColor" red="0.17254901959999999" green="0.1764705882" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                     <state key="normal" title="超清(720p)">

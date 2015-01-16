@@ -26,6 +26,8 @@
     __weak IBOutlet CPTextViewPlaceholder *mtxtCompany;
     
     NSArray *arrayBtn;
+    NSArray * arrayType;
+    NSString * selectType;
 }
 - (IBAction)btnSelectReasonOntouch:(UIButton *)sender;
 - (IBAction)btnSumbitOntouch:(id)sender;

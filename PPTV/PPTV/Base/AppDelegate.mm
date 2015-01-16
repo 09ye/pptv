@@ -23,53 +23,53 @@
 static bool __isupdate = NO;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
-//    [SHAnalyzeFactory setAnalyExtension:[[SHAnalyzeFactoryExtension1 alloc]init]];
+    //    [SHAnalyzeFactory setAnalyExtension:[[SHAnalyzeFactoryExtension1 alloc]init]];
 #ifdef DEBUG
     [SHTask pull:URL_HEADER newUrl:URL_DEVELOPER];
 #endif
     // Override point for customization after application launch.
-
     
-//    
-//    // 新浪微博
-//    [WeiboSDK enableDebugMode:YES];
-//    [WeiboSDK registerApp:APPID_Sina];
-//    
-//    [WXApi  registerApp:APPID_WeoXin];
-//    //需要注意的是，SendMessageToWXReq的scene成员，如果scene填WXSceneSession，那么消息会发送至微信的会话内。如果scene填WXSceneTimeline，那么消息会发送至朋友圈。如果scene填WXSceneFavorite,那么消息会发送到“我的收藏”中。scene默认值为WXSceneSession。
-//    _scene = WXSceneTimeline;
-//    _mapManager = [[BMKMapManager alloc]init];
-//    _locService = [[BMKLocationService alloc]init];
-//    _locService.delegate = self;
-//    _geocodesearch = [[BMKGeoCodeSearch alloc]init];
-//    _geocodesearch.delegate = self;
-//    
-//    BOOL ret = [_mapManager start:@"XUhLsGNq9Ch1HfTgZH8LFZs8"  generalDelegate:self];// ybh ky
-////zambon key  RNuxCab28lK3wgb3jGhsrpa3
-//    if (!ret) {
-//        NSLog(@"manager start failed!");
-//    }
+    
+    //
+    //    // 新浪微博
+    //    [WeiboSDK enableDebugMode:YES];
+    //    [WeiboSDK registerApp:APPID_Sina];
+    //
+    //    [WXApi  registerApp:APPID_WeoXin];
+    //    //需要注意的是，SendMessageToWXReq的scene成员，如果scene填WXSceneSession，那么消息会发送至微信的会话内。如果scene填WXSceneTimeline，那么消息会发送至朋友圈。如果scene填WXSceneFavorite,那么消息会发送到“我的收藏”中。scene默认值为WXSceneSession。
+    //    _scene = WXSceneTimeline;
+    //    _mapManager = [[BMKMapManager alloc]init];
+    //    _locService = [[BMKLocationService alloc]init];
+    //    _locService.delegate = self;
+    //    _geocodesearch = [[BMKGeoCodeSearch alloc]init];
+    //    _geocodesearch.delegate = self;
+    //
+    //    BOOL ret = [_mapManager start:@"XUhLsGNq9Ch1HfTgZH8LFZs8"  generalDelegate:self];// ybh ky
+    ////zambon key  RNuxCab28lK3wgb3jGhsrpa3
+    //    if (!ret) {
+    //        NSLog(@"manager start failed!");
+    //    }
     [super application:application didFinishLaunchingWithOptions:launchOptions];
-//    [_locService startUserLocationService];
-//    
-//    
-//    [ShareSDK registerApp:@"24732465ea3a"];     //参数为ShareSDK官网中添加应用后得到的AppKey
-//    
-//    
-//    [ShareSDK connectSinaWeiboWithAppKey:APPID_Sina
-//                               appSecret:APPID_KEY_Sina
-//                             redirectUri:Sina_RedirectURI];
-//    
-//    [ShareSDK connectQQWithQZoneAppKey:@"100371282"
-//                     qqApiInterfaceCls:[QQApiInterface class]
-//                       tencentOAuthCls:[TencentOAuth class]];
+    //    [_locService startUserLocationService];
+    //
+    //
+    //    [ShareSDK registerApp:@"24732465ea3a"];     //参数为ShareSDK官网中添加应用后得到的AppKey
+    //
+    //
+    //    [ShareSDK connectSinaWeiboWithAppKey:APPID_Sina
+    //                               appSecret:APPID_KEY_Sina
+    //                             redirectUri:Sina_RedirectURI];
+    //
+    //    [ShareSDK connectQQWithQZoneAppKey:@"100371282"
+    //                     qqApiInterfaceCls:[QQApiInterface class]
+    //                       tencentOAuthCls:[TencentOAuth class]];
     
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(configUpdate:) name:CORE_NOTIFICATION_CONFIG_STATUS_CHANGED object:nil];
     [SHConfigManager instance];
-//    [SHConfigManager instance].URL = URL_FOR(@"get_config");
+    //    [SHConfigManager instance].URL = URL_FOR(@"get_config");
     
-//    [self loadCachesfiles];
+    //    [self loadCachesfiles];
     
     [self loadCacheList];
     return YES;
@@ -103,10 +103,10 @@ static bool __isupdate = NO;
 -(void) onGetReverseGeoCodeResult:(BMKGeoCodeSearch *)searcher result:(BMKReverseGeoCodeResult *)result errorCode:(BMKSearchErrorCode)error
 {
     
-	if (error == 0) {
-		BMKPointAnnotation* item = [[BMKPointAnnotation alloc]init];
-		item.coordinate = result.location;
-		item.title = result.address;
+    if (error == 0) {
+        BMKPointAnnotation* item = [[BMKPointAnnotation alloc]init];
+        item.coordinate = result.location;
+        item.title = result.address;
         
         NSLog(@"reuslt==%@",result);
         myAddressResult = result;
@@ -123,9 +123,9 @@ static bool __isupdate = NO;
         //        [myAlertView show];
         
         //	定位时非直辖市传值到市，如：江苏苏州市；直辖市传值到区，如：上海上海市闸北区 // provicne  上海 江苏
-       
         
-	}
+        
+    }
 }
 
 
@@ -183,8 +183,8 @@ static bool __isupdate = NO;
     else{
         
     }
-//    return [ShareSDK handleOpenURL:url
-//                        wxDelegate:self];
+    //    return [ShareSDK handleOpenURL:url
+    //                        wxDelegate:self];
     
     //return   [WXApi  handleOpenURL:url delegate:self];
     //return [TencentOAuth HandleOpenURL:url];
@@ -219,10 +219,10 @@ static bool __isupdate = NO;
         NSLog(@"url %@ isSuc %d",url,isSuc == YES ? 1 : 0);
         return  isSuc;
     }
-//    return [ShareSDK handleOpenURL:url
-//                 sourceApplication:sourceApplication
-//                        annotation:annotation
-//                        wxDelegate:self];
+    //    return [ShareSDK handleOpenURL:url
+    //                 sourceApplication:sourceApplication
+    //                        annotation:annotation
+    //                        wxDelegate:self];
     return   [WXApi  handleOpenURL:url delegate:self];
 }
 
@@ -362,38 +362,38 @@ static bool __isupdate = NO;
     }
 }
 
--  (void) taskDidFinished:(SHTask *)task
-{
-    if (task.tag == 0) {
-        
-        
-        NSData *data=(NSData *)task.result;
-        //    NSString *str=[[NSString  alloc  ]initWithData:data encoding:4];
-        //
-        NSError  *error=nil;
-        NSDictionary * netreutrn = nil;
-        
-        NSLog(@"000000+＝＝》%@",netreutrn);
-        
-        if(data != nil){
-            netreutrn  = [NSJSONSerialization JSONObjectWithData:data options:(NSJSONReadingOptions)NSJSONWritingPrettyPrinted error:&error];
-        }
-        if (netreutrn) {
-            [[NSNotificationCenter defaultCenter]  postNotificationName: NOTIFY_SinaAuthon_Success object:netreutrn];
-            
-        }
-    }
-    
-}
-
-- (void) taskDidFailed:(SHTask *)task
-{
-    
-}
+//-  (void) taskDidFinished:(SHTask *)task
+//{
+//    if (task.tag == 0) {
+//
+//
+//        NSData *data=(NSData *)task.result;
+//        //    NSString *str=[[NSString  alloc  ]initWithData:data encoding:4];
+//        //
+//        NSError  *error=nil;
+//        NSDictionary * netreutrn = nil;
+//
+//        NSLog(@"000000+＝＝》%@",netreutrn);
+//
+//        if(data != nil){
+//            netreutrn  = [NSJSONSerialization JSONObjectWithData:data options:(NSJSONReadingOptions)NSJSONWritingPrettyPrinted error:&error];
+//        }
+//        if (netreutrn) {
+//            [[NSNotificationCenter defaultCenter]  postNotificationName: NOTIFY_SinaAuthon_Success object:netreutrn];
+//
+//        }
+//    }
+//
+//}
+//
+//- (void) taskDidFailed:(SHTask *)task
+//{
+//
+//}
 #pragma  download
--(void)beginRequest:(NSMutableDictionary *)fileInfo isBeginDown:(BOOL)isBeginDown
+-(void)beginRequest:(int )videoId hdType:(int)hdType  isBeginDown:(BOOL)isBeginDown
 {
-////    如果不存在则创建临时存储目录
+    ////    如果不存在则创建临时存储目录
     NSFileManager *fileManager=[NSFileManager defaultManager];
     if(![fileManager fileExistsAtPath:[SHFileManager getTargetFloderPath]])
     {
@@ -403,44 +403,63 @@ static bool __isupdate = NO;
         self.requestlist = [[NSMutableArray alloc]init];
     }
     SHPostTaskM * post = [[SHPostTaskM alloc]init];
-    post.URL = URL_FOR(@"download");
-    [post.postArgs setValue:[fileInfo objectForKey:@"id"] forKey:@"id"];
+    post.URL = URL_FOR(@"Pad/download");
+    [post.postArgs setValue:[NSNumber numberWithInt:videoId] forKey:@"id"];
     post.delegate = self;
     [post start:^(SHTask *task) {
-    
+        NSArray * array  = [[task result]mutableCopy];
+        if (array.count<1) {
+            return ;
+        }
+        NSMutableDictionary * dic = [array objectAtIndex:0];
+        
+        if([fileManager fileExistsAtPath:[[SHFileManager getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mp4",[dic objectForKey:@"id"]]]])//存在已经下好的MP4
+        {
+            return;
+        }
+        NSDictionary *urls = [dic objectForKey:@"list"];
+        NSString *key  =[NSString stringWithFormat:@"hd%d",hdType];
+        NSString * url = [urls objectForKey:key];
+        if (!url || [url isEqualToString:@""]) {
+            UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"对不起，未找到相应的下载资源" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定",nil];
+            [myAlertView show];
+            return;
+        }
+        
+        [dic setValue:[[SHFileManager getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@",[dic objectForKey:@"id"]]] forKey:@"path"];// 没有格式
+        [dic setValue:@"1" forKey:@"state"];
+        [dic setValue:[NSNumber numberWithInt:hdType] forKey:@"hdType"];
+        ASIHTTPRequest *request=[[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:url]];
+        request.delegate=self;
+        [request setDownloadDestinationPath:[[SHFileManager getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mp4",[dic objectForKey:@"id"]]]];
+        [request setTemporaryFileDownloadPath:[[SHFileManager getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.temp",[dic objectForKey:@"id"]]]];
+        //    [request setDownloadProgressDelegate:self];
+        //    [request setDownloadProgressDelegate:downCell.progress];//设置进度条的代理,这里由于下载是在AppDelegate里进行的全局下载，所以没有使用自带的进度条委托，这里自己设置了一个委托，用于更新UI
+        [request setAllowResumeForFileDownloads:YES];//支持断点续传
+        [request setTimeOutSeconds:120];
+        [request setNumberOfTimesToRetryOnTimeout:3];
+        [request setUserInfo:[NSDictionary dictionaryWithObject:dic forKey:@"file"]];//设置上下文的文件基本信息
+        [request startAsynchronous];
+        if (isBeginDown) {
+            UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"成功添加至离线观看" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定",nil];
+            [myAlertView show];
+            [self.cachesInfolist addObject:dic];
+        }
+        [self.requestlist addObject:request];
+        
     } taskWillTry:^(SHTask *task) {
         
     } taskDidFailed:^(SHTask *task) {
         
     }];
     
-//    文件开始下载时，把id;文件名;图片url;文件URL
+    //    文件开始下载时，把id;文件名;图片url;文件URL
     
-//    NSString *fileName=[[fileInfo objectForKey:@"id"] stringByAppendingFormat:@";%@;%@;%@;",[fileInfo objectForKey:@"title"],[fileInfo objectForKey:@"pic"],[fileInfo objectForKey:@"url"]];
-
-//    [fileInfo setValue:@"http://padload-cnc.wasu.cn/pcsan08/mams/vod/201409/29/16/201409291618156309b21cbd8_4e58bd54.mp4" forKey:@"url"];
-    if([fileManager fileExistsAtPath:[[SHFileManager getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mp4",[fileInfo objectForKey:@"id"]]]])//存在已经下好的MP4
-    {
-        return;
-    }
-    [fileInfo setValue:[[SHFileManager getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@",[fileInfo objectForKey:@"id"]]] forKey:@"path"];// 没有格式
-    [fileInfo setValue:@"1" forKey:@"state"];
-    ASIHTTPRequest *request=[[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:[fileInfo objectForKey:@"url"]]];
-    request.delegate=self;
-    [request setDownloadDestinationPath:[[SHFileManager getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mp4",[fileInfo objectForKey:@"id"]]]];
-    [request setTemporaryFileDownloadPath:[[SHFileManager getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.temp",[fileInfo objectForKey:@"id"]]]];
-//    [request setDownloadProgressDelegate:self];
-    //    [request setDownloadProgressDelegate:downCell.progress];//设置进度条的代理,这里由于下载是在AppDelegate里进行的全局下载，所以没有使用自带的进度条委托，这里自己设置了一个委托，用于更新UI
-    [request setAllowResumeForFileDownloads:YES];//支持断点续传
-    [request setTimeOutSeconds:120];
-    [request setNumberOfTimesToRetryOnTimeout:3];
-    [request setUserInfo:[NSDictionary dictionaryWithObject:fileInfo forKey:@"file"]];//设置上下文的文件基本信息
-    [request startAsynchronous];
-    if (isBeginDown) {
-        [self.cachesInfolist addObject:fileInfo];
-    }
-    [self.requestlist addObject:request];
-
+    //    NSString *fileName=[[fileInfo objectForKey:@"id"] stringByAppendingFormat:@";%@;%@;%@;",[fileInfo objectForKey:@"title"],[fileInfo objectForKey:@"pic"],[fileInfo objectForKey:@"url"]];
+    
+    //    [fileInfo setValue:@"http://padload-cnc.wasu.cn/pcsan08/mams/vod/201409/29/16/201409291618156309b21cbd8_4e58bd54.mp4" forKey:@"url"];
+    
+    
 }
 -(void) loadCacheList
 {
@@ -452,17 +471,19 @@ static bool __isupdate = NO;
         self.cachesInfolist  = [[NSMutableArray alloc]init];
     }
     NSFileManager *fileManager=[NSFileManager defaultManager];
-   
+    
     for (int i = 0; i<self.cachesInfolist.count; i++) {
         NSMutableDictionary * dic = [self.cachesInfolist objectAtIndex:i];
         
         if([fileManager fileExistsAtPath:[NSString stringWithFormat:@"%@.temp",[dic objectForKey:@"path"]]]){
-            [self beginRequest:dic  isBeginDown:NO];
+            [self beginRequest:[[dic objectForKey:@"id"]intValue] hdType:[[dic objectForKey:@"hdType"]intValue] isBeginDown:NO];
+            
+            
         }
         if([fileManager fileExistsAtPath:[NSString stringWithFormat:@"%@.mp4",[dic objectForKey:@"path"]]]){
             [dic setValue:@"0" forKey:@"state"];
         }
-      
+        
     }
     
 }
@@ -473,7 +494,7 @@ static bool __isupdate = NO;
 {
     NSError *error=[request error];
     NSLog(@"ASIHttpRequest出错了!%@",error);
-
+    
 }
 
 -(void)requestStarted:(ASIHTTPRequest *)request
@@ -487,13 +508,13 @@ static bool __isupdate = NO;
     NSMutableDictionary *fileInfo=[request.userInfo objectForKey:@"file"];
     [fileInfo setValue:[SHFileManager getFileSizeString:[[request responseHeaders] objectForKey:@"Content-Length"]] forKey:@"fileSize"];
     
-   
+    
     
     NSData * data = [NSKeyedArchiver archivedDataWithRootObject:self.cachesInfolist];
     [[NSUserDefaults standardUserDefaults ] setValue:data forKey:DOWNLOAD_INFO_LIST];
     [[NSUserDefaults standardUserDefaults]synchronize];
     
-
+    
 }
 
 -(void)setProgress:(float)newProgress
