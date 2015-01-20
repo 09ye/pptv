@@ -55,8 +55,10 @@
     if (data2) {
         arrayRecord = [NSKeyedUnarchiver unarchiveObjectWithData:data2];
     }
-    
+
     [self request:[[dicPreInfo objectForKey:@"id"]intValue]];
+
+    
 
 }
 -(void) viewDidDisappear:(BOOL)animated
@@ -86,6 +88,9 @@
                 mVideoUrl = [urls objectForKey:[keys objectAtIndex:i]];
                 break;
             }
+        }
+        if ([self.intent.args objectForKey:@"urlPath"] && ![[self.intent.args objectForKey:@"urlPath"] isEqualToString:@""]) {
+            mVideoUrl = [self.intent.args objectForKey:@"urlPath"];
         }
         NSURL * videoUrl = [NSURL URLWithString:mVideoUrl];
         

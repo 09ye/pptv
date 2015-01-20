@@ -97,9 +97,10 @@
    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(volumeChanged:) name:@"AVSystemController_SystemVolumeDidChangeNotification" object:nil];
 
     MPVolumeView *volumeView = [[MPVolumeView alloc] init];
+    volumeView.hidden = YES;
     [self.view addSubview:volumeView];
     [volumeView sizeToFit];
-    NSLog(@"%@",volumeView.subviews);
+
     
 //    self.sliderVolume1 = [[UISlider alloc]init];
 //    self.sliderVolume1.backgroundColor = [UIColor blueColor];

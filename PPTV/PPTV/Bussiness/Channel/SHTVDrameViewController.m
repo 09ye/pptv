@@ -100,19 +100,15 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSDictionary * dic = [mList objectAtIndex:indexPath.row];
     
     if (self.isDownload) {
-         [self showAlertDialog:@"成功添加至离线观看"];
-//        NSMutableDictionary * dic = [[NSMutableDictionary alloc]init];
-//        [dic setValue:[self.detail objectForKey:@"title"] forKey:@"title"];
-//        [dic setValue:[self.detail objectForKey:@"id"] forKey:@"id"];
-//        [dic setValue:[self.detail objectForKey:@"pic"] forKey:@"pic"];
-//        [dic setValue:url forKey:@"url"];
-//        AppDelegate* app=(AppDelegate*)[UIApplication sharedApplication].delegate;
-//        [app beginRequest:dic isBeginDown:YES];
+   
+        AppDelegate* app=(AppDelegate*)[UIApplication sharedApplication].delegate;
+        [app beginRequest:[[dic objectForKey:@"id"]intValue] hdType:hdType isCollection:YES isBeginDown:YES];
     }else{
         if (self.delegate && [self.delegate respondsToSelector:@selector(drameDidSelect:info:)]) {
-            [self.delegate drameDidSelect:self info:[mList objectAtIndex:indexPath.row]];
+            [self.delegate drameDidSelect:self info:dic];
         }
     }
     
@@ -245,6 +241,7 @@
         default:
             break;
     }
+    hdType = sender.tag;
     mViewDownSelect.hidden = YES;
 }
 

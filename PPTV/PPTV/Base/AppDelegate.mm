@@ -16,6 +16,7 @@
 #import "SHDownloadCollectionViewCell.h"
 
 
+
 @implementation AppDelegate
 @synthesize myAddressResult;
 @synthesize locationDistrict;
@@ -391,7 +392,7 @@ static bool __isupdate = NO;
 //
 //}
 #pragma  download
--(void)beginRequest:(int )videoId hdType:(int)hdType  isBeginDown:(BOOL)isBeginDown
+-(void)beginRequest:(int )videoId hdType:(int)hdType isCollection:(BOOL)isCollection isBeginDown:(BOOL)isBeginDown
 {
     ////    如果不存在则创建临时存储目录
     NSFileManager *fileManager=[NSFileManager defaultManager];
@@ -420,15 +421,27 @@ static bool __isupdate = NO;
         NSDictionary *urls = [dic objectForKey:@"list"];
         NSString *key  =[NSString stringWithFormat:@"hd%d",hdType];
         NSString * url = [urls objectForKey:key];
+        
         if (!url || [url isEqualToString:@""]) {
-            UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"对不起，未找到相应的下载资源" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定",nil];
-            [myAlertView show];
-            return;
+            if (![[urls objectForKey:@"hd0"] isEqualToString:@""]) {
+                url = [urls objectForKey:@"hd0"];
+            }else  if (![[urls objectForKey:@"hd1"] isEqualToString:@""]) {
+                url = [urls objectForKey:@"hd1"];
+            }else  if (![[urls objectForKey:@"hd2"] isEqualToString:@""]) {
+                url = [urls objectForKey:@"hd2"];
+            }else{
+                UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"对不起，未找到相应的下载资源" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定",nil];
+                [myAlertView show];
+                return;
+            }
+            
         }
         
+        
         [dic setValue:[[SHFileManager getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@",[dic objectForKey:@"id"]]] forKey:@"path"];// 没有格式
-        [dic setValue:@"1" forKey:@"state"];
+        [dic setValue:[NSNumber numberWithInt:emDownloading] forKey:@"state"];
         [dic setValue:[NSNumber numberWithInt:hdType] forKey:@"hdType"];
+        [dic setValue:[NSNumber numberWithBool:isCollection] forKey:@"isCollection"];
         ASIHTTPRequest *request=[[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:url]];
         request.delegate=self;
         [request setDownloadDestinationPath:[[SHFileManager getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mp4",[dic objectForKey:@"id"]]]];
@@ -476,12 +489,14 @@ static bool __isupdate = NO;
         NSMutableDictionary * dic = [self.cachesInfolist objectAtIndex:i];
         
         if([fileManager fileExistsAtPath:[NSString stringWithFormat:@"%@.temp",[dic objectForKey:@"path"]]]){
-            [self beginRequest:[[dic objectForKey:@"id"]intValue] hdType:[[dic objectForKey:@"hdType"]intValue] isBeginDown:NO];
+            [self beginRequest:[[dic objectForKey:@"id"]intValue] hdType:[[dic objectForKey:@"hdType"]intValue] isCollection:[[dic objectForKey:@"isCollection"]boolValue]  isBeginDown:NO];
             
             
         }
         if([fileManager fileExistsAtPath:[NSString stringWithFormat:@"%@.mp4",[dic objectForKey:@"path"]]]){
-            [dic setValue:@"0" forKey:@"state"];
+            [dic setValue:[NSNumber numberWithInt:emDownLoaded] forKey:@"state"];
+        }else{
+            [self.cachesInfolist removeObject:dic];
         }
         
     }

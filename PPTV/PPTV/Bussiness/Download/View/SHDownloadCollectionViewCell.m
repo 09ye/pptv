@@ -11,6 +11,7 @@
 
 @implementation SHDownloadCollectionViewCell
 @synthesize  detail = _detail;
+@synthesize  isDelete = _isDelete;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -37,28 +38,44 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    self.layer.cornerRadius = 5;
+    self.backgroundColor = [UIColor clearColor];
+    bgView.layer.cornerRadius = 5;
      app  = (AppDelegate*)[UIApplication sharedApplication].delegate;
+}
+-(void)setIsDelete:(BOOL)isDelete_
+{
+    _isDelete = isDelete_;
+    self.btnDelete.hidden = !isDelete_;
+    
 }
 -(void) setDetail:(NSMutableDictionary *)detail_
 {
     _detail = detail_;
+    if ([detail_ objectForKey:@"isCollection"]) {
+        imgCollectionShade.hidden = NO;
+    }
+    if ([detail_ objectForKey:@"isCollection"]) {
+        imgCollectionShade.hidden = NO;
+    }else{
+        imgCollectionShade.hidden = YES;
+    }
     for (int i= 0; i<app.requestlist.count; i++) {
         ASIHTTPRequest *request = [app.requestlist objectAtIndex:i];
         NSDictionary *dic =[request.userInfo objectForKey:@"file"];
         if ([dic objectForKey:@"id"] ==[detail_ objectForKey:@"id"]) {
             mRequest = request;
+            mState = emDownloading;
         }
     }
     mRequest.downloadProgressDelegate = self;
     [mRequest setShouldContinueWhenAppEntersBackground:YES]; //监视网络活动
     //记录过去5秒的平均流量字节/秒
    
-    mState = Downloading;
+   
     [self.imgPic setUrl:[detail_ objectForKey:@"pic"]];
     self.labTitle.text = [detail_ objectForKey:@"title"];
     switch ([[detail_ objectForKey:@"state"]intValue]) {
-        case 0:
+        case emDownLoaded:
             mlabDownstate.text = @"";
             [btnStart setImage:[UIImage imageNamed:@"kaishi"] forState:UIControlStateNormal];
             mlabSize.text = [detail_ objectForKey:@"fileSize"];
@@ -74,7 +91,7 @@
 }
 -(void)setProgress:(float)newProgress
 {
-    mViewProgress.frame = CGRectMake(newProgress*120, 0, 220, 120);
+    mViewProgress.frame = CGRectMake(newProgress*220, 11, 220, 120);
     unsigned long byte = [ASIHTTPRequest averageBandwidthUsedPerSecond];
     int dbyte = byte/5;
     mlabDownstate.text = [NSString stringWithFormat:@"下载中 %d kb/s",dbyte/1024];
@@ -86,20 +103,20 @@
 }
 - (IBAction)btnStartPauseOntouch:(UIButton*)sender {
     
-    if(mState == Waiting){
+    if(mState == emWaiting){
 
-    }else if (mState == Downloading) {
+    }else if (mState == emDownloading) {
         [mRequest clearDelegatesAndCancel];
         [sender setImage:[UIImage imageNamed:@"zhanting"] forState:UIControlStateNormal];
-        mState = Paused;
+        mState = emPaused;
         mlabDownstate.text = @"已暂停";
-    }else if(mState == Paused){
+    }else if(mState == emPaused){
         [mRequest start];
-        [_detail setValue:[NSNumber numberWithInt:Downloading] forKey:@"state"];
-        [app beginRequest:[[_detail objectForKey:@"id"]intValue] hdType:[[_detail objectForKey:@"hd"]intValue] isBeginDown:NO];
+        [_detail setValue:[NSNumber numberWithInt:emDownloading] forKey:@"state"];
+        [app beginRequest:[[_detail objectForKey:@"id"]intValue] hdType:[[_detail objectForKey:@"hd"]intValue] isCollection:[[_detail objectForKey:@"isCollection"]boolValue] isBeginDown:NO];
         [self setDetail:_detail];
         [sender setImage:[UIImage imageNamed:@"xiazai"] forState:UIControlStateNormal];
-        mState = Downloading;
+        mState = emDownloading;
     }else{
         SHIntent * intent = [[SHIntent alloc ]init];
         intent.target = @"SHTVDetailViewController";
@@ -109,4 +126,6 @@
     }
     
 }
+
+
 @end

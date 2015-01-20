@@ -7,6 +7,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SHDownloadViewController">
             <connections>
+                <outlet property="btnClearAll" destination="kti-qK-srb" id="rfS-6r-Iue"/>
+                <outlet property="btnEdit" destination="64K-Ak-qBS" id="L34-n8-Ij3"/>
                 <outlet property="mCollection" destination="QBI-80-sVt" id="RCb-4G-cbU"/>
                 <outlet property="mProgressSize" destination="bOo-BY-0le" id="JGG-T3-chM"/>
                 <outlet property="mViewNoData" destination="9tf-x1-1Aj" id="0tW-vi-FYp"/>
@@ -24,6 +26,32 @@
                 <view contentMode="scaleToFill" id="lm2-wE-xhs">
                     <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="64K-Ak-qBS">
+                            <rect key="frame" x="951" y="10" width="50" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.99215686274509807" green="0.52549019607843139" blue="0.094117647058823528" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" title="编辑">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="btnEditOntouch:" destination="-1" eventType="touchUpInside" id="EcD-WR-vyI"/>
+                            </connections>
+                        </button>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="kti-qK-srb">
+                            <rect key="frame" x="884" y="10" width="50" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.99215686270000003" green="0.52549019610000003" blue="0.094117647060000004" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" title="清空">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="btnClearAllOntouch:" destination="-1" eventType="touchUpInside" id="rLc-xN-p3d"/>
+                            </connections>
+                        </button>
+                    </subviews>
                     <color key="backgroundColor" red="0.21176470588235294" green="0.21176470588235294" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <view contentMode="scaleToFill" id="ysW-yC-Znj">
@@ -90,7 +118,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="30" minimumInteritemSpacing="20" id="Z2j-YH-3K0">
-                        <size key="itemSize" width="220" height="180"/>
+                        <size key="itemSize" width="230" height="190"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>

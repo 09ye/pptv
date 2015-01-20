@@ -8,13 +8,20 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="collection_download_cell" id="gTV-IL-0wX" customClass="SHDownloadCollectionViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="220" height="180"/>
+            <rect key="frame" x="0.0" y="0.0" width="230" height="190"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="220" height="180"/>
+                <rect key="frame" x="0.0" y="0.0" width="230" height="190"/>
                 <subviews>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uea-BH-upJ">
+                        <rect key="frame" x="0.0" y="11" width="220" height="180"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg_download_shade.png" translatesAutoresizingMaskIntoConstraints="NO" id="MlY-Um-ag0">
+                        <rect key="frame" x="0.0" y="1" width="220" height="120"/>
+                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="-" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8f6-Bb-PW7">
-                        <rect key="frame" x="10" y="124" width="210" height="22"/>
+                        <rect key="frame" x="10" y="134" width="210" height="22"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
@@ -23,14 +30,14 @@
                         </userDefinedRuntimeAttributes>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="default168x108.png" translatesAutoresizingMaskIntoConstraints="NO" id="uzX-5X-SIA" customClass="SHImageView">
-                        <rect key="frame" x="0.0" y="0.0" width="220" height="120"/>
+                        <rect key="frame" x="0.0" y="11" width="220" height="120"/>
                     </imageView>
                     <view alpha="0.40000000000000002" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CVe-W8-d4h">
-                        <rect key="frame" x="0.0" y="0.0" width="220" height="120"/>
+                        <rect key="frame" x="0.0" y="11" width="220" height="120"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="-" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wwx-Xc-W3c">
-                        <rect key="frame" x="10" y="153" width="210" height="22"/>
+                        <rect key="frame" x="10" y="163" width="210" height="22"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
@@ -39,7 +46,7 @@
                         </userDefinedRuntimeAttributes>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UZk-so-vzL">
-                        <rect key="frame" x="172" y="78" width="40" height="40"/>
+                        <rect key="frame" x="172" y="89" width="40" height="40"/>
                         <state key="normal" image="xiazai.png">
                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -49,17 +56,26 @@
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="下载中" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tKy-5G-k4t">
-                        <rect key="frame" x="0.0" y="89" width="160" height="22"/>
+                        <rect key="frame" x="0.0" y="100" width="160" height="22"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mtg-IL-06Q">
+                        <rect key="frame" x="190" y="0.0" width="40" height="40"/>
+                        <state key="normal" title="Button" image="ic_lixian_delete.png">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <connections>
+                <outlet property="bgView" destination="uea-BH-upJ" id="ltz-5J-M7T"/>
+                <outlet property="btnDelete" destination="Mtg-IL-06Q" id="e7h-pt-uci"/>
                 <outlet property="btnStart" destination="UZk-so-vzL" id="Tnf-tL-s0T"/>
+                <outlet property="imgCollectionShade" destination="MlY-Um-ag0" id="vbF-Np-n2X"/>
                 <outlet property="imgPic" destination="uzX-5X-SIA" id="shV-xP-sfb"/>
                 <outlet property="labTitle" destination="8f6-Bb-PW7" id="9E3-br-LIt"/>
                 <outlet property="mViewProgress" destination="CVe-W8-d4h" id="7k8-9f-QPy"/>
@@ -69,7 +85,9 @@
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="bg_download_shade.png" width="426" height="260"/>
         <image name="default168x108.png" width="168" height="108"/>
+        <image name="ic_lixian_delete.png" width="66" height="66"/>
         <image name="xiazai.png" width="56" height="56"/>
     </resources>
 </document>

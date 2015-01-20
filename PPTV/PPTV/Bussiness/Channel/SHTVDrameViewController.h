@@ -30,6 +30,7 @@
     NSArray * mListCategory;
     NSMutableArray * arrayBtnCate;
     NSString * mCurrentGroup;
+    int  hdType ;
     
 }
 @property (nonatomic,assign) id <SHTVDrameViewControllerDelegate> delegate;

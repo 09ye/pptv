@@ -25,4 +25,6 @@
 +(CGFloat) getProgress:(float)totalSize currentSize:(float)currentSize;
 
 +(float) currentCachesFileSize;
+// 完整路径
++ (BOOL)deleteFileOfPath :(NSString*) file;
 @end

@@ -7,15 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-typedef enum
-{
-    DownLoaded,// 完成
-    Downloading,//下载中
-    Paused,//暂停
-    Waiting,// 等待
-    
-    
-}DownLoadState;
+
+@class SHDownloadCollectionViewCell;
+
 @interface SHDownloadCollectionViewCell : UICollectionViewCell
 {
     
@@ -23,6 +17,9 @@ typedef enum
     __weak IBOutlet UILabel *mlabSize;
     __weak IBOutlet UIButton *btnStart;
     __weak IBOutlet UILabel *mlabDownstate;
+    __weak IBOutlet UIView *bgView;
+    __weak IBOutlet UIImageView *imgCollectionShade;
+
     ASIHTTPRequest *mRequest;
     DownLoadState  mState;
     AppDelegate *app;
@@ -31,8 +28,12 @@ typedef enum
 @property (weak, nonatomic) IBOutlet SHImageView *imgPic;
 @property (weak, nonatomic) IBOutlet UILabel *labTitle;
 @property (nonatomic,strong) NSMutableDictionary * detail;
+@property (nonatomic, assign) BOOL isDelete;
 @property (nonatomic,assign) DownLoadState downLoadState;
+@property (weak, nonatomic) IBOutlet UIButton *btnDelete;
+
 
 - (IBAction)btnStartPauseOntouch:(id)sender;
+
 
 @end

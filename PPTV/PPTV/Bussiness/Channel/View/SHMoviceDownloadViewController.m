@@ -109,6 +109,6 @@
     [dic setValue:[self.detail objectForKey:@"pic"] forKey:@"pic"];
     [dic setValue:url forKey:@"url"];
     AppDelegate* app=(AppDelegate*)[UIApplication sharedApplication].delegate;
-    [app beginRequest:[[self.detail objectForKey:@"id"]intValue] hdType:hdType isBeginDown:YES];
+    [app beginRequest:[[self.detail objectForKey:@"id"]intValue] hdType:hdType isCollection:NO isBeginDown:YES];
 }
 @end

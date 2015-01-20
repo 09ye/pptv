@@ -18,7 +18,11 @@
     __weak IBOutlet UIView *mViewNoData;
     __weak IBOutlet UICollectionView *mCollection;
     AppDelegate *app;
+    __weak IBOutlet UIButton *btnEdit;
+    __weak IBOutlet UIButton *btnClearAll;
 }
 @property(nonatomic,retain) UINavigationController *navController; // If this view controller has been pushed onto a navigation controller, return it.
+- (IBAction)btnEditOntouch:(id)sender;
+- (IBAction)btnClearAllOntouch:(id)sender;
 
 @end

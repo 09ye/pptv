@@ -10,6 +10,9 @@
 #import "ASIHTTPRequest.h"
 
 @interface SHDownloadViewController ()
+{
+    BOOL isDelete;
+}
 
 @end
 
@@ -23,6 +26,8 @@
     }else{
         self.view.frame = CGRectMake(0, 64, 1024, 648);
     }
+    btnClearAll.layer.cornerRadius = 5;
+    btnEdit.layer.cornerRadius = 5;
     app  = (AppDelegate*)[UIApplication sharedApplication].delegate;
     NSString* path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] ;
     
@@ -62,11 +67,10 @@
     SHDownloadCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"collection_download_cell" forIndexPath:indexPath];
 //    NSDictionary * dic = [app.downinglist objectAtIndex:indexPath.row];
     NSDictionary * dic=[app.cachesInfolist objectAtIndex:indexPath.row];
-    cell.detail = [dic mutableCopy];;
-       
-    
-    
-    
+    cell.detail = [dic mutableCopy];
+    cell.isDelete = isDelete;
+    cell.btnDelete.tag = indexPath.row;
+    [cell.btnDelete addTarget:self action:@selector(btnDeleteOntouch:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
 }
 
@@ -82,9 +86,16 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    
-    
+    NSDictionary * dic = [app.cachesInfolist objectAtIndex:indexPath.row];
+    NSFileManager *fileManager=[NSFileManager defaultManager];
+    if([fileManager fileExistsAtPath:[NSString stringWithFormat:@"%@.mp4",[dic objectForKey:@"path"]]]){
+        SHIntent *intent = [[SHIntent alloc]init];
+        intent.target = @"SHTVDetailViewController";
+        [intent.args setValue:dic forKeyPath:@"detailInfo"];
+        [intent.args setValue:[NSString stringWithFormat:@"%@.mp4",[dic objectForKey:@"path"]] forKey:@"urlPath"];
+        intent.container = self.navController;
+        [[UIApplication sharedApplication]open:intent];
+    }
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -101,4 +112,37 @@
 }
 */
 
+- (IBAction)btnEditOntouch:(id)sender {
+    if (btnClearAll.hidden) {
+        btnClearAll.hidden = NO;
+        [btnEdit setTitle:@"完成" forState:UIControlStateNormal];
+        isDelete = YES;
+    }else{
+        btnClearAll.hidden = YES;
+        [btnEdit setTitle:@"编辑" forState:UIControlStateNormal];
+        isDelete = NO;
+    }
+    [mCollection reloadData];
+}
+
+- (IBAction)btnClearAllOntouch:(id)sender {
+    [app.cachesInfolist removeAllObjects];
+     [SHFileManager deleteFile:SHFileManager.getTargetFloderPath];
+    NSData * data = [NSKeyedArchiver archivedDataWithRootObject:app.cachesInfolist ];
+    [[NSUserDefaults standardUserDefaults ] setValue:data forKey:DOWNLOAD_INFO_LIST];
+    [[NSUserDefaults standardUserDefaults]synchronize];
+    [mCollection reloadData];
+}
+
+-(void) btnDeleteOntouch:(UIButton *)sender
+{
+    
+    NSDictionary * dic = [app.cachesInfolist objectAtIndex:sender.tag];
+    [app.cachesInfolist removeObjectAtIndex:sender.tag];
+    [SHFileManager deleteFileOfPath:[dic objectForKey:@"path"]];
+    NSData * data = [NSKeyedArchiver archivedDataWithRootObject:app.cachesInfolist ];
+    [[NSUserDefaults standardUserDefaults ] setValue:data forKey:DOWNLOAD_INFO_LIST];
+    [[NSUserDefaults standardUserDefaults]synchronize];
+    [mCollection reloadData];
+}
 @end

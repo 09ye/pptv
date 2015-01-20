@@ -66,3 +66,13 @@
 #define UIScreenWidth MAX([[UIScreen mainScreen]bounds].size.width ,[[UIScreen mainScreen]bounds].size.height)
 #define UIScreenHeight MIN([[UIScreen mainScreen]bounds].size.width ,[[UIScreen mainScreen]bounds].size.height)
 
+typedef enum
+{
+    emDownLoaded,// 完成
+    emDownloading,//下载中
+    emPaused,//暂停
+    emWaiting,// 等待
+    
+    
+}DownLoadState;
+

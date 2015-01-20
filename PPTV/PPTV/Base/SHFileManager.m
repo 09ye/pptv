@@ -121,4 +121,26 @@
     return cacheSize;
     
 }
+
++ (BOOL)deleteFileOfPath :(NSString*) file
+{
+   NSFileManager* fileManager=[NSFileManager defaultManager];
+    BOOL blHave=[[NSFileManager defaultManager] fileExistsAtPath:file];
+    if (!blHave) {
+        NSLog(@"no  have");
+        return NO;
+    }else {
+        NSLog(@" have");
+        BOOL blDele= [fileManager removeItemAtPath:file error:nil];
+        if (blDele) {
+            NSLog(@"dele success");
+            return YES;
+        }else {
+            NSLog(@"dele fail");
+            return NO;
+        }
+        
+    }
+}
+
 @end

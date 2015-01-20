@@ -928,7 +928,6 @@
 		77566D9B1A18960D00194562 /* SHTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHTools.h; sourceTree = "<group>"; };
 		77566D9C1A18960D00194562 /* SHUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHUser.h; sourceTree = "<group>"; };
 		77566D9D1A18960D00194562 /* SHVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHVersion.h; sourceTree = "<group>"; };
-		77566D9E1A18960D00194562 /* wax.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wax.h; sourceTree = "<group>"; };
 		77566D9F1A18960D00194562 /* libCore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libCore.a; sourceTree = "<group>"; };
 		77566DA21A18960E00194562 /* BMapKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMapKit.h; sourceTree = "<group>"; };
 		77566DA31A18960E00194562 /* BMKActionPaopaoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMKActionPaopaoView.h; sourceTree = "<group>"; };
@@ -2195,7 +2194,6 @@
 				77566D9B1A18960D00194562 /* SHTools.h */,
 				77566D9C1A18960D00194562 /* SHUser.h */,
 				77566D9D1A18960D00194562 /* SHVersion.h */,
-				77566D9E1A18960D00194562 /* wax.h */,
 			);
 			path = Core;
 			sourceTree = "<group>";

@@ -74,7 +74,7 @@
 +(BOOL)containsObject:(NSMutableArray *)array forKey:(NSString *)key forValue:(NSString *)value
 {
     for (NSDictionary *dic in array) {
-        if ([[dic objectForKey:key] isEqualToString:value]) {
+        if ([[NSString stringWithFormat:@"%@",[dic objectForKey:key]] isEqualToString:value]) {
             return YES;
             
         }

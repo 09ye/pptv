@@ -55,7 +55,7 @@
 
 @property(nonatomic,strong)NSMutableArray *cachesInfolist;//下载文件信息 id name pic url
 
--(void)beginRequest:(int )videoId hdType:(int)hdType isBeginDown:(BOOL)isBeginDown;
+-(void)beginRequest:(int )videoId hdType:(int)hdType isCollection:(BOOL)isCollection isBeginDown:(BOOL)isBeginDown ;
 
 
 
