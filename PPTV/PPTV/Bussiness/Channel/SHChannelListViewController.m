@@ -9,6 +9,7 @@
 #import "SHChannelListViewController.h"
 #import "SHImgVertiaclViewCell.h"
 
+
 @interface SHChannelListViewController ()
 
 @end
@@ -31,8 +32,6 @@
     }
     
     [_refreshHeaderView refreshLastUpdatedDate];
-    
-   
 //    mFilterView = [[[NSBundle mainBundle]loadNibNamed:@"SHFilterView" owner:nil options:nil] objectAtIndex:0];
     mFilterView = [[SHFilterView alloc]initWithFrame:self.view.bounds];
    

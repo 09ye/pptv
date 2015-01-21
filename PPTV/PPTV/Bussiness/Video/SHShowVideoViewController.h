@@ -9,6 +9,7 @@
 #import "SHViewController.h"
 #import "Utilities.h"
 #import "VSegmentSlider.h"
+#import <MediaPlayer/MediaPlayer.h>
 @class SHShowVideoViewController;
 @protocol SHShowVideoViewControllerDelegate <NSObject>
 
@@ -38,6 +39,9 @@
     BOOL isLock;
     UISlider * mSliderSystemVolume;
     UISlider * mSliderVolume;
+    
+    MPMoviePlayerViewController *playerViewController;
+    NSDictionary *mAdVideo;
 
 }
 @property (weak, nonatomic) IBOutlet UIView *viewMenuDown;
@@ -109,5 +113,7 @@
 - (IBAction)btnCloseOnTouch:(id)sender;
 
 -(NSDictionary *) getRecordInfo;
+
+-(void) request:(NSString *) aid gid:(NSString*)gid ;
 
 @end

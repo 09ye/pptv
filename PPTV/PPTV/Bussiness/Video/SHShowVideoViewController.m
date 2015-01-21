@@ -122,6 +122,8 @@
     [mSliderVolume addTarget:self action:@selector(sliderVolumeOntouch:) forControlEvents:UIControlEventValueChanged];
     
 //     self.view.userInteractionEnabled = NO;
+    
+
 
 }
 #pragma  手势
@@ -379,7 +381,7 @@
     
     mDuration = [player getDuration];
     [player seekTo:mCurPostion];
-    [player start];
+//    [player start];
     
     [self setBtnEnableStatus:YES];
 //    self.view.userInteractionEnabled = YES;
@@ -468,7 +470,17 @@
 - (void)mediaPlayer:(VMediaPlayer *)player bufferingEnd:(id)arg
 {
     if (![Utilities isLocalMedia:self.videoURL]) {
-        [player start];
+       
+        
+        if ( playerViewController) {
+            [player pause];
+        }else{
+            [player start];
+        }
+
+        
+
+        
         [self changeStartPauseImg:NO];
         //        [self.startPause setBackgroundImage:[UIImage imageNamed:@"mediacontroller_pause"] forState:UIControlStateNormal];
         //		[self.startPause setTitle:@"Pause" forState:UIControlStateNormal];
@@ -763,7 +775,8 @@
 }
 
 -(IBAction)startPauseButtonAction:(id)sender
-{ [self resetTimeViewhidden];
+{
+    [self resetTimeViewhidden];
     BOOL isPlaying = [mMPayer isPlaying];
     if (isPlaying) {
         [mMPayer pause];
@@ -815,7 +828,8 @@
 }
 
 -(IBAction)switchVideoViewModeButtonAction:(id)sender
-{ [self resetTimeViewhidden];
+{
+    [self resetTimeViewhidden];
     static emVMVideoFillMode modes[] = {
         VMVideoFillModeFit,
         VMVideoFillMode100,
@@ -1060,5 +1074,93 @@
     }
     return cache;
 }
+#pragma ads
+-(void) request:(NSString *) aid gid:(NSString *)gid ;
+{
+    
+    SHPostTask *post  = [[SHPostTask alloc]init];
+    post.URL = URL_ADS;
+    NSString * postString  =[NSString stringWithFormat:@"aid=%@&fmt=json&ver=1&aw=%d&ah=%d&gid=%@",aid,(int)UIScreenWidth,(int)UIScreenHeight,gid];
+    NSData * data = [postString dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
+    post.postData = data;
+    [post.postHeader setValue:@"1" forKey:@"m"];
+    post.delegate = self;
+    [post start:^(SHTask *task) {
+        NSDictionary * dic = [[task result]mutableCopy];
+        if([[dic allKeys]containsObject:@"ad"]){
+            NSArray * ads = [dic objectForKey:@"ad"];
+            if (ads.count>0) {
+                NSArray *adarray = [[ads objectAtIndex:0]objectForKey:@"creative"];
+                if (adarray.count>0) {
+                    mAdVideo= [adarray objectAtIndex:0];
+                    NSArray * mediafiles = [mAdVideo objectForKey:@"mediafiles"];
+                    if (mediafiles.count>0) {
+                        NSString * url = [[mediafiles objectAtIndex:0]objectForKey:@"url"];
+                        [self playMovie:url];
+                        
+                    }else{
+                        //                        [self  bootSetting];
+                    }
+                    
+                }else{
+                    //                    [self  bootSetting];
+                }
+            }else{
+                //                [self  bootSetting];
+            }
+        }else{
+            //            [self  bootSetting];
+        }
+        
+        
+    } taskWillTry:^(SHTask *task) {
+        
+    } taskDidFailed:^(SHTask *task) {
+        //        [self  bootSetting];
+    }];
+    
+}
+-(void)playMovie:(NSString *)fileName{
+    
+    NSURL *url = [NSURL URLWithString:fileName];
+    playerViewController =[[MPMoviePlayerViewController alloc]     initWithContentURL:url];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(playVideoFinished:) name:MPMoviePlayerPlaybackDidFinishNotification object:[playerViewController moviePlayer]];
+    playerViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    playerViewController.view.frame = self.view.bounds;
+    [self.view addSubview:playerViewController.view];
+    MPMoviePlayerController *player = [playerViewController moviePlayer];
+    player.movieSourceType = MPMovieSourceTypeFile;
+    player.shouldAutoplay = YES;
+    [player setControlStyle:MPMovieControlStyleNone];
+//    [player setFullscreen:YES];
+//    player.scalingMode = MPMovieScalingModeFill;
+    NSTimeInterval length = [player duration];
+    NSLog(@"%f",length);
+
+    [player prepareToPlay];
+    [player play];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+
+    // 倒计时时间
+    
+}
+
+#pragma mark -------------------视频播放结束委托--------------------
+
+/*
+ @method 当视频播放完毕释放对象
+ */
+- (void) playVideoFinished:(NSNotification *)theNotification//当点击Done按键或者播放完毕时调用此函数
+{
+    MPMoviePlayerController *playerAD = [theNotification object];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerPlaybackDidFinishNotification object:playerAD];
+    [playerAD stop];
+    [playerViewController.view removeFromSuperview];
+    playerViewController = nil;
+    //    [self  bootSetting];
+    [mMPayer start];
+    
+}
+
 
 @end

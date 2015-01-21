@@ -48,7 +48,7 @@
          mShowViewControll.isfull = NO;
         mShowViewControll.view.frame = mViewVideo.frame;
     }
-
+    [mShowViewControll request:@"102349" gid:@"p4840"];// ad
     [self.view addSubview:mShowViewControll.view];
     
     arrayCollect = [[NSMutableArray alloc]init];

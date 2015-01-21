@@ -1,3 +1,4 @@
+
 //
 //  SHMainViewController.m
 //  crowdfunding-arcturus
@@ -16,6 +17,9 @@
     SHGuideViewController  *guideVC;
     MPMoviePlayerViewController* playerViewController;
     NSDictionary *mAdVideo;
+    int duration;
+    NSTimer *mTimer ;
+    UILabel * mlabCountdown;
 }
 
 @end
@@ -171,7 +175,8 @@
 {
     SHPostTask *post  = [[SHPostTask alloc]init];
     post.URL = URL_ADS;
-    NSData * data = [@"aid=101525&fmt=json&ver=1&m=1" dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
+    NSString * stringPost  =[NSString stringWithFormat:@"aid=102357&fmt=json&ver=1&aw=%d&ah=%d",(int)UIScreenWidth,(int)UIScreenHeight];
+    NSData * data = [stringPost dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
     post.postData = data;
     [post.postHeader setValue:@"1" forKey:@"m"];
     post.delegate = self;
@@ -183,10 +188,13 @@
                 NSArray *adarray = [[ads objectAtIndex:0]objectForKey:@"creative"];
                 if (adarray.count>0) {
                     mAdVideo= [adarray objectAtIndex:0];
+                    duration= [[mAdVideo objectForKey:@"duration"]intValue];
                     NSArray * mediafiles = [mAdVideo objectForKey:@"mediafiles"];
                     if (mediafiles.count>0) {
                         NSString * url = [[mediafiles objectAtIndex:0]objectForKey:@"url"];
-                        [self playMovie:url];
+                       
+//                        [self playMovie:url];
+                        [self showGuidePng:url];
                         
                     }else{
                         [self  bootSetting];
@@ -226,7 +234,7 @@
     player.scalingMode = MPMovieScalingModeFill;
     NSTimeInterval length = [player duration];
     NSLog(@"%f",length);
-    [player.view setFrame:self.view.bounds];
+//    [player.view setFrame:self.view.bounds];
     [player prepareToPlay];
     [player play];
     
@@ -247,5 +255,34 @@
     [playerViewController.view removeFromSuperview];
     [self  bootSetting];
     
+}
+-(void)showGuidePng:(NSString * )url
+{
+    SHImageView * image  = [[SHImageView alloc]initWithFrame:self.view.bounds];
+    [image setUrl:url];
+    [self.view addSubview:image];
+    mlabCountdown  = [[UILabel alloc]initWithFrame:CGRectMake(900, 20, 50, 30)];
+    mlabCountdown.layer.cornerRadius = 5;
+    mlabCountdown.text = [NSString stringWithFormat:@"%d",duration];
+    mlabCountdown.textAlignment = NSTextAlignmentCenter;
+    mlabCountdown.textColor = [UIColor whiteColor];
+    mlabCountdown.backgroundColor = [SHSkin.instance colorOfStyle:@"ColorStyleLight"];
+    [self.view addSubview:mlabCountdown];
+    
+     mTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(showGuidePngFinished:) userInfo:image repeats:YES];
+
+}
+-(void)showGuidePngFinished:(NSTimer *)theTimer
+{
+    if (duration == 0) {
+        SHImageView * image  = theTimer.userInfo ;
+        [image removeFromSuperview];
+        [mlabCountdown removeFromSuperview];
+        [self  bootSetting];
+        [mTimer invalidate];
+    }
+  
+    duration--;
+    mlabCountdown.text = [NSString stringWithFormat:@"%d",duration];
 }
 @end
