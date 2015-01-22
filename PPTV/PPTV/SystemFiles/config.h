@@ -55,7 +55,7 @@
 //notification
 #define NOTIFICATION_LOGIN_SUCCESSFUL @"notification_login_successful"
 #define NOTIFY_SinaAuthon_Success     @"SinaAuthonSuccess"
-
+#define NOTIFICATION_INTENT_CANCLE_SUCCESSFUL     @"notification_intent_cancle_successful"
 
 
 #define IPHONE5 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)

@@ -261,7 +261,7 @@
     SHImageView * image  = [[SHImageView alloc]initWithFrame:self.view.bounds];
     [image setUrl:url];
     [self.view addSubview:image];
-    mlabCountdown  = [[UILabel alloc]initWithFrame:CGRectMake(900, 20, 50, 30)];
+    mlabCountdown  = [[UILabel alloc]initWithFrame:CGRectMake(950, 40, 40, 30)];
     mlabCountdown.layer.cornerRadius = 5;
     mlabCountdown.text = [NSString stringWithFormat:@"%d",duration];
     mlabCountdown.textAlignment = NSTextAlignmentCenter;

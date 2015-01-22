@@ -37,7 +37,8 @@
     mShowViewControll.delegate = self;
     mShowViewControll.view.frame = CGRectMake(0, 0, UIScreenWidth, UIScreenHeight);
     mShowViewControll.isfull = YES;
-    [mShowViewControll request:@"102345" gid:@"p4841"];// ad
+//    mShowViewControll.navController = self.navigationController;
+    mShowViewControll.videoType = emDemand;
     [self.view addSubview:mShowViewControll.view];
     
     arrayCollect = [[NSMutableArray alloc]init];
@@ -62,6 +63,7 @@
     
 
 }
+
 -(void) viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:YES];
@@ -69,7 +71,7 @@
 }
 -(void) request:(NSInteger)videoID
 {
- 
+    [mShowViewControll request:@"102345" gid:@"p4841"];// ad
     [self recordVideoDate];
     
     SHPostTaskM * post = [[SHPostTaskM alloc]init];

@@ -28,8 +28,12 @@
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     // Do any additional setup after loading the view from its nib.
-//    self.title = [self.intent.args valueForKey:@"title"];
-    NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:[[self.intent.args valueForKey:@"detailInfo"]objectForKey:@"url"]]];
+    self.title = [self.intent.args valueForKey:@"title"];
+    NSString * url  = [[self.intent.args valueForKey:@"detailInfo"]objectForKey:@"url"];
+    if ([self.intent.args objectForKey:@"url"]) {
+        url = [self.intent.args objectForKey:@"url"];
+    }
+    NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
      [mWebView setScalesPageToFit:YES];
     [mWebView loadRequest:request];
     mWebView.delegate = self;

@@ -123,8 +123,17 @@
     
 //     self.view.userInteractionEnabled = NO;
     
+    [self requestPauseADS];
+    labAdTime.layer.cornerRadius = 5;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationIntentCancle:) name:NOTIFICATION_INTENT_CANCLE_SUCCESSFUL object:nil];
+    
 
-
+}
+- (void)notificationIntentCancle:(NSObject*)sender
+{
+    if (self.playerViewController && self.playerViewController.moviePlayer.playbackState == MPMoviePlaybackStatePaused) {
+        [self.playerViewController.moviePlayer play];
+    }
 }
 #pragma  手势
 -(void)handelPan:(UIPanGestureRecognizer*)gestureRecognizer{
@@ -212,7 +221,6 @@
     
 }
 
-
 -(void)resetTimeViewhidden
 {
     if (mtimeViewHidden) {
@@ -231,6 +239,10 @@
         [mtimeViewHidden invalidate];
         mtimeViewHidden = nil;
     }
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
 }
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -472,7 +484,7 @@
     if (![Utilities isLocalMedia:self.videoURL]) {
        
         
-        if ( playerViewController) {
+        if ( self.playerViewController) {
             [player pause];
         }else{
             [player start];
@@ -780,7 +792,12 @@
     BOOL isPlaying = [mMPayer isPlaying];
     if (isPlaying) {
         [mMPayer pause];
+        if (mAdPauseInfo) {
+            mViewPauseAD.hidden = NO;
+            [mViewPauseAD bringSubviewToFront:self.view];
+        }
     } else {
+        mViewPauseAD.hidden = YES;
         [mMPayer start];
     }
     [self changeStartPauseImg:isPlaying];
@@ -950,6 +967,38 @@
     }
     [self changeVolumImg:mSliderVolume.value];
 }
+
+- (IBAction)btnADPauseDeleteOntouch:(id)sender {
+    
+    mViewPauseAD.hidden = YES;
+}
+
+- (IBAction)btnADPauseOntouch:(id)sender {
+    SHIntent *intent = [[SHIntent alloc]init];
+    intent.target = @"WebViewController";
+    [intent.args setValue:@"广告" forKeyPath:@"title"];
+    [intent.args setValue:[mAdPauseInfo objectForKey:@"value"] forKeyPath:@"url"];
+    [intent.args setValue:mAdPauseInfo forKeyPath:@"detailInfo"];
+//    intent.container = self.navController;
+    [[UIApplication sharedApplication]open:intent];
+    
+}
+-(void)btnADPausePreviousOntouch :(UIButton*)sender
+{
+   
+
+    NSArray * mediafiles = [mAdVideo objectForKey:@"mediafiles"];
+    NSDictionary * dic = [mediafiles objectAtIndex:0];
+    
+    SHIntent *intent = [[SHIntent alloc]init];
+    intent.target = @"WebViewController";
+    [intent.args setValue:@"广告" forKeyPath:@"title"];
+    [intent.args setValue:[dic objectForKey:@"value"] forKeyPath:@"url"];
+    [intent.args setValue:dic forKeyPath:@"detailInfo"];
+//        intent.container = self.navController;
+    [[UIApplication sharedApplication]open:intent];
+    [self.playerViewController.moviePlayer pause];
+}
 - (void)volumeChanged:(NSNotification *)notification
 {
     // service logic here.
@@ -1075,12 +1124,51 @@
     return cache;
 }
 #pragma ads
+-(void) requestPauseADS
+{
+    int aid = 102351;
+    if (self.videoType == emDemand) {
+        aid = 102347;
+    }
+    SHPostTask *post  = [[SHPostTask alloc]init];
+    post.URL = URL_ADS;
+    NSString * postString  =[NSString stringWithFormat:@"aid=%d&fmt=json&ver=1&aw=%d&ah=%d&gid=%d",aid,320,570,self.videoType];
+    NSData * data = [postString dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
+    post.postData = data;
+    [post.postHeader setValue:@"1" forKey:@"m"];
+    post.delegate = self;
+    [post start:^(SHTask *task) {
+        NSDictionary * dic = [[task result]mutableCopy];
+        if([[dic allKeys]containsObject:@"ad"]){
+            NSArray * ads = [dic objectForKey:@"ad"];
+            if (ads.count>0) {
+                NSArray *adarray = [[ads objectAtIndex:0]objectForKey:@"creative"];
+                if (adarray.count>0) {
+                    NSArray * mediafiles = [[adarray objectAtIndex:0] objectForKey:@"mediafiles"];
+                    if (mediafiles.count>0) {
+                        mAdPauseInfo  = [mediafiles objectAtIndex:0];
+                        NSString * url = [mAdPauseInfo objectForKey:@"url"];
+                        [imgADPause setUrl:url];
+
+                    }
+                    
+                }
+            }
+        }
+        
+        
+    } taskWillTry:^(SHTask *task) {
+        
+    } taskDidFailed:^(SHTask *task) {
+
+    }];
+}
 -(void) request:(NSString *) aid gid:(NSString *)gid ;
 {
     
     SHPostTask *post  = [[SHPostTask alloc]init];
     post.URL = URL_ADS;
-    NSString * postString  =[NSString stringWithFormat:@"aid=%@&fmt=json&ver=1&aw=%d&ah=%d&gid=%@",aid,(int)UIScreenWidth,(int)UIScreenHeight,gid];
+    NSString * postString  =[NSString stringWithFormat:@"aid=%@&fmt=json&ver=1&aw=%d&ah=%d&gid=%d",aid,(int)UIScreenWidth,(int)UIScreenHeight,self.videoType];
     NSData * data = [postString dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
     post.postData = data;
     [post.postHeader setValue:@"1" forKey:@"m"];
@@ -1123,12 +1211,12 @@
 -(void)playMovie:(NSString *)fileName{
     
     NSURL *url = [NSURL URLWithString:fileName];
-    playerViewController =[[MPMoviePlayerViewController alloc]     initWithContentURL:url];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(playVideoFinished:) name:MPMoviePlayerPlaybackDidFinishNotification object:[playerViewController moviePlayer]];
-    playerViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    playerViewController.view.frame = self.view.bounds;
-    [self.view addSubview:playerViewController.view];
-    MPMoviePlayerController *player = [playerViewController moviePlayer];
+    self.playerViewController =[[MPMoviePlayerViewController alloc]     initWithContentURL:url];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(playVideoFinished:) name:MPMoviePlayerPlaybackDidFinishNotification object:[self.playerViewController moviePlayer]];
+    self.playerViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    self.playerViewController.view.frame = self.view.bounds;
+    [self.view addSubview:self.playerViewController.view];
+    MPMoviePlayerController *player = [self.playerViewController moviePlayer];
     player.movieSourceType = MPMovieSourceTypeFile;
     player.shouldAutoplay = YES;
     [player setControlStyle:MPMovieControlStyleNone];
@@ -1139,10 +1227,31 @@
 
     [player prepareToPlay];
     [player play];
+    labAdTime.hidden = NO;
+    labAdTime.text = [NSString stringWithFormat:@"%@",[mAdVideo objectForKey:@"duration"]];
+    [labAdTime removeFromSuperview];
+    [self.view addSubview:labAdTime];
+//    [labAdTime bringSubviewToFront:self.view];
+    UIButton * button  = [[UIButton alloc]initWithFrame:self.playerViewController.view.bounds];
+    [button addTarget:self action:@selector(btnADPausePreviousOntouch:) forControlEvents:UIControlEventTouchUpInside];
+    [self.playerViewController.view addSubview:button];
+    
+
+    
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
 
     // 倒计时时间
+    mTimerAD = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(showGuidePngFinished:) userInfo:nil repeats:YES];
     
+}
+-(void)showGuidePngFinished:(NSTimer *)theTimer
+{
+  
+    NSTimeInterval length = [self.playerViewController.moviePlayer currentPlaybackTime];
+    int time  = [[mAdVideo objectForKey:@"duration"]intValue] -(int)length;
+    labAdTime.text = [NSString stringWithFormat:@"%d",time];
+    
+
 }
 
 #pragma mark -------------------视频播放结束委托--------------------
@@ -1155,10 +1264,15 @@
     MPMoviePlayerController *playerAD = [theNotification object];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerPlaybackDidFinishNotification object:playerAD];
     [playerAD stop];
-    [playerViewController.view removeFromSuperview];
-    playerViewController = nil;
-    //    [self  bootSetting];
+    [self.playerViewController.view removeFromSuperview];
+    self.playerViewController = nil;
+    labAdTime.hidden = YES;
+    [mTimerAD invalidate];
     [mMPayer start];
+     mViewPauseAD.hidden = YES;
+}
+-(void)dismissADPlayVideo
+{
     
 }
 

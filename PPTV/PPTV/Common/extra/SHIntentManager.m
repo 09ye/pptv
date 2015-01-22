@@ -23,6 +23,7 @@ static UINavigationController * __NAVIGATION__;
         [__NAVIGATION__ popToRootViewControllerAnimated:NO];
         __NAVIGATION__ = nil;
     }];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_INTENT_CANCLE_SUCCESSFUL object:nil];
    
 }
 

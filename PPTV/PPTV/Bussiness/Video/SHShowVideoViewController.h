@@ -22,6 +22,14 @@
 
 -(void) showVideoControllerMenuDidSelct:(SHShowVideoViewController *)control sender:(UIButton*) sender tag:(int) tag;
 @end
+
+typedef enum
+{
+    
+    emLiving = 4840,//直播
+    emDemand = 4841,//点播
+}emVideoType;
+
 @interface SHShowVideoViewController : SHViewController<VMediaPlayerDelegate>
 {
     VMediaPlayer       *mMPayer;
@@ -29,6 +37,7 @@
     long               mCurPostion;
     NSTimer            *mSyncSeekTimer;
     NSTimer * mtimeViewHidden;
+    NSTimer * mTimerAD;
    
     UIView * mViewControl;
     UIView * mViewMenu;
@@ -40,10 +49,16 @@
     UISlider * mSliderSystemVolume;
     UISlider * mSliderVolume;
     
-    MPMoviePlayerViewController *playerViewController;
+//    MPMoviePlayerViewController *playerViewController;
     NSDictionary *mAdVideo;
+    NSDictionary *mAdPauseInfo;
 
+    __weak IBOutlet UIView *mViewPauseAD;
+    __weak IBOutlet SHImageView *imgADPause;
+    __weak IBOutlet UILabel *labAdTime;
 }
+//@property(nonatomic,strong) UINavigationController *navController;
+@property (nonatomic,strong) MPMoviePlayerViewController *playerViewController;
 @property (weak, nonatomic) IBOutlet UIView *viewMenuDown;
 @property (weak, nonatomic) IBOutlet UIButton *btnSeriesDown;
 @property (weak, nonatomic) IBOutlet UIButton *btnDeatilDown;
@@ -103,10 +118,13 @@
 @property (nonatomic, assign) BOOL isfull;
 @property (nonatomic, assign) BOOL isLive;
 @property (nonatomic,assign)  BOOL isStore;
+@property (nonatomic,assign) emVideoType videoType;
 - (IBAction)btnMenuOntouch:(UIButton *)sender;
 - (IBAction)btnLockOntouch:(id)sender;
 - (IBAction)btnVolumeOntouch:(UIButton *)sender;
 
+- (IBAction)btnADPauseDeleteOntouch:(id)sender;
+- (IBAction)btnADPauseOntouch:(id)sender;
 
 - (void)showIn:(UIView *)view;
 

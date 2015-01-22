@@ -48,7 +48,8 @@
          mShowViewControll.isfull = NO;
         mShowViewControll.view.frame = mViewVideo.frame;
     }
-    [mShowViewControll request:@"102349" gid:@"p4840"];// ad
+  
+    mShowViewControll.videoType = emLiving;
     [self.view addSubview:mShowViewControll.view];
     
     arrayCollect = [[NSMutableArray alloc]init];
@@ -72,7 +73,7 @@
 
 -(void) request:(NSInteger)videoID
 {
-    
+    [mShowViewControll request:@"102349" gid:@"p4840"];// ad
     SHPostTaskM * post = [[SHPostTaskM alloc]init];
     post.URL = URL_FOR(@"Pad/liveinfo");
     [post.postArgs setValue:[NSNumber numberWithInt:videoID] forKey:@"id"];
