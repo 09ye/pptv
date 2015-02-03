@@ -26,6 +26,21 @@
     NSData * data = [postString dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
     return data;
 }
++ (NSString *)createPostString:(NSDictionary*) params
+{
+    NSString *postString=@"";
+    for(NSString *key in [params allKeys])
+    {
+        NSString *value=[params objectForKey:key];
+        postString=[postString stringByAppendingFormat:@"%@=%@&",key,value];
+    }
+    if([postString length]>1)
+    {
+        postString=[postString substringToIndex:[postString length]-1];
+    }
+    SHLog(@"%@",postString);
+    return postString;
+}
 +(NSArray *)weekDayWithDate:(NSDate *)date{
     
     NSCalendar *gregorian = [NSCalendar currentCalendar];

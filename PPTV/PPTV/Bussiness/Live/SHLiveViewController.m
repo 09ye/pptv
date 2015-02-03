@@ -27,7 +27,7 @@
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
 //    app=(AppDelegate*)[UIApplication sharedApplication].delegate;
     dicPreInfo = [self.intent.args objectForKey:@"detailInfo"];
-    self.leftTitle = [dicPreInfo objectForKey:@"title"];
+//    self.leftTitle = [dicPreInfo objectForKey:@"title"];
     [self createDateView];
     [self createBill];
     
@@ -36,6 +36,10 @@
     mListViewControll = [[SHLiveListViewController alloc]init];
     mListViewControll.view.frame = mViewContent.bounds;
     mListViewControll.delegate = self;
+    if (!dicPreInfo) {
+         mListViewControll.isLiveList = YES;
+    }
+   
     [mViewContent addSubview:mListViewControll.view];
     
     mShowViewControll = [[SHShowVideoViewController alloc]init];
@@ -61,13 +65,25 @@
         mShowViewControll.isStore = YES;
     }
     
-//    [mListViewControll.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
     if (dicPreInfo) {
         [self request:[[dicPreInfo objectForKey:@"id"]intValue]];
     }
     
     
+    mTimeLog  = [NSTimer scheduledTimerWithTimeInterval:5*60 target:self selector:@selector(requestOnline) userInfo:nil repeats:YES];
     
+    
+}
+-(void)requestOnline
+{
+    if (mResultDetail) {
+        NSMutableDictionary * dic  = [[NSMutableDictionary alloc]init];
+        [dic setValue:@"在线统计" forKey:@"DMec"];
+        [dic setValue:@"直播" forKey:@"DMel"];
+        NSString * string  = [NSString stringWithFormat:@"%@|%@|%@",mVideotitle,[mResultDetail objectForKey:@"id"],@"直播"];//标题|视频id|栏目
+        [dic setValue:string forKey:@"DMeo"];
+        [SHStatisticalData requestDmaevent:dic];
+    }
 }
 
 
@@ -109,6 +125,14 @@
             [viewControll refreBill:[date stringWithFormat:@"yyyy-MM-dd"] detail:mResultDetail];
             
         }
+        
+        NSMutableDictionary * dic  = [[NSMutableDictionary alloc]init];
+        [dic setValue:@"直播监测" forKey:@"DMec"];
+        
+        NSString * string  = [NSString stringWithFormat:@"%@|%@",mVideotitle,[mResultDetail objectForKey:@"id"]];//频道名称|频道ID|节目名称|节目ID
+        [dic setValue:string forKey:@"DMel"];
+        [dic setValue:[NSDate stringFromDate:[NSDate date] withFormat:@"HH"] forKey:@"DMeo"];
+        [SHStatisticalData requestDmaevent:dic];
         
     } taskWillTry:^(SHTask *t) {
         

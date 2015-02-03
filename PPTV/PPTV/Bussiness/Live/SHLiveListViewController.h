@@ -25,4 +25,5 @@
     NSMutableArray * arrayBtnCate;
 }
 @property (nonatomic,assign) id <SHLiveListViewControllerDelegate> delegate;
+@property (nonatomic,assign) BOOL isLiveList;// 是否是直播频道列表
 @end

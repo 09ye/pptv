@@ -20,8 +20,9 @@
     self.title = @"设置";
     self.view.backgroundColor = [SHSkin.instance colorOfStyle:@"ColorBackGroundRightView"];
     self.tableView.backgroundColor = [UIColor clearColor];
-     self.tableView.layer.cornerRadius= 5;
+    self.tableView.layer.cornerRadius= 5;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(configUpdate:) name:CORE_NOTIFICATION_CONFIG_STATUS_CHANGED object:nil];
+    [SHStatisticalData requestDmalog:self.title];
 }
 
 
@@ -42,7 +43,7 @@
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-   
+    
     UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, 320, 44)];
     label.textAlignment = NSTextAlignmentLeft;
     label.backgroundColor = [SHSkin.instance colorOfStyle:@"ColorBackGroundRightView"];
@@ -58,7 +59,7 @@
         return 5;
     }
     return 1;
-
+    
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -82,7 +83,7 @@
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-
+    
     SHSettingCell * cell = [self.tableView dequeueReusableCellWithIdentifier:@"table_setting_cell"];
     if(cell == nil){
         cell = (SHSettingCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHSettingCell" owner:nil options:nil] objectAtIndex:0];
@@ -102,7 +103,7 @@
             cell.viewLine.hidden = YES;
             cell.imgChoose.image = [UIImage imageNamed:@"ic_select.png"];
         }
-
+        
     }else if (indexPath.section == 1){
         if(indexPath.row == 0){
             cell.labTitle.text = @"接受新消息通知";
@@ -112,13 +113,13 @@
             cell.userInteractionEnabled = NO;
         }else if (indexPath.row == 1){
             cell.labTitle.text = @"请在您的设备\"设置-通知-华数TV\"中更改";
-             cell.viewLine.hidden = YES;
+            cell.viewLine.hidden = YES;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
-
+        
     }else if(indexPath.section == 2){
         if(indexPath.row == 0){
-            cell.labTitle.text = @"清除图片缓存";
+            cell.labTitle.text = @"清除缓存";
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }else if (indexPath.row == 1){
             cell.labTitle.text = @"检查版本更新";
@@ -129,8 +130,8 @@
             cell.labTitle.text = @"为我打分";
             cell.imgChoose.hidden = NO;
             
-
-
+            
+            
         }else if (indexPath.row == 3){
             cell.labTitle.text = @"意见反馈";
             cell.imgChoose.hidden = NO;
@@ -139,10 +140,10 @@
             cell.imgChoose.hidden = NO;
             cell.viewLine.hidden = YES;
         }
-
+        
     }
-
-
+    
+    
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -156,7 +157,7 @@
         [self.tableView reloadData];
     }else if (indexPath.section ==2){
         if (indexPath.row == 0) {
-            
+            [self showAlertDialog:@"删除之后可能会降低流畅度,请三思啊" button:@"取消" otherButton:@"清除"];
         }else if (indexPath.row ==1){
             [SHConfigManager.instance refresh];
         }else if (indexPath.row ==2){
@@ -172,7 +173,7 @@
             SHIntent * intent  =[[SHIntent alloc]init];
             intent.target = @"SHAboutViewController";
             intent.container  = self.navigationController;
-          [[UIApplication sharedApplication]open:intent];
+            [[UIApplication sharedApplication]open:intent];
         }
     }
 }
@@ -202,14 +203,46 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void) alertViewCancelOnClick
+{
+    dispatch_async(
+                   
+                   dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+                   , ^{
+                       
+                       NSString *cachPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory,NSUserDomainMask, YES) objectAtIndex:0];
+                       
+                       
+                       NSFileManager*  filemgr =[NSFileManager defaultManager];
+                       NSArray *files = [filemgr subpathsAtPath:cachPath];
+                       
+                       NSLog(@"files :%d",[files count]);
+                       float cacheSize = 0;
+                       
+                       for (NSString *p in files) {
+                           
+                           NSError *error;
+                           
+                           NSString *path = [cachPath stringByAppendingPathComponent:p];
+                           
+                           if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
+                               long long size = [[filemgr attributesOfItemAtPath:[NSString stringWithFormat:@"%@/%@",cachPath,p] error:nil] fileSize];
+                               if(size){
+                                   cacheSize = cacheSize + size;
+                               }
+                               
+                               [[NSFileManager defaultManager] removeItemAtPath:path error:&error];
+                               
+                               
+                           }
+                           
+                       }
+                       
+                       [self performSelectorOnMainThread:@selector(clearCacheSuccess) withObject:[NSString stringWithFormat:@"为您节省%0.1fM空间",(cacheSize/1024.0/1024.0)] waitUntilDone:YES];});
+    
 }
-*/
-
+-(void) clearCacheSuccess:(NSString *) message
+{
+    [self showAlertDialog:message];
+}
 @end

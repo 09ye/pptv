@@ -23,8 +23,9 @@
 
 //传入文件总大小和当前大小，得到文件的下载进度
 +(CGFloat) getProgress:(float)totalSize currentSize:(float)currentSize;
-
+// 单位G
 +(float) currentCachesFileSize;
++(float) getFileSize:(NSString *)filePath;
 // 完整路径
 + (BOOL)deleteFileOfPath :(NSString*) file;
 @end

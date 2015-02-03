@@ -26,7 +26,7 @@
     AppDelegate* app=(AppDelegate*)[UIApplication sharedApplication].delegate;
     
     dicPreInfo = [self.intent.args objectForKey:@"detailInfo"];
-    self.leftTitle = [dicPreInfo objectForKey:@"title"];
+//    self.leftTitle = [dicPreInfo objectForKey:@"title"];
     mScrollview.datasource = self;
     mScrollview.delegate = self;
     
@@ -61,7 +61,20 @@
     [self request:[[dicPreInfo objectForKey:@"id"]intValue]];
 
     
-
+    mTimeLog  = [NSTimer scheduledTimerWithTimeInterval:5*60 target:self selector:@selector(requestOnline) userInfo:nil repeats:YES];
+    
+    
+}
+-(void)requestOnline
+{
+    if (mResultDetail) {
+        NSMutableDictionary * dic  = [[NSMutableDictionary alloc]init];
+        [dic setValue:@"在线统计" forKey:@"DMec"];
+        [dic setValue:@"点播" forKey:@"DMel"];
+        NSString * string  = [NSString stringWithFormat:@"%@|%@|%@",mVideotitle,[mResultDetail objectForKey:@"id"],[mResultDetail objectForKey:@"pname"]];//标题|视频id|栏目
+        [dic setValue:string forKey:@"DMeo"];
+        [SHStatisticalData requestDmaevent:dic];
+    }
 }
 
 -(void) viewDidDisappear:(BOOL)animated
@@ -117,6 +130,13 @@
             mMoviceDownloadViewControll.detail = [mResultDetail mutableCopy];
         }
         
+        NSMutableDictionary * dic  = [[NSMutableDictionary alloc]init];
+        [dic setValue:@"视频监测" forKey:@"DMec"];
+        
+        NSString * string  = [NSString stringWithFormat:@"%@|%@|%@|%@",[mResultDetail objectForKey:@"pid"],[mResultDetail objectForKey:@"pname"],mVideotitle,[mResultDetail objectForKey:@"id"]];//频道名称|频道ID|节目名称|节目ID
+        [dic setValue:string forKey:@"DMel"];
+        [dic setValue:[NSDate stringFromDate:[NSDate date] withFormat:@"HH"] forKey:@"DMeo"];
+        [SHStatisticalData requestDmaevent:dic];
         
         // 大家都在看
         SHPostTaskM * post = [[SHPostTaskM alloc]init];
@@ -303,7 +323,16 @@
         NSData * data = [NSKeyedArchiver archivedDataWithRootObject:arrayRecord];
         [[NSUserDefaults standardUserDefaults ] setValue:data forKey:RECORD_LIST];
         [[NSUserDefaults standardUserDefaults]synchronize];
+        
+        NSMutableDictionary * dic  = [[NSMutableDictionary alloc]init];
+        [dic setValue:@"播放时长监测" forKey:@"DMec"];
+        
+        NSString * string  = [NSString stringWithFormat:@"%@|%@",[mResultDetail objectForKey:@"id"],[recordInfo objectForKey:@"currentPos"]];//视频ID|播放时间'，时间的单位为秒
+        [dic setValue:string forKey:@"DMel"];
+        [dic setValue:[NSDate stringFromDate:[NSDate date] withFormat:@"HH"] forKey:@"DMeo"];
+        [SHStatisticalData requestDmaevent:dic];
     }
+   
     
 }
 -(long)getVideoRecordSeek{

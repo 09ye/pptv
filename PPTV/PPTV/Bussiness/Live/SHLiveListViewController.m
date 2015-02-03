@@ -128,6 +128,12 @@
             
         }
         [self.tableView reloadData];
+        if (pagenum == 2 && mList.count>1 && self.isLiveList) {
+            [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
+            if (self.delegate && [self.delegate respondsToSelector:@selector(liveListDidSelect:info:)]) {
+                [self.delegate liveListDidSelect:self info:[mList objectAtIndex:0]];
+            }
+        }
         
     }
     

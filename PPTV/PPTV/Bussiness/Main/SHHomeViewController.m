@@ -378,7 +378,6 @@
         lastnacontroller = nacontroller;
         lastMoreTag = sender.tag;
     }
-    
     [self close];
     
 }

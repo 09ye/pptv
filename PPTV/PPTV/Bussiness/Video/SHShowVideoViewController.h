@@ -56,6 +56,8 @@ typedef enum
     __weak IBOutlet UIView *mViewPauseAD;
     __weak IBOutlet SHImageView *imgADPause;
     __weak IBOutlet UILabel *labAdTime;
+    
+    
 }
 //@property(nonatomic,strong) UINavigationController *navController;
 @property (nonatomic,strong) MPMoviePlayerViewController *playerViewController;

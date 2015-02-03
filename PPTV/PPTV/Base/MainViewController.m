@@ -15,11 +15,12 @@
 {
     
     SHGuideViewController  *guideVC;
-    MPMoviePlayerViewController* playerViewController;
     NSDictionary *mAdVideo;
     int duration;
     NSTimer *mTimer ;
     UILabel * mlabCountdown;
+    SHImageView * imgGuid;
+    
 }
 
 @end
@@ -39,10 +40,14 @@
 {
     [super viewDidLoad];
      homeViewController = [[SHHomeViewController alloc ] init];
+    
+    imgGuid  = [[SHImageView alloc]initWithFrame:self.view.bounds];
+    imgGuid.image = [UIImage  imageNamed:@"default_guid"];
+    [self.view addSubview:imgGuid];
     [self requestAd];
     
     // 引导页
-    [self  showGuidePage] ;
+//    [self  showGuidePage] ;
     // Do any additional setup after loading the view from its nib.
     
     SHPostTaskM * post = [[SHPostTaskM alloc]init];
@@ -193,7 +198,6 @@
                     if (mediafiles.count>0) {
                         NSString * url = [[mediafiles objectAtIndex:0]objectForKey:@"url"];
                        
-//                        [self playMovie:url];
                         [self showGuidePng:url];
                         
                     }else{
@@ -218,49 +222,10 @@
     }];
     
 }
--(void)playMovie:(NSString *)fileName{
-    
-    NSURL *url = [NSURL URLWithString:fileName];
-    playerViewController =[[MPMoviePlayerViewController alloc]     initWithContentURL:url];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(playVideoFinished:) name:MPMoviePlayerPlaybackDidFinishNotification object:[playerViewController moviePlayer]];
-    playerViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    [self.view addSubview:playerViewController.view];
-
-    MPMoviePlayerController *player = [playerViewController moviePlayer];
-    player.movieSourceType = MPMovieSourceTypeFile;
-    player.shouldAutoplay = YES;
-    [player setControlStyle:MPMovieControlStyleNone];
-    [player setFullscreen:YES];
-    player.scalingMode = MPMovieScalingModeFill;
-    NSTimeInterval length = [player duration];
-    NSLog(@"%f",length);
-//    [player.view setFrame:self.view.bounds];
-    [player prepareToPlay];
-    [player play];
-    
-    // 倒计时时间
-    
-}
-
-#pragma mark -------------------视频播放结束委托--------------------
-
-/*
- @method 当视频播放完毕释放对象
- */
-- (void) playVideoFinished:(NSNotification *)theNotification//当点击Done按键或者播放完毕时调用此函数
-{
-    MPMoviePlayerController *player = [theNotification object];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerPlaybackDidFinishNotification object:player];
-    [player stop];
-    [playerViewController.view removeFromSuperview];
-    [self  bootSetting];
-    
-}
 -(void)showGuidePng:(NSString * )url
 {
-    SHImageView * image  = [[SHImageView alloc]initWithFrame:self.view.bounds];
-    [image setUrl:url];
-    [self.view addSubview:image];
+   
+    [imgGuid setUrl:url];
     mlabCountdown  = [[UILabel alloc]initWithFrame:CGRectMake(950, 40, 40, 30)];
     mlabCountdown.layer.cornerRadius = 5;
     mlabCountdown.text = [NSString stringWithFormat:@"%d",duration];
@@ -269,7 +234,7 @@
     mlabCountdown.backgroundColor = [SHSkin.instance colorOfStyle:@"ColorStyleLight"];
     [self.view addSubview:mlabCountdown];
     
-     mTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(showGuidePngFinished:) userInfo:image repeats:YES];
+     mTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(showGuidePngFinished:) userInfo:nil repeats:YES];
 
 }
 -(void)showGuidePngFinished:(NSTimer *)theTimer
@@ -278,8 +243,8 @@
         SHImageView * image  = theTimer.userInfo ;
         [image removeFromSuperview];
         [mlabCountdown removeFromSuperview];
-        [self  bootSetting];
         [mTimer invalidate];
+        [self  bootSetting];
     }
   
     duration--;

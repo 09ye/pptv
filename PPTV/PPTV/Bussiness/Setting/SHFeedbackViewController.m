@@ -17,6 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"意见反馈";
+    [SHStatisticalData requestDmalog:self.title];
     self.view.backgroundColor = [SHSkin.instance colorOfStyle:@"ColorBackGroundRightView"];
     mScrollview.layer.cornerRadius= 5;
     arrayType = [[NSMutableArray alloc]init];

@@ -46,6 +46,7 @@
     __weak IBOutlet UIButton *mbtnDay5;
     __weak IBOutlet UIButton *mbtnDay6;
     __weak IBOutlet UIButton *mbtnDay7;
+    NSTimer* mTimeLog;
      
 }
 

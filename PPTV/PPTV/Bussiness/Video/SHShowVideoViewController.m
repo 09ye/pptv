@@ -126,8 +126,6 @@
     [self requestPauseADS];
     labAdTime.layer.cornerRadius = 5;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationIntentCancle:) name:NOTIFICATION_INTENT_CANCLE_SUCCESSFUL object:nil];
-    
-
 }
 - (void)notificationIntentCancle:(NSObject*)sender
 {
@@ -563,6 +561,7 @@
 
 -(void)quicklyPlayMovie:(NSURL*)fileURL title:(NSString*)title seekToPos:(long)pos
 {
+    
     [UIApplication sharedApplication].idleTimerDisabled = YES;
     [self setBtnEnableStatus:NO];
 //    self.view.userInteractionEnabled = NO;
@@ -570,7 +569,7 @@
     NSString *docDir = [NSString stringWithFormat:@"%@/Documents", NSHomeDirectory()];
     NSLog(@"NAL &&& Doc: %@", docDir);
     
-    //	fileURL = [NSURL URLWithString:@"http://v.17173.com/api/5981245-4.m3u8"];
+//    	fileURL = [NSURL URLWithString:@"http://v.17173.com/api/5981245-4.m3u8"];
     
     
     
@@ -1165,6 +1164,9 @@
 }
 -(void) request:(NSString *) aid gid:(NSString *)gid ;
 {
+    if (self.playerViewController ) {
+        [self playVideoFinished:nil];
+    }
     
     SHPostTask *post  = [[SHPostTask alloc]init];
     post.URL = URL_ADS;
@@ -1261,15 +1263,14 @@
  */
 - (void) playVideoFinished:(NSNotification *)theNotification//当点击Done按键或者播放完毕时调用此函数
 {
-    MPMoviePlayerController *playerAD = [theNotification object];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerPlaybackDidFinishNotification object:playerAD];
-    [playerAD stop];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerPlaybackDidFinishNotification object:self.playerViewController.moviePlayer];
+    [self.playerViewController.moviePlayer stop];
     [self.playerViewController.view removeFromSuperview];
     self.playerViewController = nil;
     labAdTime.hidden = YES;
     [mTimerAD invalidate];
     [mMPayer start];
-     mViewPauseAD.hidden = YES;
+    mViewPauseAD.hidden = YES;
 }
 -(void)dismissADPlayVideo
 {

@@ -20,6 +20,7 @@
     [super viewDidLoad];
      self.tableView.backgroundColor = [UIColor clearColor];
      app=(AppDelegate*)[UIApplication sharedApplication].delegate;
+    [SHStatisticalData requestDmalog:[self.type objectForKey:@"name"]];
     pagenum = 1;
     mIsEnd = NO;
     

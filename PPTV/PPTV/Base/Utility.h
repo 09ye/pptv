@@ -11,6 +11,8 @@
 @interface Utility : SHTools
 //post 请求参数 key=vlaue&key=value
 + (NSData *)createPostData:(NSDictionary*) params;
+
++ (NSString *)createPostString:(NSDictionary*) params;
 // data 是星期几 返回[0,周一]。。。
 +(NSArray *)weekDayWithDate:(NSDate *)date;
 //判断数组中是否存在这个key value 的字典

@@ -64,8 +64,15 @@ static UINavigationController * __NAVIGATION__;
                 }else if(__NAVIGATION__ == nil){
                     controller.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCancel:self action:@selector(btnCancel:)];
                     __NAVIGATION__ = [[UINavigationController alloc]initWithRootViewController:controller];
-                    
-                    __NAVIGATION__.view.frame = [[UIScreen mainScreen]bounds];
+                    if(!iOS8 && IPAD){
+                        __NAVIGATION__.view.frame = CGRectMake(0, 0, 1024, 768);
+
+                    }else{
+                         __NAVIGATION__.view.frame = [UIScreen mainScreen].bounds;
+                    }
+                   
+
+             
                     NSDictionary *attributes=[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName,nil];
                     [__NAVIGATION__.navigationBar setTitleTextAttributes:attributes];
                     __NAVIGATION__.navigationBar.translucent = NO;
@@ -84,7 +91,17 @@ static UINavigationController * __NAVIGATION__;
                         }
 
                     }
-                    [[UIApplication sharedApplication].keyWindow addSubview:__NAVIGATION__.view];
+
+                   
+                    if(!iOS8 && IPAD){
+                        SHAppDelegate *app =[UIApplication sharedApplication].delegate;
+                        [app.viewController.view addSubview:__NAVIGATION__.view];
+                        
+                    }else{
+                        [[UIApplication sharedApplication].keyWindow addSubview:__NAVIGATION__.view];
+                    }
+                    
+                    
                     __NAVIGATION__.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCancel:   self action:@selector(btnCancel:)];
                     CGRect rect = __NAVIGATION__.view.frame;
                     rect.origin.y = [UIApplication sharedApplication].keyWindow.frame.size.height;

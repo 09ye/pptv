@@ -121,6 +121,37 @@
     return cacheSize;
     
 }
++(float) getFileSize:(NSString *)filePath
+{
+    
+    NSFileManager *filemgr;
+    
+    NSArray *filelist;
+    
+    int count;
+    
+    float cacheSize = 0;
+    
+    filemgr =[NSFileManager defaultManager];
+    
+    filelist = [filemgr contentsOfDirectoryAtPath:filePath error:NULL];
+    
+    count = [filelist count];
+    
+    for (NSString *url in filelist) {
+        
+        long long size = [[filemgr attributesOfItemAtPath:[NSString stringWithFormat:@"%@/%@",filePath,url] error:nil] fileSize];
+        if(size){
+            cacheSize = cacheSize + size;
+        }
+        
+        
+    }
+    
+    cacheSize = (cacheSize/1024.0/1024.0);
+    
+    return cacheSize;
+}
 
 + (BOOL)deleteFileOfPath :(NSString*) file
 {

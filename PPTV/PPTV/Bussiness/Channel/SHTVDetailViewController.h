@@ -32,6 +32,7 @@
     NSMutableArray * arrayCollect;
     NSMutableArray * arrayRecord;
     NSDictionary*  mDicVideoCurrent;//正在播放的视频 name id time
+    NSTimer* mTimeLog;
     
 
 }

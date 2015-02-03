@@ -11,11 +11,12 @@
 #import "common.h"
 #import "SHAppDelegate.h"
 #import "Utility.h"
+#import "SHStatisticalData.h"
 
 
 #define URL_HEADER @ "http://padapi.wasu.cn"
 #define URL_ADS @"http://afp.csbew.com/s.htm"
-
+#define URL_STATISTICS  @"http://dmav1.junjichu.net"
 
 #define URL_BATA @ "http://123.103.20.88:18014"
 //测试 pad.cs.wasu.cn:18014
@@ -58,6 +59,7 @@
 #define NOTIFICATION_INTENT_CANCLE_SUCCESSFUL     @"notification_intent_cancle_successful"
 
 
+#define IPAD ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(768, 1024), [[UIScreen mainScreen] currentMode].size) : NO)
 #define IPHONE5 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
 
 #define RETAIN ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 960), [[UIScreen mainScreen] currentMode].size) : NO)
@@ -75,4 +77,5 @@ typedef enum
     
     
 }DownLoadState;
+
 

@@ -21,6 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [SHStatisticalData requestDmalog:@"下载"];
     if(iOS8){
         self.view.frame = CGRectMake(0, 64, 1024, 655);
     }else{

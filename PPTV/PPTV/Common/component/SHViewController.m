@@ -130,11 +130,12 @@ typedef NS_ENUM(NSInteger, RMoveDirection) {
             [view removeFromSuperview];
         }
     }
-
+    
 }
 -(void) setLeftTitle:(NSString *)leftTitle_
 {
 
+    [SHStatisticalData requestDmalog:leftTitle_];//点击统计
     for (UIView *view in self.navigationController.navigationBar.subviews) {
         if ([view isKindOfClass:[UILabel class]] && [view viewWithTag:10000]) {
             [view removeFromSuperview];
