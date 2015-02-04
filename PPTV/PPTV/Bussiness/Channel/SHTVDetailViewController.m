@@ -327,7 +327,7 @@
         NSMutableDictionary * dic  = [[NSMutableDictionary alloc]init];
         [dic setValue:@"播放时长监测" forKey:@"DMec"];
         
-        NSString * string  = [NSString stringWithFormat:@"%@|%@",[mResultDetail objectForKey:@"id"],[recordInfo objectForKey:@"currentPos"]];//视频ID|播放时间'，时间的单位为秒
+        NSString * string  = [NSString stringWithFormat:@"%@|%0.0lf",[mResultDetail objectForKey:@"id"],[[recordInfo objectForKey:@"currentPos"]doubleValue]/1000];//视频ID|播放时间'，时间的单位为秒
         [dic setValue:string forKey:@"DMel"];
         [dic setValue:[NSDate stringFromDate:[NSDate date] withFormat:@"HH"] forKey:@"DMeo"];
         [SHStatisticalData requestDmaevent:dic];

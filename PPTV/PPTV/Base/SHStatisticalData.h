@@ -17,7 +17,7 @@ typedef enum
     
 }emEvent;
 
-@interface SHStatisticalData : NSObject
+@interface SHStatisticalData : NSObject<SHTaskDelegate>
 
 +(void) requestDmalog:(NSString * )title;
 

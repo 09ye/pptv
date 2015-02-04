@@ -37,7 +37,7 @@
     [dic setValue:@"" forKey:@"DMcc"];
     NSString * urlparams  = [NSString stringWithFormat:@"/dmalog?%@",[Utility createPostString:dic]];
     SHHttpTask* getTask= [[SHHttpTask alloc]init];
-    getTask.URL = [NSString stringWithFormat:@"%@%@",URL_STATISTICS,urlparams];
+    getTask.URL = [[NSString stringWithFormat:@"%@%@",URL_STATISTICS,urlparams] stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
     getTask.delegate = self;
     [getTask start:^(SHTask *task) {
         NSLog(@"统计发送成功Dmalog");
@@ -65,7 +65,7 @@
     [dic setValue:[NSNumber numberWithInt:(arc4random()%9000)+1000] forKey:@"DMr"];
     NSString * urlparams  = [NSString stringWithFormat:@"/dmaevent?%@",[Utility createPostString:dic]];
     SHHttpTask* getTask= [[SHHttpTask alloc]init];
-    getTask.URL = [NSString stringWithFormat:@"%@%@",URL_STATISTICS,urlparams];
+    getTask.URL = [[NSString stringWithFormat:@"%@%@",URL_STATISTICS,urlparams] stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
     getTask.delegate = self;
     [getTask start:^(SHTask *task) {
          NSLog(@"统计发送成功Dmaevent");
