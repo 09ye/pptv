@@ -68,6 +68,7 @@
 #define UIScreenWidth MAX([[UIScreen mainScreen]bounds].size.width ,[[UIScreen mainScreen]bounds].size.height)
 #define UIScreenHeight MIN([[UIScreen mainScreen]bounds].size.width ,[[UIScreen mainScreen]bounds].size.height)
 
+#define BEST_SCROLLVIEW_WIDTH 262
 typedef enum
 {
     emDownLoaded,// 完成

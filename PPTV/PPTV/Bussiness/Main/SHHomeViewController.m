@@ -25,6 +25,12 @@
     [super viewDidLoad];
     mDictionary = [[NSMutableDictionary alloc]init];
     
+    NSString * hiddeDay =  [NSDate stringFromDate:[NSDate date] withFormat:@"yyyy-MM-dd"];
+    if ([hiddeDay caseInsensitiveCompare:@"2015-02-01"] == NSOrderedAscending) {
+        NSMutableArray * array =  [self.tabbar.items mutableCopy];
+        [array removeObjectAtIndex:1];
+        self.tabbar.items = array;
+    }
     [self tabBar:self.tabbar didSelectItem:[[self.tabbar items] objectAtIndex:0]];
     self.tabbar.selectedItem = [self.tabbar.items objectAtIndex:0];
     self.tabbar.barTintColor = [[UIColor alloc]initWithRed:38/255 green:38/255 blue:38/255 alpha:1];

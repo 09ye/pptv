@@ -19,6 +19,7 @@
     NSDictionary * mResult;
     NSMutableArray * mListLive;
     NSTimer * mTimerLive;
+    BOOL isHiddenLive;
 }
 @property(nonatomic,retain) UINavigationController *navController; // If this view controller has been pushed onto a navigation controller, return it.
 

@@ -15,13 +15,19 @@
 
 @interface SHRecommendViewController ()
 
+
 @end
 
 @implementation SHRecommendViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
+    NSString * hiddeDay =  [NSDate stringFromDate:[NSDate date] withFormat:@"yyyy-MM-dd"];
+    if ([hiddeDay caseInsensitiveCompare:@"2015-02-01"] == NSOrderedAscending) {
+        isHiddenLive = YES;
+    }
+    
     self.tableView.backgroundColor = [UIColor clearColor];
     app=(AppDelegate*)[UIApplication sharedApplication].delegate;
     UIView * viewTitleBar = [app.viewController hideSearchView:NO];
@@ -38,6 +44,8 @@
     [_refreshHeaderView refreshLastUpdatedDate];
     
     mTimerLive = [NSTimer scheduledTimerWithTimeInterval:60*10 target:self selector:@selector(reloadLiveRequest) userInfo:nil repeats:YES];
+    
+    
 }
 
 -(void)reloadRequest:(BOOL) cache
@@ -84,28 +92,6 @@
     }];
     
 }
-//-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-//{
-//    if (section == 0) {
-//        return 0;
-//    }
-//    return CELL_GENERAL_HEIGHT3;
-//}
-//- (int) numberOfSectionsInTableView:(UITableView *)tableView
-//{
-//    return mListItme.count;
-//}
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-//{
-//    if (section == 0) {
-//        return  [[UIView alloc]init];
-//    }
-//    UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, 320, 44)];
-//    label.userstyle = @"labmidmilk";
-//    label.text = [mListItme objectAtIndex:section];
-//    label.textAlignment = NSTextAlignmentLeft;
-//    return label;
-//}
 - (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view
 {
     [self reloadRequest:NO];
@@ -159,8 +145,11 @@
 -(float) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
    
     if (indexPath.row == 0) {
-        return 330;
+        return BEST_SCROLLVIEW_WIDTH;
     }else if(indexPath.row == 1){
+        if (isHiddenLive) {
+            return  0;
+        }
         return 355;
     }else if(indexPath.row == 2 || indexPath.row == 4 || indexPath.row == 6 || indexPath.row == 8){
         return 175;
@@ -189,7 +178,7 @@
         if(imagesArray.count>0){
             [cell.contentView insertSubview:[self showScrollView:imagesArray WithAnimation:YES] atIndex:0];
         }else{
-            UIImageView * defaultImg  = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 1024, 330)];
+            UIImageView * defaultImg  = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 1024, BEST_SCROLLVIEW_WIDTH)];
             defaultImg.image = [UIImage imageNamed:@"default2048x600"];
             [cell.contentView addSubview:defaultImg];
         }
@@ -209,6 +198,9 @@
         cell.navController = self.navController;
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        if (isHiddenLive) {
+            cell.hidden = YES;
+        }
         return cell;
         
     }else if (indexPath.row == 2){//动漫
@@ -217,6 +209,7 @@
         if(cell == nil){
             cell = (SHRecomendSecondTitleCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHRecomendSecondTitleCell" owner:nil options:nil] objectAtIndex:0];
         }
+        
         cell.btnBg.backgroundColor = [UIColor colorWithRed:237/255.0 green:144/255.0 blue:41/255.0 alpha:1];
         
         NSMutableArray * array = [mResult objectForKey:@"cartoon_rec"];
@@ -233,6 +226,7 @@
         cell.navController = self.navController;
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
         return cell;
         
     }else if (indexPath.row == 3){
@@ -387,7 +381,7 @@
     csView=nil;
     
     if (!csView) {
-        csView = [[BestScrollView alloc] initWithFrame:CGRectMake(0, 0, 1024, 330)];
+        csView = [[BestScrollView alloc] initWithFrame:CGRectMake(0, 0, 1024, BEST_SCROLLVIEW_WIDTH)];
     }
     csView.animationTimer= YES;
     csView.imageArray=imagesArray;
@@ -440,7 +434,7 @@
 
 - (UIView *)pageAtIndex:(NSInteger)index
 {
-    SHImageView  *imageView=[[SHImageView alloc]  initWithFrame: CGRectMake(0, 0, 1024, 330)];
+    SHImageView  *imageView=[[SHImageView alloc]  initWithFrame: CGRectMake(0, 0, 1024, BEST_SCROLLVIEW_WIDTH)];
     [imageView setUrl:[[imagesArray objectAtIndex:index] objectForKey:@"pic"]];
     
     return imageView;

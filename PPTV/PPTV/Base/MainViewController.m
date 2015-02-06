@@ -20,6 +20,9 @@
     NSTimer *mTimer ;
     UILabel * mlabCountdown;
     SHImageView * imgGuid;
+    UIButton * mbtnClose;
+    UIButton * mbtnWebView;
+
     
 }
 
@@ -61,7 +64,6 @@
     } taskDidFailed:^(SHTask *task) {
         
     }];
-   
 }
 
 -(NSNumber *) categoryForKey:(NSString *) key defaultPic:(int)defaultPic
@@ -226,13 +228,21 @@
 {
    
     [imgGuid setUrl:url];
-    mlabCountdown  = [[UILabel alloc]initWithFrame:CGRectMake(950, 40, 40, 30)];
+  
+    mlabCountdown  = [[UILabel alloc]initWithFrame:CGRectMake(900, 40, 40, 30)];
     mlabCountdown.layer.cornerRadius = 5;
     mlabCountdown.text = [NSString stringWithFormat:@"%d",duration];
     mlabCountdown.textAlignment = NSTextAlignmentCenter;
     mlabCountdown.textColor = [UIColor whiteColor];
     mlabCountdown.backgroundColor = [SHSkin.instance colorOfStyle:@"ColorStyleLight"];
     [self.view addSubview:mlabCountdown];
+    mbtnWebView  = [[UIButton alloc]initWithFrame:self.view.bounds];
+    [mbtnWebView addTarget:self action:@selector(btnGoWebView) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:mbtnWebView];
+    mbtnClose = [[UIButton alloc]initWithFrame:CGRectMake(950, 32, 45, 45)];
+    [mbtnClose setImage:[UIImage imageNamed:@"ic_lixian_delete.png"] forState:UIControlStateNormal];
+    [mbtnClose addTarget:self action:@selector(btnCloseAd) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:mbtnClose];
     
      mTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(showGuidePngFinished:) userInfo:nil repeats:YES];
 
@@ -242,12 +252,33 @@
     if (duration == 0) {
         SHImageView * image  = theTimer.userInfo ;
         [image removeFromSuperview];
+        [mbtnClose removeFromSuperview];
         [mlabCountdown removeFromSuperview];
+        [mbtnWebView removeFromSuperview];
         [mTimer invalidate];
         [self  bootSetting];
     }
   
     duration--;
     mlabCountdown.text = [NSString stringWithFormat:@"%d",duration];
+}
+-(void) btnCloseAd
+{
+
+    duration = 0;
+}
+-(void) btnGoWebView
+{
+    NSArray * mediafiles = [mAdVideo objectForKey:@"mediafiles"];
+    if (mediafiles.count>0) {
+        NSDictionary * dic = [mediafiles objectAtIndex:0];
+        SHIntent *intent = [[SHIntent alloc]init];
+        intent.target = @"WebViewController";
+        [intent.args setValue:@"广告" forKeyPath:@"title"];
+        [intent.args setValue:[dic objectForKey:@"value"] forKeyPath:@"url"];
+        [intent.args setValue:dic forKeyPath:@"detailInfo"];
+        [[UIApplication sharedApplication]open:intent];
+    }
+    
 }
 @end

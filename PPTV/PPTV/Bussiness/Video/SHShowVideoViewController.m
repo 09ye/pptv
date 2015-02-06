@@ -1252,7 +1252,16 @@
     NSTimeInterval length = [self.playerViewController.moviePlayer currentPlaybackTime];
     int time  = [[mAdVideo objectForKey:@"duration"]intValue] -(int)length;
     labAdTime.text = [NSString stringWithFormat:@"%d",time];
-    
+    if(time == 0){
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerPlaybackDidFinishNotification object:self.playerViewController.moviePlayer];
+        [self.playerViewController.moviePlayer stop];
+        [self.playerViewController.view removeFromSuperview];
+        self.playerViewController = nil;
+        labAdTime.hidden = YES;
+        [mTimerAD invalidate];
+        [mMPayer start];
+        mViewPauseAD.hidden = YES;
+    }
 
 }
 
