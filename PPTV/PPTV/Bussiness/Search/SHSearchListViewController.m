@@ -104,7 +104,8 @@
             
         } taskDidFailed:^(SHTask *t) {
             
-            
+            isShowMocie = NO;
+            isShowMore = YES;
         }];
     }
     
@@ -154,7 +155,9 @@
         } taskWillTry:^(SHTask *t) {
             
         } taskDidFailed:^(SHTask *t) {
-            
+            mIsEnd = YES;
+            isShowShort = NO;
+            [self.tableView reloadData];
         }];
         
         pagenum++;
@@ -179,10 +182,8 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     if (section == 0) {
-        
         return mViewMoviceSection;
     }
-    
     return mViewSection2;
 }
 
@@ -228,7 +229,7 @@
             return ((mList.count-1)/5+1)*164+15;
         }
     }
-    return  0;
+    return  44;
 }
 -(UITableViewCell* )tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -251,13 +252,14 @@
         
     }else if (indexPath.section == 1){
         
-        if(indexPath.row ==1 || mList.count == 0 ){
+        if((indexPath.row ==1 || mList.count == 0) && mListMovice.count==0 ){
             SHNoneViewCell * cell;
             if(mIsEnd){
                 cell = [self dequeueReusableNoneViewCell];
-                cell.labContent.text = @"暂无相关讯息...";
+                cell.labContent.text = @"抱歉，没有找到相关的结果";
             }else{
                 cell = [self.tableView dequeueReusableLoadingCell];
+                cell.backgroundColor = [UIColor redColor];
                 [self loadNext];
             }
             cell.backgroundColor = [UIColor clearColor];
@@ -352,6 +354,7 @@
     }
     SHIntent * intent = [[SHIntent alloc]init];
     intent.target = @"SHSearchListViewController";
+    [intent.args setValue:searchBar.text forKey:@"keyword"];
     intent.container  = self.navigationController;
     [[UIApplication sharedApplication]open:intent];
     

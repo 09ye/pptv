@@ -8,6 +8,7 @@
 
 #import "SHChannelListViewController.h"
 #import "SHImgVertiaclViewCell.h"
+#import "SHImgHorizaonalViewCell.h"
 
 
 @interface SHChannelListViewController ()
@@ -23,7 +24,7 @@
     [SHStatisticalData requestDmalog:[self.type objectForKey:@"name"]];
     pagenum = 1;
     mIsEnd = NO;
-    
+    [mbtnSelect1 setTitleColor:[SHSkin.instance colorOfStyle:@"ColorTextOrg"] forState:UIControlStateNormal];
     [self reloadRequest];
     if (_refreshHeaderView == nil) {
         _refreshHeaderView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0, 0-self.tableView.bounds.size.height, self.tableView.frame.size.width, self.tableView.bounds.size.height)];
@@ -74,7 +75,10 @@
     if(indexPath.row >= 1 || mList.count == 0 ){
         return 44;
     }else{
-         return ((mList.count-1)/5+1)*304+15;
+        if (self.isHorizontal) {
+            return ((mList.count-1)/5+1)*164+15;//175
+        }
+         return ((mList.count-1)/5+1)*304+15;//315
     }
    
 }
@@ -96,7 +100,7 @@
         SHNoneViewCell * cell;
         if(mIsEnd){
             cell = [self dequeueReusableNoneViewCell];
-            cell.labContent.text = @"暂无相关讯息...";
+            cell.labContent.text = @"抱歉，没有找到相关的结果";
         }else{
             cell = [self.tableView dequeueReusableLoadingCell];
             [self loadNext];
@@ -111,16 +115,31 @@
 }
 -(UITableViewCell*) tableView:(UITableView *)tableView dequeueReusableStandardCellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SHImgVertiaclViewCell * cell = [self.tableView dequeueReusableCellWithIdentifier:@"table_img_vertical_cell"];
-    if(cell == nil){
-        cell = (SHImgVertiaclViewCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHImgVertiaclViewCell" owner:nil options:nil] objectAtIndex:0];
+    if (self.isHorizontal) {
+        SHImgHorizaonalViewCell * cell = [self.tableView dequeueReusableCellWithIdentifier:@"table_img_horizaonal_cell"];
+        if(cell == nil){
+            cell = (SHImgHorizaonalViewCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHImgHorizaonalViewCell" owner:nil options:nil] objectAtIndex:0];
+        }
+        cell.navController = self.navController;
+        cell.type = 0;
+        cell.list = [mList mutableCopy];
+        cell.backgroundColor = [UIColor clearColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return  cell;
+
+    }else{
+        SHImgVertiaclViewCell * cell = [self.tableView dequeueReusableCellWithIdentifier:@"table_img_vertical_cell"];
+        if(cell == nil){
+            cell = (SHImgVertiaclViewCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHImgVertiaclViewCell" owner:nil options:nil] objectAtIndex:0];
+        }
+        cell.list = [mList mutableCopy];
+        cell.type = self.type;
+        cell.navController = self.navController;
+        cell.backgroundColor = [UIColor clearColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
+
     }
-    cell.list = [mList mutableCopy];
-    cell.type = self.type;
-    cell.navController = self.navController;
-    cell.backgroundColor = [UIColor clearColor];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    return cell;
     
 }
 - (void)didReceiveMemoryWarning {
@@ -166,6 +185,7 @@
         mSelect = [[NSMutableDictionary alloc]init];
         [mSelect setValue:@"1" forKey:@"sort"];//排序 ( 1, 更新时间; 2, 点击量 )
         [self createFilterView];
+        [mbtnSelect1 setTitleColor:[SHSkin.instance colorOfStyle:@"ColorTextOrg"] forState:UIControlStateNormal];
         
     }else{
         [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
@@ -207,6 +227,14 @@
     [mFilterView close];
     [mSelect setValue:[NSNumber numberWithInt:sender.tag] forKey:@"sort"];//排序 ( 1, 更新时间; 2, 点击量 )
     [self reloadRequest];
+    if (sender.tag == 1) {
+        [mbtnSelect1 setTitleColor:[SHSkin.instance colorOfStyle:@"ColorTextOrg"] forState:UIControlStateNormal];
+        [mbtnSelect2 setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+    }else{
+        [mbtnSelect1 setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+        [mbtnSelect2 setTitleColor:[SHSkin.instance colorOfStyle:@"ColorTextOrg"] forState:UIControlStateNormal];
+    }
+    
     
     
 }

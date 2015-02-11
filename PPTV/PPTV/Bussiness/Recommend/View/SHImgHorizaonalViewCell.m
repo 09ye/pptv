@@ -45,13 +45,19 @@
         cell.labLogoName.hidden = YES;
         cell.labLogoContent.hidden = YES;
         [cell.imgDeatil setUrl:[dic objectForKey:@"pic"]];
-        
+        cell.labStatus.text = [dic objectForKey:@"status"];
         cell.labTitle2.text = [dic objectForKey:@"title"];
         cell.labTitle2.numberOfLines = 2;
         [cell.labTitle2 sizeToFit];
         cell.labTitle.hidden =YES;
         cell.labTitle2.hidden = NO;
         cell.labContent.hidden = YES;
+        if(![dic objectForKey:@"status"] || [[dic objectForKey:@"status"] isEqualToString:@""]){
+            cell.imgBgState.hidden = YES;
+        }else{
+            cell.imgBgState.hidden = NO;
+        }
+        
 
         
     }else if (self.type == 1){
@@ -81,7 +87,11 @@
             cell.labTitle.hidden = NO;
             cell.labTitle2.hidden = YES;
             cell.labContent.hidden = NO;
-            
+            if(![dic objectForKey:@"status"] || [[dic objectForKey:@"status"] isEqualToString:@""]){
+                cell.imgBgState.hidden = YES;
+            }else{
+                cell.imgBgState.hidden = NO;
+            }
             
             
         }
@@ -110,6 +120,11 @@
             cell.labTitle.hidden =YES;
             cell.labTitle2.hidden = NO;
             cell.labContent.hidden = YES;
+            if(![dic objectForKey:@"status"] || [[dic objectForKey:@"status"] isEqualToString:@""]){
+                cell.imgBgState.hidden = YES;
+            }else{
+                cell.imgBgState.hidden = NO;
+            }
         }
     }
     return cell;
@@ -129,18 +144,28 @@
 }
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0) {
-        return;
-    }
      NSDictionary * dic ;
     if (self.type == 0) {
         dic = [_list objectAtIndex:indexPath.row];
-    }else{
+    }else if(self.type == 1){
+        if (indexPath.row == 0 ) {
+            [[NSNotificationCenter defaultCenter]postNotificationName:NOTIFICATION_HOME_TABBAR_DIDSELECT object:[NSNumber numberWithInt:6]];
+            return;
+        }
         dic = [_list objectAtIndex:indexPath.row-1];
+      
+    }else if (self.type ==2){
+        if (indexPath.row == 0 ) {
+            [[NSNotificationCenter defaultCenter]postNotificationName:NOTIFICATION_HOME_TABBAR_DIDSELECT object:[NSNumber numberWithInt:7]];
+            return;
+        }
+        dic = [_list objectAtIndex:indexPath.row-1];
+    
     }
+    
+    
    
     SHIntent * intent = [[SHIntent alloc ]init];
-   
     if([[dic objectForKey:@"type"]intValue] == 4){
         intent.target = @"WebViewController";
         

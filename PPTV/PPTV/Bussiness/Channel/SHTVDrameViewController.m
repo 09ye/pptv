@@ -82,8 +82,13 @@
     }
     NSDictionary * dic = [mList objectAtIndex:indexPath.row];
     [cell.imgDetail setUrl:[dic objectForKey:@"pic"]];
-    cell.labTitle.text = [dic objectForKey:@"title"];
+    
     cell.labContent.text = [dic objectForKey:@"focus"];
+    cell.labTitle.text = [dic objectForKey:@"title"];
+    if(![dic objectForKey:@"focus"] || [[dic objectForKey:@"focus"] isEqualToString:@""]){
+        cell.labTitle.numberOfLines = 3;
+        [cell.labTitle sizeToFit];
+    }
     cell.backgroundColor = [UIColor clearColor];
     if ([[dic objectForKey:@"id"]integerValue] == selctID) {
 

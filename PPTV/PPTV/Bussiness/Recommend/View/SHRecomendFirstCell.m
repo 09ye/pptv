@@ -33,13 +33,11 @@
         NSDictionary * dic1 =[arry objectAtIndex:0];
         self.labLive1.text =  [dic1 objectForKey:@"title"];
         [self.imgLive1 setUrl:[dic1 objectForKey:@"pic"]];
-        self.imgLive2.layer.borderColor = [[UIColor blackColor]CGColor];
-        self.imgLive2.layer.borderWidth = 1.0;
+    
         NSDictionary * dic2 =[arry objectAtIndex:1];
         [self.imgLive2 setUrl:[dic2 objectForKey:@"pic"]];
         self.labLive2.text =  [dic2 objectForKey:@"title"];
-        self.imgLive2.layer.borderColor = [[UIColor blackColor]CGColor];
-        self.imgLive2.layer.borderWidth = 1.0;
+    
     }
     NSArray * arry2 =[_detail objectForKey:@"series_area"];// 同步剧场
     for(int j=0;j<arry2.count;j++){

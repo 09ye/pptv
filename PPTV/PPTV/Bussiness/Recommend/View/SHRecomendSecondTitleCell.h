@@ -18,6 +18,7 @@
 @property(nonatomic,strong) UINavigationController *navController;
 
 @property (nonatomic,strong) NSMutableArray * detailArray;
-
+@property (nonatomic,assign)int tabIndex;
 - (IBAction)btnImgBigOntouch:(UIButton *)sender;
+- (IBAction)btnHomeOntouch:(UIButton *)sender;
 @end

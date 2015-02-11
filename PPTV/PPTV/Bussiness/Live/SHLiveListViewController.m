@@ -128,7 +128,7 @@
             
         }
         [self.tableView reloadData];
-        if (pagenum == 2 && mList.count>1 && self.isLiveList) {
+        if (pagenum == 2 && mList.count>0 && self.isLiveList) {
             [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
             if (self.delegate && [self.delegate respondsToSelector:@selector(liveListDidSelect:info:)]) {
                 [self.delegate liveListDidSelect:self info:[mList objectAtIndex:0]];
@@ -147,7 +147,7 @@
 #pragma  btnaction
 -(void) btnCategory:(UIButton *)sender
 {
-    
+    self.isLiveList = NO;
     NSDictionary* dic  =[mListCategory objectAtIndex:sender.tag];
     cid = [[dic objectForKey:@"id"]integerValue];
     [self reloadRequest];

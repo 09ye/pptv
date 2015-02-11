@@ -38,6 +38,7 @@
     
     arrayBtn = [[NSArray alloc]initWithObjects:btnOration,btnOriginal,btnEntertainment,btnLife,btnCar,btnSports,btnTravel,btnMicroShow, nil];
     mViewRight = [[[NSBundle mainBundle]loadNibNamed:@"SHShowRightView" owner:self options:nil]objectAtIndex:0];
+    mViewRight.delegate = self;
     
     SHPostTaskM * postKeyWord = [[SHPostTaskM alloc]init];
     postKeyWord.URL = URL_FOR(@"Pad/keywordrecom");
@@ -53,8 +54,16 @@
         
         
     }];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(noticTabBarDidSelect:) name:NOTIFICATION_HOME_TABBAR_DIDSELECT object:nil];
 
     
+}
+-(void)noticTabBarDidSelect:(NSNotification *)notic
+{
+    int tag = [[notic object]intValue];
+    [self tabBar:self.tabbar didSelectItem:[[self.tabbar items] objectAtIndex:tag]];
+    self.tabbar.selectedItem = [self.tabbar.items objectAtIndex:tag];
+
 }
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -65,6 +74,8 @@
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
 {
     [self tabBarDidSelect:item.tag];
+    
+
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -72,6 +83,9 @@
 }
 -(void) tabBarDidSelect:(int) tag
 {
+   
+    mlabRecord.textColor = [UIColor lightGrayColor];
+    mlabDownload.textColor = [UIColor lightGrayColor];
     if(mViewRight.isShow && (tag != 9 && tag !=10)){
         [mViewRight close];
     }
@@ -205,6 +219,8 @@
     [mViewRight show:controller inView:self.view direction:Right];
     AppDelegate* app=(AppDelegate*)[UIApplication sharedApplication].delegate;
     [app.viewController hideTarbar:NO];
+    mlabRecord.textColor = [SHSkin.instance colorOfStyle:@"ColorTextOrg"];
+    mlabDownload.textColor = [UIColor lightGrayColor];
 }
 
 - (IBAction)btnDownloadOntouch:(UIButton *)sender {
@@ -212,6 +228,9 @@
     [self tabBarDidSelect:100];
     AppDelegate* app=(AppDelegate*)[UIApplication sharedApplication].delegate;
     [app.viewController hideTarbar:NO];
+    mlabDownload.textColor = [SHSkin.instance colorOfStyle:@"ColorTextOrg"];
+    mlabRecord.textColor = [UIColor lightGrayColor];
+    
 
 }
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
@@ -275,11 +294,13 @@
 - (IBAction)btnMoreOntouch:(UIButton *)sender {
     SHTableViewController * nacontroller;
     [self changeMoreViewColor:sender.tag];
+     SHChannelListViewController * viewcontroller = [[SHChannelListViewController alloc]init];
+    viewcontroller.isHorizontal = YES;
     switch (sender.tag) {
         case 21:
             nacontroller =[ mDictionary valueForKey:@"SHChannelListViewController21"];
             if(!nacontroller){
-                SHChannelListViewController * viewcontroller = [[SHChannelListViewController alloc]init];
+               
                 viewcontroller.type = @{@"name":@"资讯",@"id":@"22"};
 
                 nacontroller = viewcontroller;
@@ -290,7 +311,7 @@
         case 22:{
             nacontroller =[ mDictionary valueForKey:@"SHChannelListViewController22"];
             if(!nacontroller){
-                SHChannelListViewController * viewcontroller = [[SHChannelListViewController alloc]init];
+
                 viewcontroller.type = @{@"name":@"原创",@"id":@"91"};
 
                 nacontroller = viewcontroller;
@@ -302,7 +323,7 @@
         case 23:{
             nacontroller =[ mDictionary valueForKey:@"SHChannelListViewController23"];
             if(!nacontroller){
-                SHChannelListViewController * viewcontroller = [[SHChannelListViewController alloc]init];
+
                 viewcontroller.type = @{@"name":@"娱乐",@"id":@"26"};
                 nacontroller = viewcontroller;
                 [mDictionary setValue:nacontroller forKey:@"SHChannelListViewController23"];
@@ -313,7 +334,7 @@
         case 24:{
             nacontroller =[ mDictionary valueForKey:@"SHChannelListViewController24"];
             if(!nacontroller){
-                SHChannelListViewController * viewcontroller = [[SHChannelListViewController alloc]init];
+
                 viewcontroller.type = @{@"name":@"生活",@"id":@"137"};
                 nacontroller = viewcontroller;
                 [mDictionary setValue:nacontroller forKey:@"SHChannelListViewController24"];
@@ -324,7 +345,7 @@
         case 25:{
             nacontroller =[ mDictionary valueForKey:@"SHChannelListViewController25"];
             if(!nacontroller){
-                SHChannelListViewController * viewcontroller = [[SHChannelListViewController alloc]init];
+               
                 viewcontroller.type = @{@"name":@"汽车",@"id":@"102"};
                 nacontroller = viewcontroller;
                 [mDictionary setValue:nacontroller forKey:@"SHChannelListViewController25"];
@@ -335,7 +356,7 @@
         case 26:{
             nacontroller =[ mDictionary valueForKey:@"SHChannelListViewController26"];
             if(!nacontroller){
-                SHChannelListViewController * viewcontroller = [[SHChannelListViewController alloc]init];
+               
                 viewcontroller.type = @{@"name":@"体育",@"id":@"32"};
                 nacontroller = viewcontroller;
                 [mDictionary setValue:nacontroller forKey:@"SHChannelListViewController26"];
@@ -346,7 +367,7 @@
         case 27:{
             nacontroller =[ mDictionary valueForKey:@"SHChannelListViewController27"];
             if(!nacontroller){
-                SHChannelListViewController * viewcontroller = [[SHChannelListViewController alloc]init];
+               
                 viewcontroller.type = @{@"name":@"旅游",@"id":@"55"};
                 nacontroller = viewcontroller;
                 [mDictionary setValue:nacontroller forKey:@"SHChannelListViewController27"];
@@ -357,7 +378,7 @@
         case 28:{
             nacontroller =[ mDictionary valueForKey:@"SHChannelListViewController28"];
             if(!nacontroller){
-                SHChannelListViewController * viewcontroller = [[SHChannelListViewController alloc]init];
+                
                 viewcontroller.type = @{@"name":@"微秀社区",@"id":@"60"};
                 nacontroller = viewcontroller;
                 [mDictionary setValue:nacontroller forKey:@"SHChannelListViewController28"];
@@ -425,5 +446,9 @@
     intent.container = self.navigationController;
     [[UIApplication sharedApplication] open:intent];
 }
-
+-(void)showRightViewDidClose:(SHShowRightView *)controller
+{
+    mlabDownload.textColor = [UIColor lightGrayColor];
+    mlabRecord.textColor = [UIColor lightGrayColor];
+}
 @end

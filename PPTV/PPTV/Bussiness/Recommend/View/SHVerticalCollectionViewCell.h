@@ -13,5 +13,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *labTitle;
 @property (weak, nonatomic) IBOutlet UILabel *labContent;
 @property (weak, nonatomic) IBOutlet UILabel *labStatus;
+@property (weak, nonatomic) IBOutlet UIImageView *imgBgState;
 
 @end

@@ -91,5 +91,8 @@
 - (IBAction)btnCloseOnTouch:(id)sender
 {
     [self close];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(showRightViewDidClose:)]) {
+        [self.delegate showRightViewDidClose:self];
+    }
 }
 @end

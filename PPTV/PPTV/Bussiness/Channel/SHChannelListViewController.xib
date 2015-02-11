@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SHChannelListViewController">
             <connections>
                 <outlet property="imgArrow" destination="kfW-eX-YJE" id="OV8-BI-hu9"/>
+                <outlet property="mbtnSelect1" destination="RxK-qr-Feg" id="bF6-so-6QX"/>
+                <outlet property="mbtnSelect2" destination="otE-Uu-Le5" id="hdX-L1-Y0f"/>
                 <outlet property="tableView" destination="Yhq-zC-OvI" id="2lB-2u-TuI"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -32,7 +34,7 @@
                             <rect key="frame" x="30" y="7" width="60" height="30"/>
                             <state key="normal" title="最近更新">
                                 <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
                                 <action selector="btnSelectMainOntouch:" destination="-1" eventType="touchUpInside" id="lVk-y3-wcI"/>
@@ -42,7 +44,7 @@
                             <rect key="frame" x="120" y="7" width="60" height="30"/>
                             <state key="normal" title="最多播放">
                                 <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
                                 <action selector="btnSelectMainOntouch:" destination="-1" eventType="touchUpInside" id="2oQ-dU-WQM"/>

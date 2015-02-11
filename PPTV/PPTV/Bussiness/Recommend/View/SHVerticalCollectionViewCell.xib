@@ -34,8 +34,11 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="default320x448.png" translatesAutoresizingMaskIntoConstraints="NO" id="I0h-Tv-Jzz" customClass="SHImageView">
                         <rect key="frame" x="0.0" y="8" width="160" height="224"/>
                     </imageView>
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg_state_shade.png" translatesAutoresizingMaskIntoConstraints="NO" id="43S-a1-Pl6">
+                        <rect key="frame" x="0.0" y="202" width="160" height="30"/>
+                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LYU-fW-dYG" userLabel="Label-staus">
-                        <rect key="frame" x="5" y="201" width="150" height="21"/>
+                        <rect key="frame" x="5" y="208" width="150" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -43,14 +46,12 @@
                             <userDefinedRuntimeAttribute type="string" keyPath="userstyle" value="labmidwhitebold"/>
                         </userDefinedRuntimeAttributes>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg_state_shade.png" translatesAutoresizingMaskIntoConstraints="NO" id="43S-a1-Pl6">
-                        <rect key="frame" x="0.0" y="202" width="160" height="30"/>
-                    </imageView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <size key="customSize" width="127" height="105"/>
             <connections>
+                <outlet property="imgBgState" destination="43S-a1-Pl6" id="rcN-ca-TL5"/>
                 <outlet property="imgDeatil" destination="I0h-Tv-Jzz" id="auc-oY-brM"/>
                 <outlet property="labContent" destination="UfE-rM-Onz" id="4bO-rD-xvM"/>
                 <outlet property="labStatus" destination="LYU-fW-dYG" id="7AX-b8-cXa"/>

@@ -16,6 +16,8 @@
     EGORefreshTableHeaderView* _refreshHeaderView;
     SHFilterView * mFilterView;
     __weak IBOutlet UIImageView *imgArrow;
+    __weak IBOutlet UIButton *mbtnSelect1;
+    __weak IBOutlet UIButton *mbtnSelect2;
     
 //    int pageSize;
     int pagenum;
@@ -28,6 +30,7 @@
 }
 @property(nonatomic,retain) UINavigationController *navController; // If this view controller has been pushed onto a navigation controller, return it.
 @property (nonatomic,strong) NSDictionary * type;//频道类型 ["name":"电影"，“id”：“1”]
+@property (nonatomic,assign)BOOL isHorizontal;// 横图显示 小图
 - (IBAction)btnShowSearchOntouch:(UIButton *)sender;
 - (IBAction)btnSelectMainOntouch:(UIButton *)sender;
 @end

@@ -39,7 +39,7 @@ typedef enum
     NSTimer * mtimeViewHidden;
     NSTimer * mTimerAD;
    
-    UIView * mViewControl;
+    UIView * mViewControl;// 浮在上面的播控条
     UIView * mViewMenu;
     UIButton * mbtnStore;
     
@@ -56,6 +56,7 @@ typedef enum
     __weak IBOutlet UIView *mViewPauseAD;
     __weak IBOutlet SHImageView *imgADPause;
     __weak IBOutlet UILabel *labAdTime;
+    __weak IBOutlet UIView *mViewVideoControl;// 显示在最下面的播控条
     
     
 }

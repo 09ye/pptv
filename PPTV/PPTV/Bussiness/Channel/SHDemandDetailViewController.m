@@ -58,7 +58,9 @@
         labAbstract.textColor = [UIColor grayColor];
         [labAbstract sizeToFit];
         [self.view addSubview:labAbstract];
+        ((UIScrollView *)self.view).contentSize = CGSizeMake(0, labAbstract.frame.origin.y+labAbstract.frame.size.height);
     }
+    
     
 }
 - (void)didReceiveMemoryWarning {

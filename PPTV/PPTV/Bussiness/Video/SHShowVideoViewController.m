@@ -137,6 +137,9 @@
 -(void)handelPan:(UIPanGestureRecognizer*)gestureRecognizer{
     [NSRunLoop cancelPreviousPerformRequestsWithTarget:self];//双击事件取消延时
     CGPoint curPoint = [gestureRecognizer locationInView:self.view];
+    if (isLock) {
+        return;
+    }
     if([gestureRecognizer state] == UIGestureRecognizerStateBegan) {
         self.firstPoint = curPoint;
         NSLog(@"begin====>>>>>%f===%f",curPoint.x ,curPoint.y);
@@ -935,6 +938,7 @@
 - (IBAction)btnLockOntouch:(id)sender {
     [self resetTimeViewhidden];
     if (isLock) {
+        mViewVideoControl.hidden = NO;
         isLock = NO;
         mViewControl.hidden = YES;
 //        mViewMenu.hidden = YES;
@@ -944,6 +948,7 @@
         [self.btnLock setBackgroundImage:[UIImage imageNamed:@"btn_unlock_select"] forState:UIControlStateHighlighted];
         
     }else{
+        mViewVideoControl.hidden = YES;
         isLock = YES;
         mViewControl.hidden = YES;
 //        mViewMenu.hidden = YES;
@@ -1164,7 +1169,7 @@
 }
 -(void) request:(NSString *) aid gid:(NSString *)gid ;
 {
-    if (self.playerViewController ) {
+    if ( self.playerViewController ) {
         [self playVideoFinished:nil];
     }
     
@@ -1212,35 +1217,38 @@
 }
 -(void)playMovie:(NSString *)fileName{
     
+
     NSURL *url = [NSURL URLWithString:fileName];
-    self.playerViewController =[[MPMoviePlayerViewController alloc]     initWithContentURL:url];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(playVideoFinished:) name:MPMoviePlayerPlaybackDidFinishNotification object:[self.playerViewController moviePlayer]];
-    self.playerViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    if(!self.playerViewController){
+        self.playerViewController = [[MPMoviePlayerViewController alloc]init];
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(playVideoFinished:) name:MPMoviePlayerPlaybackDidFinishNotification object:[self.playerViewController moviePlayer]];
+        self.playerViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+        [self.view addSubview:self.playerViewController.view];
+    }
+
+    
+    
     self.playerViewController.view.frame = self.view.bounds;
-    [self.view addSubview:self.playerViewController.view];
     MPMoviePlayerController *player = [self.playerViewController moviePlayer];
+    player.contentURL = url;
     player.movieSourceType = MPMovieSourceTypeFile;
     player.shouldAutoplay = YES;
     [player setControlStyle:MPMovieControlStyleNone];
-//    [player setFullscreen:YES];
-//    player.scalingMode = MPMovieScalingModeFill;
-    NSTimeInterval length = [player duration];
-    NSLog(@"%f",length);
-
     [player prepareToPlay];
     [player play];
     labAdTime.hidden = NO;
     labAdTime.text = [NSString stringWithFormat:@"%@",[mAdVideo objectForKey:@"duration"]];
-    [labAdTime removeFromSuperview];
-    [self.view addSubview:labAdTime];
-//    [labAdTime bringSubviewToFront:self.view];
+//    [labAdTime removeFromSuperview];
+//    [self.view addSubview:labAdTime];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    [self.view bringSubviewToFront:labAdTime];
     UIButton * button  = [[UIButton alloc]initWithFrame:self.playerViewController.view.bounds];
     [button addTarget:self action:@selector(btnADPausePreviousOntouch:) forControlEvents:UIControlEventTouchUpInside];
     [self.playerViewController.view addSubview:button];
     
 
     
-    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    
 
     // 倒计时时间
     mTimerAD = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(showGuidePngFinished:) userInfo:nil repeats:YES];
@@ -1253,14 +1261,7 @@
     int time  = [[mAdVideo objectForKey:@"duration"]intValue] -(int)length;
     labAdTime.text = [NSString stringWithFormat:@"%d",time];
     if(time == 0){
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerPlaybackDidFinishNotification object:self.playerViewController.moviePlayer];
-        [self.playerViewController.moviePlayer stop];
-        [self.playerViewController.view removeFromSuperview];
-        self.playerViewController = nil;
-        labAdTime.hidden = YES;
-        [mTimerAD invalidate];
-        [mMPayer start];
-        mViewPauseAD.hidden = YES;
+        [self playVideoFinished:nil];
     }
 
 }
@@ -1272,12 +1273,14 @@
  */
 - (void) playVideoFinished:(NSNotification *)theNotification//当点击Done按键或者播放完毕时调用此函数
 {
+
     [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerPlaybackDidFinishNotification object:self.playerViewController.moviePlayer];
     [self.playerViewController.moviePlayer stop];
     [self.playerViewController.view removeFromSuperview];
     self.playerViewController = nil;
     labAdTime.hidden = YES;
     [mTimerAD invalidate];
+    mTimerAD = nil;
     [mMPayer start];
     mViewPauseAD.hidden = YES;
 }

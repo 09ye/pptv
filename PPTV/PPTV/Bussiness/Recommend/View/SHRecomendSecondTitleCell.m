@@ -8,6 +8,7 @@
 
 #import "SHRecomendSecondTitleCell.h"
 
+
 @implementation SHRecomendSecondTitleCell
 @synthesize detailArray = _detailArray;
 /*
@@ -36,5 +37,10 @@
     [intent.args setValue:dic forKey:@"detailInfo"];
     intent.container = self.navController;
     [[UIApplication sharedApplication] open:intent];
+}
+
+- (IBAction)btnHomeOntouch:(UIButton *)sender {
+    [[NSNotificationCenter defaultCenter]postNotificationName:NOTIFICATION_HOME_TABBAR_DIDSELECT object:[NSNumber numberWithInt:self.tabIndex]];
+
 }
 @end

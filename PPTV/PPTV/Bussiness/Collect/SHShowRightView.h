@@ -14,6 +14,12 @@ typedef enum
     Up,//动画方向
    
 }Direction;
+@class SHShowRightView;
+@protocol SHShowRightViewDelegate <NSObject>
+
+-(void)showRightViewDidClose:(SHShowRightView *)controller ;
+
+@end
 
 @interface SHShowRightView : SHView
 {
@@ -22,7 +28,7 @@ typedef enum
     SHCollectViewController * mCollectViewController;
 }
 @property (nonatomic,assign) BOOL isShow;
-
+@property(nonatomic,weak) id<SHShowRightViewDelegate> delegate;
 - (IBAction)btnCloseOnTouch:(id)sender;
 - (void)show:(UIViewController*)controller inView:(UIView *) view  direction:(Direction) direction;
 - (void)showIn:(UIView *) view  direction:(Direction) direction;

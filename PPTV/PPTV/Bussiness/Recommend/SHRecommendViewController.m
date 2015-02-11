@@ -117,22 +117,22 @@
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     [_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
-    static float currentPostion = 0;
-    static float lastPosition = 0;
-    currentPostion = scrollView.contentOffset.y ;
-    if (currentPostion - lastPosition > 10) { //向上滑动屏幕时，隐藏标签栏
-      
-        [app hideTarBarSHDelegate:YES];
-    }
-    else if (lastPosition - currentPostion > 5)//当标签栏隐藏时，向下滑动屏幕时，显示标签栏,
-    {
-        [app hideTarBarSHDelegate:NO];
-    }
-    lastPosition = currentPostion;
-    if(scrollView.contentSize.height-scrollView.contentOffset.y <= scrollView.frame.size.height){// 底部
-        [app hideTarBarSHDelegate:YES];
-    }
-   [app.viewController hideSearchView:NO];
+//    static float currentPostion = 0;
+//    static float lastPosition = 0;
+//    currentPostion = scrollView.contentOffset.y ;
+//    if (currentPostion - lastPosition > 10) { //向上滑动屏幕时，隐藏标签栏
+//      
+//        [app hideTarBarSHDelegate:YES];
+//    }
+//    else if (lastPosition - currentPostion > 5)//当标签栏隐藏时，向下滑动屏幕时，显示标签栏,
+//    {
+//        [app hideTarBarSHDelegate:NO];
+//    }
+//    lastPosition = currentPostion;
+//    if(scrollView.contentSize.height-scrollView.contentOffset.y <= scrollView.frame.size.height){// 底部
+//        [app hideTarBarSHDelegate:YES];
+//    }
+//   [app.viewController hideSearchView:NO];
     
     
 }
@@ -209,7 +209,7 @@
         if(cell == nil){
             cell = (SHRecomendSecondTitleCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHRecomendSecondTitleCell" owner:nil options:nil] objectAtIndex:0];
         }
-        
+        cell.tabIndex = 2;
         cell.btnBg.backgroundColor = [UIColor colorWithRed:237/255.0 green:144/255.0 blue:41/255.0 alpha:1];
         
         NSMutableArray * array = [mResult objectForKey:@"cartoon_rec"];
@@ -245,7 +245,7 @@
         if(cell == nil){
             cell = (SHRecomendSecondTitleCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHRecomendSecondTitleCell" owner:nil options:nil] objectAtIndex:0];
         }
-        
+        cell.tabIndex = 3;
         cell.btnBg.backgroundColor = [UIColor colorWithRed:160/255.0 green:177/255.0 blue:1/255.0 alpha:1];
         NSMutableArray * array = [mResult objectForKey:@"tele_rec"];
         cell.detailArray = [array mutableCopy];
@@ -279,6 +279,7 @@
         if(cell == nil){
             cell = (SHRecomendSecondTitleCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHRecomendSecondTitleCell" owner:nil options:nil] objectAtIndex:0];
         }
+        cell.tabIndex = 4;
         cell.btnBg.backgroundColor = [UIColor colorWithRed:0/255.0 green:166/255.0 blue:241/255.0 alpha:1];
         NSMutableArray * array = [mResult objectForKey:@"movie_rec"];
         cell.detailArray = [array mutableCopy];
@@ -313,6 +314,7 @@
         if(cell == nil){
             cell = (SHRecomendSecondTitleCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHRecomendSecondTitleCell" owner:nil options:nil] objectAtIndex:0];
         }
+        cell.tabIndex = 5;
         cell.btnBg.backgroundColor = [UIColor colorWithRed:1/255.0 green:195/255.0 blue:169/255.0 alpha:1];
         NSMutableArray * array = [mResult objectForKey:@"micro_rec"];
         cell.detailArray = [array mutableCopy];
@@ -408,7 +410,7 @@
 //    if(recognizer.direction == (UISwipeGestureRecognizerDirectionLeft| UISwipeGestureRecognizerDirectionRight)){
 //              }
   
-    [app.viewController hideSearchView:YES];
+//    [app.viewController hideSearchView:YES];
 
     return YES;
 }

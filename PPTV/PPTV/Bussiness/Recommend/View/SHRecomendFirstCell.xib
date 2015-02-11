@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -37,8 +37,11 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="default308x246.png" translatesAutoresizingMaskIntoConstraints="NO" id="Hiz-d3-dSd" customClass="SHImageView">
                                 <rect key="frame" x="5" y="5" width="160" height="125"/>
                             </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg_state_shade.png" translatesAutoresizingMaskIntoConstraints="NO" id="UNh-yw-MwE">
+                                <rect key="frame" x="5" y="100" width="160" height="30"/>
+                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="-" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rAR-vy-8nM">
-                                <rect key="frame" x="10" y="105" width="150" height="21"/>
+                                <rect key="frame" x="10" y="105" width="150" height="22"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -49,8 +52,11 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="default308x246.png" translatesAutoresizingMaskIntoConstraints="NO" id="Qqm-4U-Dp6" customClass="SHImageView">
                                 <rect key="frame" x="5" y="136" width="160" height="125"/>
                             </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg_state_shade.png" translatesAutoresizingMaskIntoConstraints="NO" id="LJc-Ht-tRW">
+                                <rect key="frame" x="5" y="231" width="160" height="30"/>
+                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="-" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hPJ-Io-Uyz">
-                                <rect key="frame" x="10" y="236" width="150" height="21"/>
+                                <rect key="frame" x="10" y="237" width="150" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -107,7 +113,7 @@
                         <rect key="frame" x="624" y="69" width="350" height="200"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="--" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="17z-R0-avp">
-                        <rect key="frame" x="642" y="240" width="320" height="21"/>
+                        <rect key="frame" x="631" y="240" width="320" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -172,6 +178,9 @@
                             <action selector="btnLiveSynchOntouch:" destination="12Y-7w-Asa" eventType="touchUpInside" id="anD-mS-vcR"/>
                         </connections>
                     </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg_state_shade.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ihk-Oj-vwq">
+                        <rect key="frame" x="625" y="239" width="350" height="30"/>
+                    </imageView>
                 </subviews>
             </tableViewCellContentView>
             <connections>
@@ -191,6 +200,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="bg_state_shade.png" width="320" height="64"/>
         <image name="default168x108.png" width="168" height="108"/>
         <image name="default308x246.png" width="308" height="246"/>
         <image name="default706x400.png" width="706" height="400"/>

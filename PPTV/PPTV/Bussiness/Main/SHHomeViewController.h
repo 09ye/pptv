@@ -12,7 +12,7 @@
 
 
 
-@interface SHHomeViewController : SHTableViewController<UISearchBarDelegate,SHCollectViewControllerDelegate,SHRecordViewControllerDelegate>
+@interface SHHomeViewController : SHTableViewController<UISearchBarDelegate,SHCollectViewControllerDelegate,SHRecordViewControllerDelegate,SHShowRightViewDelegate>
 {
     __weak IBOutlet UIView *mViewContain;
 
@@ -34,6 +34,8 @@
     __weak IBOutlet UIButton *btnSports;
     __weak IBOutlet UIButton *btnTravel;
     __weak IBOutlet UIButton *btnMicroShow;
+    __weak IBOutlet UILabel *mlabRecord;
+    __weak IBOutlet UILabel *mlabDownload;
     
     NSArray * arrayBtn;
     SHShowRightView *mViewRight;

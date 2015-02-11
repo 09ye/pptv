@@ -19,6 +19,8 @@
                 <outlet property="mViewContain" destination="oTc-lR-J8w" id="dus-xU-tv6"/>
                 <outlet property="mViewMore" destination="2n2-0m-jDM" id="TZ9-Lf-Ob6"/>
                 <outlet property="mViewMoreContent" destination="PVQ-ka-JfL" id="Cd0-8i-JDE"/>
+                <outlet property="mlabDownload" destination="ERV-6d-sQa" id="gxQ-k8-KfX"/>
+                <outlet property="mlabRecord" destination="ONh-Zg-zUF" id="2fv-K7-sjV"/>
                 <outlet property="tabbar" destination="sgC-EW-N6p" id="SVW-BP-NcO"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="viewTitleBar" destination="q81-xb-2Nn" id="leq-5j-ppH"/>
@@ -149,7 +151,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="315" height="140"/>
                         </imageView>
                         <button opaque="NO" tag="21" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X7d-dE-KPO">
-                            <rect key="frame" x="10" y="10" width="50" height="50"/>
+                            <rect key="frame" x="20" y="10" width="50" height="50"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <inset key="titleEdgeInsets" minX="-30" minY="34" maxX="0.0" maxY="0.0"/>
                             <inset key="imageEdgeInsets" minX="10" minY="-15" maxX="0.0" maxY="0.0"/>
@@ -161,7 +163,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" tag="22" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dRM-SY-W81" userLabel="原创">
-                            <rect key="frame" x="85" y="10" width="50" height="50"/>
+                            <rect key="frame" x="95" y="10" width="50" height="50"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <inset key="titleEdgeInsets" minX="-30" minY="34" maxX="0.0" maxY="0.0"/>
                             <inset key="imageEdgeInsets" minX="10" minY="-15" maxX="0.0" maxY="0.0"/>
@@ -173,7 +175,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" tag="23" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4W5-Rj-QjL">
-                            <rect key="frame" x="160" y="10" width="58" height="50"/>
+                            <rect key="frame" x="170" y="10" width="58" height="50"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <inset key="titleEdgeInsets" minX="-30" minY="34" maxX="0.0" maxY="0.0"/>
                             <inset key="imageEdgeInsets" minX="10" minY="-15" maxX="0.0" maxY="0.0"/>
@@ -185,7 +187,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" tag="24" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HOt-ZW-yy4">
-                            <rect key="frame" x="235" y="10" width="50" height="50"/>
+                            <rect key="frame" x="245" y="10" width="50" height="50"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <inset key="titleEdgeInsets" minX="-30" minY="34" maxX="0.0" maxY="0.0"/>
                             <inset key="imageEdgeInsets" minX="10" minY="-15" maxX="0.0" maxY="0.0"/>
@@ -197,7 +199,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" tag="25" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BtG-5f-Kn0">
-                            <rect key="frame" x="10" y="73" width="50" height="50"/>
+                            <rect key="frame" x="20" y="73" width="50" height="50"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <inset key="titleEdgeInsets" minX="-30" minY="34" maxX="0.0" maxY="0.0"/>
                             <inset key="imageEdgeInsets" minX="10" minY="-15" maxX="0.0" maxY="0.0"/>
@@ -209,7 +211,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" tag="26" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="twT-FW-6Pq">
-                            <rect key="frame" x="85" y="73" width="50" height="50"/>
+                            <rect key="frame" x="95" y="73" width="50" height="50"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <inset key="titleEdgeInsets" minX="-30" minY="34" maxX="0.0" maxY="0.0"/>
                             <inset key="imageEdgeInsets" minX="10" minY="-15" maxX="0.0" maxY="0.0"/>
@@ -221,7 +223,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" tag="28" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FZU-If-pOe">
-                            <rect key="frame" x="235" y="73" width="50" height="50"/>
+                            <rect key="frame" x="245" y="73" width="50" height="50"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <inset key="titleEdgeInsets" minX="-28" minY="34" maxX="0.0" maxY="0.0"/>
                             <inset key="imageEdgeInsets" minX="10" minY="-15" maxX="0.0" maxY="0.0"/>
@@ -233,7 +235,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" tag="27" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QF8-Or-D7o">
-                            <rect key="frame" x="160" y="73" width="58" height="50"/>
+                            <rect key="frame" x="170" y="73" width="58" height="50"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <inset key="titleEdgeInsets" minX="-32" minY="34" maxX="0.0" maxY="0.0"/>
                             <inset key="imageEdgeInsets" minX="10" minY="-15" maxX="0.0" maxY="0.0"/>
@@ -255,25 +257,25 @@
     </objects>
     <resources>
         <image name="bg_more.png" width="629" height="280"/>
-        <image name="ic_tab_animation.png" width="30" height="30"/>
-        <image name="ic_tab_documentary.png" width="30" height="30"/>
-        <image name="ic_tab_home.png" width="30" height="30"/>
-        <image name="ic_tab_live.png" width="30" height="30"/>
-        <image name="ic_tab_more.png" width="30" height="30"/>
-        <image name="ic_tab_movice.png" width="30" height="30"/>
-        <image name="ic_tab_movice_micro.png" width="30" height="30"/>
-        <image name="ic_tab_normal_21.png" width="30" height="30"/>
-        <image name="ic_tab_normal_22.png" width="30" height="30"/>
-        <image name="ic_tab_normal_23.png" width="30" height="30"/>
-        <image name="ic_tab_normal_24.png" width="30" height="30"/>
-        <image name="ic_tab_normal_25.png" width="30" height="30"/>
-        <image name="ic_tab_normal_26.png" width="30" height="30"/>
-        <image name="ic_tab_normal_27.png" width="30" height="30"/>
-        <image name="ic_tab_normal_28.png" width="30" height="30"/>
-        <image name="ic_tab_setting.png" width="30" height="30"/>
-        <image name="ic_tab_store.png" width="30" height="30"/>
-        <image name="ic_tab_tv.png" width="30" height="30"/>
-        <image name="ic_tab_variety.png" width="30" height="30"/>
+        <image name="ic_tab_animation.png" width="20" height="20"/>
+        <image name="ic_tab_documentary.png" width="20" height="20"/>
+        <image name="ic_tab_home.png" width="20" height="20"/>
+        <image name="ic_tab_live.png" width="20" height="20"/>
+        <image name="ic_tab_more.png" width="20" height="20"/>
+        <image name="ic_tab_movice.png" width="20" height="20"/>
+        <image name="ic_tab_movice_micro.png" width="20" height="20"/>
+        <image name="ic_tab_normal_21.png" width="20" height="20"/>
+        <image name="ic_tab_normal_22.png" width="20" height="20"/>
+        <image name="ic_tab_normal_23.png" width="20" height="20"/>
+        <image name="ic_tab_normal_24.png" width="20" height="20"/>
+        <image name="ic_tab_normal_25.png" width="20" height="20"/>
+        <image name="ic_tab_normal_26.png" width="20" height="20"/>
+        <image name="ic_tab_normal_27.png" width="20" height="20"/>
+        <image name="ic_tab_normal_28.png" width="20" height="20"/>
+        <image name="ic_tab_setting.png" width="20" height="20"/>
+        <image name="ic_tab_store.png" width="20" height="20"/>
+        <image name="ic_tab_tv.png" width="20" height="20"/>
+        <image name="ic_tab_variety.png" width="20" height="20"/>
         <image name="ic_title_download.png" width="38" height="39"/>
         <image name="ic_title_records.png" width="39" height="39"/>
         <image name="logo.png" width="163" height="64"/>

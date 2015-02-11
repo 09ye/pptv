@@ -107,9 +107,12 @@
                     <rect key="frame" x="655" y="140" width="250" height="1"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="shanchu.png" translatesAutoresizingMaskIntoConstraints="NO" id="sGO-TJ-bAH">
+                    <rect key="frame" x="827" y="115" width="20" height="20"/>
+                </imageView>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oxg-K3-32O">
-                    <rect key="frame" x="819" y="111" width="107" height="25"/>
-                    <state key="normal" title="清空" image="shanchu.png">
+                    <rect key="frame" x="818" y="113" width="107" height="25"/>
+                    <state key="normal" title="清空">
                         <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>

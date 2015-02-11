@@ -27,6 +27,7 @@
                 <outlet property="imgADPause" destination="red-QX-gl6" id="p8P-LU-guC"/>
                 <outlet property="labAdTime" destination="xas-64-boY" id="xT7-8Z-MG2"/>
                 <outlet property="mViewPauseAD" destination="NqS-1o-xCB" id="0fJ-q1-eQ2"/>
+                <outlet property="mViewVideoControl" destination="DZK-MT-FZK" id="IJK-AU-aeJ"/>
                 <outlet property="modeBtn" destination="a5X-XB-C95" id="rgZ-EL-10J"/>
                 <outlet property="nextBtn" destination="hv4-LV-HbP" id="DKf-dO-8Lh"/>
                 <outlet property="nextBtn1" destination="ORG-xB-M07" id="078-es-IDx"/>
@@ -266,14 +267,14 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tkn-gY-iNO" userLabel="Label_buffer">
-                    <rect key="frame" x="370" y="436" width="242" height="92"/>
+                    <rect key="frame" x="370" y="374" width="242" height="92"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" id="Wvs-a1-jKz" userLabel="View_buffer">
-                    <rect key="frame" x="471" y="364" width="40" height="40"/>
+                    <rect key="frame" x="471" y="302" width="40" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
@@ -522,6 +523,9 @@
                 </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
     </objects>

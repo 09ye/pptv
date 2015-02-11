@@ -34,6 +34,11 @@
     cell.labTitle.text = [dic objectForKey:@"title"];
     cell.labContent.text = [dic objectForKey:@"focus"];
     cell.labStatus.text = [dic objectForKey:@"status"];
+    if(![dic objectForKey:@"status"] || [[dic objectForKey:@"status"] isEqualToString:@""]){
+        cell.imgBgState.hidden = YES;
+    }else{
+        cell.imgBgState.hidden = NO;
+    }
     
     
     

@@ -129,6 +129,7 @@
         }else if (indexPath.row == 2){
             cell.labTitle.text = @"为我打分";
             cell.imgChoose.hidden = NO;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
             
             
@@ -157,7 +158,7 @@
         [self.tableView reloadData];
     }else if (indexPath.section ==2){
         if (indexPath.row == 0) {
-            [self showAlertDialog:@"删除之后可能会降低流畅度,请三思啊" button:@"取消" otherButton:@"清除"];
+            [self showAlertDialog:@"删除之后可能会降低流畅度,请三思啊" button:@"取消" otherButton:@"清除" tag:10000];
         }else if (indexPath.row ==1){
             [SHConfigManager.instance refresh];
         }else if (indexPath.row ==2){
@@ -203,42 +204,50 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void) alertViewCancelOnClick
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    dispatch_async(
-                   
-                   dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
-                   , ^{
-                       
-                       NSString *cachPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory,NSUserDomainMask, YES) objectAtIndex:0];
-                       
-                       
-                       NSFileManager*  filemgr =[NSFileManager defaultManager];
-                       NSArray *files = [filemgr subpathsAtPath:cachPath];
-                       
-                       NSLog(@"files :%d",[files count]);
-                       float cacheSize = 0;
-                       
-                       for (NSString *p in files) {
+    if (alertView.tag == 10000) {
+        if(buttonIndex == 0){
+            dispatch_async(
                            
-                           NSError *error;
-                           
-                           NSString *path = [cachPath stringByAppendingPathComponent:p];
-                           
-                           if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
-                               long long size = [[filemgr attributesOfItemAtPath:[NSString stringWithFormat:@"%@/%@",cachPath,p] error:nil] fileSize];
-                               if(size){
-                                   cacheSize = cacheSize + size;
+                           dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+                           , ^{
+                               
+                               NSString *cachPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory,NSUserDomainMask, YES) objectAtIndex:0];
+                               
+                               
+                               NSFileManager*  filemgr =[NSFileManager defaultManager];
+                               NSArray *files = [filemgr subpathsAtPath:cachPath];
+                               
+                               NSLog(@"files :%d",[files count]);
+                               float cacheSize = 0;
+                               
+                               for (NSString *p in files) {
+                                   
+                                   NSError *error;
+                                   
+                                   NSString *path = [cachPath stringByAppendingPathComponent:p];
+                                   
+                                   if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
+                                       long long size = [[filemgr attributesOfItemAtPath:[NSString stringWithFormat:@"%@/%@",cachPath,p] error:nil] fileSize];
+                                       if(size){
+                                           cacheSize = cacheSize + size;
+                                       }
+                                       
+                                       [[NSFileManager defaultManager] removeItemAtPath:path error:&error];
+                                       
+                                       
+                                   }
+                                   
                                }
                                
-                               [[NSFileManager defaultManager] removeItemAtPath:path error:&error];
-                               
-                               
-                           }
-                           
-                       }
-                       
-                       [self performSelectorOnMainThread:@selector(clearCacheSuccess) withObject:[NSString stringWithFormat:@"为您节省%0.1fM空间",(cacheSize/1024.0/1024.0)] waitUntilDone:YES];});
+                               [self performSelectorOnMainThread:@selector(clearCacheSuccess:) withObject:[NSString stringWithFormat:@"为您节省%0.1fM空间",(cacheSize/1024.0/1024.0)] waitUntilDone:YES];});
+        }else if (buttonIndex == 1){
+
+        }
+
+    }
+    
     
 }
 -(void) clearCacheSuccess:(NSString *) message
