@@ -436,7 +436,7 @@ static bool __isupdate = NO;
             }
             
         }
-        
+        url = [Utility encodeVideoUrl:url];
         
         [dic setValue:[[SHFileManager getTargetFloderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@",[dic objectForKey:@"id"]]] forKey:@"path"];// 没有格式
         [dic setValue:[NSNumber numberWithInt:emDownloading] forKey:@"state"];

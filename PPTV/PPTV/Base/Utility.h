@@ -19,4 +19,7 @@
 +(BOOL)containsObject:(NSMutableArray *)array forKey:(NSString *)key forValue:(NSString *)value;
 //删除 数组存在 key =value 的索引
 +(void)removeObject:(NSMutableArray *)array forKey:(NSString *)key forValue:(NSString *)value;
+
++(NSString *)encodeVideoUrl:(NSString *) url ;
++(NSString *)encodeVideoUrl:(NSString *) url key:(NSString *)key;
 @end

@@ -24,12 +24,12 @@
 }
 
 
--(void) refresh:(NSInteger)videoID
+-(void) refresh:(NSString *)videoID
 {
     selctID = videoID;
     SHPostTaskM * post = [[SHPostTaskM alloc]init];
     post.URL = URL_FOR(@"Pad/iteminfo");
-    [post.postArgs setValue:[NSNumber numberWithInt:videoID] forKey:@"id"];
+    [post.postArgs setValue:videoID forKey:@"id"];
     post.delegate = self;
     [post start:^(SHTask *task) {
         mResult = [[task result]mutableCopy];
@@ -90,7 +90,7 @@
         [cell.labTitle sizeToFit];
     }
     cell.backgroundColor = [UIColor clearColor];
-    if ([[dic objectForKey:@"id"]integerValue] == selctID) {
+    if ([NSString stringWithFormat:@"%@",[dic objectForKey:@"id"]] == selctID) {
 
             [tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionTop];
     }

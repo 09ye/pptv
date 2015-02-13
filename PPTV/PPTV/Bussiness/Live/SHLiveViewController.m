@@ -66,7 +66,7 @@
     }
     
     if (dicPreInfo) {
-        [self request:[[dicPreInfo objectForKey:@"id"]intValue]];
+        [self request:[dicPreInfo objectForKey:@"id"]];
     }
     
     
@@ -87,12 +87,12 @@
 }
 
 
--(void) request:(NSInteger)videoID
+-(void) request:(NSString *)videoID
 {
     [mShowViewControll request:@"102349" gid:@"p4840"];// ad
     SHPostTaskM * post = [[SHPostTaskM alloc]init];
     post.URL = URL_FOR(@"Pad/liveinfo");
-    [post.postArgs setValue:[NSNumber numberWithInt:videoID] forKey:@"id"];
+    [post.postArgs setValue:videoID forKey:@"id"];
     post.delegate = self;
     [post start:^(SHTask *t) {
         
@@ -108,7 +108,7 @@
        
 //     mVideoUrl = @"http://183.136.140.38/hd_hbws/z.m3u8";
         self.leftTitle = mVideotitle;
-        NSURL * videoUrl = [NSURL URLWithString:mVideoUrl];
+        NSURL * videoUrl = [NSURL URLWithString:[Utility encodeVideoUrl:mVideoUrl]];
         [mShowViewControll quicklyReplayMovie:videoUrl title:[mResultDetail objectForKey:@"title"] seekToPos:0];
         
         if (mDemandDetailViewControll==nil) {// 详情
@@ -235,7 +235,7 @@
 }
 -(void) liveListDidSelect:(SHLiveListViewController*)controll info:(NSDictionary*)detail
 {
-    [self request:[[detail objectForKey:@"id"]intValue]];
+    [self request:[detail objectForKey:@"id"]];
 }
 #pragma  菜单响应变化
 -(void) changeRightViewContent:(int) index

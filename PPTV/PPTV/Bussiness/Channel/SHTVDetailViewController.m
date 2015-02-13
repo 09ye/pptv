@@ -58,7 +58,7 @@
         arrayRecord = [NSKeyedUnarchiver unarchiveObjectWithData:data2];
     }
 
-    [self request:[[dicPreInfo objectForKey:@"id"]intValue]];
+    [self request:[dicPreInfo objectForKey:@"id"]];
 
     
     mTimeLog  = [NSTimer scheduledTimerWithTimeInterval:5*60 target:self selector:@selector(requestOnline) userInfo:nil repeats:YES];
@@ -82,14 +82,14 @@
     [super viewDidDisappear:YES];
     [self recordVideoDate];
 }
--(void) request:(NSInteger)videoID
+-(void) request:(NSString *)videoID
 {
     [mShowViewControll request:@"102345" gid:@"p4841"];// ad
     [self recordVideoDate];
     
     SHPostTaskM * post = [[SHPostTaskM alloc]init];
     post.URL = URL_FOR(@"Pad/vodinfo");
-    [post.postArgs setValue:[NSNumber numberWithInt:videoID] forKey:@"id"];
+    [post.postArgs setValue:videoID forKey:@"id"];
     post.delegate = self;
     [post start:^(SHTask *t) {
 
@@ -108,7 +108,7 @@
         if ([self.intent.args objectForKey:@"urlPath"] && ![[self.intent.args objectForKey:@"urlPath"] isEqualToString:@""]) {
             mVideoUrl = [self.intent.args objectForKey:@"urlPath"];
         }
-        NSURL * videoUrl = [NSURL URLWithString:mVideoUrl];
+        NSURL * videoUrl = [NSURL URLWithString:[Utility encodeVideoUrl:mVideoUrl]];
         
         [mShowViewControll quicklyReplayMovie:videoUrl title:[mResultDetail objectForKey:@"title"] seekToPos:[self getVideoRecordSeek]];
         if (mDrameViewControll ==nil) {// 剧集
@@ -116,7 +116,7 @@
             mDrameViewControll.view.frame = mViewContent.bounds;
             mDrameViewControll.delegate = self;
         }
-        [mDrameViewControll refresh:[[mResultDetail objectForKey:@"id"]intValue]];
+        [mDrameViewControll refresh:[mResultDetail objectForKey:@"id"]];
         
         [mViewContent addSubview:mDrameViewControll.view];
         if (mDemandDetailViewControll==nil) {// 详情
@@ -197,7 +197,7 @@
 //    [mScrollview selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
 
 
-    [self request:[[[mList objectAtIndex:indexPath.row] objectForKey:@"id"]intValue]];
+    [self request:[[mList objectAtIndex:indexPath.row] objectForKey:@"id"]];
     
 }
 #pragma video delegate
@@ -208,10 +208,10 @@
         NSIndexPath *indexPath =[self.tableView indexPathForSelectedRow];
         if (indexPath && indexPath.row+1<mList.count) {
 
-            [self request:[[[mList objectAtIndex:indexPath.row+1] objectForKey:@"id"]intValue]];
+            [self request:[[mList objectAtIndex:indexPath.row+1] objectForKey:@"id"]];
 
         }else if(!indexPath && mList.count>0){
-            [self request:[[[mList objectAtIndex:0] objectForKey:@"id"]intValue]];
+            [self request:[[mList objectAtIndex:0] objectForKey:@"id"]];
         }else{
            [self.navigationController popViewControllerAnimated:YES];
         }
@@ -250,7 +250,7 @@
 
 -(void) drameDidSelect:(SHTVDrameViewController*)controll info:(NSDictionary*)detail
 {
-    [self request:[[detail objectForKey:@"id"]intValue]];
+    [self request:[detail objectForKey:@"id"]];
 }
 #pragma  菜单响应变化
 -(void) changeRightViewContent:(int) index

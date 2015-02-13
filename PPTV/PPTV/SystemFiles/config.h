@@ -15,12 +15,13 @@
 
 
 #define URL_HEADER @ "http://padapi.wasu.cn"
-#define URL_ADS @"http://afp.csbew.com/s.htm"
-#define URL_STATISTICS  @"http://dmav1.junjichu.net"
+#define URL_ADS @"http://afp.csbew.com/s.htm"//广告
+#define URL_STATISTICS  @"http://dmav1.junjichu.net"//统计
 
 #define URL_BATA @ "http://123.103.20.88:18014"
 //测试 pad.cs.wasu.cn:18014
-#define URL_DEVELOPER @ "http://padapi.wasu.cn"////pad.cs.wasu.cn
+//正式 padapi.wasu.cn
+#define URL_DEVELOPER @ "http://padapi.wasu.cn"
 
 #define URL_UPDATE @"http://zambon-update1.mobilitychina.com:8095/get_config"
 

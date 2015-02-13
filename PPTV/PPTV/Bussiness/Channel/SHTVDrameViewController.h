@@ -14,7 +14,7 @@
 @end
 @interface SHTVDrameViewController : SHTableViewController<SHTaskDelegate>
 {
-    int selctID;
+    NSString * selctID;
     __weak IBOutlet UIView *mViewDownload;
     __weak IBOutlet UILabel *mlabTitleDown;
      __weak IBOutlet UIView *mViewContain;
@@ -40,6 +40,6 @@
 - (IBAction)btnDownModeOntouch:(UIButton *)sender;
 - (IBAction)btnShowModeOntouch:(id)sender;
 - (IBAction)btnModeCloseOntouch:(id)sender;
--(void) refresh:(NSInteger)videoID;
+-(void) refresh:(NSString *)videoID;
 -(BOOL) showNextVideo;
 @end

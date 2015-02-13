@@ -160,7 +160,8 @@
         if (indexPath.row == 0) {
             [self showAlertDialog:@"删除之后可能会降低流畅度,请三思啊" button:@"取消" otherButton:@"清除" tag:10000];
         }else if (indexPath.row ==1){
-            [SHConfigManager.instance refresh];
+//            [SHConfigManager.instance refresh];
+            [self showAlertDialog:@"当前已为最新版本"];
         }else if (indexPath.row ==2){
             NSString *str = [NSString stringWithFormat:
                              @"https://itunes.apple.com/cn/app/offer/id914425168?mt=8"];
