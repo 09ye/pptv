@@ -56,7 +56,7 @@
     }else if (section == 1){
         return 2;
     }else if(section == 2){
-        return 5;
+        return 3;
     }
     return 1;
     
@@ -127,9 +127,12 @@
             cell.labContent.hidden = NO;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }else if (indexPath.row == 2){
-            cell.labTitle.text = @"为我打分";
+            cell.labTitle.text = @"关于我们";
             cell.imgChoose.hidden = NO;
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//            cell.viewLine.hidden = YES;
+//            cell.labTitle.text = @"为我打分";
+//            cell.imgChoose.hidden = NO;
+//            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
             
             
@@ -137,9 +140,7 @@
             cell.labTitle.text = @"意见反馈";
             cell.imgChoose.hidden = NO;
         }else if (indexPath.row == 4){
-            cell.labTitle.text = @"关于我们";
-            cell.imgChoose.hidden = NO;
-            cell.viewLine.hidden = YES;
+            
         }
         
     }
@@ -163,19 +164,20 @@
 //            [SHConfigManager.instance refresh];
             [self showAlertDialog:@"当前已为最新版本"];
         }else if (indexPath.row ==2){
-            NSString *str = [NSString stringWithFormat:
-                             @"https://itunes.apple.com/cn/app/offer/id914425168?mt=8"];
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+            SHIntent * intent  =[[SHIntent alloc]init];
+            intent.target = @"SHAboutViewController";
+            intent.container  = self.navigationController;
+            [[UIApplication sharedApplication]open:intent];
+//            NSString *str = [NSString stringWithFormat:
+//                             @"https://itunes.apple.com/cn/app/offer/id914425168?mt=8"];
+//            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
         }else if (indexPath.row ==3){
             SHIntent * intent  =[[SHIntent alloc]init];
             intent.target = @"SHFeedbackViewController";
             intent.container  = self.navigationController;
             [[UIApplication sharedApplication]open:intent];
         }else if (indexPath.row ==4){
-            SHIntent * intent  =[[SHIntent alloc]init];
-            intent.target = @"SHAboutViewController";
-            intent.container  = self.navigationController;
-            [[UIApplication sharedApplication]open:intent];
+           
         }
     }
 }

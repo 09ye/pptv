@@ -26,9 +26,12 @@
     mDictionary = [[NSMutableDictionary alloc]init];
     
     NSString * hiddeDay =  [NSDate stringFromDate:[NSDate date] withFormat:@"yyyy-MM-dd"];
-    if ([hiddeDay caseInsensitiveCompare:@"2015-02-01"] == NSOrderedAscending) {
+    if ([hiddeDay caseInsensitiveCompare:@"2015-03-18"] == NSOrderedAscending) {
         NSMutableArray * array =  [self.tabbar.items mutableCopy];
         [array removeObjectAtIndex:1];
+        [array removeObjectAtIndex:4];
+        [array removeObjectAtIndex:5];
+        [array removeObjectAtIndex:5];
         self.tabbar.items = array;
     }
     [self tabBar:self.tabbar didSelectItem:[[self.tabbar items] objectAtIndex:0]];

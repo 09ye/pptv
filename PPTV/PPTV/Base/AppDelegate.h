@@ -8,10 +8,9 @@
 
 
 #import <UIKit/UIKit.h>
-#import "BMapKit.h"
 #import "SHAppDelegate.h"
-#import "ShareConfig.h"
-#import <ShareSDK/ShareSDK.h>
+
+
 #import "SHAnalyzeFactory.h"
 #import "FileModel.h"
 #import "SHFileManager.h"
@@ -21,14 +20,10 @@
 //
 //@end
 
-@interface AppDelegate : SHAppDelegate<UIApplicationDelegate,BMKGeneralDelegate,WXApiDelegate,WeiboSDKDelegate,SHTaskDelegate,BMKLocationServiceDelegate,BMKGeoCodeSearchDelegate,SHTaskDelegate>
+@interface AppDelegate : SHAppDelegate<UIApplicationDelegate,SHTaskDelegate>
 {
     
-    BMKMapManager* _mapManager;
-    BMKLocationService * _locService;
-    BMKGeoCodeSearch* _geocodesearch;
-    // 微信
-    enum WXScene _scene;
+
     // 微博
     NSString      *wbtoken;
     
@@ -36,8 +31,7 @@
     
 }
 @property (strong, nonatomic) NSString * wbtoken;
-@property (nonatomic,assign) BMKUserLocation *myLocation;
-@property (nonatomic,copy) BMKReverseGeoCodeResult* myAddressResult;
+
 @property (nonatomic,strong) NSDictionary * locationDistrict;
 #pragma mark - 微信
 - (void)changeScene:(NSInteger)scene;

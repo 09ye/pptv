@@ -24,7 +24,7 @@
     [super viewDidLoad];
     
     NSString * hiddeDay =  [NSDate stringFromDate:[NSDate date] withFormat:@"yyyy-MM-dd"];
-    if ([hiddeDay caseInsensitiveCompare:@"2015-02-01"] == NSOrderedAscending) {
+    if ([hiddeDay caseInsensitiveCompare:@"2015-03-18"] == NSOrderedAscending) {
         isHiddenLive = YES;
     }
     
@@ -146,16 +146,25 @@
    
     if (indexPath.row == 0) {
         return BEST_SCROLLVIEW_WIDTH;
-    }else if(indexPath.row == 1){
+    }else if(indexPath.row == 1){// 直播
         if (isHiddenLive) {
             return  0;
         }
         return 355;
     }else if(indexPath.row == 2 || indexPath.row == 4 || indexPath.row == 6 || indexPath.row == 8){
+        if(isHiddenLive && (indexPath.row == 8)){//微电影
+            return 0;
+        }
         return 175;
     }else if(indexPath.row == 3 || indexPath.row == 5 || indexPath.row == 7 || indexPath.row == 9){
+        if(isHiddenLive && (indexPath.row == 9)){//微电影
+            return 0;
+        }
         return 2*315;
     }else{
+        if(isHiddenLive && (indexPath.row == 11)){//综艺
+            return 0;
+        }
         return 2*175;
     }
 
@@ -330,6 +339,9 @@
         cell.navController = self.navController;
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        if (isHiddenLive) {
+            cell.hidden = YES;
+        }
         return cell;
         
     }else if (indexPath.row == 9){
@@ -341,6 +353,9 @@
         cell.navController = self.navController;
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        if (isHiddenLive) {
+            cell.hidden = YES;
+        }
         return cell;
     }else if (indexPath.row == 10){//综艺
         SHImgHorizaonalViewCell * cell = [self.tableView dequeueReusableCellWithIdentifier:@"table_img_horizaonal_cell"];
@@ -364,6 +379,9 @@
         cell.detail = [mResult mutableCopy];
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        if (isHiddenLive) {
+            cell.hidden = YES;
+        }
         return cell;
     }
    
