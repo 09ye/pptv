@@ -22,7 +22,7 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"编辑" target:self action:@selector(btnEdit)];
     self.view.backgroundColor = [SHSkin.instance colorOfStyle:@"ColorBackGroundRightView"];
     self.tableView.backgroundColor = [UIColor clearColor];
-    NSData * data  = [[NSUserDefaults standardUserDefaults] valueForKey:RECORD_LIST];
+    NSData * data  = [[NSUserDefaults standardUserDefaults] valueForKey:COLLECT_LIST];
     if (data) {
         mList = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     }
@@ -104,7 +104,7 @@
     [mList removeObjectAtIndex:indexPath.row-1];
     [self.tableView reloadData];
     NSData * data = [NSKeyedArchiver archivedDataWithRootObject:mList];
-    [[NSUserDefaults standardUserDefaults ] setValue:data forKey:RECORD_LIST];
+    [[NSUserDefaults standardUserDefaults ] setValue:data forKey:COLLECT_LIST];
     [[NSUserDefaults standardUserDefaults]synchronize];
 
 }
@@ -165,7 +165,7 @@
     [mList removeObjectsInArray:mArraySelect];
     [self.tableView reloadData];
     NSData * data = [NSKeyedArchiver archivedDataWithRootObject:mList];
-    [[NSUserDefaults standardUserDefaults ] setValue:data forKey:RECORD_LIST];
+    [[NSUserDefaults standardUserDefaults ] setValue:data forKey:COLLECT_LIST];
     [[NSUserDefaults standardUserDefaults]synchronize];
 }
 
@@ -173,7 +173,7 @@
     [mList removeAllObjects];
     [self.tableView reloadData];
     NSData * data = [NSKeyedArchiver archivedDataWithRootObject:mList];
-    [[NSUserDefaults standardUserDefaults ] setValue:data forKey:RECORD_LIST];
+    [[NSUserDefaults standardUserDefaults ] setValue:data forKey:COLLECT_LIST];
     [[NSUserDefaults standardUserDefaults]synchronize];
 
 }

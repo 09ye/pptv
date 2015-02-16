@@ -66,9 +66,9 @@ static bool __isupdate = NO;
     //                       tencentOAuthCls:[TencentOAuth class]];
     
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(configUpdate:) name:CORE_NOTIFICATION_CONFIG_STATUS_CHANGED object:nil];
-    [SHConfigManager instance];
-    //    [SHConfigManager instance].URL = URL_FOR(@"get_config");
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(configUpdate:) name:CORE_NOTIFICATION_CONFIG_STATUS_CHANGED object:nil];
+//    [SHConfigManager instance];
+//    [SHConfigManager instance].URL = URL_FOR(@"get_config");
     
     //    [self loadCachesfiles];
     
@@ -78,19 +78,6 @@ static bool __isupdate = NO;
 - (void)configUpdate:(NSObject*)sender
 {
     [SHConfigManager.instance show];
-}
-
-
-
-- (void)didFailToLocateUserWithError:(NSError *)error
-{
-}
-- (void)onGetNetworkState:(int)iError
-{
-}
-
-- (void)onGetPermissionState:(int)iError
-{
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
