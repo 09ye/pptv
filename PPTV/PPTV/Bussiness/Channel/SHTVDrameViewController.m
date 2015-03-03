@@ -61,7 +61,7 @@
 //    [super viewWillAppear:YES];
 }
 
--(float) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+-(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary * dic = [mList objectAtIndex:indexPath.row];
     if ([mCurrentGroup isEqualToString:@""] || [[dic objectForKey:@"group"] isEqualToString:mCurrentGroup]) {

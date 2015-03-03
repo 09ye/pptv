@@ -46,6 +46,7 @@
     
     imgGuid  = [[SHImageView alloc]initWithFrame:self.view.bounds];
     imgGuid.image = [UIImage  imageNamed:@"default_guid"];
+
     [self.view addSubview:imgGuid];
     [self requestAd];
     
@@ -180,6 +181,7 @@
 #pragma  ads
 -(void)requestAd
 {
+    
     SHPostTask *post  = [[SHPostTask alloc]init];
     post.URL = URL_ADS;
     NSString * stringPost  =[NSString stringWithFormat:@"aid=102357&fmt=json&ver=1&aw=%d&ah=%d",(int)UIScreenWidth,(int)UIScreenHeight];

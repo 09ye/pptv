@@ -24,7 +24,7 @@
     [super viewDidLoad];
     
     NSString * hiddeDay =  [NSDate stringFromDate:[NSDate date] withFormat:@"yyyy-MM-dd"];
-    if ([hiddeDay caseInsensitiveCompare:@"2015-03-18"] == NSOrderedAscending) {
+    if ([hiddeDay caseInsensitiveCompare:@"2015-04-18"] == NSOrderedAscending) {
         isHiddenLive = YES;
     }
     
@@ -59,9 +59,12 @@
     [post start:^(SHTask *t) {
         [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
 
-        mResult = [[t result]mutableCopy];
+        if(![[[t result] class] isSubclassOfClass:[NSNull class]]){
+            mResult = [[t result]mutableCopy];
+ 
+        }
         imagesArray = [mResult objectForKey:@"slide_area"];
-        
+
         [self.tableView reloadData];
     } taskWillTry:^(SHTask *t) {
         
@@ -142,7 +145,7 @@
    
 }
 
--(float) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+-(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
    
     if (indexPath.row == 0) {
         return BEST_SCROLLVIEW_WIDTH;
@@ -178,7 +181,6 @@
 -(SHTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == 0) {
-    
         SHBestAdCell * cell = [self.tableView dequeueReusableCellWithIdentifier:@"table_bestad_cell"];
         if(cell == nil){
             cell = (SHBestAdCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHBestAdCell" owner:nil options:nil] objectAtIndex:0];
@@ -198,10 +200,9 @@
         return cell;
         
     }else if (indexPath.row == 1){
-        SHRecomendFirstCell * cell = cell = [self.tableView dequeueReusableCellWithIdentifier:@"table_recommend_first_cell"];
-        if(cell == nil){
-            cell = (SHRecomendFirstCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHRecomendFirstCell" owner:nil options:nil] objectAtIndex:0];
-        }
+
+        SHRecomendFirstCell * cell = [[[NSBundle mainBundle]loadNibNamed:@"SHRecomendFirstCell" owner:nil options:nil] objectAtIndex:0];
+        
         cell.detail = [mResult mutableCopy];
         cell.listLive = mListLive;
         cell.navController = self.navController;
@@ -213,11 +214,9 @@
         return cell;
         
     }else if (indexPath.row == 2){//动漫
+
+        SHRecomendSecondTitleCell * cell = (SHRecomendSecondTitleCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHRecomendSecondTitleCell" owner:nil options:nil] objectAtIndex:0];
         
-        SHRecomendSecondTitleCell * cell = cell = [self.tableView dequeueReusableCellWithIdentifier:@"table_recommend_second_title_cell"];
-        if(cell == nil){
-            cell = (SHRecomendSecondTitleCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHRecomendSecondTitleCell" owner:nil options:nil] objectAtIndex:0];
-        }
         cell.tabIndex = 2;
         cell.btnBg.backgroundColor = [UIColor colorWithRed:237/255.0 green:144/255.0 blue:41/255.0 alpha:1];
         
@@ -239,6 +238,7 @@
         return cell;
         
     }else if (indexPath.row == 3){
+
         SHImgVertiaclViewCell * cell = [self.tableView dequeueReusableCellWithIdentifier:@"table_img_vertical_cell"];
         if(cell == nil){
             cell = (SHImgVertiaclViewCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHImgVertiaclViewCell" owner:nil options:nil] objectAtIndex:0];
@@ -249,7 +249,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }else if (indexPath.row == 4){//电视
-        
+
         SHRecomendSecondTitleCell * cell = cell = [self.tableView dequeueReusableCellWithIdentifier:@"table_recommend_second_title_cell"];
         if(cell == nil){
             cell = (SHRecomendSecondTitleCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHRecomendSecondTitleCell" owner:nil options:nil] objectAtIndex:0];
@@ -273,6 +273,7 @@
         return cell;
         
     }else if (indexPath.row == 5){
+
         SHImgVertiaclViewCell * cell = [self.tableView dequeueReusableCellWithIdentifier:@"table_img_vertical_cell"];
         if(cell == nil){
             cell = (SHImgVertiaclViewCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHImgVertiaclViewCell" owner:nil options:nil] objectAtIndex:0];
@@ -283,7 +284,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }else if (indexPath.row == 6){
-        
+
         SHRecomendSecondTitleCell * cell = cell = [self.tableView dequeueReusableCellWithIdentifier:@"table_recommend_second_title_cell"];
         if(cell == nil){
             cell = (SHRecomendSecondTitleCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHRecomendSecondTitleCell" owner:nil options:nil] objectAtIndex:0];
@@ -307,6 +308,7 @@
         return cell;
         
     }else if (indexPath.row == 7){
+
         SHImgVertiaclViewCell * cell = [self.tableView dequeueReusableCellWithIdentifier:@"table_img_vertical_cell"];
         if(cell == nil){
             cell = (SHImgVertiaclViewCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHImgVertiaclViewCell" owner:nil options:nil] objectAtIndex:0];
@@ -319,9 +321,9 @@
         return cell;
     }else if (indexPath.row == 8){// 微电影
         
-        SHRecomendSecondTitleCell * cell = cell = [self.tableView dequeueReusableCellWithIdentifier:@"table_recommend_second_title_cell"];
+        SHRecomendSecondTitleCell * cell  = [self.tableView dequeueReusableCellWithIdentifier:@"table_recommend_second_title_cell"];
         if(cell == nil){
-            cell = (SHRecomendSecondTitleCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHRecomendSecondTitleCell" owner:nil options:nil] objectAtIndex:0];
+            cell = [[[NSBundle mainBundle]loadNibNamed:@"SHRecomendSecondTitleCell" owner:nil options:nil] objectAtIndex:0];
         }
         cell.tabIndex = 5;
         cell.btnBg.backgroundColor = [UIColor colorWithRed:1/255.0 green:195/255.0 blue:169/255.0 alpha:1];

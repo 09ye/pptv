@@ -23,10 +23,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //return;
     mDictionary = [[NSMutableDictionary alloc]init];
     
     NSString * hiddeDay =  [NSDate stringFromDate:[NSDate date] withFormat:@"yyyy-MM-dd"];
-    if ([hiddeDay caseInsensitiveCompare:@"2015-03-18"] == NSOrderedAscending) {
+    if ([hiddeDay caseInsensitiveCompare:@"2015-04-18"] == NSOrderedAscending) {
         NSMutableArray * array =  [self.tabbar.items mutableCopy];
         [array removeObjectAtIndex:1];
         [array removeObjectAtIndex:4];
@@ -86,6 +87,7 @@
 }
 -(void) tabBarDidSelect:(int) tag
 {
+    //return;
    
     mlabRecord.textColor = [UIColor lightGrayColor];
     mlabDownload.textColor = [UIColor lightGrayColor];
@@ -192,7 +194,7 @@
         ((SHRecommendViewController*)nacontroller).navController = self.navigationController;
         nacontroller.view.backgroundColor =[UIColor clearColor];
         if(tag == 0){
-            nacontroller.view.frame = self.view.bounds;
+            nacontroller.view.frame = self.view.frame;
             mViewContain.hidden = YES;
             [self.view insertSubview:nacontroller.view atIndex:0];
         }else if(tag == 1){
