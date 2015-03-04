@@ -217,7 +217,12 @@
 
         SHRecomendSecondTitleCell * cell = (SHRecomendSecondTitleCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHRecomendSecondTitleCell" owner:nil options:nil] objectAtIndex:0];
         
-        cell.tabIndex = 2;
+        if (isHiddenLive) {
+            cell.tabIndex = 1;
+        }else{
+            cell.tabIndex = 2;
+        }
+        
         cell.btnBg.backgroundColor = [UIColor colorWithRed:237/255.0 green:144/255.0 blue:41/255.0 alpha:1];
         
         NSMutableArray * array = [mResult objectForKey:@"cartoon_rec"];
@@ -254,7 +259,11 @@
         if(cell == nil){
             cell = (SHRecomendSecondTitleCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHRecomendSecondTitleCell" owner:nil options:nil] objectAtIndex:0];
         }
-        cell.tabIndex = 3;
+        if (isHiddenLive) {
+            cell.tabIndex = 2;
+        }else{
+            cell.tabIndex = 3;
+        }
         cell.btnBg.backgroundColor = [UIColor colorWithRed:160/255.0 green:177/255.0 blue:1/255.0 alpha:1];
         NSMutableArray * array = [mResult objectForKey:@"tele_rec"];
         cell.detailArray = [array mutableCopy];
@@ -289,7 +298,11 @@
         if(cell == nil){
             cell = (SHRecomendSecondTitleCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHRecomendSecondTitleCell" owner:nil options:nil] objectAtIndex:0];
         }
-        cell.tabIndex = 4;
+        if (isHiddenLive) {
+            cell.tabIndex = 3;
+        }else{
+            cell.tabIndex = 4;
+        }
         cell.btnBg.backgroundColor = [UIColor colorWithRed:0/255.0 green:166/255.0 blue:241/255.0 alpha:1];
         NSMutableArray * array = [mResult objectForKey:@"movie_rec"];
         cell.detailArray = [array mutableCopy];
@@ -364,7 +377,7 @@
         if(cell == nil){
             cell = (SHImgHorizaonalViewCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHImgHorizaonalViewCell" owner:nil options:nil] objectAtIndex:0];
         }
-        
+        cell.isHiddenLive = isHiddenLive;// 隐藏点击跳转
         cell.navController = self.navController;
         cell.type = 1;
         cell.detail = [mResult mutableCopy];

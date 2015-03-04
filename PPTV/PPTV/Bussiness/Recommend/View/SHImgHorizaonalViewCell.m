@@ -149,7 +149,12 @@
         dic = [_list objectAtIndex:indexPath.row];
     }else if(self.type == 1){
         if (indexPath.row == 0 ) {
-            [[NSNotificationCenter defaultCenter]postNotificationName:NOTIFICATION_HOME_TABBAR_DIDSELECT object:[NSNumber numberWithInt:6]];
+            if (self.isHiddenLive) {
+                [[NSNotificationCenter defaultCenter]postNotificationName:NOTIFICATION_HOME_TABBAR_DIDSELECT object:[NSNumber numberWithInt:4]];
+            }else{
+                [[NSNotificationCenter defaultCenter]postNotificationName:NOTIFICATION_HOME_TABBAR_DIDSELECT object:[NSNumber numberWithInt:6]];
+            }
+            
             return;
         }
         dic = [_list objectAtIndex:indexPath.row-1];
