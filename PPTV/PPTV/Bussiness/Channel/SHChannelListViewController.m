@@ -128,10 +128,10 @@
         return  cell;
 
     }else{
-//        SHImgVertiaclViewCell * cell = [self.tableView dequeueReusableCellWithIdentifier:@"table_img_vertical_cell"];
-//        if(cell == nil){
-        SHImgVertiaclViewCell*    cell = (SHImgVertiaclViewCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHImgVertiaclViewCell" owner:nil options:nil] objectAtIndex:0];
-//        }
+        SHImgVertiaclViewCell * cell = [self.tableView dequeueReusableCellWithIdentifier:@"table_img_vertical_cell"];
+        if(cell == nil){
+            cell = (SHImgVertiaclViewCell*)[[[NSBundle mainBundle]loadNibNamed:@"SHImgVertiaclViewCell" owner:nil options:nil] objectAtIndex:0];
+        }
         cell.list = [mList mutableCopy];
         cell.type = self.type;
         cell.navController = self.navController;
