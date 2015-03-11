@@ -148,6 +148,9 @@
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
    
     if (indexPath.row == 0) {
+        if (isHiddenLive) {
+            return  0;
+        }
         return BEST_SCROLLVIEW_WIDTH;
     }else if(indexPath.row == 1){// 直播
         if (isHiddenLive) {
@@ -196,7 +199,9 @@
 
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
+        if (isHiddenLive) {
+            cell.hidden = YES;
+        }
         return cell;
         
     }else if (indexPath.row == 1){
@@ -479,19 +484,19 @@
 {
     
     // 进入大图
-    NSDictionary * dic = [imagesArray objectAtIndex:index];
-   // 1.3 点播  2 直播  4浏览器
-    SHIntent *intent = [[SHIntent alloc]init];
-    if([[dic objectForKey:@"type"]intValue] == 4){
-        intent.target = @"WebViewController";
-        
-    }else if([[dic objectForKey:@"type"]intValue] == 2){
-        intent.target = @"SHLiveViewController";
-    }else{
-        intent.target = @"SHTVDetailViewController";
-    }
-    [intent.args setValue:dic forKeyPath:@"detailInfo"];
-    intent.container = self.navController;
-    [[UIApplication sharedApplication]open:intent];
+//    NSDictionary * dic = [imagesArray objectAtIndex:index];
+//   // 1.3 点播  2 直播  4浏览器
+//    SHIntent *intent = [[SHIntent alloc]init];
+//    if([[dic objectForKey:@"type"]intValue] == 4){
+//        intent.target = @"WebViewController";
+//        
+//    }else if([[dic objectForKey:@"type"]intValue] == 2){
+//        intent.target = @"SHLiveViewController";
+//    }else{
+//        intent.target = @"SHTVDetailViewController";
+//    }
+//    [intent.args setValue:dic forKeyPath:@"detailInfo"];
+//    intent.container = self.navController;
+//    [[UIApplication sharedApplication]open:intent];
 }
 @end
