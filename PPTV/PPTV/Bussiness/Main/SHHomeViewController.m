@@ -34,6 +34,7 @@
         [array removeObjectAtIndex:5];
         [array removeObjectAtIndex:5];
         self.tabbar.items = array;
+        mSearch.hidden = YES;
     }
     [self tabBar:self.tabbar didSelectItem:[[self.tabbar items] objectAtIndex:0]];
     self.tabbar.selectedItem = [self.tabbar.items objectAtIndex:0];
