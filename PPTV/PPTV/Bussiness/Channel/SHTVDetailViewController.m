@@ -105,14 +105,16 @@
                 break;
             }
         }
+        NSURL * videoUrl = [NSURL URLWithString:[Utility encodeVideoUrl:mVideoUrl]];
         if ([self.intent.args objectForKey:@"urlPath"] && ![[self.intent.args objectForKey:@"urlPath"] isEqualToString:@""]) {
             mVideoUrl = [self.intent.args objectForKey:@"urlPath"];
+            videoUrl = [[NSURL alloc]initFileURLWithPath:mVideoUrl];
         }
 //        NSString * msg = [NSString stringWithFormat:@"收到数据===%@\n 转换后的链接：==%@",mVideoUrl,[Utility encodeVideoUrl:mVideoUrl]];
 //        UIAlertView * alter = [[UIAlertView alloc]initWithTitle:@"提示" message:msg delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"xx", nil];
 //        [alter show];
         
-        NSURL * videoUrl = [NSURL URLWithString:[Utility encodeVideoUrl:mVideoUrl]];
+        
         
         [mShowViewControll quicklyReplayMovie:videoUrl title:[mResultDetail objectForKey:@"title"] seekToPos:[self getVideoRecordSeek]];
         if (mDrameViewControll ==nil) {// 剧集

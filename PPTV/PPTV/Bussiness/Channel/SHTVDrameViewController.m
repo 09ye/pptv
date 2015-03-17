@@ -185,6 +185,9 @@
 }
 -(void) createGroupView
 {
+    for(UIView * view in mScrollviewCate.subviews){
+        [view removeFromSuperview];
+    }
     arrayBtnCate = [[NSMutableArray alloc]init];
     CGRect  lastRect = CGRectZero;
     for (int i=0; i<mListCategory.count; i++) {

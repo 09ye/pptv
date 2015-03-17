@@ -577,14 +577,15 @@
     
     
 #if TEST_Common // Test Common
-    NSString *abs = [fileURL absoluteString];
-    if ([abs rangeOfString:@"://"].length == 0) {
-        NSString *docDir = [NSString stringWithFormat:@"%@/Documents", NSHomeDirectory()];
-        NSString *videoUrl = [NSString stringWithFormat:@"%@/%@", docDir, abs];
-        self.videoURL = [NSURL fileURLWithPath:videoUrl];
-    } else {
-        self.videoURL = fileURL;
-    }
+//    NSString *abs = [fileURL absoluteString];
+//    if ([abs rangeOfString:@"://"].length == 0) {
+//        NSString *docDir = [NSString stringWithFormat:@"%@/Documents", NSHomeDirectory()];
+//        NSString *videoUrl = [NSString stringWithFormat:@"%@/%@", docDir, abs];
+//        self.videoURL = [NSURL fileURLWithPath:videoUrl];
+//    } else {
+//        
+//    }
+    self.videoURL = fileURL;
     //    [mMPayer setDataSource:self.videoURL header:nil];
     [mMPayer setDataSource:self.videoURL];
     
