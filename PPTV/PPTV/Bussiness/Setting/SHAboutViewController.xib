@@ -29,7 +29,7 @@
                             <color key="textColor" red="0.16862745100000001" green="0.18039215689999999" blue="0.20784313730000001" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="      华数TV网iPad客户端集高清电影、电视剧、动漫、综艺、热点资讯等海量视频内容于一身，随心点播看不停；汇聚最全电视直播，同步追剧乐翻天；支持视频缓存至本地，断网也能看。" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cpE-75-zd7">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="       华数TV网PAD客户端集高清电影、电视剧、动漫、综艺、热点资讯等海量视频内容于一身，随心点播看不停；支持视频缓存至本地，断网也能看。" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cpE-75-zd7">
                             <rect key="frame" x="20" y="110" width="340" height="97"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
