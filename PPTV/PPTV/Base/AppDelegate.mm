@@ -14,6 +14,7 @@
 
 #import "ASIHTTPRequest.h"
 #import "SHDownloadCollectionViewCell.h"
+#import <sys/xattr.h>
 
 
 
@@ -28,6 +29,7 @@ static bool __isupdate = NO;
 #ifdef DEBUG
     [SHTask pull:URL_HEADER newUrl:URL_DEVELOPER];
 #endif
+    [self addNotBackUp];
     // Override point for customization after application launch.
     
     
@@ -257,5 +259,55 @@ static bool __isupdate = NO;
 -(void)setProgress:(float)newProgress
 {
     NSLog(@"setProgress-%f",newProgress);
+}
+-(void)addNotBackUp{
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSURL *url = [NSURL URLWithString:documentsDirectory];
+    
+    [self addSkipBackupAttributeToItemAtURL:url];
+    
+    paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
+    documentsDirectory = [paths objectAtIndex:0];
+    url = [NSURL URLWithString:documentsDirectory];
+    [self addSkipBackupAttributeToItemAtURL:url];
+}
+-(BOOL)addSkipBackupAttributeToItemAtURL:(NSURL *)URL
+{
+    if ( ! [[NSFileManager defaultManager] fileExistsAtPath:[URL path]] ) return YES;
+    
+    BOOL success = YES;
+    if ( [self systemVersionIsHighOrEqualToIt:@"5.1"] ) {
+        NSError *error = nil;
+        success = [URL setResourceValue:[NSNumber numberWithBool:YES]
+                                 forKey:NSURLIsExcludedFromBackupKey
+                                  error:&error];
+    } else if ( [self systemVersionIsEqualToIt:@"5.0.1"] ) {
+        const char *filePath = [[URL path] fileSystemRepresentation];
+        const char *attrName = "com.apple.MobileBackup";
+        u_int8_t attrValue = 1;
+        int result = setxattr(filePath, attrName, &attrValue, sizeof(attrValue), 0, 0);
+        success = (result == 0);
+    }
+    
+    return success;
+}
+-(BOOL)systemVersionIsHighOrEqualToIt:(NSString*)minSystemVersion
+{
+    NSString *systemVersion = [[UIDevice currentDevice] systemVersion];
+    if ( [systemVersion compare:minSystemVersion options:NSNumericSearch] != NSOrderedAscending ) {
+        return YES;
+    }
+    return NO;
+}
+
+-(BOOL)systemVersionIsEqualToIt:(NSString*)version
+{
+    NSString *systemVersion = [[UIDevice currentDevice] systemVersion];
+    if ( [systemVersion compare:version options:NSNumericSearch] == NSOrderedSame ) {
+        return YES;
+    }
+    return NO;
 }
 @end

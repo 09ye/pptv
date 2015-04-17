@@ -51,7 +51,10 @@
     [postKeyWord start:^(SHTask *t) {
         
         NSMutableArray * list = [[t result]mutableCopy];
-        mSearch.placeholder = [[list objectAtIndex:arc4random()%list.count] objectForKey:@"name"];
+        if(mList.count>0){
+          mSearch.placeholder = [[list objectAtIndex:arc4random()%list.count] objectForKey:@"name"];
+        }
+        
         
     } taskWillTry:^(SHTask *t) {
         

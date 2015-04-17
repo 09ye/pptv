@@ -10,6 +10,10 @@
 #import "SHSettingCell.h"
 
 @interface SHSettingViewController ()
+{
+    BOOL isHiddenLive;
+    NSString *appUrl;
+}
 
 @end
 
@@ -23,6 +27,10 @@
     self.tableView.layer.cornerRadius= 5;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(configUpdate:) name:CORE_NOTIFICATION_CONFIG_STATUS_CHANGED object:nil];
     [SHStatisticalData requestDmalog:self.title];
+    NSString * hiddeDay =  [NSDate stringFromDate:[NSDate date] withFormat:@"yyyy-MM-dd"];
+    if ([hiddeDay caseInsensitiveCompare:@"2015-04-27"] == NSOrderedAscending) {
+        isHiddenLive = YES;
+    }
 }
 
 
@@ -76,6 +84,9 @@
             return 50;
         }
     }else if(indexPath.section == 2){
+        if (indexPath.row == 1 && isHiddenLive) {
+            return 0;
+        }
         return 50;
     }
     return 50;;
@@ -126,6 +137,9 @@
             cell.labContent.text = [NSString stringWithFormat:@"当前版本V%@",SHEntironment.instance.version.description];
             cell.labContent.hidden = NO;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
+            cell.hidden = isHiddenLive;
+            
         }else if (indexPath.row == 2){
             cell.labTitle.text = @"关于我们";
             cell.imgChoose.hidden = NO;
@@ -162,7 +176,32 @@
             [self showAlertDialog:@"删除之后可能会降低流畅度,请三思啊" button:@"取消" otherButton:@"清除" tag:10000];
         }else if (indexPath.row ==1){
 //            [SHConfigManager.instance refresh];
-            [self showAlertDialog:@"当前已为最新版本"];
+            SHPostTask * post = [[SHPostTask alloc]init];
+            post.URL = URL_UPDATE_APP;
+            [post start:^(SHTask *task) {
+                NSDictionary * dic = [task.result mutableCopy];
+                NSArray * array  = [dic objectForKey:@"results"];
+                if (array.count > 0) {
+                    NSDictionary * result = [array objectAtIndex:0];
+                    NSString *newVersion = [result objectForKey:@"version"];
+                    appUrl = [result objectForKey:@"trackViewUrl"];
+                    NSString *localVersion =[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+                    if ([newVersion floatValue] > [localVersion floatValue]) {
+                        [self showAlertDialog:@"检查到版本更新" button:@"现在升级" otherButton:@"下次再说" tag:10001];
+                    }else{
+                        [self showAlertDialog:@"当前已为最新版本"];
+
+                    }
+                }else{
+                    [self showAlertDialog:@"当前已为最新版本"];
+
+                }
+                
+            } taskWillTry:^(SHTask *task) {
+                
+            } taskDidFailed:^(SHTask *task) {
+                
+            }];
         }else if (indexPath.row ==2){
             SHIntent * intent  =[[SHIntent alloc]init];
             intent.target = @"SHAboutViewController";
@@ -249,6 +288,10 @@
 
         }
 
+    }else if (alertView.tag == 10001){
+         if(buttonIndex == 0){
+             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:appUrl]];
+         }
     }
     
     

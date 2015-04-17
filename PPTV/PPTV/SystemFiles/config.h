@@ -22,6 +22,8 @@
 //正式 padapi.wasu.cn
 #define URL_DEVELOPER @ "http://padapi.wasu.cn"
 
+#define URL_UPDATE_APP @"http://itunes.apple.com/lookup?id=979565161"
+
 #define URL_UPDATE @"http://zambon-update1.mobilitychina.com:8095/get_config"
 
 #define URL_FOR(a) [NSString stringWithFormat:@"%@/%@",URL_HEADER,a]

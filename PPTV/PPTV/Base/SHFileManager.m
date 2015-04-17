@@ -90,7 +90,7 @@
 
 +(float)currentCachesFileSize{
     
-    NSString *savePath=[NSHomeDirectory() stringByAppendingPathComponent:@"Library/Caches/videos"];
+    NSString *savePath = [self getDocumentPath];
     
     NSFileManager *filemgr;
     
