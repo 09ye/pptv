@@ -391,10 +391,14 @@
 - (void)mediaPlayer:(VMediaPlayer *)player didPrepared:(id)arg
 {
     [player setVideoFillMode:VMVideoFillModeFit];
-    
     mDuration = [player getDuration];
-    [player seekTo:mCurPostion];
-//    [player start];
+    if(self.isLive || mCurPostion == 0){
+        [player start];
+    }else{// 直播
+        [player seekTo:mCurPostion];
+    }
+   
+    
     
     [self setBtnEnableStatus:YES];
 //    self.view.userInteractionEnabled = YES;
@@ -590,7 +594,7 @@
     [mMPayer setDataSource:self.videoURL];
     
 #elif TEST_setOptionsWithKeys // Test setOptionsWithKeys:withValues:
-    self.videoURL = [NSURL URLWithString:@"http://padlive2-cnc.wasu.cn/cctv7/z.m3u8"]; // This is a live stream.
+    self.videoURL = [NSURL URLWithString:@"http://padlive1-cnc.wasu.cn/201505041556/b626913fecefa4aab3571192e5719a0d/zjws/z.m3u8"]; // This is a live stream.
     NSMutableArray *keys = [NSMutableArray arrayWithCapacity:0];
     NSMutableArray *vals = [NSMutableArray arrayWithCapacity:0];
     keys[0] = @"-rtmp_live";

@@ -28,7 +28,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(configUpdate:) name:CORE_NOTIFICATION_CONFIG_STATUS_CHANGED object:nil];
     [SHStatisticalData requestDmalog:self.title];
     NSString * hiddeDay =  [NSDate stringFromDate:[NSDate date] withFormat:@"yyyy-MM-dd"];
-    if ([hiddeDay caseInsensitiveCompare:@"2015-04-27"] == NSOrderedAscending) {
+    if ([hiddeDay caseInsensitiveCompare:@"2015-04-20"] == NSOrderedAscending) {
         isHiddenLive = YES;
     }
 }

@@ -106,6 +106,9 @@
     [[UIApplication sharedApplication] open:intent];
 }
 - (IBAction)btnLiveOntouch:(UIButton *)sender {
+    if ([[_detail objectForKey:@"live_area"]count]<sender.tag+1) {
+        return;
+    }
     NSDictionary * dic = [[_detail objectForKey:@"live_area"]objectAtIndex:sender.tag];
     SHIntent * intent = [[SHIntent alloc ]init];
     if([[dic objectForKey:@"type"]intValue] == 4){

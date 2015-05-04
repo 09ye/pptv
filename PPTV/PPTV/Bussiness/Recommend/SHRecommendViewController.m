@@ -24,7 +24,7 @@
     [super viewDidLoad];
     
     NSString * hiddeDay =  [NSDate stringFromDate:[NSDate date] withFormat:@"yyyy-MM-dd"];
-    if ([hiddeDay caseInsensitiveCompare:@"2015-04-27"] == NSOrderedAscending) {
+    if ([hiddeDay caseInsensitiveCompare:@"2015-04-20"] == NSOrderedAscending) {
         isHiddenLive = YES;
     }
     
@@ -120,21 +120,24 @@
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     [_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
-//    static float currentPostion = 0;
-//    static float lastPosition = 0;
-//    currentPostion = scrollView.contentOffset.y ;
-//    if (currentPostion - lastPosition > 10) { //向上滑动屏幕时，隐藏标签栏
-//      
+    static float currentPostion = 0;
+    static float lastPosition = 0;
+    currentPostion = scrollView.contentOffset.y ;
+    if (currentPostion - lastPosition > 10) { //向上滑动屏幕时，隐藏标签栏
+      
 //        [app hideTarBarSHDelegate:YES];
-//    }
-//    else if (lastPosition - currentPostion > 5)//当标签栏隐藏时，向下滑动屏幕时，显示标签栏,
-//    {
+        [app.viewController hideSearchView:YES];
+    }
+    else if (lastPosition - currentPostion > 5)//当标签栏隐藏时，向下滑动屏幕时，显示标签栏,
+    {
 //        [app hideTarBarSHDelegate:NO];
-//    }
-//    lastPosition = currentPostion;
-//    if(scrollView.contentSize.height-scrollView.contentOffset.y <= scrollView.frame.size.height){// 底部
+        [app.viewController hideSearchView:NO];
+    }
+    lastPosition = currentPostion;
+    if(scrollView.contentSize.height-scrollView.contentOffset.y <= scrollView.frame.size.height){// 底部
 //        [app hideTarBarSHDelegate:YES];
-//    }
+        [app.viewController hideSearchView:YES];
+    }
 //   [app.viewController hideSearchView:NO];
     
     
