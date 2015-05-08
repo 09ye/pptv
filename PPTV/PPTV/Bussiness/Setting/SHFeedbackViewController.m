@@ -75,6 +75,7 @@
 {
     SHPostTaskM * post = [[SHPostTaskM alloc]init];
     post.URL = URL_FOR(@"Pad/feedtype");
+    [post.postArgs setValue:SHEntironment.instance.version.description forKey:@"version"];
     post.delegate = self;
     [post start:^(SHTask *task) {
         arrayType = [[task result]mutableCopy];
@@ -185,6 +186,7 @@
     [postKeyWord.postArgs setValue:mtxtCompany.text forKey:@"idc"];
     [postKeyWord.postArgs setValue:mtxtCOntent.text forKey:@"content"];
     [postKeyWord.postArgs setValue:@"" forKey:@"ip"];
+    [postKeyWord.postArgs setValue:SHEntironment.instance.version.description forKey:@"version"];
     postKeyWord.delegate = self;
     [postKeyWord start:^(SHTask *t) {
         

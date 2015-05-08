@@ -93,6 +93,7 @@
     SHPostTaskM * post = [[SHPostTaskM alloc]init];
     post.URL = URL_FOR(@"Pad/liveinfo");
     [post.postArgs setValue:videoID forKey:@"id"];
+    [post.postArgs setValue:SHEntironment.instance.version.description forKey:@"version"];
     post.delegate = self;
     [post start:^(SHTask *t) {
         

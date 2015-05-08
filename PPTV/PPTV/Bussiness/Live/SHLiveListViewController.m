@@ -28,6 +28,7 @@
 {
     SHPostTaskM *post  =[[SHPostTaskM alloc]init];
     post.URL = URL_FOR(@"/Pad/livecategory");
+    [post.postArgs setValue:SHEntironment.instance.version.description forKey:@"version"];
     post.cachetype = CacheTypeTimes;
     post.tag = 1000;
     post.delegate = self;
@@ -84,6 +85,7 @@
 {
     SHPostTaskM * post = [[SHPostTaskM alloc]init];
     post.URL = URL_FOR(@"Pad/livedata");
+    [post.postArgs setValue:SHEntironment.instance.version.description forKey:@"version"];
     [post.postArgs setValue:[NSString stringWithFormat:@"%d",LIST_PAGE_SIZE] forKeyPath:@"limit"];
     [post.postArgs setValue:[NSString stringWithFormat:@"%d",pagenum] forKeyPath:@"p"];
     [post.postArgs setValue:[NSNumber numberWithInt:cid] forKeyPath:@"cid"];

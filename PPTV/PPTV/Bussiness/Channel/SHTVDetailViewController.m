@@ -90,6 +90,7 @@
     SHPostTaskM * post = [[SHPostTaskM alloc]init];
     post.URL = URL_FOR(@"Pad/vodinfo");
     [post.postArgs setValue:videoID forKey:@"id"];
+    [post.postArgs setValue:SHEntironment.instance.version.description forKey:@"version"];
     post.delegate = self;
     [post start:^(SHTask *t) {
 
@@ -147,6 +148,7 @@
         // 大家都在看
         SHPostTaskM * post = [[SHPostTaskM alloc]init];
         post.URL = URL_FOR(@"Pad/recominfo");
+        [post.postArgs setValue:SHEntironment.instance.version.description forKey:@"version"];
         [post.postArgs setValue:[mResultDetail objectForKey:@"id"] forKey:@"id"];
         post.delegate = self;
         [post start:^(SHTask *task) {

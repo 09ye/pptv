@@ -57,6 +57,7 @@
     
     SHPostTaskM * post = [[SHPostTaskM alloc]init];
     post.URL = URL_FOR(@"Pad/listcategory");
+    [post.postArgs setValue:SHEntironment.instance.version.description forKey:@"version"];
     post.cachetype = CacheTypeTimes;
     post.delegate = self;
     [post start:^(SHTask *task) {

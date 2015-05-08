@@ -48,6 +48,7 @@
     
     SHPostTaskM * postKeyWord = [[SHPostTaskM alloc]init];
     postKeyWord.URL = URL_FOR(@"Pad/keywordrecom");
+    [postKeyWord.postArgs setValue:SHEntironment.instance.version.description forKey:@"version"];
     postKeyWord.delegate = self;
     [postKeyWord start:^(SHTask *t) {
         

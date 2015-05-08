@@ -154,6 +154,7 @@
     SHPostTaskM * post = [[SHPostTaskM alloc]init];
     post.URL = URL_FOR(@"Pad/listfilter");
     [post.postArgs setValue:[app.viewController categoryForKey:[self.type objectForKey:@"name"] defaultPic:[[self.type objectForKey:@"id"]intValue]] forKeyPath:@"pid"];
+    [post.postArgs setValue:SHEntironment.instance.version.description forKey:@"version"];
     post.delegate = self;
     post.tag = 1000;
     [post start];
@@ -172,6 +173,7 @@
     [post.postArgs setValue:[NSString stringWithFormat:@"%d",LIST_PAGE_SIZE] forKeyPath:@"limit"];
     [post.postArgs setValue:[NSString stringWithFormat:@"%d",pagenum] forKeyPath:@"p"];
     [post.postArgs setValue:[app.viewController categoryForKey:[self.type objectForKey:@"name"] defaultPic:[[self.type objectForKey:@"id"]intValue]] forKeyPath:@"cid"];
+    [post.postArgs setValue:SHEntironment.instance.version.description forKey:@"version"];
     [post.postArgs setValuesForKeysWithDictionary:mSelect];
     post.delegate = self;
     [post start];

@@ -34,6 +34,7 @@
     post.URL = URL_FOR(@"Pad/livebill");
     [post.postArgs setValue:[dic objectForKey:@"id"] forKey:@"id"];
     [post.postArgs setValue:date forKey:@"date"];
+    [post.postArgs setValue:SHEntironment.instance.version.description forKey:@"version"];
     post.delegate = self;
     [post start:^(SHTask *task) {
         NSDictionary * dic   =[[task result]mutableCopy];

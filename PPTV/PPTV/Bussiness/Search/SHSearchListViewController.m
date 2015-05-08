@@ -78,6 +78,7 @@
         SHPostTaskM * postKeyWord = [[SHPostTaskM alloc]init];
         postKeyWord.URL = URL_FOR(@"Pad/searchtopdata");
         [postKeyWord.postArgs setValue:mSearch.text forKey:@"k"];
+        [postKeyWord.postArgs setValue:SHEntironment.instance.version.description forKey:@"version"];
         postKeyWord.delegate = self;
         [postKeyWord start:^(SHTask *t) {
             
@@ -124,6 +125,7 @@
     if (![mSearch.text isEqualToString:@""]) {
         SHPostTaskM * postKeyWord = [[SHPostTaskM alloc]init];
         postKeyWord.URL = URL_FOR(@"Pad/searchdata");
+        [postKeyWord.postArgs setValue:SHEntironment.instance.version.description forKey:@"version"];
         [postKeyWord.postArgs setValue:mSearch.text forKey:@"k"];
         [postKeyWord.postArgs setValue:[NSString stringWithFormat:@"%d",LIST_PAGE_SIZE] forKeyPath:@"limit"];
         [postKeyWord.postArgs setValue:[NSString stringWithFormat:@"%d",pagenum] forKeyPath:@"p"];
@@ -226,7 +228,7 @@
         if(indexPath.row >= 1 || mList.count == 0 ){
             return 44;
         }else{
-            return ((mList.count-1)/5+1)*164+15+1000;
+            return ((mList.count-1)/5+1)*164+15;
         }
     }
     return  44;
@@ -252,7 +254,7 @@
         
     }else if (indexPath.section == 1){
         
-        if((indexPath.row ==1 || mList.count == 0) && mListMovice.count==0 ){
+        if((indexPath.row ==1 || mList.count == 0)){
             SHNoneViewCell * cell;
             if(mIsEnd){
                 cell = [self dequeueReusableNoneViewCell];

@@ -53,6 +53,7 @@
     if (cache) {
         post.cachetype  = CacheTypeTimes;
     }
+    [post.postArgs setValue:SHEntironment.instance.version.description forKey:@"version"];
     post.delegate = self;
     [post start:^(SHTask *t) {
         [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
@@ -80,6 +81,7 @@
     SHPostTaskM * post1 = [[SHPostTaskM alloc]init];
     post1.URL = URL_FOR(@"Pad/indexlive");
     post1.delegate = self;
+    [post1.postArgs setValue:SHEntironment.instance.version.description forKey:@"version"];
     [post1 start:^(SHTask *t) {
         
         mListLive = [[t result]mutableCopy];

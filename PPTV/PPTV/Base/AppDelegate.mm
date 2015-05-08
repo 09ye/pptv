@@ -129,6 +129,7 @@ static bool __isupdate = NO;
     SHPostTaskM * post = [[SHPostTaskM alloc]init];
     post.URL = URL_FOR(@"Pad/download");
     [post.postArgs setValue:[NSNumber numberWithInt:videoId] forKey:@"id"];
+    [post.postArgs setValue:SHEntironment.instance.version.description forKey:@"version"];
     post.delegate = self;
     [post start:^(SHTask *task) {
         NSArray * array  = [[task result]mutableCopy];
