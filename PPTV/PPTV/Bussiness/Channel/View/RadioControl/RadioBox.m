@@ -241,30 +241,23 @@
 - (void)handleTapTapGestureRecognizerEvent:(UITapGestureRecognizer *)recognizer
 {
     if (recognizer.state == UIGestureRecognizerStateEnded) {
-        [self setOn:!self.isOn];
         self.isClick = YES;
+        [self setOn:!self.isOn];
+        [self sendActionsForControlEvents:UIControlEventValueChanged];
     }
 }
 
 - (void)setOn:(BOOL)on
 {
-    if (_on == on) {
-        return;
-    }
     _on = on;
-    
     CGFloat _boxWidth = CGRectGetHeight(self.containerView.bounds) - 8;
     CGFloat margin = (CGRectGetHeight(self.bounds) - _boxWidth) / 2.0;
     if (self.isOn) {
          self.onBoxView.frame = CGRectMake(margin, margin, _boxWidth, _boxWidth);
-        [UIView animateWithDuration:0.3
+        [UIView animateWithDuration:0.2
                          animations:^{
                              self.knobView.frame = CGRectMake(margin, margin, _boxWidth, _boxWidth);
-                             self.onBoxView.frame = self.bounds;
-                             
-                             self.offBoxView.frame = CGRectMake(0, 0, 0, 0);
-                             
-                             self.textColor = [UIColor whiteColor   ];
+                           
                          }
                          completion:^(BOOL finished){
                              self.onBoxView.frame = self.bounds;
@@ -274,7 +267,7 @@
                              self.textColor = [UIColor whiteColor   ];
                          }];
         
-         [self sendActionsForControlEvents:UIControlEventValueChanged];
+        
     } else {
         [UIView animateWithDuration:0.2
                          animations:^{

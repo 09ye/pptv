@@ -11,7 +11,7 @@
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>2CE46BA6643D49676B75F8CF9170B84D7258BD3F</key>
-		<string>https://github.com/09ye/pptv.git</string>
+		<string>http://stash.junjichu.net/scm/ptv/ptv_ios.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>PPTV/PPTV.xcodeproj</string>
@@ -21,7 +21,7 @@
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/09ye/pptv.git</string>
+	<string>http://stash.junjichu.net/scm/ptv/ptv_ios.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>

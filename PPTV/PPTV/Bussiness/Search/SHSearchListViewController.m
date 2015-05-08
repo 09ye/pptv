@@ -164,12 +164,12 @@
     }
     
 }
-- (int) numberOfSectionsInTableView:(UITableView *)tableView
+- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
     return  2;
 }
 
--(float)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (section== 0 &&isShowMocie) {
         return 44;
@@ -187,7 +187,7 @@
     return mViewSection2;
 }
 
-- (int) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     
     if (!isShowMore && section == 0) {
@@ -226,7 +226,7 @@
         if(indexPath.row >= 1 || mList.count == 0 ){
             return 44;
         }else{
-            return ((mList.count-1)/5+1)*164+15;
+            return ((mList.count-1)/5+1)*164+15+1000;
         }
     }
     return  44;

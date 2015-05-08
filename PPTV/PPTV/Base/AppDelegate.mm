@@ -68,18 +68,17 @@ static bool __isupdate = NO;
     //                       tencentOAuthCls:[TencentOAuth class]];
     
     
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(configUpdate:) name:CORE_NOTIFICATION_CONFIG_STATUS_CHANGED object:nil];
-//    [SHConfigManager instance];
-//    [SHConfigManager instance].URL = URL_FOR(@"get_config");
-    
-    //    [self loadCachesfiles];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(configUpdate:) name:CORE_NOTIFICATION_CONFIG_STATUS_CHANGED object:nil];
+    [SHConfigManager instance].URL = URL_FOR(@"Pad/config");
+    [SHConfigManager.instance refresh];
     [self loadCacheList];
     return YES;
 }
 - (void)configUpdate:(NSObject*)sender
 {
     [SHConfigManager.instance show];
+    NSDictionary * dic  =[SHConfigManager.instance configInfo];
+    self.isHidden =  [[dic objectForKey:@"ishidden"]boolValue];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -97,16 +96,16 @@ static bool __isupdate = NO;
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-//    [SHConfigManager.instance refresh];
+    [SHConfigManager.instance refresh];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-//    if(__isupdate == NO){
-//        [SHConfigManager.instance refresh];
-//        __isupdate = YES;
-//    }
+    if(__isupdate == NO){
+        [SHConfigManager.instance refresh];
+        __isupdate = YES;
+    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

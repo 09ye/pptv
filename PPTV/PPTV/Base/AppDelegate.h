@@ -49,6 +49,8 @@
 
 @property(nonatomic,strong)NSMutableArray *cachesInfolist;//下载文件信息 id name pic url
 
+@property (assign, nonatomic) BOOL isHidden;// 隐藏版本
+
 -(void)beginRequest:(int )videoId hdType:(int)hdType isCollection:(BOOL)isCollection isBeginDown:(BOOL)isBeginDown ;
 
 

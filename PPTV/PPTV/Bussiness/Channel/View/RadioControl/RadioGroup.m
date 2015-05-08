@@ -104,6 +104,9 @@
             if (((RadioBox*)control).index == selectValue) {
                 [(RadioBox*)control setIsClick:YES];
                 [(RadioBox*)control setOn:YES];
+            }else{
+                [(RadioBox*)control setIsClick:NO];
+                [(RadioBox*)control setOn:NO];
             }
         }
     }
@@ -128,24 +131,8 @@
     if(self.delegate && [self.delegate respondsToSelector:@selector(radioGroupDidSelect:radioBox:select:)]){
         [self.delegate radioGroupDidSelect:self radioBox:radioBox select:radioBox.isOn];
     }
-    for (UIView *control in self.subviews) {
-        if ([control isKindOfClass:[RadioBox class]]) {
-            if (!((RadioBox*)control).isClick) {
-                continue;
-            }
-            if ([self.subviews indexOfObject:control] != [self.subviews indexOfObject:sender]) {
-                [(RadioBox*)control setIsClick:NO];
-                if (((RadioBox*)control).isOn) {
-                    [(RadioBox*)control setOn:NO];
-                }
-            }
-            else
-            {
-                self.selectText = ((RadioBox*)control).text;
-                self.selectValue = ((RadioBox*)control).index;
-            }
-        }
-    }
+    self.selectText = radioBox.text;
+    self.selectValue = radioBox.index;
 }
 
 @end

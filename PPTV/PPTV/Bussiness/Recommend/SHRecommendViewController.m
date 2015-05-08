@@ -23,13 +23,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSString * hiddeDay =  [NSDate stringFromDate:[NSDate date] withFormat:@"yyyy-MM-dd"];
-    if ([hiddeDay caseInsensitiveCompare:@"2015-04-20"] == NSOrderedAscending) {
-        isHiddenLive = YES;
-    }
     
     self.tableView.backgroundColor = [UIColor clearColor];
     app=(AppDelegate*)[UIApplication sharedApplication].delegate;
+    isHiddenLive = app.isHidden;
+    
     UIView * viewTitleBar = [app.viewController hideSearchView:NO];
     viewTitleBar.alpha = 0.9;
     
@@ -212,7 +210,9 @@
         SHRecomendFirstCell * cell = [[[NSBundle mainBundle]loadNibNamed:@"SHRecomendFirstCell" owner:nil options:nil] objectAtIndex:0];
         
         cell.detail = [mResult mutableCopy];
-        cell.listLive = mListLive;
+        if(mListLive){
+            cell.listLive = mListLive;
+        }
         cell.navController = self.navController;
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;

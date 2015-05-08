@@ -48,7 +48,8 @@
     imgGuid.image = [UIImage  imageNamed:@"default_guid"];
 
     [self.view addSubview:imgGuid];
-    [self requestAd];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(configUpdate:) name:CORE_NOTIFICATION_CONFIG_STATUS_CHANGED object:nil];
+   
     
     // 引导页
 //    [self  showGuidePage] ;
@@ -66,7 +67,11 @@
         
     }];
 }
-
+// 升级接口成功返回信息后 才去展示界面
+- (void)configUpdate:(NSObject*)sender
+{
+     [self requestAd];
+}
 -(NSNumber *) categoryForKey:(NSString *) key defaultPic:(int)defaultPic
 {
     for(NSDictionary *dic in self.listCategory){
