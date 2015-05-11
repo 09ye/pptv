@@ -444,7 +444,7 @@
 {
     // Set buffer size, default is 1024KB(1*1024*1024).
 
-    [player setBufferSize:517*1024];
+    [player setBufferSize:512*1024];
     //    [player setAdaptiveStream:YES];
     
     [player setVideoQuality:VMVideoQualityHigh];
@@ -638,9 +638,10 @@
 
 -(void)quicklyReplayMovie:(NSURL*)fileURL title:(NSString*)title seekToPos:(long)pos
 {
-    if (mSyncSeekTimer) {
-         [self quicklyStopMovie];
-    }
+//    if (mSyncSeekTimer) {
+//        [self quicklyStopMovie];
+//    }
+    [self quicklyStopMovie];
     [self quicklyPlayMovie:fileURL title:title seekToPos:pos];
 }
 

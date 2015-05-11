@@ -22,6 +22,7 @@
     SHImageView * imgGuid;
     UIButton * mbtnClose;
     UIButton * mbtnWebView;
+    bool isShow;//升级配置之后，加载界面只需加载一次，防止重复调升级接口，重复加载
 
     
 }
@@ -71,7 +72,12 @@
 // 升级接口成功返回信息后 才去展示界面
 - (void)configUpdate:(NSObject*)sender
 {
-     [self requestAd];
+    if (!isShow) {
+       [self requestAd];
+//        isShow   = true;
+    }
+   
+    
 }
 -(NSNumber *) categoryForKey:(NSString *) key defaultPic:(int)defaultPic
 {

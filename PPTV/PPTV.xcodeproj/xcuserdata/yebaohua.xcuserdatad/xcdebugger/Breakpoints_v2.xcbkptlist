@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PPTV/Bussiness/Video/SHShowVideoViewController.m"
-            timestampString = "452421057.641591"
+            timestampString = "453017536.418635"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "820"
-            endingLineNumber = "820"
+            startingLineNumber = "821"
+            endingLineNumber = "821"
             landmarkName = "-currButtonAction:"
             landmarkType = "5">
          </BreakpointContent>
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PPTV/Bussiness/Video/SHShowVideoViewController.m"
-            timestampString = "452421057.641591"
+            timestampString = "453017536.418635"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "969"
-            endingLineNumber = "969"
+            startingLineNumber = "970"
+            endingLineNumber = "970"
             landmarkName = "-btnVolumeOntouch:"
             landmarkType = "5">
          </BreakpointContent>
@@ -308,7 +308,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PPTV/Bussiness/Live/SHLiveViewController.m"
@@ -472,11 +472,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PPTV/Base/MainViewController.m"
-            timestampString = "452754245.424557"
+            timestampString = "453008912.222981"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "199"
-            endingLineNumber = "199"
+            startingLineNumber = "197"
+            endingLineNumber = "197"
             landmarkName = "-requestAd"
             landmarkType = "5">
          </BreakpointContent>
@@ -488,27 +488,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PPTV/Base/MainViewController.m"
-            timestampString = "452754245.424557"
+            timestampString = "453008912.222981"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "191"
-            endingLineNumber = "191"
-            landmarkName = "-requestAd"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "PPTV/Base/MainViewController.m"
-            timestampString = "452754245.424557"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "231"
-            endingLineNumber = "231"
+            startingLineNumber = "237"
+            endingLineNumber = "237"
             landmarkName = "-requestAd"
             landmarkType = "5">
          </BreakpointContent>
@@ -630,44 +614,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PPTV/Bussiness/Recommend/SHRecommendViewController.m"
-            timestampString = "452686005.428214"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
-            landmarkName = "-reloadRequest:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "PPTV/Bussiness/Recommend/SHRecommendViewController.m"
             timestampString = "452754245.424557"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "117"
             endingLineNumber = "117"
             landmarkName = "-egoRefreshTableHeaderDataSourceLastUpdated:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "PPTV/Bussiness/Recommend/SHRecommendViewController.m"
-            timestampString = "452754245.424557"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "153"
-            endingLineNumber = "153"
-            landmarkName = "-tableView:heightForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -729,54 +681,6 @@
             timestampString = "452754245.424557"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
-            landmarkName = "-reloadLiveRequest"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "PPTV/Bussiness/Recommend/SHRecommendViewController.m"
-            timestampString = "452754245.424557"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "61"
-            endingLineNumber = "61"
-            landmarkName = "-reloadRequest:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "PPTV/Bussiness/Recommend/SHRecommendViewController.m"
-            timestampString = "452754245.424557"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
-            landmarkName = "-reloadRequest:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "PPTV/Bussiness/Recommend/SHRecommendViewController.m"
-            timestampString = "452754245.424557"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
             startingLineNumber = "477"
             endingLineNumber = "477"
             landmarkName = "-numberOfPages"
@@ -818,22 +722,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "PPTV/Bussiness/Recommend/SHRecommendViewController.m"
-            timestampString = "452754245.424557"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "487"
-            endingLineNumber = "487"
-            landmarkName = "-didClickPage:atIndex:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -854,11 +742,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PPTV/Bussiness/Video/SHShowVideoViewController.m"
-            timestampString = "452421057.641591"
+            timestampString = "453017536.418635"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1171"
-            endingLineNumber = "1171"
+            startingLineNumber = "1172"
+            endingLineNumber = "1172"
             landmarkName = "-requestPauseADS"
             landmarkType = "5">
             <Locations>
@@ -870,11 +758,11 @@
                   moduleName = "PPTV"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/yebaohua/Documents/Demo/pptv/project/ios/pptv/PPTV/PPTV/Bussiness/Video/SHShowVideoViewController.m"
-                  timestampString = "452753058.392081"
+                  timestampString = "453019812.513907"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1171"
-                  endingLineNumber = "1171"
+                  startingLineNumber = "1172"
+                  endingLineNumber = "1172"
                   offsetFromSymbolStart = "51">
                </Location>
                <Location
@@ -885,11 +773,11 @@
                   moduleName = "PPTV"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/yebaohua/Documents/Demo/pptv/project/ios/pptv/PPTV/PPTV/Bussiness/Video/SHShowVideoViewController.m"
-                  timestampString = "452753058.392409"
+                  timestampString = "453019812.514112"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1171"
-                  endingLineNumber = "1171"
+                  startingLineNumber = "1172"
+                  endingLineNumber = "1172"
                   offsetFromSymbolStart = "45">
                </Location>
             </Locations>
@@ -930,22 +818,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "PPTV/Bussiness/Video/SHShowVideoViewController.m"
-            timestampString = "452421057.641591"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "573"
-            endingLineNumber = "573"
-            landmarkName = "-quicklyPlayMovie:title:seekToPos:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -962,23 +834,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "PPTV/Bussiness/Live/View/SHBillListViewController.m"
-            timestampString = "452754245.424557"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
-            landmarkName = "-refreBill:detail:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PPTV/Bussiness/Live/View/SHBillListViewController.m"
@@ -1004,38 +860,6 @@
             startingLineNumber = "315"
             endingLineNumber = "315"
             landmarkName = "-changeBill:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "PPTV/Bussiness/Live/View/SHBillListViewController.m"
-            timestampString = "452754245.424557"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
-            landmarkName = "-refreBill:detail:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "PPTV/Bussiness/Recommend/SHRecommendViewController.m"
-            timestampString = "452754245.424557"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
-            landmarkName = "-reloadLiveRequest"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1084,6 +908,70 @@
             startingLineNumber = "140"
             endingLineNumber = "140"
             landmarkName = "-loadNext"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PPTV/Bussiness/Video/SHShowVideoViewController.m"
+            timestampString = "453005039.034779"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "573"
+            endingLineNumber = "573"
+            landmarkName = "-quicklyPlayMovie:title:seekToPos:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PPTV/Bussiness/Setting/SHSettingViewController.m"
+            timestampString = "453007743.599644"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "-configUpdate:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PPTV/Bussiness/Video/SHShowVideoViewController.m"
+            timestampString = "453017746.889729"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "644"
+            endingLineNumber = "644"
+            landmarkName = "-quicklyReplayMovie:title:seekToPos:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PPTV/Bussiness/Video/SHShowVideoViewController.m"
+            timestampString = "453018849.212362"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "332"
+            endingLineNumber = "332"
+            landmarkName = "-remoteControlReceivedWithEvent:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
