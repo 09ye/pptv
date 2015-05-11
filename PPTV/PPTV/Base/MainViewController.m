@@ -74,7 +74,7 @@
 {
     if (!isShow) {
        [self requestAd];
-//        isShow   = true;
+        isShow   = true;
     }
    
     

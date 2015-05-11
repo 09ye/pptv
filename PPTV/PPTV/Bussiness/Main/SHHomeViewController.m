@@ -194,9 +194,12 @@
             [mDictionary setValue:nacontroller forKey:@"SHDownloadViewController"];
         }
     }
-    
-    if(lastnacontroller != nacontroller){
-        
+   NSString *lastName=  NSStringFromClass([lastnacontroller class]);
+    NSString *currentName=  NSStringFromClass([nacontroller class]);
+    if(lastnacontroller != nacontroller ){
+        if ([lastName isEqualToString:currentName] && [lastName isEqualToString:@"SHLiveViewController"]) {
+            return;
+        }
         ((SHRecommendViewController*)nacontroller).navController = self.navigationController;
         nacontroller.view.backgroundColor =[UIColor clearColor];
         if(tag == 0){
