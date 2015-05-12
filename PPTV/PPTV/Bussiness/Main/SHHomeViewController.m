@@ -94,7 +94,8 @@
 -(void) tabBarDidSelect:(int) tag
 {
     //return;
-   
+    AppDelegate * app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    [app.viewController hideSearchView:NO];
     mlabRecord.textColor = [UIColor lightGrayColor];
     mlabDownload.textColor = [UIColor lightGrayColor];
     if(mViewRight.isShow && (tag != 9 && tag !=10)){

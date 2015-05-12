@@ -435,8 +435,8 @@
 
 - (void)mediaPlayer:(VMediaPlayer *)player setupManagerPreference:(id)arg
 {
-    player.decodingSchemeHint = VMDecodingSchemeSoftware;
-    player.autoSwitchDecodingScheme = NO;
+//    player.decodingSchemeHint = VMDecodingSchemeSoftware;
+//    player.autoSwitchDecodingScheme = NO;
     // {print_error:368} avformat_open_input: Input/output error : -5   yes
 }
 
@@ -449,8 +449,8 @@
     
     [player setVideoQuality:VMVideoQualityHigh];
     
-    //	player.useCache = YES;
-    //	[player setCacheDirectory:[self getCacheRootDirectory]];
+//    	player.useCache = YES;
+//    	[player setCacheDirectory:[self getCacheRootDirectory]];
 }
 
 - (void)mediaPlayer:(VMediaPlayer *)player seekComplete:(id)arg
